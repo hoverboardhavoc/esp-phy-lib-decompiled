@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> phy_rx11blr_cfg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,16 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void phy_rx11blr_cfg(uint param_1)
 
 {
   uint uVar1;
+  uint uVar2;
   
+  uVar1 = fpga_mem_rd(0x6001c860);
+  fpga_mem_wr(0x6001c860,uVar1 & 0xfffffbff | (param_1 & 1) << 10);
+  uVar2 = fpga_mem_rd(0x6001c860);
   uVar1 = (param_1 & 1) << 0xb;
-  _DAT_6001c860 = (param_1 & 1) << 10 | _DAT_6001c860 & 0xfffff3ff | uVar1;
-  _DAT_6001c87c = uVar1 | _DAT_6001c87c & 0xfffff7ff;
+  fpga_mem_wr(0x6001c860,uVar2 & 0xfffff7ff | uVar1);
+  uVar2 = fpga_mem_rd(0x6001c87c);
+  fpga_mem_wr(0x6001c87c,uVar2 & 0xfffff7ff | uVar1);
   return;
 }
 

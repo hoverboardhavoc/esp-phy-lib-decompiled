@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> bt_txdc_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,32 +13,38 @@
 void bt_txdc_cal(void)
 
 {
-  ushort uVar1;
-  undefined4 uVar2;
-  short sVar3;
-  short sVar4;
-  code *pcVar5;
-  undefined2 *puVar6;
+  int iVar1;
+  ushort uVar2;
+  undefined2 *puVar3;
+  undefined1 *puVar4;
+  int iVar5;
+  undefined1 *puVar6;
+  undefined2 local_28 [6];
   
-  if (-1 < (int)(DAT_00014050 << 0x13)) {
-    puVar6 = &DAT_000140b2;
-    (**(code **)(g_phyFuns + 0x1d4))(*(code **)(g_phyFuns + 0x1d4));
-    (**(code **)(g_phyFuns + 0x1ec))(0xf,0x20,*(code **)(g_phyFuns + 0x1ec));
-    pcVar5 = *(code **)(g_phyFuns + 0x1cc);
-    uVar1 = (**(code **)(g_phyFuns + 0x1d0))(1,1,*(code **)(g_phyFuns + 0x1d0));
-    (*pcVar5)(1,1,uVar1 | 2);
-    sVar3 = 0;
+  if (-1 < (int)(chip7_sleep_params._0_4_ << 0x13)) {
+    pbus_debugmode();
+    puVar6 = chip7_sleep_params;
+    pbus_xpd_tx_on(tx_rf_ana_gain,DAT_00015e22);
+    uVar2 = pbus_rd(1,1);
+    pbus_force_test(1,1,uVar2 | 2);
+    iVar1 = 0;
     do {
-      sVar4 = sVar3 + 1;
-      uVar2 = (**(code **)(g_phyFuns + 0x34))(sVar3,*(code **)(g_phyFuns + 0x34));
-      (**(code **)(g_phyFuns + 0x1cc))(1,2,uVar2,*(code **)(g_phyFuns + 0x1cc));
-      txdc_cal_v70(puVar6);
-      puVar6 = puVar6 + 4;
-      sVar3 = sVar4;
-    } while (sVar4 != 3);
-    (**(code **)(g_phyFuns + 0x1e4))(0,*(code **)(g_phyFuns + 0x1e4));
-    (**(code **)(g_phyFuns + 0x1d8))(*(code **)(g_phyFuns + 0x1d8));
-    DAT_00014050 = DAT_00014050 | 0x1000;
+      pbus_force_test(1,2,(&CSWTCH_233)[iVar1]);
+      txdc_cal_v70(local_28);
+      iVar5 = 0;
+      puVar4 = puVar6;
+      do {
+        puVar3 = (undefined2 *)((int)local_28 + iVar5);
+        iVar5 = iVar5 + 2;
+        *(undefined2 *)(puVar4 + 0x98) = *puVar3;
+        puVar4 = puVar4 + 2;
+      } while (iVar5 != 8);
+      iVar1 = iVar1 + 1;
+      puVar6 = puVar6 + 8;
+    } while (iVar1 != 3);
+    pbus_xpd_rx_on(0);
+    pbus_workmode();
+    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x1000;
   }
   return;
 }

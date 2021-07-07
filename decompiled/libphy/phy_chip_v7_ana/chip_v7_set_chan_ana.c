@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7_ana.o -> chip_v7_set_chan_ana
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,8 +13,8 @@
 void chip_v7_set_chan_ana(undefined1 param_1)
 
 {
-  set_channel_rfpll_freq(DAT_000120ff,0);
-  DAT_000121fe = param_1;
+  set_channel_rfpll_freq(chip7_phy_init_ctrl,0);
+  chip7_sleep_params = param_1;
   return;
 }
 

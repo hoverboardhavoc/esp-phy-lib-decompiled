@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7_cal.o -> rfcal_txiq
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,55 +10,79 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void rfcal_txiq(undefined4 param_1,undefined4 param_2,ushort *param_3,short param_4,
-               undefined4 param_5,int param_6)
+void rfcal_txiq(undefined4 param_1,undefined4 param_2,ushort *param_3,short param_4,uint param_5,
+               int param_6)
 
 {
-  undefined4 uVar1;
-  char cVar2;
-  undefined1 uVar3;
-  ushort uVar4;
-  byte bVar5;
-  code *pcVar6;
+  char cVar1;
+  ushort uVar2;
+  short sVar3;
+  uint uVar4;
+  undefined4 uVar5;
+  int iVar6;
+  byte bVar7;
+  char cVar8;
   byte bStack_34;
   byte bStack_33;
   
-  cVar2 = '8' - power_cal_offset;
-  _DAT_6000607c = _DAT_6000607c & 0xffffefff | 0x800;
+  uVar4 = fpga_mem_rd(0x600050dc);
+  fpga_mem_wr(0x600050dc,uVar4 | 0x800);
+  uVar4 = fpga_mem_rd(0x600050dc);
+  fpga_mem_wr(0x600050dc,uVar4 & 0xffffefff);
   txcal_debuge_mode();
-  (**(code **)(_g_phyFuns + 0x1cc))(1,2,param_1,*(code **)(_g_phyFuns + 0x1cc));
+  pbus_force_test(1,2,param_1);
   if (param_6 == 1) {
-    pcVar6 = *(code **)(_g_phyFuns + 0x1cc);
-    uVar4 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
-    (*pcVar6)(1,1,uVar4 | 2);
+    uVar2 = pbus_rd(1,1);
+    pbus_force_test(1,1,uVar2 | 2);
   }
   else if (param_6 == 2) {
-    (**(code **)(_g_phyFuns + 0x24))(1,*(code **)(_g_phyFuns + 0x24));
+    loopback_mode_en(1);
     txdc_cal_v70(param_2);
-    goto _L318;
+    goto _L103;
   }
-  (**(code **)(_g_phyFuns + 0x1f0))(param_2,*(code **)(_g_phyFuns + 0x1f0));
-_L318:
-  uVar1 = _DAT_60006040;
-  uVar3 = get_power_atten((int)param_4,param_5,cVar2,0xfc,0);
-  txiq_cover(uVar3,(int)param_4,&bStack_34);
+  pbus_set_dco(param_2);
+_L103:
+  uVar5 = fpga_mem_rd(0x600060b8);
+  cVar8 = '\x04';
+  do {
+    start_tx_tone_step(1,(int)param_4,param_5 & 0xff,0,0,0);
+    ets_delay_us(2);
+    iVar6 = txtone_linear_pwr(0);
+    sVar3 = (short)(iVar6 >> 2);
+    if (sVar3 < 0x3e9) {
+      if (599 < sVar3) break;
+      cVar1 = (char)param_5 + -4;
+    }
+    else {
+      cVar1 = (char)param_5 + '\x04';
+    }
+    cVar8 = cVar8 + -1;
+    param_5 = (uint)cVar1;
+  } while (cVar8 != '\0');
+  uVar4 = param_5 & 0xff;
+  if (0x78 < (int)param_5) {
+    uVar4 = 0x78;
+  }
+  if ((char)uVar4 < '\0') {
+    uVar4 = 0;
+  }
+  txiq_cover(uVar4,(int)param_4,&bStack_34,0);
   txcal_work_mode();
-  bVar5 = 0xf;
-  if (('\x0f' < (char)bStack_34) || (bVar5 = 0xf1, (char)bStack_34 < -0xf)) {
-    bStack_34 = bVar5;
+  bVar7 = 0xf;
+  if (('\x0f' < (char)bStack_34) || (bVar7 = 0xf1, (char)bStack_34 < -0xf)) {
+    bStack_34 = bVar7;
   }
-  bVar5 = 0x1f;
-  if (('\x1f' < (char)bStack_33) || (bVar5 = 0xe1, (char)bStack_33 < -0x1f)) {
-    bStack_33 = bVar5;
+  bVar7 = 0x1f;
+  if (('\x1f' < (char)bStack_33) || (bVar7 = 0xe1, (char)bStack_33 < -0x1f)) {
+    bStack_33 = bVar7;
   }
-  *param_3 = (bStack_34 & 0x1f) << 6 | bStack_33 & 0x3f;
-  _DAT_60006040 = uVar1;
+  *param_3 = (ushort)((bStack_34 & 0x1f) << 6) | bStack_33 & 0x3f;
+  fpga_mem_wr(0x600060b8,uVar5);
   if (param_6 == 2) {
-    (**(code **)(_g_phyFuns + 0x24))(0,*(code **)(_g_phyFuns + 0x24));
+    loopback_mode_en(0);
   }
-  _DAT_6000607c = _DAT_6000607c | 0x1000;
+  uVar4 = fpga_mem_rd(0x600050dc);
+  fpga_mem_wr(0x600050dc,uVar4 | 0x1000);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7_cal.o -> bt_tx_pwctrl_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,35 +15,92 @@
 void bt_tx_pwctrl_init(void)
 
 {
-  ushort uVar1;
-  undefined4 uVar2;
+  int iVar1;
+  ushort uVar2;
   undefined4 uVar3;
   uint uVar4;
-  code *pcVar5;
+  int iVar5;
+  int iVar6;
+  char cVar7;
+  int iVar8;
+  undefined *puVar9;
+  int iVar10;
+  char acStack_42 [14];
   
-  if (-1 < (int)(_DAT_00013128 << 0x10)) {
-    uVar2 = (**(code **)(_g_phyFuns + 0x1ac))(0x67,0,0x1c,*(code **)(_g_phyFuns + 0x1ac));
-    uVar3 = (**(code **)(_g_phyFuns + 0x1ac))(0x67,0,0x1e,*(code **)(_g_phyFuns + 0x1ac));
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,0x1c,2,*(code **)(_g_phyFuns + 0x1b4));
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,0x1d,2,*(code **)(_g_phyFuns + 0x1b4));
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,0x1e,2,*(code **)(_g_phyFuns + 0x1b4));
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,0x1f,2,*(code **)(_g_phyFuns + 0x1b4));
-    txcal_debuge_mode();
-    (**(code **)(_g_phyFuns + 0x1cc))(5,1,0x1f,*(code **)(_g_phyFuns + 0x1cc));
-    (**(code **)(_g_phyFuns + 0x1cc))(1,2,0,*(code **)(_g_phyFuns + 0x1cc));
-    pcVar5 = *(code **)(_g_phyFuns + 0x1cc);
-    uVar1 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
-    (*pcVar5)(1,1,uVar1 | 2);
-    uVar4 = (**(code **)(_g_phyFuns + 0x38))(0,*(code **)(_g_phyFuns + 0x38));
-    (**(code **)(_g_phyFuns + 0x1f0))((uVar4 & 0xff) * 8 + 0x1318a,*(code **)(_g_phyFuns + 0x1f0));
-    tx_pwctrl_init_cal(1,&phy_param,&phy_param,&phy_param);
-    _DAT_00013186 = 0;
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,0x1c,uVar2,*(code **)(_g_phyFuns + 0x1b4));
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,0x1d,uVar2,*(code **)(_g_phyFuns + 0x1b4));
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,0x1e,uVar3,*(code **)(_g_phyFuns + 0x1b4));
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,0x1f,uVar3,*(code **)(_g_phyFuns + 0x1b4));
-    _DAT_00013128 = _DAT_00013128 | 0x8000;
+  puVar9 = &chip7_sleep_params;
+  iVar1 = 0;
+  iVar8 = 0;
+_L587:
+  cVar7 = (&CSWTCH_291)[iVar8];
+  acStack_42[1] = 0x30;
+  set_channel_rfpll_freq((int)cVar7,DAT_00014055,0);
+  set_txcap_reg(&chip7_sleep_params,cVar7);
+  if (cVar7 == '\a') {
+    iVar10 = 2;
+    iVar1 = 1;
+    do {
+      uVar3 = bt_index_to_bb(iVar1);
+      txcal_debuge_mode();
+      pbus_force_test(5,1,_tx_rf_ana_gain);
+      pbus_force_test(1,2,uVar3);
+      uVar2 = pbus_rd(1,1);
+      pbus_force_test(1,1,uVar2 | 2);
+      pbus_set_dco(wifi_track_pll_cap + iVar1 * 8);
+      uVar4 = (uint)DAT_0001409b;
+      iVar5 = get_bbgain_db(_DAT_0001402e);
+      iVar6 = get_bbgain_db(uVar3);
+      iVar5 = (uVar4 + 0x2a & 0xff) + (iVar5 - iVar6) * -4;
+      cVar7 = (char)iVar5;
+      if (0x78 < iVar5 * 0x1000000 >> 0x18) {
+        cVar7 = 'x';
+      }
+      if (cVar7 < '\0') {
+        cVar7 = '\0';
+      }
+      rfcal_pwrctrl(0x20,acStack_42 + 1,1,6,acStack_42,_pwrdet_offset,(int)cVar7,0);
+      if (acStack_42[0] < '1') {
+        if ('\x13' < acStack_42[0]) goto _L582;
+        iVar1 = 2;
+      }
+      else {
+        iVar1 = 0;
+      }
+      if (iVar10 == 1) goto _L582;
+      iVar10 = 1;
+    } while( true );
   }
-  return;
+  uVar3 = bt_index_to_bb(iVar1);
+  txcal_debuge_mode();
+  pbus_force_test(5,1,_tx_rf_ana_gain);
+  pbus_force_test(1,2,uVar3);
+  uVar2 = pbus_rd(1,1);
+  pbus_force_test(1,1,uVar2 | 2);
+  pbus_set_dco(wifi_track_pll_cap + iVar1 * 8);
+  uVar4 = (uint)DAT_0001409b;
+  iVar10 = get_bbgain_db(_DAT_0001402e);
+  iVar5 = get_bbgain_db(uVar3);
+  iVar10 = (uVar4 + 0x2a & 0xff) + (iVar10 - iVar5) * -4;
+  cVar7 = (char)iVar10;
+  if (0x78 < iVar10 * 0x1000000 >> 0x18) {
+    cVar7 = 'x';
+  }
+  if (cVar7 < '\0') {
+    cVar7 = '\0';
+  }
+  rfcal_pwrctrl(0x20,acStack_42 + 1,1,6,acStack_42,_pwrdet_offset,(int)cVar7,0);
+  puVar9[0x8b] = acStack_42[0] - DAT_000140ba;
+  goto _L592;
+_L582:
+  _phy_enter_critical = (undefined2)uVar3;
+  DAT_000140ba = acStack_42[0];
+_L592:
+  txcal_work_mode();
+  iVar8 = iVar8 + 1;
+  puVar9 = puVar9 + 1;
+  if (iVar8 == 4) {
+    DAT_000140bf = DAT_000140be;
+    return;
+  }
+  goto _L587;
 }
 

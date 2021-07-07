@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7_cal.o -> tx_pwctrl_init_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,57 +12,51 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void tx_pwctrl_init_cal(int param_1,char *param_2,char *param_3,int param_4)
+uint tx_pwctrl_init_cal(int param_1,int param_2)
 
 {
-  char cVar1;
-  char cVar2;
-  char cVar3;
-  char *pcVar4;
-  int iVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  char cVar8;
-  char acStack_41 [13];
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  uint uVar4;
+  char cVar5;
+  uint uVar6;
+  char cStack_29;
+  undefined1 auStack_28 [16];
   
-  acStack_41[0] = '8' - power_cal_offset;
-  if (param_1 == 0) {
-    uVar6 = 0x80;
-    cVar3 = '\b';
-    cVar8 = '\x10';
-    cVar2 = '\x04';
-    uVar7 = 0x28;
+  set_channel_rfpll_freq((int)(char)param_1,chip7_phy_init_ctrl,0);
+  set_txcap_reg(&chip7_sleep_params,param_1);
+  if (param_1 == 6) {
+    cal_rf_ana_gain_part_2();
+  }
+  if (param_2 == 1) {
+    cVar5 = '\x04';
+    iVar1 = 0;
+    do {
+      iVar3 = tx_pwr_backoff(&chip7_sleep_params,&cStack_29);
+      iVar1 = (iVar1 + iVar3) * 0x10000 >> 0x10;
+      if ((iVar3 == 0) && (cStack_29 == '\x01')) goto _L562;
+      cVar5 = cVar5 + -1;
+    } while (cVar5 != '\0');
+    uVar2 = (uint)(short)((iVar1 + 2) / 4);
   }
   else {
-    uVar6 = 0x20;
-    cVar3 = '\x10';
-    cVar8 = ' ';
-    cVar2 = '\b';
-    uVar7 = 6;
+_L562:
+    uVar2 = 0;
   }
-  iVar5 = 0;
-  do {
-    cVar1 = (&_LANCHOR3)[iVar5];
-    set_channel_rfpll_freq((int)cVar1,DAT_000130fb,0);
-    (**(code **)(_g_phyFuns + 0x114))(&phy_param,cVar1,*(code **)(_g_phyFuns + 0x114));
-    rfcal_pwrctrl(uVar6,acStack_41,1,uVar7,(char *)(param_4 + iVar5),0xfc,(int)DAT_000130e0,0);
-    pcVar4 = param_2 + iVar5;
-    cVar1 = *(char *)(param_4 + iVar5);
-    iVar5 = iVar5 + 1;
-    *pcVar4 = cVar1;
-    DAT_000130e0 = cVar1 + '(';
-  } while (iVar5 != 3);
-  cVar1 = *param_2;
-  if ((cVar1 < cVar2) || (cVar8 < cVar1)) {
-    *param_3 = (acStack_41[0] + cVar1) - cVar3;
-    cVar3 = cVar3 - cVar1;
-    *param_2 = *param_2 + cVar3;
-    param_2[1] = param_2[1] + cVar3;
-    param_2[2] = cVar3 + param_2[2];
+  target_power_add_backoff(auStack_28,&chip7_sleep_params,uVar2);
+  uVar4 = param_1 - 1U & 0xff;
+  uVar6 = 3;
+  if (uVar4 < 0xb) {
+    uVar6 = (uint)(byte)CSWTCH_289[uVar4];
   }
-  else {
-    *param_3 = acStack_41[0];
-  }
-  return;
+  *(short *)(pbus_set_dco + uVar6 * 2) = (short)uVar2;
+  uVar4 = fpga_mem_rd(0x600060f8);
+  fpga_mem_wr(0x600060f8,
+              (uVar2 & 0xff) << (uVar6 << 3 & 0x1f) | uVar4 & ~(0xff << (uVar6 << 3 & 0x1f)));
+  rfcal_bb_atten_init = (byte)((rfcal_bb_atten_init + uVar2) * 0x1000000 >> 0x18);
+  rfcal_pwrctrl(0x80,auStack_28,6,0x2a,uVar6 * 6 + 0x14090,_pwrdet_offset,0);
+  rfcal_bb_atten_init = phy_chan_target_power[uVar6 * 6 + 0xd] + '*';
+  return uVar2;
 }
 

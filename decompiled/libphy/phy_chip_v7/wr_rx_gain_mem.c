@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> wr_rx_gain_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,113 +10,84 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void wr_rx_gain_mem(int param_1,int param_2,byte *param_3,int param_4,int param_5,int param_6,
-                   uint param_7,int param_8)
+void wr_rx_gain_mem(int param_1,int param_2,int param_3,int param_4,uint param_5,int param_6)
 
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
+  undefined1 *puVar1;
+  int iVar2;
+  undefined4 uVar3;
   uint uVar4;
-  byte *pbVar5;
+  uint uVar5;
   uint uVar6;
-  int iVar7;
+  uint uVar7;
   uint uVar8;
   uint uVar9;
-  int iVar10;
+  uint uVar10;
   uint uVar11;
   uint uVar12;
-  uint uVar13;
-  byte abStack_5c [12];
-  byte local_50 [28];
   
-  iVar10 = 0;
-  if (param_1 != 0) {
-    iVar10 = 0x50;
+  if (param_1 == 0) {
+    iVar2 = 0;
+    puVar1 = rf_gain_swp_wifi;
   }
-  abStack_5c[0] = 0;
-  abStack_5c[1] = 0;
-  abStack_5c[2] = 1;
-  abStack_5c[3] = 0;
-  abStack_5c[4] = 5;
-  abStack_5c[5] = 0;
-  abStack_5c[6] = 0xd;
-  abStack_5c[7] = 0;
-  abStack_5c[8] = 0x1d;
-  abStack_5c[9] = 0;
-  memcpy(local_50,&_LANCHOR1,0xf);
-  iVar7 = 0;
+  else {
+    iVar2 = 0x80;
+    puVar1 = (undefined1 *)&bt_rx_gain_swp;
+  }
+  uVar8 = 0x33;
+  if (param_2 == 0) {
+    uVar8 = 0;
+  }
+  uVar3 = get_i2c_clk_sel();
+  i2c_clk_sel(0);
+  uVar10 = 0;
   uVar9 = 0;
   do {
-    pbVar5 = local_50 + iVar7;
-    iVar7 = iVar7 + 1;
-    uVar9 = uVar9 + *pbVar5 & 0xff;
-  } while (iVar7 != 8);
-  uVar3 = uVar9;
-  if (param_2 == 0) {
-    uVar3 = 0;
-  }
-  uVar2 = 0;
-  uVar11 = 0;
-  do {
-    if (param_7 <= uVar3) {
+    if (param_5 <= uVar8) {
+      i2c_clk_sel(uVar3);
       return;
     }
-    if (param_2 == 0) {
-      uVar1 = *(uint *)((uVar3 >> 1) * 4 + param_8);
-      if ((uVar3 & 1) == 0) {
-        uVar1 = uVar1 << 0x10;
+    uVar7 = *(uint *)((uVar8 >> 1) * 4 + param_6);
+    if ((uVar8 & 1) != 0) {
+      uVar7 = uVar7 >> 0x10;
+    }
+    uVar6 = uVar7 & 0x7c00;
+    if ((param_1 == 0) && (rfbb_gain_swp <= uVar6)) {
+      if (rfbb_gain_swp != uVar6) {
+        uVar10 = uVar10 + 1 & 0xff;
       }
-      uVar1 = uVar1 >> 0x10;
-      uVar8 = 3;
-      uVar2 = 0;
-      do {
-        uVar12 = uVar8 & 0x1f;
-        uVar8 = uVar8 + 1;
-        uVar2 = uVar2 + ((int)uVar1 >> uVar12 & 1U) & 0xff;
-      } while (uVar8 != 9);
-      uVar2 = uVar2 * 6 + (uVar1 & 7) & 0xff;
+      uVar6 = *(uint *)(((int)chip7_sleep_params[0x51] + uVar10 + 10) * 4 + param_3);
+      uVar12 = uVar6 >> 0x10;
+      uVar6 = uVar6 & 0xffff;
+_L87:
+      uVar4 = (uVar7 & 0x7fff) >> 3;
+      uVar5 = uVar4 & 0x7f;
+      uVar11 = *(uint *)((uVar7 & 7) * 4 + param_4);
+      uVar5 = (uVar5 >> 6) + (uVar4 & 1) + (uVar5 >> 5 & 1) + (uVar5 >> 4 & 1) + (uVar5 >> 3 & 1) +
+              (uVar5 >> 2 & 1) + (uVar5 >> 1 & 1);
+      uVar4 = uVar11 >> 0x10;
+      uVar11 = uVar11 & 0xffff;
+      if (3 < uVar5) {
+        uVar5 = 3;
+      }
+      uVar5 = (uint)*(ushort *)(chip7_sleep_params + (uVar5 + 0x18) * 2 + 8);
     }
     else {
-      uVar1 = (uint)*param_3 << 8 | (uint)abStack_5c[(uVar2 / 6) * 2] * 8 + uVar2 % 6 & 0xff;
-    }
-    if ((param_1 == 0) && (uVar9 <= uVar3)) {
-      uVar8 = *(uint *)(((int)DAT_00014122 - 1U & 0xffff) * 4 + param_6);
-      uVar12 = uVar8 >> 0x10;
-      uVar8 = uVar8 & 0xffff;
-_L83:
-      uVar4 = (int)uVar1 >> 3 & 0x1f;
-      uVar13 = *(uint *)(uVar2 * 4 + param_5);
-      iVar7 = (uVar4 >> 1 & 1) +
-              (uVar4 >> 4) + ((int)uVar1 >> 3 & 1U) + (uVar4 >> 3 & 1) + (uVar4 >> 2 & 1);
-      uVar4 = uVar13 >> 0x10;
-      uVar13 = uVar13 & 0xffff;
-      if (iVar7 != 0) {
-        iVar7 = 1;
+      if (*(ushort *)((int)puVar1 + uVar9 * 2) != uVar6) {
+        uVar9 = uVar9 + 1 & 0xff;
       }
-      uVar6 = (uint)(*(ushort *)(&phy_param + (iVar7 + 0xa8) * 2) >> 7) << 6 |
-              *(ushort *)(&phy_param + (iVar7 + 0xa8) * 2) & 0x3f;
-    }
-    else {
-      if ((uVar1 & 0xffffff00) != (uint)param_3[uVar11] << 8) {
-        uVar11 = uVar11 + 1 & 0xff;
-      }
-      uVar8 = *(uint *)(uVar11 * 4 + param_4);
-      uVar12 = uVar8 >> 0x10;
-      uVar8 = uVar8 & 0xffff;
-      if (param_1 == 0) goto _L83;
-      uVar13 = 0x100;
+      uVar6 = *(uint *)(uVar9 * 4 + param_3);
+      uVar12 = uVar6 >> 0x10;
+      uVar6 = uVar6 & 0xffff;
+      if (param_1 == 0) goto _L87;
+      uVar11 = 0x100;
       uVar4 = 0x100;
-      uVar6 = 0;
+      uVar5 = 0;
     }
-    (**(code **)(g_phyFuns + 0x2c))
-              (((int)uVar4 >> 1) + uVar1 * 0x20000 + uVar12 * 0x100,
-               uVar8 * 0x400000 + uVar4 * -0x80000000 + uVar13 * 0x2000 + (uVar6 & 0x7ff) * 4,
-               uVar3 + iVar10 & 0xff,*(code **)(g_phyFuns + 0x2c));
-    if (param_2 != 0) {
-      uVar2 = uVar2 + 1 & 0xff;
-    }
-    uVar3 = uVar3 + 1 & 0xff;
+    write_gain_mem(((int)uVar4 >> 1) + (uVar7 & 0x7fff) * 0x20000 + uVar12 * 0x100,
+                   (uVar5 & 0x7ff) * 4 + uVar11 * 0x2000 + uVar6 * 0x400000 + uVar4 * -0x80000000,
+                   uVar8 + iVar2 & 0xff);
+    uVar8 = uVar8 + 1 & 0xff;
   } while( true );
 }
 

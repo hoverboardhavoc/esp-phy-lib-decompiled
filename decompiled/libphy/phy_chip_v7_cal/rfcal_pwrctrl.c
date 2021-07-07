@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7_cal.o -> rfcal_pwrctrl
  *
  * (C) Espressif, Apache License 2.0.
@@ -66,10 +66,10 @@ void rfcal_pwrctrl(undefined4 param_1,int param_2,int param_3,int param_4,char *
       if ((int)uVar1 < 0x19) {
         if ((int)uVar1 < -0x18) {
           uVar1 = 0xffffffe8;
-          goto _L343;
+          goto _L375;
         }
-        if (param_8 != 0) goto _L357;
-_L344:
+        if (param_8 != 0) goto _L389;
+_L376:
         if (uVar1 == 0) {
           if (iVar12 != 0) break;
         }
@@ -77,12 +77,12 @@ _L344:
       }
       else {
         uVar1 = 0x18;
-_L343:
+_L375:
         if (param_8 != 0) {
-_L357:
-          phy_printf("i=%02d  acc=%03d  tgt=%03d  err=%03d  ser=%03d att=%03d\n",iVar12,uVar7,uVar1,
+_L389:
+          ets_printf("i=%02d  acc=%03d  tgt=%03d  err=%03d  ser=%03d att=%03d\n",iVar12,uVar7,uVar1,
                      iVar3,iVar8);
-          goto _L344;
+          goto _L376;
         }
       }
       if (uVar10 == 0) break;

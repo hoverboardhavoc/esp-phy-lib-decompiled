@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> phy_i2c_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,87 +13,117 @@
 void phy_i2c_check(void)
 
 {
-  char cVar1;
-  char cVar2;
-  undefined4 uVar3;
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  int iVar4;
+  undefined4 uVar5;
   
-  cVar1 = '\0';
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x6a,0,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_bias %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\b');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(0x6a,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_bias %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 10);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x66,0,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_bbpll %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\v');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(0x66,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_bbpll %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 0xd);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(100,1,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_rfrx %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\v');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(100,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_rfrx %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 0xb);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x6b,0,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_txrf %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\f');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(0x6b,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_txrf %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 0xc);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x67,0,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_bbtop %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '9');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(0x67,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_bbtop %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 0x10);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x65,0,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_ckgen %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\t');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(0x65,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_ckgen %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 7);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x62,1,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_rfpll %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\r');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(0x68,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_xtal %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 3);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(99,1,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_rfpll_sdm %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\x06');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(0x62,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_rfpll %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 0xd);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x6d,0,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_dig_reg %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\x0f');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(99,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_rfpll_sdm %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 6);
+  uVar2 = 0;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x61,0,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_ulp %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\t');
-  cVar1 = '\0';
+    uVar5 = i2c_readReg(0x6d,1,uVar2 & 0xff);
+    uVar1 = uVar2 + 1;
+    ets_printf("i2c_apll %02d: 0x%x\n",uVar2,uVar5);
+    uVar2 = uVar1;
+  } while (uVar1 != 10);
+  iVar4 = 0x60008000;
   do {
-    cVar2 = cVar1 + '\x01';
-    uVar3 = (**(code **)(g_phyFuns + 0x1ac))(0x69,0,cVar1,*(code **)(g_phyFuns + 0x1ac));
-    phy_printf("i2c_sar %02d: 0x%x\n",uVar3);
-    cVar1 = cVar2;
-  } while (cVar2 != '\b');
+    uVar5 = i2c_to_apb_rd(iVar4);
+    iVar3 = iVar4 + 4;
+    ets_printf("rtc_cntl 0x%x: 0x%x\n",iVar4,uVar5);
+    iVar4 = iVar3;
+  } while (iVar3 != 0x600080d4);
+  iVar4 = 0x60008800;
+  do {
+    uVar5 = i2c_to_apb_rd(iVar4);
+    iVar3 = iVar4 + 4;
+    ets_printf("saradc 0x%x: 0x%x\n",iVar4,uVar5);
+    iVar4 = iVar3;
+  } while (iVar3 != 0x60008900);
+  iVar4 = 0x6000e000;
+  do {
+    uVar5 = i2c_to_apb_rd(iVar4);
+    iVar3 = iVar4 + 4;
+    ets_printf("i2c_mst 0x%x: 0x%x\n",iVar4,uVar5);
+    iVar4 = iVar3;
+  } while (iVar3 != 0x6000e16c);
+  iVar4 = 0x60005000;
+  do {
+    uVar5 = i2c_to_apb_rd(iVar4);
+    iVar3 = iVar4 + 4;
+    ets_printf("fe2_reg 0x%x: 0x%x\n",iVar4,uVar5);
+    iVar4 = iVar3;
+  } while (iVar3 != 0x6000511c);
+  iVar4 = 0x60006000;
+  do {
+    uVar5 = i2c_to_apb_rd(iVar4);
+    iVar3 = iVar4 + 4;
+    ets_printf("fe_reg 0x%x: 0x%x\n",iVar4,uVar5);
+    iVar4 = iVar3;
+  } while (iVar3 != 0x60006100);
   return;
 }
 

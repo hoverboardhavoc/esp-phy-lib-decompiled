@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7_ana.o -> phy_get_fetx_delay
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,17 +10,18 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 uint phy_get_fetx_delay(void)
 
 {
-  uint uVar1;
+  int iVar1;
+  uint uVar2;
   
-  uVar1 = 0;
-  if (-1 < _DAT_60006070 << 1) {
-    uVar1 = _DAT_60006090 & 0x1ff;
+  iVar1 = fpga_mem_rd(0x600050d0);
+  uVar2 = fpga_mem_rd(0x600050f0);
+  uVar2 = uVar2 & 0x1ff;
+  if (iVar1 << 1 < 0) {
+    uVar2 = 0;
   }
-  return uVar1;
+  return uVar2;
 }
 

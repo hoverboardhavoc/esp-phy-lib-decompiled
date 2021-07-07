@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libbtbb -> bt_bb_v2.o -> bt_get_channel_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 int bt_get_channel_pwr(void)
 
 {
-  return (int)(char)_DAT_600110b0;
+  char cVar1;
+  
+  cVar1 = fpga_mem_rd(0x600110b0);
+  return (int)cVar1;
 }
 

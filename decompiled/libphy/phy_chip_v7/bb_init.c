@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> bb_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,28 +13,49 @@
 void bb_init(void)
 
 {
-  if (-1 < (int)(DAT_00014050 << 0xf)) {
+  uint uVar1;
+  
+  fe_reg_init();
+  tx_paon_set();
+  if (-1 < (int)(chip7_sleep_params._0_4_ << 0xf)) {
     set_pbus_mem();
-    DAT_00014050 = DAT_00014050 | 0x10000;
+    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x10000;
   }
-  if (-1 < (int)(DAT_00014050 << 0xc)) {
-    txdc_cal_init(&DAT_00014054,0xf,0x20,0);
-    DAT_00014050 = DAT_00014050 | 0x80000;
+  rc_cal();
+  if (-1 < (int)(chip7_sleep_params._0_4_ << 0xc)) {
+    txdc_cal_init(chip7_sleep_params,tx_rf_ana_gain,DAT_00015e22,0);
+    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x80000;
   }
-  pwdet_code_cal();
   tx_cap_init();
   txpwr_offset(0);
-  tx_pwctrl_init(0);
+  tx_pwctrl_init(1);
   txiq_cal_init();
-  (**(code **)(g_phyFuns + 0x124))(*(code **)(g_phyFuns + 0x124));
-  bt_tx_gain_init();
-  set_rx_gain_table(0x985,0);
-  rom_phy_reg_init();
-  (**(code **)(g_phyFuns + 4))(*(code **)(g_phyFuns + 4));
-  phy_analog_delay_cal();
-  DAT_00014094 = 0xfe80;
-  DAT_00014128 = 0xfe80;
-  chip_v7_set_chan(0xb,0);
+  if ((re_entry == '\0') || (phy_init_flag == '\0')) {
+    set_tx_gain_table(tx_rf_ana_gain,DAT_00015e22);
+    write_txrate_power_offset(0);
+    set_tx_gain_table_bt();
+  }
+  set_rx_gain_table(0x985);
+  bb_wdg_cfg();
+  mac_enable_bb();
+  agc_reg_init();
+  bb_reg_init();
+  noise_init();
+  phy_set_bbfreq_init(1);
+  tx_pwctrl_bg_init();
+  noise_floor_auto_set();
+  uVar1 = fpga_mem_rd(0x6001c11c);
+  fpga_mem_wr(0x6001c11c,uVar1 & 0xffffefff);
+  uVar1 = fpga_mem_rd(0x6001c030);
+  fpga_mem_wr(0x6001c030,uVar1 & 0xfffc07ff | 0x1a000);
+  uVar1 = fpga_mem_rd(0x6001c11c);
+  fpga_mem_wr(0x6001c11c,uVar1 & 0xfffff80f);
+  uVar1 = fpga_mem_rd(0x6001c11c);
+  fpga_mem_wr(0x6001c11c,uVar1 & 0xfffffff0);
+  uVar1 = fpga_mem_rd(0x6001c120);
+  fpga_mem_wr(0x6001c120,uVar1 & 0xffff00ff | 0x1e00);
+  uVar1 = fpga_mem_rd(0x6001c120);
+  fpga_mem_wr(0x6001c120,uVar1 & 0xffffff | 0x1e000000);
   return;
 }
 

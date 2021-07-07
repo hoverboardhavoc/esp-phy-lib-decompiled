@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> chan14_mic_cfg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,19 +10,24 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void chan14_mic_cfg(int param_1)
 
 {
+  uint uVar1;
+  
   if (param_1 == 1) {
-    _DAT_6001c400 = _DAT_6001c400 & 0xffff9fff | 0x2000;
-    DAT_00013fc8 = DAT_00014014;
+    uVar1 = fpga_mem_rd(0x6001c400);
+    fpga_mem_wr(0x6001c400,uVar1 & 0xffff9fff | 0x2000);
+    phy_in_most_power = chan14_mic_most_power;
   }
   else {
-    _DAT_6001c400 = _DAT_6001c400 | 0x6000;
+    uVar1 = fpga_mem_rd(0x6001c400);
+    fpga_mem_wr(0x6001c400,uVar1 | 0x6000);
+    phy_in_most_power = phy_in_most_power_bk;
   }
-  ram_wifi_set_tx_gain(DAT_00014122,0);
+  phy_set_most_tpw_index = set_most_pwr_reg();
+  set_chan_dig_gain(chip7_sleep_params[0]);
+  phy_set_most_tpw_flag = 1;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> rf_cal_data_recovery
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,48 +13,42 @@
 void rf_cal_data_recovery(int param_1)
 
 {
-  undefined1 *puVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
+  int iVar1;
+  undefined1 *puVar2;
+  undefined4 uVar3;
   
-  iVar3 = 0x2b4;
-  puVar1 = &phy_param;
+  puVar2 = chip7_sleep_params;
+  iVar1 = 0x40c;
   do {
-    iVar4 = param_1 + iVar3;
-    iVar3 = iVar3 + 4;
-    uVar5 = (**(code **)(g_phyFuns + 0xa4))(iVar4,*(code **)(g_phyFuns + 0xa4));
-    *(undefined4 *)(puVar1 + 0x120) = uVar5;
-    puVar1 = puVar1 + 4;
-  } while (iVar3 != 0x398);
-  iVar3 = 0x528;
-  puVar2 = &phy_rxrf_dc;
+    uVar3 = phy_byte_to_word(param_1 + iVar1);
+    *(undefined4 *)puVar2 = uVar3;
+    iVar1 = iVar1 + 4;
+    puVar2 = (undefined1 *)((int)puVar2 + 4);
+  } while (iVar1 != 0x4d0);
+  puVar2 = phy_rx_gain_gen;
+  iVar1 = 0x4d0;
   do {
-    iVar4 = param_1 + iVar3;
-    iVar3 = iVar3 + 4;
-    uVar5 = (**(code **)(g_phyFuns + 0xa4))(iVar4,*(code **)(g_phyFuns + 0xa4));
-    *puVar2 = uVar5;
-    puVar2 = puVar2 + 1;
-  } while (iVar3 != 0x570);
-  iVar3 = 0x570;
-  puVar2 = &phy_rxbb_dc;
+    uVar3 = phy_byte_to_word(param_1 + iVar1);
+    *(undefined4 *)puVar2 = uVar3;
+    iVar1 = iVar1 + 4;
+    puVar2 = (undefined1 *)((int)puVar2 + 4);
+  } while (iVar1 != 0x638);
+  puVar2 = phy_rxrf_dc;
+  iVar1 = 0x638;
   do {
-    iVar4 = param_1 + iVar3;
-    iVar3 = iVar3 + 4;
-    uVar5 = (**(code **)(g_phyFuns + 0xa4))(iVar4,*(code **)(g_phyFuns + 0xa4));
-    *puVar2 = uVar5;
-    puVar2 = puVar2 + 1;
-  } while (iVar3 != 0x5e8);
-  iVar3 = 0x5e8;
-  puVar2 = &phy_chan_dc;
+    uVar3 = phy_byte_to_word(param_1 + iVar1);
+    *(undefined4 *)puVar2 = uVar3;
+    iVar1 = iVar1 + 4;
+    puVar2 = (undefined1 *)((int)puVar2 + 4);
+  } while (iVar1 != 0x6cc);
+  puVar2 = phy_rxbb_dc;
+  iVar1 = 0x6cc;
   do {
-    iVar4 = param_1 + iVar3;
-    iVar3 = iVar3 + 4;
-    uVar5 = (**(code **)(g_phyFuns + 0xa4))(iVar4,*(code **)(g_phyFuns + 0xa4));
-    *puVar2 = uVar5;
-    puVar2 = puVar2 + 1;
-  } while (iVar3 != 0x620);
+    uVar3 = phy_byte_to_word(param_1 + iVar1);
+    *(undefined4 *)puVar2 = uVar3;
+    iVar1 = iVar1 + 4;
+    puVar2 = (undefined1 *)((int)puVar2 + 4);
+  } while (iVar1 != 0x6e4);
   return;
 }
 

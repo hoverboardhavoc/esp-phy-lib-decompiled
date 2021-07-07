@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> rf_cal_data_backup
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,94 +10,98 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-undefined4 rf_cal_data_backup(int param_1)
+void rf_cal_data_backup(int param_1)
 
 {
-  int iVar1;
-  undefined1 *puVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  uint *puVar6;
-  undefined1 *puVar7;
-  undefined1 *puVar8;
+  undefined1 *puVar1;
+  uint uVar2;
+  uint uVar3;
+  int iVar4;
+  undefined1 *puVar5;
+  uint uVar6;
+  int iVar7;
+  int iVar8;
   
-  puVar2 = (undefined1 *)(param_1 + 0xc);
-  iVar3 = 0;
+  iVar8 = 0x55;
+  if (phy_freq_wifi_only != '\0') {
+    iVar8 = 0xe;
+  }
+  uVar2 = 0;
   do {
-    iVar1 = 0;
-    puVar7 = puVar2;
-    while( true ) {
-      uVar4 = _DAT_6000e0c0;
-      _DAT_6000e0c4 = _DAT_6000e0c4 & 0xffffff00 | iVar1 + iVar3;
-      uVar5 = 0;
-      puVar8 = puVar7;
-      do {
-        *puVar8 = (char)(uVar4 >> (uVar5 & 0x1f));
-        uVar5 = uVar5 + 8;
-        puVar8 = puVar8 + 1;
-      } while (uVar5 != 0x20);
-      puVar7 = puVar7 + 4;
-      if (iVar1 == 1) break;
-      iVar1 = 1;
+    uVar6 = uVar2 & 0xff;
+    if ((phy_freq_wifi_only != '\0') && (uVar6 = 0x54, (int)uVar2 < 0xd)) {
+      uVar6 = uVar2 * 5 + 0xc & 0xff;
     }
-    iVar3 = iVar3 + 3;
-    puVar2 = puVar2 + 0xc;
-  } while (iVar3 != 0xff);
-  puVar2 = &phy_param;
-  iVar3 = 0x2b4;
-  do {
-    uVar4 = 0;
-    puVar7 = (undefined1 *)(iVar3 + param_1);
+    iVar7 = 0;
+    puVar1 = (undefined1 *)((uVar6 + 1) * 0xc + param_1);
     do {
-      *puVar7 = (char)(*(uint *)(puVar2 + 0x120) >> (uVar4 & 0x1f));
-      uVar4 = uVar4 + 8;
-      puVar7 = puVar7 + 1;
-    } while (uVar4 != 0x20);
-    iVar3 = iVar3 + 4;
-    puVar2 = puVar2 + 4;
-  } while (iVar3 != 0x398);
-  puVar6 = &phy_rxrf_dc;
-  iVar3 = 0x528;
+      uVar3 = fpga_mem_rd(0x6000e0c4);
+      fpga_mem_wr(0x6000e0c4,uVar3 & 0xffffff00 | (uVar6 * 3 & 0xff) + iVar7);
+      iVar4 = fpga_mem_rd(0x6000e0c0);
+      uVar3 = 0;
+      puVar5 = puVar1;
+      do {
+        *puVar5 = (char)(iVar4 >> (uVar3 & 0x1f));
+        uVar3 = uVar3 + 8;
+        puVar5 = puVar5 + 1;
+      } while (uVar3 != 0x20);
+      iVar7 = iVar7 + 1;
+      puVar1 = puVar1 + 4;
+    } while (iVar7 != 3);
+    uVar2 = uVar2 + 1;
+  } while ((int)uVar2 < iVar8);
+  puVar1 = chip7_sleep_params;
+  iVar8 = 0x40c;
   do {
-    uVar4 = 0;
-    puVar2 = (undefined1 *)(param_1 + iVar3);
+    uVar2 = 0;
+    puVar5 = (undefined1 *)(param_1 + iVar8);
     do {
-      *puVar2 = (char)(*puVar6 >> (uVar4 & 0x1f));
-      uVar4 = uVar4 + 8;
-      puVar2 = puVar2 + 1;
-    } while (uVar4 != 0x20);
-    iVar3 = iVar3 + 4;
-    puVar6 = puVar6 + 1;
-  } while (iVar3 != 0x570);
-  puVar6 = &phy_rxbb_dc;
-  iVar3 = 0x570;
+      *puVar5 = (char)(*(int *)puVar1 >> (uVar2 & 0x1f));
+      uVar2 = uVar2 + 8;
+      puVar5 = puVar5 + 1;
+    } while (uVar2 != 0x20);
+    iVar8 = iVar8 + 4;
+    puVar1 = (undefined1 *)((int)puVar1 + 4);
+  } while (iVar8 != 0x4d0);
+  puVar1 = phy_rx_gain_gen;
+  iVar8 = 0x4d0;
   do {
-    uVar4 = 0;
-    puVar2 = (undefined1 *)(param_1 + iVar3);
+    uVar2 = 0;
+    puVar5 = (undefined1 *)(iVar8 + param_1);
     do {
-      *puVar2 = (char)(*puVar6 >> (uVar4 & 0x1f));
-      uVar4 = uVar4 + 8;
-      puVar2 = puVar2 + 1;
-    } while (uVar4 != 0x20);
-    iVar3 = iVar3 + 4;
-    puVar6 = puVar6 + 1;
-  } while (iVar3 != 0x5e8);
-  puVar6 = &phy_chan_dc;
-  iVar3 = 0x5e8;
+      *puVar5 = (char)(*(uint *)puVar1 >> (uVar2 & 0x1f));
+      uVar2 = uVar2 + 8;
+      puVar5 = puVar5 + 1;
+    } while (uVar2 != 0x20);
+    iVar8 = iVar8 + 4;
+    puVar1 = (undefined1 *)((int)puVar1 + 4);
+  } while (iVar8 != 0x638);
+  puVar1 = phy_rxrf_dc;
+  iVar8 = 0x638;
   do {
-    uVar4 = 0;
-    puVar2 = (undefined1 *)(param_1 + iVar3);
+    uVar2 = 0;
+    puVar5 = (undefined1 *)(param_1 + iVar8);
     do {
-      *puVar2 = (char)(*puVar6 >> (uVar4 & 0x1f));
-      uVar4 = uVar4 + 8;
-      puVar2 = puVar2 + 1;
-    } while (uVar4 != 0x20);
-    iVar3 = iVar3 + 4;
-    puVar6 = puVar6 + 1;
-  } while (iVar3 != 0x620);
-  return 0x620;
+      *puVar5 = (char)(*(uint *)puVar1 >> (uVar2 & 0x1f));
+      uVar2 = uVar2 + 8;
+      puVar5 = puVar5 + 1;
+    } while (uVar2 != 0x20);
+    iVar8 = iVar8 + 4;
+    puVar1 = (undefined1 *)((int)puVar1 + 4);
+  } while (iVar8 != 0x6cc);
+  puVar1 = phy_rxbb_dc;
+  iVar8 = 0x6cc;
+  do {
+    uVar2 = 0;
+    puVar5 = (undefined1 *)(param_1 + iVar8);
+    do {
+      *puVar5 = (char)(*(uint *)puVar1 >> (uVar2 & 0x1f));
+      uVar2 = uVar2 + 8;
+      puVar5 = puVar5 + 1;
+    } while (uVar2 != 0x20);
+    iVar8 = iVar8 + 4;
+    puVar1 = (undefined1 *)((int)puVar1 + 4);
+  } while (iVar8 != 0x6e4);
+  return;
 }
 

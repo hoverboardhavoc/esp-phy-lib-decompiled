@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7.o -> txiq_cal_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,42 +13,42 @@
 void txiq_cal_init(void)
 
 {
-  uint uVar1;
+  int iVar1;
   int iVar2;
-  int iVar3;
-  undefined1 auStack_28 [16];
+  uint uVar3;
+  undefined1 auStack_28 [20];
   
-  if (-1 < (int)(DAT_00014050 << 0x11)) {
-    uVar1 = (uint)DAT_00014008;
-    if ((int)(uVar1 << 0x10) < 0) {
-      uVar1 = 0;
+  if (-1 < (int)(chip7_sleep_params._0_4_ << 0x11)) {
+    uVar3 = (chip7_sleep_params[0x74] + 0x2a) * 0x10000 >> 0x10;
+    if ((int)uVar3 < 0) {
+      uVar3 = 0;
     }
-    iVar2 = (**(code **)(g_phyFuns + 0x3c))(0,*(code **)(g_phyFuns + 0x3c));
-    iVar3 = (**(code **)(g_phyFuns + 0x3c))(0x20,*(code **)(g_phyFuns + 0x3c));
-    iVar2 = (uVar1 & 0xffff) + (iVar2 - iVar3) * -4;
-    if (0x78 < iVar2 * 0x10000 >> 0x10) {
-      iVar2 = 0x78;
+    iVar1 = get_bbgain_db(DAT_00015e22);
+    iVar2 = get_bbgain_db(0x20);
+    iVar1 = (uVar3 & 0xffff) + (iVar1 - iVar2) * -4;
+    if (0x78 < iVar1 * 0x10000 >> 0x10) {
+      iVar1 = 0x78;
     }
-    if (iVar2 << 0x10 < 0) {
-      iVar2 = 0;
+    if (iVar1 << 0x10 < 0) {
+      iVar1 = 0;
     }
-    rfcal_txiq(0x20,&DAT_00014064,&DAT_0001407c,0x80,(int)(char)iVar2,0);
-    iVar2 = (**(code **)(g_phyFuns + 0x3c))(0,*(code **)(g_phyFuns + 0x3c));
-    iVar3 = (**(code **)(g_phyFuns + 0x3c))(0x120,*(code **)(g_phyFuns + 0x3c));
-    iVar2 = (uVar1 & 0xffff) + (iVar2 - iVar3) * -4;
-    if (0x78 < iVar2 * 0x10000 >> 0x10) {
-      iVar2 = 0x78;
+    rfcal_txiq(0x20,chip7_sleep_params,chip7_sleep_params,0x80,(int)(char)iVar1,0);
+    iVar1 = get_bbgain_db(DAT_00015e22);
+    iVar2 = get_bbgain_db(0x30);
+    iVar1 = (uVar3 & 0xffff) + (iVar1 - iVar2) * -4;
+    if (0x78 < iVar1 * 0x10000 >> 0x10) {
+      iVar1 = 0x78;
     }
-    if (iVar2 << 0x10 < 0) {
-      iVar2 = 0;
+    if (iVar1 << 0x10 < 0) {
+      iVar1 = 0;
     }
-    rfcal_txiq(0x120,&DAT_00014074,&DAT_0001407e,0x80,(int)(char)iVar2,0);
-    iVar2 = (iVar2 + -0x28) * 0x10000 >> 0x10;
-    if (iVar2 < 0) {
-      iVar2 = 0;
+    rfcal_txiq(0x30,chip7_sleep_params,chip7_sleep_params,0x80,(int)(char)iVar1,0);
+    iVar1 = (iVar1 + -0x28) * 0x10000 >> 0x10;
+    if (iVar1 < 0) {
+      iVar1 = 0;
     }
-    rfcal_txiq(0x120,auStack_28,&DAT_00014092,0x80,(int)(char)iVar2,2);
-    DAT_00014050 = DAT_00014050 | 0x4000;
+    rfcal_txiq(0x30,auStack_28,chip7_sleep_params,0x80,(int)(char)iVar1,2);
+    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x4000;
   }
   return;
 }

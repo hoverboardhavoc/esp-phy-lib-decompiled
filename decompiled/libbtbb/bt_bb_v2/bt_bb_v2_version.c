@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  ets_printf("libbtbb version: %s, %s, %s\n","cdc7508","Apr 26 2021","14:28:20");
+  ets_printf("libbtbb version: %s, %s, %s\n","f94837b","Mar 26 2021","18:06:04");
   return;
 }
 

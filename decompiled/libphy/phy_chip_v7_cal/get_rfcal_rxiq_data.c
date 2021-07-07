@@ -1,16 +1,14 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7_cal.o -> get_rfcal_rxiq_data
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 uint get_rfcal_rxiq_data(undefined4 param_1,undefined4 param_2,int param_3)
 
@@ -19,58 +17,71 @@ uint get_rfcal_rxiq_data(undefined4 param_1,undefined4 param_2,int param_3)
   char cVar2;
   int iVar3;
   int iVar4;
-  uint uVar5;
-  char cVar6;
-  uint uVar7;
+  int iVar5;
+  uint uVar6;
+  char cVar7;
   int iVar8;
-  int iVar9;
+  uint uVar9;
   int iVar10;
-  char cStack_44;
-  char cStack_43;
+  int iVar11;
+  int iVar12;
+  char cStack_34;
+  char cStack_33;
   
-  iVar9 = 0;
+  iVar12 = 0;
   iVar10 = 0;
-  iVar8 = 0;
+  iVar11 = 0;
   iVar1 = 0;
   iVar3 = 0;
-  while( true ) {
-    rfcal_rxiq(0xe,param_1,param_2,&cStack_44,param_3);
+  do {
+    rfcal_rxiq(0xe,param_1,param_2,&cStack_34,param_3);
     if (param_3 != 0) {
-      phy_printf("%d_%d_%d\n",iVar8,(int)cStack_44,(int)cStack_43);
+      ets_printf("%d_%d_%d\n",iVar12,(int)cStack_34,(int)cStack_33);
     }
-    if (((iVar8 != 0) &&
-        (iVar4 = (**(code **)(_g_phyFuns + 0x100))
-                           (iVar10 - cStack_44,*(code **)(_g_phyFuns + 0x100)), iVar4 < 2)) &&
-       (iVar4 = (**(code **)(_g_phyFuns + 0x100))(iVar9 - cStack_43,*(code **)(_g_phyFuns + 0x100)),
-       iVar4 < 2)) break;
-    iVar10 = (int)cStack_44;
-    iVar9 = (int)cStack_43;
-    iVar8 = iVar8 + 1;
-    iVar3 = (iVar3 + iVar10) * 0x10000 >> 0x10;
-    iVar1 = (iVar1 + iVar9) * 0x10000 >> 0x10;
-    if (iVar8 == 4) {
-      cVar2 = (char)(iVar3 + 2 >> 2);
-      cVar6 = (char)(iVar1 + 2 >> 2);
-_L249:
-      if (cVar2 < -0x1f) {
-        cVar2 = -0x1f;
+    iVar8 = (int)cStack_34;
+    iVar5 = (int)cStack_33;
+    if (iVar12 != 0) {
+      iVar4 = iVar3 - iVar8;
+      if (iVar4 < 0) {
+        iVar4 = iVar8 - iVar3;
       }
-      uVar5 = (uint)cVar2;
-      if (cVar6 < -0x1f) {
-        cVar6 = -0x1f;
+      if (iVar4 < 2) {
+        iVar4 = iVar1 - iVar5;
+        if (iVar4 < 0) {
+          iVar4 = iVar5 - iVar1;
+        }
+        if (iVar4 < 2) {
+          cVar2 = (char)(iVar3 + iVar8 + 1 >> 1);
+          cVar7 = (char)(iVar1 + iVar5 + 1 >> 1);
+          goto _L181;
+        }
       }
-      uVar7 = (uint)cVar6;
-      if (0x1f < (int)uVar5) {
-        uVar5 = 0x1f;
-      }
-      if (0x1f < (int)uVar7) {
-        uVar7 = 0x1f;
-      }
-      return (uVar5 & 0x3f) << 6 | uVar7 & 0x3f;
     }
-  }
-  cVar2 = (char)(cStack_44 + iVar10 + 1 >> 1);
-  cVar6 = (char)(cStack_43 + iVar9 + 1 >> 1);
-  goto _L249;
+    iVar12 = iVar12 + 1;
+    iVar11 = (iVar11 + iVar8) * 0x10000 >> 0x10;
+    iVar10 = (iVar10 + iVar5) * 0x10000 >> 0x10;
+    iVar1 = iVar5;
+    iVar3 = iVar8;
+    if (iVar12 == 4) {
+      cVar2 = (char)(iVar11 + 2 >> 2);
+      cVar7 = (char)(iVar10 + 2 >> 2);
+_L181:
+      if (cVar2 < -0xf) {
+        cVar2 = -0xf;
+      }
+      uVar6 = (uint)cVar2;
+      if (cVar7 < -0x1f) {
+        cVar7 = -0x1f;
+      }
+      uVar9 = (uint)cVar7;
+      if (0xf < (int)uVar6) {
+        uVar6 = 0xf;
+      }
+      if (0x1f < (int)uVar9) {
+        uVar9 = 0x1f;
+      }
+      return (uVar6 & 0x1f) << 6 | uVar9 & 0x3f;
+    }
+  } while( true );
 }
 

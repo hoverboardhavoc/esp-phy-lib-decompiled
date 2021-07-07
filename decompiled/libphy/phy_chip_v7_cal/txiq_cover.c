@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libphy -> phy_chip_v7_cal.o -> txiq_cover
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,83 +10,86 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void txiq_cover(int param_1,undefined4 param_2,byte *param_3)
+void txiq_cover(int param_1,undefined4 param_2,byte *param_3,undefined4 param_4)
 
 {
-  int iVar1;
-  int iVar2;
-  short sVar3;
-  int iVar4;
+  byte bVar1;
+  uint uVar2;
+  int iVar3;
+  short sVar4;
   uint uVar5;
   uint uVar6;
-  byte bVar7;
+  uint uVar7;
   uint uVar8;
   int iVar9;
   int iVar10;
-  short local_44;
-  short asStack_42 [7];
+  int iVar11;
+  int iVar12;
+  byte bVar13;
+  short sStack_44;
+  short local_42 [7];
   
   uVar5 = (param_1 + -0xc) * 0x1000000 >> 0x18;
-  uVar8 = 0;
+  uVar2 = 0;
   if (-1 < (int)uVar5) {
-    uVar8 = uVar5 & 0xff;
+    uVar2 = uVar5 & 0xff;
   }
-  iVar10 = 0;
+  iVar11 = 0;
   iVar9 = 0;
-  iVar1 = 0;
-  iVar2 = 0;
-  bVar7 = 0;
+  iVar10 = 0;
+  iVar12 = 0;
+  bVar13 = 0;
   do {
-    if (bVar7 < 3) {
-      iVar2 = txiq_set_reg(iVar2,1);
-      iVar1 = txiq_set_reg(iVar1,0);
+    if (bVar13 < 3) {
+      uVar5 = iVar10 * iVar10 + 0x80 >> 8 & 0xff;
+      iVar12 = txiq_set_reg((int)((uVar5 + iVar12) * 0x1000000) >> 0x18,1);
+      iVar10 = txiq_set_reg(iVar10,0);
+      iVar12 = (int)((iVar12 - uVar5) * 0x1000000) >> 0x18;
     }
-    txiq_get_mis_pwr(1,uVar8,param_2,&local_44,asStack_42);
-    sVar3 = asStack_42[0];
-    if ((int)local_44 < (int)asStack_42[0]) {
-      sVar3 = local_44;
+    txiq_get_mis_pwr(1,uVar2,param_2,&sStack_44,local_42,param_4);
+    sVar4 = local_42[0];
+    if ((int)sStack_44 < (int)local_42[0]) {
+      sVar4 = sStack_44;
     }
-    iVar4 = (int)sVar3;
-    if (iVar4 == 0) {
-      iVar4 = 1;
+    iVar3 = (int)sVar4;
+    if (iVar3 == 0) {
+      iVar3 = 1;
     }
-    *param_3 = (byte)((((int)asStack_42[0] - (int)local_44) * 0x800) / iVar4 + 0x10 >> 5);
-    txiq_get_mis_pwr(0,param_1,param_2,&local_44,asStack_42);
-    iVar4 = ((int)local_44 + (int)asStack_42[0]) * 0x10000 >> 0x10;
-    if (iVar4 == 0) {
-      iVar4 = 1;
+    *param_3 = (byte)((((int)local_42[0] - (int)sStack_44) * 0x800) / iVar3 + 0x10 >> 5);
+    txiq_get_mis_pwr(0,param_1,param_2,&sStack_44,local_42,param_4);
+    iVar3 = ((int)sStack_44 + (int)local_42[0]) * 0x10000 >> 0x10;
+    if (iVar3 == 0) {
+      iVar3 = 1;
     }
-    uVar5 = (uint)*param_3;
-    uVar6 = (((int)local_44 - (int)asStack_42[0]) * 0x1000) / iVar4 + 0x10 >> 5;
+    bVar1 = *param_3;
+    uVar5 = (uint)bVar1;
+    uVar6 = (((int)sStack_44 - (int)local_42[0]) * 0x1000) / iVar3 + 0x10 >> 5;
     param_3[1] = (byte)uVar6;
-    uVar6 = uVar6 & 0xff;
-    if (bVar7 < 3) {
-_L86:
-      iVar2 = (int)((iVar2 - uVar5) * 0x1000000) >> 0x18;
-      iVar1 = (int)((iVar1 - uVar6) * 0x1000000) >> 0x18;
+    uVar7 = uVar6 & 0xff;
+    if (bVar13 < 3) {
+_L99:
+      iVar12 = (int)((iVar12 - uVar5) * 0x1000000) >> 0x18;
+      iVar10 = (int)((iVar10 - uVar7) * 0x1000000) >> 0x18;
     }
     else {
+      uVar8 = (int)(char)bVar1 >> 0x1f;
       iVar9 = (int)((iVar9 + uVar5) * 0x1000000) >> 0x18;
-      iVar4 = (**(code **)(_g_phyFuns + 0x100))(*(code **)(_g_phyFuns + 0x100));
-      iVar10 = (int)((iVar10 + uVar6) * 0x1000000) >> 0x18;
-      if ((iVar4 < 2) &&
-         (iVar4 = (**(code **)(_g_phyFuns + 0x100))
-                            ((int)(char)param_3[1],*(code **)(_g_phyFuns + 0x100)), iVar4 < 2))
-      break;
-      if (bVar7 == 6) {
+      iVar11 = (int)((uVar7 + iVar11) * 0x1000000) >> 0x18;
+      if (((int)(((int)(char)bVar1 ^ uVar8) - uVar8) < 2) &&
+         (uVar5 = (int)(uVar6 << 0x18) >> 0x1f,
+         (int)(((int)(uVar6 << 0x18) >> 0x18 ^ uVar5) - uVar5) < 2)) break;
+      if (bVar13 == 6) {
         uVar5 = iVar9 + 2 >> 2;
-        uVar6 = iVar10 + 2 >> 2;
-        goto _L86;
+        uVar7 = iVar11 + 2 >> 2;
+        goto _L99;
       }
     }
-    bVar7 = bVar7 + 1;
-  } while (bVar7 != 7);
-  txiq_set_reg(iVar2,1);
-  txiq_set_reg(iVar1,0);
-  param_3[1] = (byte)iVar1;
-  *param_3 = (byte)iVar2;
+    bVar13 = bVar13 + 1;
+  } while (bVar13 != 7);
+  txiq_set_reg(iVar12,1);
+  txiq_set_reg(iVar10,0);
+  *param_3 = (byte)iVar12;
+  param_3[1] = (byte)iVar10;
   return;
 }
 

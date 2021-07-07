@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
+ * Upstream date: 2021-07-07 18:06:39 +0800
+ * Upstream subject: esp32h2: update phy libs
  * Source: libbtbb -> bt_bb_v2.o -> force_coex_timer1_bt_pti_v2
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,12 +10,13 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void force_coex_timer1_bt_pti_v2(uint param_1)
 
 {
-  _DAT_600350b0 = (param_1 & 0xf) << 0x18 | _DAT_600350b0 & 0xf0ffffff;
+  uint uVar1;
+  
+  uVar1 = fpga_mem_rd(0x600350b0);
+  fpga_mem_wr(0x600350b0,(param_1 & 0xf) << 0x18 | uVar1 & 0xf0ffffff);
   return;
 }
 
