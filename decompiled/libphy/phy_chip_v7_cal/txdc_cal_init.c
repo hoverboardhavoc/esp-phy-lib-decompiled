@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> txdc_cal_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,28 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void txdc_cal_init(int param_1,undefined4 param_2,undefined4 param_3,int param_4)
+void txdc_cal_init(undefined4 param_1)
 
 {
-  uint uVar1;
-  ushort uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  
   pbus_debugmode();
-  pbus_xpd_tx_on(param_2,param_3);
-  if (param_4 != 0) {
-    uVar2 = pbus_rd(1,1);
-    pbus_force_test(1,1,uVar2 | 2);
-  }
-  uVar1 = 0;
-  do {
-    uVar3 = index_to_txbbgain(uVar1 & 0xff);
-    pbus_force_test(1,2,uVar3);
-    iVar4 = uVar1 * 8;
-    uVar1 = uVar1 + 1;
-    txdc_cal_v70(iVar4 + param_1);
-  } while (uVar1 != 5);
+  pbus_xpd_tx_on();
+  txdc_cal(param_1);
   pbus_xpd_rx_on(0);
   pbus_workmode();
   return;

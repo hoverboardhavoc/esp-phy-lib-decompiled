@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_ana.o -> pbus_rd_addr
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,27 +10,22 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined4 pbus_rd_addr(undefined4 param_1,int param_2)
+undefined4 pbus_rd_addr(int param_1,int param_2)
 
 {
-  switch(param_1) {
-  case 0:
-    break;
-  case 1:
-    if (param_2 != 1) {
-      return 0x600060ac;
+  if (param_1 == 1) {
+    if (param_2 == 1) {
+      return 0x60006118;
     }
-    break;
-  case 2:
-    return 0x600060ac;
-  case 3:
-  case 4:
-    return 0x600060b0;
-  case 5:
-    return 0x600060b4;
-  default:
-    return param_1;
   }
-  return 0x600060a8;
+  else {
+    if (param_1 == 0) {
+      return 0x60006118;
+    }
+    if (param_1 != 2) {
+      return 0x60006120;
+    }
+  }
+  return 0x6000611c;
 }
 

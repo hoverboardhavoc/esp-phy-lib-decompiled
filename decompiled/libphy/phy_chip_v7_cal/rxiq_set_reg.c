@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> rxiq_set_reg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,39 +10,38 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-uint rxiq_set_reg(uint param_1,int param_2)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void rxiq_set_reg(uint param_1,int param_2)
 
 {
-  uint uVar1;
+  int iVar1;
   uint uVar2;
-  int iVar3;
   
   if (param_2 == 0) {
-    iVar3 = 0x1f;
+    iVar1 = 0x1f;
     if ((int)param_1 < 0x20) {
-_L138:
-      if ((int)param_1 < -iVar3) {
-        param_1 = iVar3 * -0x1000000 >> 0x18;
+_L76:
+      if ((int)param_1 < -iVar1) {
+        param_1 = iVar1 * -0x1000000 >> 0x18;
       }
-      if (param_2 != 0) goto _L137;
+      if (param_2 != 0) goto _L75;
     }
     else {
       param_1 = 0x1f;
     }
-    uVar1 = fpga_mem_rd(0x600050dc);
     uVar2 = (param_1 & 0x3f) << 0x15;
-    iVar3 = -0x7e00000;
+    iVar1 = -0x7e00000;
   }
   else {
-    iVar3 = 0xf;
-    if ((int)param_1 < 0x10) goto _L138;
+    iVar1 = 0xf;
+    if ((int)param_1 < 0x10) goto _L76;
     param_1 = 0xf;
-_L137:
-    uVar1 = fpga_mem_rd(0x600050dc);
+_L75:
     uVar2 = (param_1 & 0x1f) << 0x10;
-    iVar3 = -0x1f0000;
+    iVar1 = -0x1f0000;
   }
-  fpga_mem_wr(0x600050dc,uVar2 | uVar1 & iVar3 - 1U);
-  return param_1;
+  _DAT_6000607c = uVar2 | _DAT_6000607c & iVar1 - 1U;
+  return;
 }
 

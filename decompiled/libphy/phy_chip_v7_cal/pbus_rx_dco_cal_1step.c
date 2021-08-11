@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> pbus_rx_dco_cal_1step
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,236 +10,215 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void pbus_rx_dco_cal_1step
-               (int param_1,uint param_2,uint param_3,undefined4 param_4,short *param_5,int param_6,
-               uint param_7,uint *param_8)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void pbus_rx_dco_cal_1step(int param_1,int param_2,undefined4 param_3,short *param_4,int *param_5)
 
 {
   short sVar1;
   short sVar2;
-  bool bVar3;
-  int iVar4;
-  int *piVar5;
-  int iVar6;
-  uint uVar7;
+  char cVar3;
+  short sVar4;
+  short sVar5;
+  uint uVar6;
+  int iVar7;
   int iVar8;
-  byte bVar9;
-  short sVar10;
-  uint uVar11;
-  uint uVar12;
+  int iVar9;
+  uint uVar10;
+  char cVar11;
+  code *pcVar12;
   int iVar13;
-  short sVar14;
-  char cVar15;
-  short sVar16;
-  char cVar17;
-  int iVar18;
+  uint uVar14;
+  int iVar15;
+  char cVar16;
+  uint uVar17;
+  uint uVar18;
   uint uVar19;
-  uint uVar20;
-  bool bVar21;
-  uint uVar22;
-  char cVar23;
-  int iStack_9c;
-  uint uStack_94;
-  int iStack_80;
-  int iStack_7c;
-  int iStack_78;
-  int local_58;
+  undefined1 uStack_5a;
+  undefined1 uStack_59;
+  int iStack_58;
   int iStack_54;
+  undefined4 uStack_50;
   int iStack_4c;
   int iStack_48;
+  undefined4 uStack_44;
   
-  sVar1 = *param_5;
-  sVar2 = param_5[1];
-  uStack_94 = 0;
-  if ((param_3 & 0xfd) == 0) {
-    bVar3 = false;
-    iVar18 = ((int)sVar1 << 0x11) >> 0x10;
-    iVar6 = ((int)sVar2 << 0x11) >> 0x10;
-    iVar13 = 0;
-_L290:
-    uStack_94 = param_2 | 8;
-    cVar17 = '\f';
-    if (!bVar3) goto _L291;
+  iStack_58 = 0;
+  iStack_54 = 0;
+  uStack_50 = 0;
+  iStack_4c = 0;
+  iStack_48 = 0;
+  uStack_44 = 0;
+  cVar3 = '\b';
+  if (param_2 != 0) {
+    cVar3 = '\x14';
+  }
+  sVar1 = param_4[1];
+  iVar13 = (int)sVar1;
+  sVar2 = *param_4;
+  uVar19 = (uint)sVar2;
+  uVar17 = 0;
+  uVar6 = (**(code **)(_g_phyFuns + 0x1d0))(1,2,*(code **)(_g_phyFuns + 0x1d0));
+  uVar10 = 0;
+  do {
+    uVar18 = uVar17 + ((int)(uVar6 & 0xff) >> (uVar10 & 0x1f) & 1U);
+    uVar10 = uVar10 + 1;
+    uVar17 = uVar18 & 0xff;
+  } while (uVar10 != 6);
+  if (param_2 == 0) {
+    uVar6 = uVar17;
+    if (uVar17 < 2) {
+      uVar6 = 2;
+    }
+    uVar6 = uVar6 - 1 & 0xff;
   }
   else {
-    if (param_1 != 0) {
-      iVar18 = 0x200;
-      bVar3 = true;
-      iVar13 = 1;
-      iVar6 = 0x200;
-      goto _L290;
+    uVar6 = 6;
+    if (param_1 == 0) {
+      uVar6 = 1;
     }
-    pbus_set_rxgain(param_2);
-    iVar18 = 0x200;
-    bVar3 = true;
-    iVar13 = 1;
-    iVar6 = 0x200;
   }
-  cVar17 = '\x06';
-_L291:
-  uVar19 = 0x1ff;
-  uVar20 = 0x1ff;
-  sVar14 = 0;
-  sVar16 = 0;
-  cVar15 = '\0';
-_L326:
-  uVar11 = iVar18 + 1 >> 1;
-  param_5[1] = (short)(iVar6 + 1 >> 1);
-  *param_5 = (short)uVar11;
-  pbus_force_test(2,iVar13 + 1,uVar11 & 0xffff);
-  pbus_force_test(3,iVar13 + 1,param_5[1]);
-  ets_delay_us(10);
-  bVar21 = false;
-  uVar11 = (int)uVar19 >> 0x1f;
-  uVar12 = (int)uVar20 >> 0x1f;
-  if ((param_1 != 0) || (!bVar3)) {
-    piVar5 = &local_58;
-    uVar7 = param_2;
-    do {
-      iStack_9c = 0x2d;
-      if (uVar7 < 0x5c01) {
-        iStack_9c = 0x28;
+  cVar11 = '\0';
+  cVar16 = (param_2 == 0) + '\x01';
+  uVar10 = uVar19;
+  iVar9 = iVar13;
+  do {
+    pcVar12 = *(code **)(_g_phyFuns + 0x1cc);
+    *param_4 = (short)uVar10;
+    param_4[1] = (short)iVar9;
+    (*pcVar12)(2,cVar16,uVar10 & 0xffff,pcVar12);
+    (**(code **)(_g_phyFuns + 0x1cc))(3,cVar16,param_4[1],*(code **)(_g_phyFuns + 0x1cc));
+    if (param_2 == 0) {
+      ets_delay_us(10);
+      rxdc_est_min(param_3,1,param_5,&uStack_5a);
+      uStack_59 = 0;
+      uVar14 = uVar18 & 0xff;
+      if (uVar17 == 0) {
+        uVar14 = 1;
       }
-      pbus_set_rxgain();
-      cVar23 = '0';
-      iVar4 = 0;
-      do {
-        dc_iq_est(1,param_4,piVar5);
-        iVar8 = piVar5[2];
-        if (iVar8 < iStack_9c) {
-          if (iVar4 == 0) {
-            iStack_7c = *piVar5;
-            iVar4 = 1;
-            iStack_80 = piVar5[1];
-            iStack_78 = iVar8;
-          }
-          else {
-            iVar4 = 2;
-          }
-        }
-        if (bVar21) {
-          sVar16 = sVar16 + 1;
-        }
-        else {
-          sVar14 = sVar14 + 1;
-        }
-        bVar9 = sVar14 == 0x2f;
-        if (sVar16 == 0x2f) {
-          bVar9 = bVar9 | 2;
-          if (iVar4 != 2) goto _L301;
-_L300:
-          *piVar5 = (*piVar5 + iStack_7c) / 2;
-          piVar5[1] = (piVar5[1] + iStack_80) / 2;
-          piVar5[2] = (iVar8 + iStack_78) / 2;
-          if (bVar9 != 0) goto _L301;
-          break;
-        }
-        if (iVar4 == 2) goto _L300;
-        if (sVar14 == 0x2f) {
-          bVar9 = 1;
-          goto _L301;
-        }
-        cVar23 = cVar23 + -1;
-      } while (cVar23 != '\0');
-      bVar9 = 0;
-      if (bVar21) goto _L301;
-      bVar21 = true;
-      piVar5 = &iStack_4c;
-      uVar7 = uStack_94;
-    } while( true );
-  }
-  dc_iq_est(1,param_4,param_8);
-  goto _L293;
-_L301:
-  if (local_58 == 0x1ff) {
-    if (iStack_4c == 0x1ff) {
-      uVar7 = 0x40;
+      uVar14 = uVar14 - 1 & 0xff;
     }
     else {
-_L307:
-      uVar7 = iStack_4c - local_58;
+      uVar14 = 3;
+      (**(code **)(_g_phyFuns + 0x1cc))(1,2,0,*(code **)(_g_phyFuns + 0x1cc));
+      ets_delay_us(10);
+      rxdc_est_min(param_3,1,&iStack_58,&uStack_5a);
+      (**(code **)(_g_phyFuns + 0x1cc))(1,2,0x20,*(code **)(_g_phyFuns + 0x1cc));
+      ets_delay_us(10);
+      rxdc_est_min(param_3,1,&iStack_4c,&uStack_59);
+      *param_5 = iStack_4c - iStack_58;
+      param_5[1] = iStack_48 - iStack_54;
+      (**(code **)(_g_phyFuns + 0x100))(*(code **)(_g_phyFuns + 0x100));
+      (**(code **)(_g_phyFuns + 0x100))(param_5[1],*(code **)(_g_phyFuns + 0x100));
+      if (param_1 == 0) {
+        uVar14 = 0;
+      }
     }
-  }
-  else {
-    if ((local_58 != -0x200) || (iStack_4c != -0x200)) goto _L307;
-    uVar7 = 0xffffffc0;
-  }
-  *param_8 = uVar7;
-  if (iStack_54 == 0x1ff) {
-    if (iStack_48 == 0x1ff) {
-      uVar7 = 0x40;
-      goto _L348;
+    iVar15 = 0;
+    iVar7 = (**(code **)(_g_phyFuns + 0x100))(*param_5,*(code **)(_g_phyFuns + 0x100));
+    if ((int)uVar6 <= iVar7) {
+      iVar15 = (int)(short)(*param_5 >> (uVar14 & 0x1f));
     }
-  }
-  else if ((iStack_54 == -0x200) && (iStack_48 == -0x200)) {
-    uVar7 = 0xffffffc0;
-    goto _L348;
-  }
-  uVar7 = iStack_48 - iStack_54;
-_L348:
-  param_8[1] = uVar7;
-  if (bVar9 != 0) {
-    if (((int)((uVar12 ^ uVar20) - uVar12) < 0x11) && ((int)((uVar11 ^ uVar19) - uVar11) < 0x11)) {
+    iVar7 = (**(code **)(_g_phyFuns + 0x100))(param_5[1],*(code **)(_g_phyFuns + 0x100));
+    if (iVar7 < (int)uVar6) {
+      if (iVar15 == 0) {
+        iVar7 = 0;
+        goto _L183;
+      }
+_L184:
+      iVar7 = 1;
+      if (param_5[1] < 1) {
+        iVar7 = -1;
+      }
+    }
+    else {
+      iVar7 = (int)(short)(param_5[1] >> (uVar14 & 0x1f));
+      if (iVar15 == 0) {
+_L183:
+        iVar15 = 1;
+        if (*param_5 < 1) {
+          iVar15 = -1;
+        }
+      }
+      if (iVar7 == 0) goto _L184;
+    }
+    if (param_2 == 2) {
+      sVar4 = (**(code **)(_g_phyFuns + 0x28))(iVar15,5,0xfffffffb,*(code **)(_g_phyFuns + 0x28));
+      sVar5 = (**(code **)(_g_phyFuns + 0x28))(iVar7,5,0xfffffffb,*(code **)(_g_phyFuns + 0x28));
+      iVar15 = (int)sVar4;
+      iVar7 = (int)sVar5;
+    }
+    iVar8 = (**(code **)(_g_phyFuns + 0x100))(*param_5,*(code **)(_g_phyFuns + 0x100));
+    if ((iVar8 <= (int)uVar6) &&
+       (iVar8 = (**(code **)(_g_phyFuns + 0x100))(param_5[1],*(code **)(_g_phyFuns + 0x100)),
+       iVar8 <= (int)uVar6)) {
+      if (param_1 == 0) {
+        *param_4 = *param_4 - (short)iStack_58;
+        param_4[1] = param_4[1] - (short)iStack_54;
+        goto _L168;
+      }
+      *param_4 = *param_4 + (short)(iStack_58 / -6);
+      param_4[1] = param_4[1] + (short)(iStack_54 / -6);
+      goto _L167;
+    }
+    iVar8 = (**(code **)(_g_phyFuns + 0x100))(*param_5,*(code **)(_g_phyFuns + 0x100));
+    if ((int)uVar6 < iVar8) {
+      uVar10 = (int)(((uVar10 & 0xffff) - iVar15) * 0x10000) >> 0x10;
+    }
+    iVar15 = (**(code **)(_g_phyFuns + 0x100))(param_5[1],*(code **)(_g_phyFuns + 0x100));
+    if ((int)uVar6 < iVar15) {
+      iVar9 = (iVar9 - iVar7) * 0x10000 >> 0x10;
+    }
+    if (0x1ff < (int)uVar10) {
+      uVar10 = 0x1ff;
+    }
+    sVar4 = (short)uVar10;
+    if ((int)(uVar10 << 0x10) < 0) {
+      sVar4 = 0;
+    }
+    uVar10 = (uint)sVar4;
+    if (0x1ff < iVar9) {
+      iVar9 = 0x1ff;
+    }
+    sVar4 = (short)iVar9;
+    if (iVar9 << 0x10 < 0) {
+      sVar4 = 0;
+    }
+    iVar9 = (int)sVar4;
+    cVar11 = cVar11 + '\x01';
+    if (cVar3 == cVar11) {
+      if (param_1 == 0) {
+_L168:
+        if ((param_2 != 0) && ((uVar19 != 0x100 || (iVar13 != 0x100)))) {
+          iVar9 = (**(code **)(_g_phyFuns + 0x100))(iStack_58,*(code **)(_g_phyFuns + 0x100));
+          if ((0x14 < iVar9) ||
+             (((iVar9 = (**(code **)(_g_phyFuns + 0x100))(iStack_4c,*(code **)(_g_phyFuns + 0x100)),
+               0x14 < iVar9 ||
+               (iVar9 = (**(code **)(_g_phyFuns + 0x100))(*param_5,*(code **)(_g_phyFuns + 0x100)),
+               5 < iVar9)) ||
+              (iVar9 = (**(code **)(_g_phyFuns + 0x100))
+                                 ((int)*param_4 - uVar19,*(code **)(_g_phyFuns + 0x100)),
+              0x28 < iVar9)))) {
+            *param_4 = sVar2;
+          }
+          iVar9 = (**(code **)(_g_phyFuns + 0x100))(iStack_54,*(code **)(_g_phyFuns + 0x100));
+          if (((0x14 < iVar9) ||
+              (iVar9 = (**(code **)(_g_phyFuns + 0x100))(iStack_48,*(code **)(_g_phyFuns + 0x100)),
+              0x14 < iVar9)) ||
+             ((iVar9 = (**(code **)(_g_phyFuns + 0x100))(param_5[1],*(code **)(_g_phyFuns + 0x100)),
+              5 < iVar9 ||
+              (iVar13 = (**(code **)(_g_phyFuns + 0x100))
+                                  (param_4[1] - iVar13,*(code **)(_g_phyFuns + 0x100)),
+              0x28 < iVar13)))) {
+            param_4[1] = sVar1;
+          }
+        }
+      }
+_L167:
+      (**(code **)(_g_phyFuns + 0x1cc))(2,cVar16,*param_4,*(code **)(_g_phyFuns + 0x1cc));
+      (**(code **)(_g_phyFuns + 0x1cc))(3,cVar16,param_4[1],*(code **)(_g_phyFuns + 0x1cc));
       return;
     }
-    *param_5 = sVar1;
-    param_5[1] = sVar2;
-    *param_8 = uVar20;
-    param_8[1] = uVar19;
-    return;
-  }
-_L293:
-  uVar22 = *param_8;
-  uVar7 = param_8[1];
-  iVar4 = ((int)uVar22 >> 0x1f ^ uVar22) - ((int)uVar22 >> 0x1f);
-  iVar8 = ((int)uVar7 >> 0x1f ^ uVar7) - ((int)uVar7 >> 0x1f);
-  if (iVar4 < 3) {
-    if (iVar8 < 3) {
-      return;
-    }
-  }
-  else if ((int)(((uVar12 ^ uVar20) - uVar12) + 0x20) < iVar4) {
-    iVar4 = 0x20;
-    if ((int)uVar22 <= (int)uVar20) {
-      iVar4 = -0x20;
-    }
-    *param_8 = iVar4 + uVar20;
-  }
-  if ((int)(((uVar11 ^ uVar19) - uVar11) + 0x20) < iVar8) {
-    iVar4 = 0x20;
-    if ((int)uVar7 <= (int)uVar19) {
-      iVar4 = -0x20;
-    }
-    param_8[1] = iVar4 + uVar19;
-  }
-  uVar20 = *param_8;
-  uVar19 = param_8[1];
-  if (2 < (int)(((int)uVar20 >> 0x1f ^ uVar20) - ((int)uVar20 >> 0x1f))) {
-    iVar18 = (iVar18 - ((int)(uVar20 * param_6) >> (param_7 & 0x1f))) * 0x10000 >> 0x10;
-  }
-  if (2 < (int)(((int)uVar19 >> 0x1f ^ uVar19) - ((int)uVar19 >> 0x1f))) {
-    iVar6 = (iVar6 - ((int)(uVar19 * param_6) >> (param_7 & 0x1f))) * 0x10000 >> 0x10;
-  }
-  if (0x3fe < iVar18) {
-    iVar18 = 0x3fe;
-  }
-  sVar10 = (short)iVar18;
-  if (iVar18 << 0x10 < 0) {
-    sVar10 = 0;
-  }
-  iVar18 = (int)sVar10;
-  if (0x3fe < iVar6) {
-    iVar6 = 0x3fe;
-  }
-  sVar10 = (short)iVar6;
-  if (iVar6 << 0x10 < 0) {
-    sVar10 = 0;
-  }
-  cVar15 = cVar15 + '\x01';
-  iVar6 = (int)sVar10;
-  if (cVar17 == cVar15) {
-    return;
-  }
-  goto _L326;
+  } while( true );
 }
 

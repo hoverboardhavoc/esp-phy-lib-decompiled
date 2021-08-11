@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_recorrect_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,33 +10,16 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void bt_agc_recorrect_set(void)
 
 {
-  uint uVar1;
-  
-  uVar1 = fpga_mem_rd(0x600118b4);
-  fpga_mem_wr(0x600118b4,uVar1 | 0x100);
-  uVar1 = fpga_mem_rd(0x600118b4);
-  fpga_mem_wr(0x600118b4,uVar1 & 0xffffc1ff | 0x1400);
-  uVar1 = fpga_mem_rd(0x600118bc);
-  fpga_mem_wr(0x600118bc,uVar1 | 0x1e0);
-  uVar1 = fpga_mem_rd(0x60011868);
-  fpga_mem_wr(0x60011868,uVar1 & 0xffffdfff);
-  uVar1 = fpga_mem_rd(0x60011868);
-  fpga_mem_wr(0x60011868,uVar1 | 0x20);
-  uVar1 = fpga_mem_rd(0x60011868);
-  fpga_mem_wr(0x60011868,uVar1 | 0x1800);
-  uVar1 = fpga_mem_rd(0x60011868);
-  fpga_mem_wr(0x60011868,uVar1 & 0xfffff83f | 0x280);
-  uVar1 = fpga_mem_rd(0x600118b0);
-  fpga_mem_wr(0x600118b0,uVar1 & 0xffffc1ff | 0x1400);
-  uVar1 = fpga_mem_rd(0x600118b0);
-  fpga_mem_wr(0x600118b0,uVar1 & 0xfffffe0f | 0xa0);
-  uVar1 = fpga_mem_rd(0x60011868);
-  fpga_mem_wr(0x60011868,uVar1 & 0xffffffe0 | 10);
-  uVar1 = fpga_mem_rd(0x6001186c);
-  fpga_mem_wr(0x6001186c,uVar1 & 0xffffff | 0xf000000);
+  _DAT_600118b4 = _DAT_600118b4 & 0xffffc1ff | 0x1500;
+  _DAT_600118bc = _DAT_600118bc | 0x1e0;
+  _DAT_600118b0 = _DAT_600118b0 & 0xffffc00f | 0x1500;
+  _DAT_60011868 = _DAT_60011868 & 0xffffd820 | 0x1aaa;
+  _DAT_6001186c = _DAT_6001186c & 0xffffff | 0xf000000;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> get_temp_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,9 +13,12 @@
 void get_temp_init(void)
 
 {
-  rom_tsens_temp_read();
-  DAT_00013fc4 = DAT_00013fc2;
-  DAT_00013fc6 = DAT_00013fc2;
+  tsens_temp_read();
+  DAT_00012de8 = DAT_00012de6;
+  if (DAT_00012f2c == '\x11') {
+    DAT_00012de8 = DAT_00012f34;
+  }
+  DAT_00012dea = DAT_00012de8;
   return;
 }
 

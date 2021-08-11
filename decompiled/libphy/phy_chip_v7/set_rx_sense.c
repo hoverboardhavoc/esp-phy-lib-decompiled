@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> set_rx_sense
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void set_rx_sense(int param_1)
   short sVar3;
   uint uVar4;
   
-  iVar1 = (**(code **)(g_phyFuns + 0x88))(*(code **)(g_phyFuns + 0x88));
+  iVar1 = read_hw_noisefloor();
   uVar2 = param_1 * 2 - (iVar1 + 1) / 2;
   sVar3 = (short)uVar2;
   uVar4 = (uint)((param_1 + 0x100) * 0x40000) >> 0x10;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> phy_tx_gain_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,55 +14,32 @@ void phy_tx_gain_print(void)
 
 {
   char *pcVar1;
-  undefined1 *puVar2;
+  undefined2 *puVar2;
   undefined2 *puVar3;
-  undefined1 *puVar4;
-  undefined1 *puVar5;
+  undefined2 *puVar4;
   
-  phy_printf("wifi_init_power:");
+  ets_printf("bt_pagain:");
+  puVar3 = &phy_param;
   puVar4 = &phy_param;
-  puVar5 = &phy_param;
   do {
-    pcVar1 = puVar5 + 0xf4;
-    puVar5 = puVar5 + 1;
-    phy_printf(&_LC40,(int)*pcVar1);
-  } while (puVar5 != (undefined1 *)0x13f3e);
-  phy_printf("\nwifi_pagain:");
-  puVar5 = puVar4;
-  do {
-    puVar2 = puVar5 + 0x1e4;
-    puVar5 = puVar5 + 1;
-    phy_printf("0x%x,",*puVar2);
-  } while (puVar5 != (undefined1 *)0x13f3e);
-  phy_printf("\nwifi_bbgain:");
-  puVar5 = puVar4;
-  do {
-    puVar3 = (undefined2 *)(puVar5 + 0x1c8);
-    puVar5 = puVar5 + 2;
-    phy_printf("0x%x,",*puVar3);
-  } while (puVar5 != (undefined1 *)0x13f4c);
-  phy_printf("\nwifi_diggain:");
-  puVar5 = puVar4;
-  do {
-    pcVar1 = puVar5 + 0x1ba;
-    puVar5 = puVar5 + 1;
-    phy_printf(&_LC40,(int)*pcVar1);
-  } while (puVar5 != (undefined1 *)0x13f3e);
-  phy_printf("\nwifi_correct_power:%d\n",(int)DAT_0001412b);
-  phy_printf("bt_pagain:");
-  puVar5 = puVar4;
-  do {
-    puVar2 = puVar5 + 0x19a;
-    puVar5 = puVar5 + 1;
-    phy_printf("0x%x,",*puVar2);
-  } while (puVar5 != (undefined1 *)0x13f40);
-  phy_printf("\nbt_diggain:");
-  do {
-    pcVar1 = puVar4 + 0x1aa;
+    puVar2 = puVar4 + 0x90;
     puVar4 = puVar4 + 1;
-    phy_printf(&_LC40,(int)*pcVar1);
-  } while (puVar4 != (undefined1 *)0x13f40);
-  phy_printf("\nbt_correct_power:%d\n",(int)DAT_0001412c);
+    ets_printf("0x%x,",*puVar2);
+  } while (puVar4 != (undefined2 *)0x12dcc);
+  ets_printf("\nbt_bbgain:");
+  puVar4 = puVar3;
+  do {
+    puVar2 = puVar4 + 0xa0;
+    puVar4 = puVar4 + 1;
+    ets_printf("0x%x,",*puVar2);
+  } while (puVar4 != (undefined2 *)0x12dcc);
+  ets_printf("\nbt_diggain:");
+  do {
+    pcVar1 = (char *)(puVar3 + 0xb0);
+    puVar3 = (undefined2 *)((int)puVar3 + 1);
+    ets_printf(&_LC30,(int)*pcVar1);
+  } while (puVar3 != (undefined2 *)0x12dbc);
+  ets_printf("\nbt_correct_power:%d\n",(int)DAT_00012f26);
   return;
 }
 

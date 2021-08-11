@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_ana.o -> wr_rf_freq_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,25 +10,21 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void wr_rf_freq_mem(int param_1,int param_2)
 
 {
-  int iVar1;
-  uint uVar2;
-  undefined4 uVar3;
+  uint uVar1;
+  int iVar2;
   
-  iVar1 = 0;
+  iVar2 = 0;
   do {
-    uVar3 = *(undefined4 *)(iVar1 * 4 + param_2);
-    uVar2 = fpga_mem_rd(0x6000e0c4);
-    fpga_mem_wr(0x6000e0c4,uVar2 & 0xffffff00 | (param_1 * 3 & 0xffU) + iVar1 & 0xff);
-    fpga_mem_wr(0x6000e148,uVar3);
-    uVar2 = fpga_mem_rd(0x6000e0c4);
-    fpga_mem_wr(0x6000e0c4,uVar2 | 0x200);
-    uVar2 = fpga_mem_rd(0x6000e0c4);
-    iVar1 = iVar1 + 1;
-    fpga_mem_wr(0x6000e0c4,uVar2 & 0xfffffdff);
-  } while (iVar1 != 3);
+    uVar1 = (param_1 * 3 & 0xffU) + iVar2;
+    _DAT_6000e148 = *(undefined4 *)(iVar2 * 4 + param_2);
+    iVar2 = iVar2 + 1;
+    _DAT_6000e0c4 = _DAT_6000e0c4 & 0xfffffd00 | uVar1 & 0xff;
+  } while (iVar2 != 3);
   return;
 }
 

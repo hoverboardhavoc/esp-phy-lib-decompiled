@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> noise_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,60 +10,66 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void noise_init(void)
 
 {
-  short sVar1;
+  char cVar1;
   char cVar2;
-  uint uVar3;
-  char cVar4;
+  int iVar3;
+  short sVar4;
   short *psVar5;
   
-  uVar3 = fpga_mem_rd(0x6001c018);
-  fpga_mem_wr(0x6001c018,uVar3 | 0x10000000);
-  uVar3 = fpga_mem_rd(0x6001c018);
-  fpga_mem_wr(0x6001c018,uVar3 & 0xfffffff8 | 4);
-  if (-1 < (int)(chip7_sleep_params._0_4_ << 10)) {
+  if (-1 < (int)(DAT_00012ea0 << 10)) {
     psVar5 = &noise_array;
-    cVar2 = '\x01';
+    cVar1 = '\0';
     do {
+      cVar2 = '\x0e';
+      if (cVar1 != '\x02') {
+        cVar2 = cVar1 * '\x05' + '\x01';
+      }
       chip_v7_set_chan((int)cVar2,0);
-      cVar4 = '\x05';
       *psVar5 = 0;
-      do {
-        if (-0x180 < *psVar5) {
-          *psVar5 = -0x180;
-        }
-        cVar4 = cVar4 + -1;
-      } while (cVar4 != '\0');
-      cVar2 = cVar2 + '\x05';
+      iVar3 = check_noise_floor();
+      if (0 < iVar3) {
+        iVar3 = iVar3 * -0x10000 >> 0x10;
+      }
+      if (iVar3 < *psVar5) {
+        *psVar5 = (short)iVar3;
+      }
+      iVar3 = check_noise_floor();
+      if (0 < iVar3) {
+        iVar3 = iVar3 * -0x10000 >> 0x10;
+      }
+      if (iVar3 < *psVar5) {
+        *psVar5 = (short)iVar3;
+      }
+      cVar1 = cVar1 + '\x01';
       psVar5 = psVar5 + 1;
-    } while (cVar2 != '\x10');
-    sVar1 = noise_array;
-    if (DAT_00015e26 < noise_array) {
-      sVar1 = DAT_00015e26;
+    } while (cVar1 != '\x03');
+    sVar4 = noise_array;
+    if (DAT_00012da6 < noise_array) {
+      sVar4 = DAT_00012da6;
     }
-    if (0 < sVar1) {
-      sVar1 = 0;
+    if (0 < sVar4) {
+      sVar4 = 0;
     }
-    chip7_sleep_params._78_2_ = DAT_00015e28;
-    if (sVar1 < DAT_00015e28) {
-      chip7_sleep_params._78_2_ = sVar1;
+    DAT_00012ebc = DAT_00012da8;
+    if (sVar4 < DAT_00012da8) {
+      DAT_00012ebc = sVar4;
     }
-    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x200000;
-    chip7_sleep_params._178_2_ = chip7_sleep_params._78_2_;
+    DAT_00012ea0 = DAT_00012ea0 | 0x200000;
+    DAT_00012f22 = DAT_00012ebc;
   }
-  sVar1 = -0x188;
-  if (-0x189 < (short)chip7_sleep_params._78_2_) {
-    sVar1 = chip7_sleep_params._78_2_;
+  sVar4 = DAT_00012ebc;
+  if (DAT_00012ebc < -0x188) {
+    sVar4 = -0x188;
   }
-  uVar3 = fpga_mem_rd(0x6001c018);
-  if (-0x160 < sVar1) {
-    sVar1 = -0x160;
+  if (-0x160 < sVar4) {
+    sVar4 = -0x160;
   }
-  fpga_mem_wr(0x6001c018,uVar3 & 0xffff801f | ((int)sVar1 & 0x3ffU) << 5);
-  uVar3 = fpga_mem_rd(0x6001c018);
-  fpga_mem_wr(0x6001c018,uVar3 | 0x10);
+  _DAT_6001c018 = ((int)sVar4 & 0x3ffU) << 5 | _DAT_6001c018 & 0xffff801f | 0x10;
   return;
 }
 

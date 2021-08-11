@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_restart_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,41 +10,17 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void bt_agc_restart_set(void)
 
 {
-  uint uVar1;
-  
-  uVar1 = fpga_mem_rd(0x60011888);
-  fpga_mem_wr(0x60011888,uVar1 & 0xefffffff);
-  uVar1 = fpga_mem_rd(0x600118ac);
-  fpga_mem_wr(0x600118ac,uVar1 & 0xfffff03f | 0xe40);
-  uVar1 = fpga_mem_rd(0x600118ac);
-  fpga_mem_wr(0x600118ac,uVar1 & 0xfffc0fff | 0x31000);
-  uVar1 = fpga_mem_rd(0x600118a4);
-  fpga_mem_wr(0x600118a4,uVar1 & 0xf81fffff | 0xe00000);
-  uVar1 = fpga_mem_rd(0x600118a4);
-  fpga_mem_wr(0x600118a4,uVar1 & 0xffe07fff | 0x60000);
-  uVar1 = fpga_mem_rd(0x600118ac);
-  fpga_mem_wr(0x600118ac,uVar1 & 0xffffffc0 | 0x34);
-  uVar1 = fpga_mem_rd(0x600118b8);
-  fpga_mem_wr(0x600118b8,uVar1 & 0x3ffffff | 0x3c000000);
-  uVar1 = fpga_mem_rd(0x600118b8);
-  fpga_mem_wr(0x600118b8,uVar1 & 0xfc0fffff | 0x3100000);
-  uVar1 = fpga_mem_rd(0x600118bc);
-  fpga_mem_wr(0x600118bc,uVar1 | 0x80000000);
-  uVar1 = fpga_mem_rd(0x600118bc);
-  fpga_mem_wr(0x600118bc,uVar1 | 0x78000000);
-  uVar1 = fpga_mem_rd(0x600118bc);
-  fpga_mem_wr(0x600118bc,uVar1 & 0xf81fffff | 0x1200000);
-  uVar1 = fpga_mem_rd(0x600118bc);
-  fpga_mem_wr(0x600118bc,uVar1 & 0xffe07fff | 0x48000);
-  uVar1 = fpga_mem_rd(0x600118bc);
-  fpga_mem_wr(0x600118bc,uVar1 & 0xffff81ff | 0x1200);
-  uVar1 = fpga_mem_rd(0x60011884);
-  fpga_mem_wr(0x60011884,uVar1 | 0x800000);
-  uVar1 = fpga_mem_rd(0x60011884);
-  fpga_mem_wr(0x60011884,uVar1 & 0xffffff | 0xf4000000);
+  _DAT_60011888 = _DAT_60011888 & 0xefffffff;
+  _DAT_600118a4 = _DAT_600118a4 & 0xf8007fff | 0xe60000;
+  _DAT_600118ac = _DAT_600118ac & 0xfffc0000 | 0x31e74;
+  _DAT_600118b8 = _DAT_600118b8 & 0xfffff | 0x3f100000;
+  _DAT_600118bc = _DAT_600118bc & 0xf80001ff | 0xf9249200;
+  _DAT_60011884 = _DAT_60011884 & 0xffffff | 0xf4800000;
   return;
 }
 

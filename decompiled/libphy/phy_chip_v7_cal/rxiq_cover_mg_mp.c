@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> rxiq_cover_mg_mp
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,12 +41,12 @@ void rxiq_cover_mg_mp(uint param_1,char *param_2,char *param_3,undefined4 param_
     if (iVar8 == 1) break;
     iVar8 = 1;
   }
-  if (iVar7 < -0xf) {
-    iVar7 = -0xf;
+  if (iVar7 < -0x1f) {
+    iVar7 = -0x1f;
   }
   cVar4 = (char)iVar7;
-  if ('\x0f' < cVar4) {
-    cVar4 = '\x0f';
+  if ('\x1f' < cVar4) {
+    cVar4 = '\x1f';
   }
   if (iVar1 < -0x1f) {
     iVar1 = -0x1f;

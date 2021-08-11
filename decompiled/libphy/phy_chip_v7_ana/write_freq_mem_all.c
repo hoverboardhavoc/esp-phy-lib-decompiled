@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_ana.o -> write_freq_mem_all
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,43 +15,24 @@
 void write_freq_mem_all(int param_1)
 
 {
-  undefined4 uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
-  undefined4 local_4c [6];
+  char cVar1;
+  char cVar2;
+  undefined4 uStack_2c;
+  undefined4 uStack_28;
+  undefined4 uStack_24;
   
-  if ((_chip7_sleep_params & 0x18) == 0x10) {
-    uVar3 = 0xe;
-    if (phy_freq_wifi_only == '\0') {
-      uVar3 = 0x55;
-    }
-    uVar4 = 0;
+  if ((_DAT_000130fc & 0x30) == 0x20) {
+    cVar1 = '\0';
     do {
-      if (phy_freq_wifi_only == '\0') {
-        uVar2 = uVar4 + 0x960;
-_L212:
-        uVar2 = uVar2 & 0xffff;
-      }
-      else {
-        uVar2 = 0x9b4;
-        if (uVar4 < 0xd) {
-          uVar2 = uVar4 * 5 + 0x96c;
-          goto _L212;
-        }
-      }
-      uVar2 = uVar2 - 0x60 & 0xff;
-      iVar5 = 0;
-      do {
-        uVar1 = phy_byte_to_word(uVar2 * 0xc + param_1 + iVar5);
-        *(undefined4 *)((int)local_4c + iVar5) = uVar1;
-        iVar5 = iVar5 + 4;
-      } while (iVar5 != 0xc);
-      wr_rf_freq_mem(uVar2,local_4c);
-      uVar4 = uVar4 + 1;
-    } while ((uVar4 & 0xff) < uVar3);
-    _chip7_sleep_params = _chip7_sleep_params | 8;
+      uStack_2c = phy_byte_to_word(param_1);
+      uStack_28 = phy_byte_to_word(param_1 + 4);
+      cVar2 = cVar1 + '\x01';
+      uStack_24 = 0;
+      param_1 = param_1 + 8;
+      wr_rf_freq_mem(cVar1,&uStack_2c);
+      cVar1 = cVar2;
+    } while (cVar2 != 'U');
+    _DAT_000130fc = _DAT_000130fc | 0x10;
   }
   return;
 }

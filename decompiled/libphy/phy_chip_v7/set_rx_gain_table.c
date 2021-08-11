@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> set_rx_gain_table
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,42 +10,46 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void set_rx_gain_table(undefined4 param_1)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void set_rx_gain_table(void)
 
 {
   uint uVar1;
+  undefined4 local_f0;
+  undefined1 uStack_ec;
+  undefined4 uStack_e8;
+  undefined1 uStack_e4;
+  undefined4 uStack_e0;
+  undefined1 uStack_dc;
+  undefined1 auStack_d8 [208];
   
-  if ((chip7_sleep_params._0_4_ & 0x200) == 0) {
-    chip7_sleep_params[0xb0] =
-         gen_rx_gain_table(phy_rx_gain_gen,0x3d,&bt_rx_gain_swp,chip7_phy_init_ctrl,0xc);
-    chip7_sleep_params[0xb1] =
-         gen_rx_gain_table(phy_rx_gain_gen,0x3d,wifi_rx_gain_swp,chip7_phy_init_ctrl,0xc,0);
-    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x200;
+  local_f0 = 0xe7d7c7c7;
+  uStack_ec = 0xf7;
+  uStack_e8 = 0x7100a06;
+  uStack_e4 = 0x20;
+  uStack_e0 = 0x3030300;
+  uStack_dc = 3;
+  if ((DAT_00012ea0 & 0x200) == 0) {
+    uVar1 = gen_rx_gain_table(auStack_d8,0x20,&local_f0,&uStack_e8,&uStack_e0,5,0);
+    if (uVar1 < 0x50) {
+      DAT_00012f1f = (char)uVar1;
+    }
+    else {
+      DAT_00012f1f = 'O';
+    }
+    DAT_00012ea0 = DAT_00012ea0 | 0x200;
+    DAT_00012f20 = DAT_00012f1f;
   }
-  if ((chip7_sleep_params._0_4_ & 0x100) == 0) {
-    set_rf_freq_offset(chip7_phy_init_ctrl[0],param_1,0);
-    set_rx_gain_param(1,chip7_sleep_params,phy_rxrf_dc,phy_rxbb_dc,chip7_sleep_params[0xb0] + 1,
-                      phy_rx_gain_gen);
-    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x100;
+  if ((DAT_00012ea0 & 0x400) == 0) {
+    set_rx_gain_cal_iq(&DAT_00012ea8,0);
+    DAT_00012ea0 = DAT_00012ea0 | 0x400;
   }
-  if (-1 < (int)(chip7_sleep_params._0_4_ << 0xe)) {
-    set_rx_gain_param(0,chip7_sleep_params,phy_rxrf_dc,phy_rxbb_dc,chip7_sleep_params[0xb1] + 1,
-                      phy_rx_gain_gen);
-    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x20000;
+  if ((DAT_00012ea0 & 0x40) == 0) {
+    wr_rx_gain_mem(DAT_00012f1f + '\x01',auStack_d8,1);
+    DAT_00012ea0 = DAT_00012ea0 | 0x40;
   }
-  if ((chip7_sleep_params._0_4_ & 0x20) == 0) {
-    wr_rx_gain_mem(1,0,phy_rxrf_dc,phy_rxbb_dc,chip7_sleep_params[0xb0] + 1,phy_rx_gain_gen);
-    wr_rx_gain_mem(0,0,phy_rxrf_dc,phy_rxbb_dc,chip7_sleep_params[0xb1] + 1,phy_rx_gain_gen);
-    chip7_sleep_params._0_4_ = chip7_sleep_params._0_4_ | 0x20;
-  }
-  uVar1 = fpga_mem_rd(0x6001c02c);
-  fpga_mem_wr(0x6001c02c,(chip7_sleep_params[0xb1] & 0x7f) << 8 | uVar1 & 0xffff80ff);
-  uVar1 = fpga_mem_rd(0x6001c0a4);
-  fpga_mem_wr(0x6001c0a4,(chip7_sleep_params[0xb0] & 0x7f) << 0xf | uVar1 & 0xffc07fff);
-  uVar1 = fpga_mem_rd(0x600050dc);
-  fpga_mem_wr(0x600050dc,uVar1 | 0x800);
-  uVar1 = fpga_mem_rd(0x600050dc);
-  fpga_mem_wr(0x600050dc,uVar1 | 0x1000);
+  _DAT_6000607c = _DAT_6000607c | 0x18001800;
   return;
 }
 

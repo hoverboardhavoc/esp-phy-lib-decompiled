@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_ana.o -> chip_i2c_writeReg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,23 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void chip_i2c_writeReg(uint param_1,int param_2,int param_3,int param_4)
+void chip_i2c_writeReg(uint param_1,int param_2,int param_3)
 
 {
   int iVar1;
-  undefined4 uVar2;
-  uint uVar3;
+  uint *puVar2;
   
-  uVar2 = phy_enter_critical();
-  iVar1 = (param_2 + 0x18003800) * 4;
+  iVar1 = get_i2c_hostid();
+  puVar2 = (uint *)((iVar1 + 0x18003800) * 4);
   do {
-    uVar3 = fpga_mem_rd(iVar1);
-  } while ((uVar3 & 0x2000000) != 0);
-  fpga_mem_wr(iVar1,param_4 << 0x10 | param_1 | param_3 << 8 | 0x5000000);
+  } while ((int)(*puVar2 << 6) < 0);
+  *puVar2 = param_3 << 0x10 | param_1 | param_2 << 8 | 0x5000000;
   do {
-    uVar3 = fpga_mem_rd(iVar1);
-  } while ((uVar3 & 0x2000000) != 0);
-  phy_exit_critical(uVar2);
+  } while ((int)(*puVar2 << 6) < 0);
   return;
 }
 

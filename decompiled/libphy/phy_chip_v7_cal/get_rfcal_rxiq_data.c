@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> get_rfcal_rxiq_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,11 +17,11 @@ uint get_rfcal_rxiq_data(undefined4 param_1,undefined4 param_2,int param_3)
   char cVar2;
   int iVar3;
   int iVar4;
-  int iVar5;
-  uint uVar6;
-  char cVar7;
-  int iVar8;
-  uint uVar9;
+  uint uVar5;
+  char cVar6;
+  int iVar7;
+  uint uVar8;
+  int iVar9;
   int iVar10;
   int iVar11;
   int iVar12;
@@ -38,49 +38,49 @@ uint get_rfcal_rxiq_data(undefined4 param_1,undefined4 param_2,int param_3)
     if (param_3 != 0) {
       ets_printf("%d_%d_%d\n",iVar12,(int)cStack_34,(int)cStack_33);
     }
-    iVar8 = (int)cStack_34;
-    iVar5 = (int)cStack_33;
+    iVar9 = (int)cStack_34;
+    iVar7 = (int)cStack_33;
     if (iVar12 != 0) {
-      iVar4 = iVar3 - iVar8;
+      iVar4 = iVar3 - iVar9;
       if (iVar4 < 0) {
-        iVar4 = iVar8 - iVar3;
+        iVar4 = iVar9 - iVar3;
       }
       if (iVar4 < 2) {
-        iVar4 = iVar1 - iVar5;
+        iVar4 = iVar1 - iVar7;
         if (iVar4 < 0) {
-          iVar4 = iVar5 - iVar1;
+          iVar4 = iVar7 - iVar1;
         }
         if (iVar4 < 2) {
-          cVar2 = (char)(iVar3 + iVar8 + 1 >> 1);
-          cVar7 = (char)(iVar1 + iVar5 + 1 >> 1);
-          goto _L181;
+          cVar2 = (char)(iVar3 + iVar9 + 1 >> 1);
+          cVar6 = (char)(iVar1 + iVar7 + 1 >> 1);
+          goto _L118;
         }
       }
     }
     iVar12 = iVar12 + 1;
-    iVar11 = (iVar11 + iVar8) * 0x10000 >> 0x10;
-    iVar10 = (iVar10 + iVar5) * 0x10000 >> 0x10;
-    iVar1 = iVar5;
-    iVar3 = iVar8;
+    iVar11 = (iVar11 + iVar9) * 0x10000 >> 0x10;
+    iVar10 = (iVar10 + iVar7) * 0x10000 >> 0x10;
+    iVar1 = iVar7;
+    iVar3 = iVar9;
     if (iVar12 == 4) {
       cVar2 = (char)(iVar11 + 2 >> 2);
-      cVar7 = (char)(iVar10 + 2 >> 2);
-_L181:
-      if (cVar2 < -0xf) {
-        cVar2 = -0xf;
+      cVar6 = (char)(iVar10 + 2 >> 2);
+_L118:
+      if (cVar2 < -0x1f) {
+        cVar2 = -0x1f;
       }
-      uVar6 = (uint)cVar2;
-      if (cVar7 < -0x1f) {
-        cVar7 = -0x1f;
+      uVar5 = (uint)cVar2;
+      if (cVar6 < -0x1f) {
+        cVar6 = -0x1f;
       }
-      uVar9 = (uint)cVar7;
-      if (0xf < (int)uVar6) {
-        uVar6 = 0xf;
+      uVar8 = (uint)cVar6;
+      if (0x1f < (int)uVar5) {
+        uVar5 = 0x1f;
       }
-      if (0x1f < (int)uVar9) {
-        uVar9 = 0x1f;
+      if (0x1f < (int)uVar8) {
+        uVar8 = 0x1f;
       }
-      return (uVar6 & 0x1f) << 6 | uVar9 & 0x3f;
+      return (uVar5 & 0x3f) << 6 | uVar8 & 0x3f;
     }
   } while( true );
 }

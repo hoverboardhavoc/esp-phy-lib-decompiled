@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> tx_cap_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,58 +15,23 @@
 void tx_cap_init(void)
 
 {
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  byte bVar5;
-  undefined *puVar6;
-  int iVar7;
-  char cVar8;
+  undefined *puVar1;
+  char *pcVar2;
+  int iVar3;
   
-  if (-1 < (int)(_chip7_sleep_params << 0xd)) {
+  if ((-1 < (int)(_DAT_0001310c << 0xd)) && (DAT_00013198 != '\x01')) {
     txcal_debuge_mode();
-    i2c_writeReg_Mask(0x6b,1,1,3,0,0xf);
-    puVar6 = &chip7_sleep_params;
-    iVar7 = 0;
-    bVar5 = 0x50;
+    puVar1 = &phy_param;
+    iVar3 = 0;
     do {
-      set_channel_rfpll_freq((int)(char)(&CSWTCH_286)[iVar7],DAT_00014055,0);
-      if (iVar7 == 0) {
-        cVar8 = '\x04';
-        do {
-          start_tx_tone_step(1,0x80,(uint)bVar5,0,0,0);
-          ets_delay_us(2);
-          iVar1 = get_power_db(_pwrdet_offset);
-          uVar2 = iVar1 >> 2 & 0xffff;
-          uVar3 = uVar2 - 0x28;
-          uVar4 = uVar3 & 0xffff;
-          iVar1 = (int)(short)uVar3;
-          if ((uVar2 - 0x25 & 0xffff) < 7) break;
-          if (iVar1 < 1) {
-            uVar4 = (iVar1 * 3) / 4;
-          }
-          iVar1 = (int)((bVar5 + uVar4) * 0x1000000) >> 0x18;
-          if (0x78 < iVar1) {
-            iVar1 = 0x78;
-          }
-          bVar5 = (byte)iVar1;
-          if ((char)bVar5 < '\0') {
-            bVar5 = 0;
-          }
-          cVar8 = cVar8 + -1;
-        } while (cVar8 != '\0');
-        rfcal_bb_atten_init = bVar5 - 8;
-      }
-      iVar7 = iVar7 + 1;
-      rfcal_txcap(0x80,bVar5,0,puVar6);
-      puVar6 = puVar6 + 3;
-    } while (iVar7 != 3);
-    phy_chan_pwr_index[5] = phy_chan_pwr_index[2];
-    phy_chan_pwr_index[6] = phy_chan_pwr_index[3];
-    phy_chan_pwr_index[7] = phy_chan_pwr_index[4];
+      pcVar2 = &CSWTCH_195 + iVar3;
+      iVar3 = iVar3 + 1;
+      set_channel_rfpll_freq((int)*pcVar2,DAT_000130b3,0);
+      rfcal_txcap(0xe0,0x18,0,puVar1);
+      puVar1 = puVar1 + 3;
+    } while (iVar3 != 3);
     txcal_work_mode();
-    _chip7_sleep_params = _chip7_sleep_params | 0x40000;
+    _DAT_0001310c = _DAT_0001310c | 0x40000;
   }
   return;
 }

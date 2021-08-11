@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> pwdet_code_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,11 +15,10 @@
 void pwdet_code_cal(void)
 
 {
-  if (-1 < (int)(_DAT_00013128 << 7)) {
+  if (-1 < (int)(_DAT_0001310c << 7)) {
     txcal_debuge_mode();
-    pwdet_ref_code(0x50);
     txcal_work_mode();
-    _DAT_00013128 = _DAT_00013128 | 0x1000000;
+    _DAT_0001310c = _DAT_0001310c | 0x1000000;
   }
   return;
 }

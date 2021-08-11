@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> rc_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,80 +15,21 @@
 void rc_cal(void)
 
 {
-  char cVar1;
-  uint uVar2;
-  short sVar3;
-  short sVar4;
-  short sVar5;
-  undefined4 uVar6;
+  int iVar1;
   
-  if (-1 < (int)(_chip7_sleep_params << 8)) {
-    i2c_writeReg_Mask(0x6a,1,6,4,0,2);
-    i2c_writeReg_Mask(0x6a,1,0,5,4,2);
-    uVar6 = 7;
-    if ((chip7_phy_init_ctrl != '\x01') && (uVar6 = 6, chip7_phy_init_ctrl != '\x02')) {
-      uVar6 = 0xb;
+  if (-1 < (int)(_DAT_0001310c << 8)) {
+    iVar1 = get_rc_dout(DAT_000130b3);
+    DAT_0001312a = (undefined1)iVar1;
+    DAT_0001312b = 0x7f;
+    if ((iVar1 * 0x7b < 0x3188) &&
+       (iVar1 = (iVar1 * 0x7b + 0x78) / 100, DAT_0001312b = (undefined1)iVar1, iVar1 == 1)) {
+      DAT_0001312b = 2;
     }
-    i2c_writeReg_Mask(0x6a,1,4,7,4,uVar6);
-    i2c_writeReg_Mask(0x68,1,1,5,5,1);
-    i2c_writeReg_Mask(0x6a,1,4,0,0,1);
-    i2c_writeReg_Mask(0x6a,1,4,3,3,0);
-    i2c_writeReg_Mask(0x6a,1,4,3,3,1);
-    ets_delay_us(100);
-    cVar1 = i2c_readReg_Mask(0x6a,1,5,5,0);
-    phy_chan_pwr_index[0xc] = cVar1;
-    i2c_writeReg_Mask(0x68,1,1,5,5,0);
-    i2c_writeReg_Mask(0x6a,1,4,0,0,0);
-    uVar2 = (uint)(byte)(cVar1 + 0x38);
-    sVar4 = (short)(((uVar2 * 0x2ee) / 0x5f - 0x39) / 10);
-    sVar5 = (short)(((uVar2 * 0x26c) / 0xc3 - 0x39) / 10);
-    sVar3 = sVar4;
-    if (sVar4 < 2) {
-      sVar3 = 2;
-    }
-    if (0x7f < sVar3) {
-      sVar3 = 0x7f;
-    }
-    phy_chan_pwr_index[0x10] = (undefined1)sVar3;
-    sVar3 = sVar5;
-    if (sVar5 < 2) {
-      sVar3 = 2;
-    }
-    if (0x7f < sVar3) {
-      sVar3 = 0x7f;
-    }
-    DAT_00014086 = (undefined1)sVar3;
-    if (sVar4 < 0xe) {
-      sVar4 = 0xe;
-    }
-    if (0x7f < sVar4) {
-      sVar4 = 0x7f;
-    }
-    DAT_00014085 = (undefined1)sVar4;
-    if (sVar5 < 0xe) {
-      sVar5 = 0xe;
-    }
-    if (0x7f < sVar5) {
-      sVar5 = 0x7f;
-    }
-    DAT_00014087 = (undefined1)sVar5;
-    uVar2 = ((uVar2 * 400) / 0x28 - 0x39) / 10;
-    if ((short)uVar2 < 2) {
-      uVar2 = 2;
-    }
-    if (0x7f < (short)uVar2) {
-      uVar2 = 0x7f;
-    }
-    phy_chan_target_power[0] = (char)uVar2;
-    _chip7_sleep_params = _chip7_sleep_params | 0x800000;
-    phy_chan_target_power[1] = phy_chan_target_power[0];
+    _DAT_0001310c = _DAT_0001310c | 0x800000;
+    DAT_0001312c = DAT_0001312b;
+    DAT_0001312d = DAT_0001312b;
+    DAT_0001312e = DAT_0001312b;
   }
-  i2c_writeReg(0x67,1,7,phy_chan_target_power[0] + -2);
-  i2c_writeReg(0x67,1,8,phy_chan_target_power[0]);
-  i2c_writeReg(0x67,1,5,phy_chan_target_power[1] + -2);
-  i2c_writeReg(0x67,1,6,phy_chan_target_power[1]);
-  i2c_writeReg_Mask(0x67,1,0xc,7,5,0);
-  i2c_writeReg_Mask(0x67,1,0xb,7,5,3);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> chan14_mic_enable
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,31 +10,22 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x00014b9e) */
+/* WARNING: Removing unreachable block (ram,0x000124fc) */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void chan14_mic_enable(int param_1,int param_2)
 
 {
-  uint uVar1;
-  
-  chan14_mic_en = (undefined1)param_1;
+  DAT_00012e3a = (undefined1)param_1;
   if (param_1 == 0) {
-    uVar1 = fpga_mem_rd(0x6001c400);
-    fpga_mem_wr(0x6001c400,uVar1 | 0x6000);
-    phy_in_most_power = phy_in_most_power_bk;
-    phy_set_most_tpw_index = set_most_pwr_reg();
-    set_chan_dig_gain(chip7_sleep_params[0]);
-    phy_set_most_tpw_flag = 1;
+    _DAT_6001c400 = _DAT_6001c400 | 0x6000;
+    wifi_set_tx_gain(DAT_00012f1c,0);
     return;
   }
-  if (chan14_mic_flag == '\0') {
-    phy_in_most_power_bk = phy_in_most_power;
-    chan14_mic_flag = '\x01';
-  }
+  DAT_00012e38 = (undefined1)param_2;
   if (0x30 < param_2) {
-    param_2 = 0x30;
+    DAT_00012e38 = 0x30;
   }
-  chan14_mic_most_power = (char)param_2;
   return;
 }
 

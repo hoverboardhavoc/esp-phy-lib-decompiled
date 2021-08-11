@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> rfcal_txiq
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,79 +10,86 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rfcal_txiq(undefined4 param_1,undefined4 param_2,ushort *param_3,short param_4,uint param_5,
-               int param_6)
+uint rfcal_txiq(int param_1)
 
 {
-  char cVar1;
-  ushort uVar2;
-  short sVar3;
-  uint uVar4;
-  undefined4 uVar5;
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  int iVar4;
+  char cVar5;
   int iVar6;
-  byte bVar7;
-  char cVar8;
-  byte bStack_34;
-  byte bStack_33;
+  uint uVar7;
+  uint uVar8;
+  uint uVar9;
+  bool bVar10;
+  int iVar11;
+  char cVar12;
+  char cVar13;
+  uint uVar14;
+  char acStack_a0 [32];
+  ushort auStack_80 [38];
   
-  uVar4 = fpga_mem_rd(0x600050dc);
-  fpga_mem_wr(0x600050dc,uVar4 | 0x800);
-  uVar4 = fpga_mem_rd(0x600050dc);
-  fpga_mem_wr(0x600050dc,uVar4 & 0xffffefff);
-  txcal_debuge_mode();
-  pbus_force_test(1,2,param_1);
-  if (param_6 == 1) {
-    uVar2 = pbus_rd(1,1);
-    pbus_force_test(1,1,uVar2 | 2);
+  txiq_set_reg(0,1);
+  txiq_set_reg(0,0);
+  pkdet_code_range();
+  iVar11 = 8;
+  if (param_1 == 0) {
+    iVar11 = 0x10;
   }
-  else if (param_6 == 2) {
-    loopback_mode_en(1);
-    txdc_cal_v70(param_2);
-    goto _L103;
-  }
-  pbus_set_dco(param_2);
-_L103:
-  uVar5 = fpga_mem_rd(0x600060b8);
-  cVar8 = '\x04';
-  do {
-    start_tx_tone_step(1,(int)param_4,param_5 & 0xff,0,0,0);
-    ets_delay_us(2);
-    iVar6 = txtone_linear_pwr(0);
-    sVar3 = (short)(iVar6 >> 2);
-    if (sVar3 < 0x3e9) {
-      if (599 < sVar3) break;
-      cVar1 = (char)param_5 + -4;
+  uVar9 = 0;
+  uVar14 = 0;
+  uVar2 = 0;
+  cVar13 = '\x01';
+  uVar7 = 0;
+  while( true ) {
+    iVar1 = 0;
+    bVar10 = false;
+    cVar12 = -1;
+    uVar8 = 0xffff;
+    while( true ) {
+      pll_cap_cal();
+      iVar4 = iVar1 + 0x10;
+      cVar5 = '\0';
+      do {
+        txiq_set_reg((int)cVar5,uVar9 ^ 1);
+        ets_delay_us(1);
+        uVar3 = pkdet_code_range();
+        if (uVar3 < uVar8) {
+          uVar8 = uVar3;
+          uVar14 = (int)cVar5;
+        }
+        auStack_80[iVar1] = (ushort)uVar3;
+        acStack_a0[iVar1] = cVar5;
+        iVar1 = (iVar1 + 1) * 0x1000000 >> 0x18;
+      } while (((int)(uVar3 - uVar8) <= iVar11) &&
+              (cVar5 = cVar5 + cVar13 * cVar12, iVar1 != iVar4 * 0x1000000 >> 0x18));
+      cVar12 = '\x01';
+      if (bVar10) break;
+      bVar10 = true;
     }
-    else {
-      cVar1 = (char)param_5 + '\x04';
+    iVar4 = 0;
+    iVar6 = 0;
+    for (uVar3 = 1; (int)uVar3 < iVar1; uVar3 = uVar3 + 1 & 0xff) {
+      if ((int)(auStack_80[uVar3] - uVar8) < 6) {
+        iVar6 = (iVar6 + acStack_a0[uVar3]) * 0x10000 >> 0x10;
+        iVar4 = (iVar4 + 1) * 0x10000 >> 0x10;
+      }
     }
-    cVar8 = cVar8 + -1;
-    param_5 = (uint)cVar1;
-  } while (cVar8 != '\0');
-  uVar4 = param_5 & 0xff;
-  if (0x78 < (int)param_5) {
-    uVar4 = 0x78;
+    if (1 < iVar4) {
+      uVar14 = (uint)(char)(iVar6 / iVar4);
+    }
+    uVar8 = uVar14;
+    if (uVar9 == 0) {
+      uVar2 = uVar14;
+      uVar8 = uVar7;
+    }
+    txiq_set_reg(uVar14,uVar9 ^ 1);
+    cVar13 = '\x02';
+    if (uVar9 == 1) break;
+    uVar9 = 1;
+    uVar7 = uVar8;
   }
-  if ((char)uVar4 < '\0') {
-    uVar4 = 0;
-  }
-  txiq_cover(uVar4,(int)param_4,&bStack_34,0);
-  txcal_work_mode();
-  bVar7 = 0xf;
-  if (('\x0f' < (char)bStack_34) || (bVar7 = 0xf1, (char)bStack_34 < -0xf)) {
-    bStack_34 = bVar7;
-  }
-  bVar7 = 0x1f;
-  if (('\x1f' < (char)bStack_33) || (bVar7 = 0xe1, (char)bStack_33 < -0x1f)) {
-    bStack_33 = bVar7;
-  }
-  *param_3 = (ushort)((bStack_34 & 0x1f) << 6) | bStack_33 & 0x3f;
-  fpga_mem_wr(0x600060b8,uVar5);
-  if (param_6 == 2) {
-    loopback_mode_en(0);
-  }
-  uVar4 = fpga_mem_rd(0x600050dc);
-  fpga_mem_wr(0x600050dc,uVar4 | 0x1000);
-  return;
+  return uVar8 & 0x3f | (uVar2 & 0x1f) << 6;
 }
 

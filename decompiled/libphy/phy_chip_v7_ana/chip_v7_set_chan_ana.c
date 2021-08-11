@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_ana.o -> chip_v7_set_chan_ana
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,8 +13,8 @@
 void chip_v7_set_chan_ana(undefined1 param_1)
 
 {
-  set_channel_rfpll_freq(chip7_phy_init_ctrl,0);
-  chip7_sleep_params = param_1;
+  set_channel_rfpll_freq(DAT_000130a3,0);
+  DAT_00013178 = param_1;
   return;
 }
 

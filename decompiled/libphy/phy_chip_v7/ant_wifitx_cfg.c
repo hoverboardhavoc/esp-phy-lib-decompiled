@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> ant_wifitx_cfg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void ant_wifitx_cfg(uint param_1,uint param_2)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void ant_wifitx_cfg(int param_1,int param_2)
 
 {
-  uint uVar1;
-  
-  uVar1 = fpga_mem_rd(0x60005104);
-  fpga_mem_wr(0x60005104,(param_1 & 0xf) << 8 | uVar1 & 0xfffff0ff);
-  uVar1 = fpga_mem_rd(0x60005104);
-  fpga_mem_wr(0x60005104,(param_2 & 0xf) << 0x10 | uVar1 & 0xfff0ffff);
+  _DAT_600060b0 = (_DAT_600060b0 & 0xffff00ff | param_1 << 8) & 0xff00ffff | param_2 << 0x10;
   return;
 }
 

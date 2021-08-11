@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> rfcal_pwrctrl
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,108 +10,103 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rfcal_pwrctrl(undefined4 param_1,int param_2,int param_3,int param_4,char *param_5,
-                  undefined4 param_6,int param_7,int param_8)
+void rfcal_pwrctrl(undefined4 param_1,int param_2,int param_3,int param_4,int param_5,int param_6,
+                  int param_7,int param_8)
 
 {
-  uint uVar1;
-  short sVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  char cVar6;
+  short sVar1;
+  int iVar2;
+  uint uVar3;
+  char cVar4;
+  short sVar5;
+  uint uVar6;
   uint uVar7;
-  int iVar8;
+  uint uVar8;
   int iVar9;
-  uint uVar10;
-  int iVar11;
+  int iVar10;
+  uint uVar11;
   int iVar12;
+  int iVar13;
   
-  iVar11 = (param_3 + -1) * 0x1000000 >> 0x18;
-  iVar3 = 0;
+  uVar7 = ((param_6 << 0x11) >> 0x10) + 4 >> 3;
+  if ((int)uVar7 < 0) {
+    uVar7 = 0;
+  }
+  iVar12 = (param_3 + -1) * 0x1000000 >> 0x18;
+  iVar2 = 0;
   do {
-    if ((char)iVar11 < '\0') {
-      if (0x32 < (int)param_5[param_3 + -1] - (int)*param_5) {
-        *param_5 = param_5[param_3 + -1] + -0x32;
-      }
+    if ((char)iVar12 < '\0') {
       stop_tx_tone(1);
       return;
     }
-    uVar7 = (uint)*(byte *)(param_2 + iVar11);
-    if (iVar11 < param_3 + -1) {
-      iVar3 = (int)(((iVar3 + (uint)((byte *)(param_2 + iVar11))[1]) - uVar7) * 0x10000) >> 0x10;
+    uVar6 = (uint)*(byte *)(param_2 + iVar12);
+    if (iVar12 < param_3 + -1) {
+      iVar2 = (int)(((iVar2 + (uint)((byte *)(param_2 + iVar12))[1]) - uVar6) * 0x10000) >> 0x10;
     }
-    iVar12 = 0;
-    uVar10 = 2;
+    sVar5 = -0x18;
+    uVar11 = (int)(((uVar7 & 0xffff) - uVar6) * 0x10000) >> 0x10;
+    if (0x18 < (int)uVar11) {
+      sVar5 = 0x18;
+    }
+    iVar13 = 0;
+    uVar8 = 2;
     do {
-      iVar8 = (iVar3 + param_7) * 0x1000000;
-      iVar9 = iVar8 >> 0x18;
-      cVar6 = (char)((uint)iVar8 >> 0x18);
-      if (iVar9 < 0) {
-        cVar6 = '\0';
+      iVar9 = (iVar2 + param_7) * 0x1000000;
+      iVar10 = iVar9 >> 0x18;
+      cVar4 = (char)((uint)iVar9 >> 0x18);
+      if (iVar10 < 0) {
+        cVar4 = '\0';
       }
-      if ('d' < cVar6) {
-        cVar6 = 'd';
+      if ('d' < cVar4) {
+        cVar4 = 'd';
       }
       start_tx_tone_step(1,param_1,0,0,0);
-      ets_delay_us(2);
-      iVar4 = get_power_db(param_6);
-      iVar5 = get_power_db(param_6);
-      iVar8 = (int)cVar6;
-      iVar4 = ((iVar4 + iVar5) * 0x10000 >> 0x10) + 4 >> 3;
-      if (iVar4 < 0) {
-        iVar4 = 0;
-      }
-      uVar1 = iVar4 - uVar7;
-      if ((int)uVar1 < 0x19) {
-        if ((int)uVar1 < -0x18) {
-          uVar1 = 0xffffffe8;
-          goto _L375;
+      get_tone_sar_dout(2);
+      get_tone_sar_dout(2);
+      iVar9 = (int)cVar4;
+      if (((int)uVar11 < 0x19) && (-0x19 < (int)uVar11)) {
+        uVar3 = uVar11;
+        if (param_8 != 0) {
+_L266:
+          ets_printf("i=%02d  acc=%03d  tgt=%03d  err=%03d  ser=%03d att=%03d\n",iVar13,uVar7,uVar6,
+                     uVar3,iVar2,iVar9);
         }
-        if (param_8 != 0) goto _L389;
-_L376:
-        if (uVar1 == 0) {
-          if (iVar12 != 0) break;
+        if (uVar3 == 0) {
+          if (iVar13 != 0) break;
         }
-        else if ((uVar1 == 0xffffffff) && (uVar10 == 1)) break;
+        else if ((uVar3 == 0xffffffff) && (uVar8 == 1)) break;
       }
       else {
-        uVar1 = 0x18;
-_L375:
-        if (param_8 != 0) {
-_L389:
-          ets_printf("i=%02d  acc=%03d  tgt=%03d  err=%03d  ser=%03d att=%03d\n",iVar12,uVar7,uVar1,
-                     iVar3,iVar8);
-          goto _L376;
-        }
+        uVar3 = (int)sVar5;
+        if (param_8 != 0) goto _L266;
       }
-      if (uVar10 == 0) break;
-      if (iVar9 < 1) {
-        if ((int)uVar1 < 0) {
-          iVar8 = 0;
+      if (uVar8 == 0) break;
+      if (iVar10 < 1) {
+        if ((int)uVar3 < 0) {
+          iVar9 = 0;
           break;
         }
       }
-      else if ((99 < iVar9) && (0 < (int)uVar1)) {
-        iVar8 = 100;
+      else if ((99 < iVar10) && (0 < (int)uVar3)) {
+        iVar9 = 100;
         break;
       }
-      sVar2 = (short)iVar3 + (short)uVar1;
-      if (4 < ((uVar1 & 0xffff) + 2 & 0xffff)) {
-        sVar2 = sVar2 - (short)((int)uVar1 >> 2);
+      sVar1 = (short)iVar2 + (short)uVar3;
+      if (4 < ((uVar3 & 0xffff) + 2 & 0xffff)) {
+        sVar1 = sVar1 - (short)((int)uVar3 >> 2);
       }
-      iVar12 = iVar12 + 1;
-      iVar3 = (int)sVar2;
-      uVar10 = uVar1;
-    } while (iVar12 != 10);
-    iVar12 = (iVar8 - param_4) * 0x1000000;
-    if (iVar12 >> 0x18 < -0x18) {
-      param_5[iVar11] = -0x18;
+      iVar13 = iVar13 + 1;
+      iVar2 = (int)sVar1;
+      uVar8 = uVar3;
+    } while (iVar13 != 10);
+    iVar13 = (iVar9 - param_4) * 0x1000000;
+    if (iVar13 >> 0x18 < -0x18) {
+      *(undefined1 *)(param_5 + iVar12) = 0xe8;
     }
     else {
-      param_5[iVar11] = (char)((uint)iVar12 >> 0x18);
+      *(undefined1 *)(param_5 + iVar12) = (char)((uint)iVar13 >> 0x18);
     }
-    iVar11 = iVar11 + -1;
+    iVar12 = iVar12 + -1;
   } while( true );
 }
 

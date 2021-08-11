@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> phy_get_noisefloor
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,24 +10,23 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 int phy_get_noisefloor(void)
 
 {
-  uint uVar1;
+  short sVar1;
   uint uVar2;
-  short sVar3;
   
-  uVar2 = fpga_mem_rd(0x6001c050);
-  uVar1 = 0xfffffe78;
-  if (-0x189 < (int)(uVar2 | 0xfffffc00)) {
-    uVar1 = uVar2 | 0xfffffc00;
+  uVar2 = _DAT_6001c050 | 0xfffffc00;
+  if ((int)uVar2 < -0x188) {
+    uVar2 = 0xfffffe78;
   }
-  uVar2 = fpga_mem_rd(0x6001d050);
-  fpga_mem_wr(0x6001d050,uVar2 | 1);
-  sVar3 = (short)uVar1;
-  if (-0x160 < sVar3) {
-    sVar3 = -0x160;
+  _DAT_6001d050 = _DAT_6001d050 | 1;
+  sVar1 = (short)uVar2;
+  if (-0x160 < sVar1) {
+    sVar1 = -0x160;
   }
-  return (int)sVar3;
+  return (int)sVar1;
 }
 

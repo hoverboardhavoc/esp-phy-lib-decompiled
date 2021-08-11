@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7_cal.o -> phy_pwdet_always_en
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,23 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void phy_pwdet_always_en(int param_1)
 
 {
-  uint uVar1;
-  
   if (param_1 == 0) {
-    phy_dis_pwdet_one = 1;
-    uVar1 = i2c_to_apb_rd(0x6000e050);
-    i2c_to_apb_wr(0x6000e050,uVar1 & 0xfffffffe);
+    _DAT_6000e050 = _DAT_6000e050 & 0xfffffffe;
     ets_delay_us(1);
     do {
-      uVar1 = i2c_to_apb_rd(0x6000e050);
-    } while ((uVar1 >> 0x18 & 7) != 0);
+    } while ((_DAT_6000e050 >> 0x18 & 7) != 7);
     return;
   }
-  uVar1 = i2c_to_apb_rd(0x6000e050);
-  i2c_to_apb_wr(0x6000e050,uVar1 | 1);
+  _DAT_6000e050 = _DAT_6000e050 | 1;
   return;
 }
 

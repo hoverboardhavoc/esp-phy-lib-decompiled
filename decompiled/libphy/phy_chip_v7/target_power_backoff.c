@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * https://github.com/espressif/esp-phy-lib/commit/8b1137c35cc3d2b1085e7f857c2530efb115d3a3
- * Upstream date: 2021-07-07 18:06:39 +0800
- * Upstream subject: esp32h2: update phy libs
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> target_power_backoff
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,12 +10,11 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void target_power_backoff(char param_1)
+void target_power_backoff(undefined1 param_1)
 
 {
-  chip7_sleep_params[0xb6] = (chip7_sleep_params[0xb6] - target_power_backoff_qdb) + param_1;
-  target_power_backoff_qdb = param_1;
-  set_chan_dig_gain(chip7_sleep_params[0x51]);
+  DAT_00012dee = param_1;
+  wifi_set_tx_gain(DAT_00012f1c,0);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
+ * Upstream date: 2021-08-11 11:36:04 +0800
+ * Upstream subject: update libphy.a and libbtbb.a
  * Source: libphy -> phy_chip_v7.o -> get_max_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,18 +15,18 @@ void get_max_power(void)
 {
   char cVar1;
   char cVar2;
-  undefined1 *puVar3;
+  undefined2 *puVar3;
   
   puVar3 = &phy_param;
-  cVar2 = DAT_00014024;
+  cVar2 = DAT_00012e48;
   do {
-    cVar1 = puVar3[0xf5];
-    if ((char)puVar3[0xf5] < cVar2) {
+    cVar1 = *(char *)((int)puVar3 + 0x9d);
+    if (*(char *)((int)puVar3 + 0x9d) < cVar2) {
       cVar1 = cVar2;
     }
     cVar2 = cVar1;
-    puVar3 = puVar3 + 1;
-  } while (puVar3 != (undefined1 *)0x13f3d);
+    puVar3 = (undefined2 *)((int)puVar3 + 1);
+  } while (puVar3 != (undefined2 *)0x12dbb);
   return;
 }
 
