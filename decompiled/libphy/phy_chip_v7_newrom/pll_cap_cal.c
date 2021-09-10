@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7_newrom.o -> pll_cap_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ char pll_cap_cal(void)
   cVar1 = '\0';
   do {
     iVar3 = pll_correct_dcap(uVar2 & 0x7f,&uStack_11);
-    if (iVar3 == 0) goto _L124;
+    if (iVar3 == 0) goto _L169;
     i2c_writeReg(0x62,1,1,uStack_11);
     i2c_writeReg(0x62,1,0,0x58);
     i2c_writeReg(0x62,1,0,0x78);
@@ -32,7 +32,7 @@ char pll_cap_cal(void)
     ets_delay_us(1);
   } while (cVar1 != '\x14');
   cVar1 = '\x14';
-_L124:
+_L169:
   return cVar1 + -1;
 }
 

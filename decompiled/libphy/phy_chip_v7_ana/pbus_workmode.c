@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7_ana.o -> pbus_workmode
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000104f0) */
+/* WARNING: Removing unreachable block (ram,0x000105a0) */
 /* WARNING: Removing unreachable block (ram,0x00010000) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 

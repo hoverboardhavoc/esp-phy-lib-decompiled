@@ -3,30 +3,35 @@
  * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
  * Upstream date: 2021-09-10 13:00:58 +0800
  * Upstream subject: esp32h2: fix tx/rx channel setting
- * Source: libphy -> phy_chip_v7.o -> get_max_power
+ * Source: libphy -> phy_chip_v7_ana.o -> lp_tx_table_set
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void get_max_power(void)
+void lp_tx_table_set(void)
 
 {
   char cVar1;
-  char cVar2;
-  undefined2 *puVar3;
+  undefined2 uVar2;
+  int iVar3;
+  undefined2 *puVar4;
+  undefined *puVar5;
   
-  puVar3 = &phy_param;
-  cVar2 = DAT_00012ec0;
+  puVar4 = &_LANCHOR4;
+  puVar5 = &phy_param;
+  iVar3 = 0;
   do {
-    cVar1 = *(char *)((int)puVar3 + 0x9d);
-    if (*(char *)((int)puVar3 + 0x9d) < cVar2) {
-      cVar1 = cVar2;
-    }
-    cVar2 = cVar1;
-    puVar3 = (undefined2 *)((int)puVar3 + 1);
-  } while (puVar3 != (undefined2 *)0x12e33);
+    uVar2 = *puVar4;
+    cVar1 = (&_LANCHOR5)[iVar3];
+    *(undefined2 *)(puVar5 + 0x1e) = 0;
+    *(undefined2 *)(puVar5 + 0x10) = uVar2;
+    *(short *)(puVar5 + 0x2c) = (short)cVar1;
+    iVar3 = iVar3 + 1;
+    puVar4 = puVar4 + 1;
+    puVar5 = puVar5 + 2;
+  } while (iVar3 != 7);
   return;
 }
 

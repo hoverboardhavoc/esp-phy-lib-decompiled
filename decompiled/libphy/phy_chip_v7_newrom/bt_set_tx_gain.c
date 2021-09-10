@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7_newrom.o -> bt_set_tx_gain
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,13 +15,21 @@
 void bt_set_tx_gain(void)
 
 {
+  undefined4 uVar1;
+  
+  if (chip_lp_en == '\0') {
+    uVar1 = 0x10;
+  }
+  else {
+    uVar1 = 0xd;
+  }
   bt_get_tx_gain(&phy_param,(int)DAT_0001214d,(int)DAT_000121aa,&phy_param,&phy_param,&phy_param,
                  &phy_param,&phy_param);
-  set_tx_gain_mem(0,0x10,&phy_param,&phy_param,&phy_param,_DAT_0001214e);
+  set_tx_gain_mem(0,uVar1,&phy_param,&phy_param,&phy_param,_DAT_0001214e);
   _DAT_60006004 = _phy_param;
-  _DAT_60006008 = _ets_printf;
-  _DAT_6000600c = _i2c_writeReg;
-  _DAT_60006010 = _bb_bss_cbw40;
+  _DAT_60006008 = _chip_lp_en;
+  _DAT_6000600c = _ets_printf;
+  _DAT_60006010 = _i2c_writeReg;
   return;
 }
 

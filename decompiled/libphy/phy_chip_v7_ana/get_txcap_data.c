@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7_ana.o -> get_txcap_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,13 +16,13 @@ void get_txcap_data(void)
   uint uVar1;
   int iVar2;
   
-  uVar1 = (uint)(DAT_00013178 >> 2);
+  uVar1 = (uint)(DAT_0001317c >> 2);
   if (2 < uVar1) {
     uVar1 = 2;
   }
   iVar2 = uVar1 * 3;
-  DAT_0001306d = DAT_0001306d & 0xf0 | *(byte *)(iVar2 + 0x1310c);
-  DAT_0001306e = *(char *)(iVar2 + 0x1310e) << 4 | *(byte *)(iVar2 + 0x1310d);
+  DAT_00013071 = DAT_00013071 & 0xf0 | *(byte *)(iVar2 + 0x13110);
+  DAT_00013072 = *(char *)(iVar2 + 0x13112) << 4 | *(byte *)(iVar2 + 0x13111);
   return;
 }
 

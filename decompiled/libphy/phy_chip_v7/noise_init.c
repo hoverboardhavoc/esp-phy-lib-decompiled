@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7.o -> noise_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void noise_init(void)
   short sVar4;
   short *psVar5;
   
-  if (-1 < (int)(DAT_00012ea0 << 10)) {
+  if (-1 < (int)(DAT_00012f18 << 10)) {
     psVar5 = &noise_array;
     cVar1 = '\0';
     do {
@@ -49,21 +49,21 @@ void noise_init(void)
       psVar5 = psVar5 + 1;
     } while (cVar1 != '\x03');
     sVar4 = noise_array;
-    if (DAT_00012da6 < noise_array) {
-      sVar4 = DAT_00012da6;
+    if (DAT_00012e1e < noise_array) {
+      sVar4 = DAT_00012e1e;
     }
     if (0 < sVar4) {
       sVar4 = 0;
     }
-    DAT_00012ebc = DAT_00012da8;
-    if (sVar4 < DAT_00012da8) {
-      DAT_00012ebc = sVar4;
+    DAT_00012f34 = DAT_00012e20;
+    if (sVar4 < DAT_00012e20) {
+      DAT_00012f34 = sVar4;
     }
-    DAT_00012ea0 = DAT_00012ea0 | 0x200000;
-    DAT_00012f22 = DAT_00012ebc;
+    DAT_00012f18 = DAT_00012f18 | 0x200000;
+    DAT_00012f9a = DAT_00012f34;
   }
-  sVar4 = DAT_00012ebc;
-  if (DAT_00012ebc < -0x188) {
+  sVar4 = DAT_00012f34;
+  if (DAT_00012f34 < -0x188) {
     sVar4 = -0x188;
   }
   if (-0x160 < sVar4) {

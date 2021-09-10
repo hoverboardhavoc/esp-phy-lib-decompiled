@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7_ana.o -> get_rf_freq_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ void get_rf_freq_init(void)
   uint uStack_28;
   undefined4 uStack_24;
   
-  if ((_DAT_000130fc & 0x20) == 0) {
+  if ((_DAT_00013100 & 0x20) == 0) {
     uVar1 = 0;
     do {
       get_rf_freq_cap(uVar1 + 0x960 & 0xffff,0,&bStack_30,auStack_34);
@@ -36,7 +36,7 @@ void get_rf_freq_init(void)
       uStack_28 = (uint)bStack_30 << 0x10 | (uint)bStack_2f << 8 | (uint)bStack_2e;
       wr_rf_freq_mem(uVar2,&uStack_2c);
     } while (uVar1 != 0x55);
-    _DAT_000130fc = _DAT_000130fc | 0x20;
+    _DAT_00013100 = _DAT_00013100 | 0x20;
   }
   return;
 }

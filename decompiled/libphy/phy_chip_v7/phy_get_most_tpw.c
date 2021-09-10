@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7.o -> phy_get_most_tpw
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,14 +20,14 @@ uint phy_get_most_tpw(void)
   uint uVar5;
   byte local_40 [20];
   
-  uVar1 = DAT_00012f2c;
-  DAT_00012f2c = 0;
+  uVar1 = DAT_00012fa4;
+  DAT_00012fa4 = 0;
   uVar2 = 0xffffff80;
   uVar4 = 1;
   do {
     get_chan_target_power
-              (uVar4 & 0xff,(int)DAT_00012dec,local_40,&DAT_00012e48,DAT_00012e5a,&DAT_00012e5b,
-               &DAT_00012e85);
+              (uVar4 & 0xff,(int)DAT_00012e64,local_40,&DAT_00012ec0,DAT_00012ed2,&DAT_00012ed3,
+               &DAT_00012efd);
     iVar3 = 0;
     do {
       uVar5 = (uint)local_40[iVar3];
@@ -41,7 +41,7 @@ uint phy_get_most_tpw(void)
     ets_printf("chan:%d,max_power:%d\n",uVar4,uVar2);
     uVar4 = uVar5;
   } while (uVar5 != 0xf);
-  DAT_00012f2c = uVar1;
+  DAT_00012fa4 = uVar1;
   return uVar2;
 }
 

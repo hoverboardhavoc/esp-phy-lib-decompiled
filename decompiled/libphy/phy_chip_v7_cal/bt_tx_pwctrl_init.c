@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7_cal.o -> bt_tx_pwctrl_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,56 +15,64 @@
 void bt_tx_pwctrl_init(void)
 
 {
-  uint uVar1;
-  undefined *puVar2;
+  undefined *puVar1;
+  uint uVar2;
   int iVar3;
   uint uVar4;
   uint uVar5;
   char cVar6;
-  char cVar7;
-  int iVar8;
+  int iVar7;
+  char cVar8;
+  int iVar9;
   
-  DAT_00013135 = 0x28;
+  puVar1 = &phy_param;
+  if (chip_lp_en == '\0') {
+    DAT_00013135 = 0x28;
+    iVar7 = 0xd8;
+  }
+  else {
+    DAT_00013135 = 0xc;
+    iVar7 = 0x1d3;
+  }
   if (-1 < (int)(_DAT_0001310c << 0x10)) {
     txcal_debuge_mode();
-    puVar2 = &phy_param;
-    iVar8 = 0;
-    uVar1 = 0x18;
+    iVar9 = 0;
+    uVar2 = 0x18;
     do {
-      set_channel_rfpll_freq((int)(char)(&CSWTCH_195)[iVar8],DAT_000130b3,0);
-      start_tx_tone_step(1,0xe0,uVar1 & 0xff,0,0,0);
+      set_channel_rfpll_freq((int)(char)(&CSWTCH_197)[iVar9],DAT_000130b3,0);
+      start_tx_tone_step(1,0xe0,uVar2 & 0xff,0,0,0);
       _DAT_6000e05c = _DAT_6000e05c & 0xffff0000;
       ets_delay_us(2);
       _DAT_0001309c = read_sar2_code();
       _DAT_6000e05c = _DAT_6000e05c & 0xffff0000 | 0xaaaa;
       ets_delay_us(2);
       _DAT_0001309a = read_sar2_code();
-      cVar7 = '\b';
+      cVar8 = '\b';
       do {
-        start_tx_tone_step(1,0xe0,uVar1 & 0xff,0,0,0);
+        start_tx_tone_step(1,0xe0,uVar2 & 0xff,0,0,0);
         ets_delay_us(2);
         iVar3 = read_sar2_code();
-        iVar3 = (iVar3 + (-0xd8 - (uint)_DAT_0001309c)) * 0x10000;
+        iVar3 = (iVar3 - ((uint)_DAT_0001309c + iVar7)) * 0x10000;
         uVar4 = iVar3 >> 0x10;
         uVar5 = iVar3 >> 0x1f;
         if ((((int)((uVar5 ^ uVar4) - uVar5) < 10) ||
-            (uVar1 = (int)(((int)uVar4 / 10 + (uVar1 & 0xff)) * 0x1000000) >> 0x18, uVar1 == 0)) ||
-           (uVar1 == 0x40)) break;
-        if (0x40 < (int)uVar1) {
-          uVar1 = 0x40;
+            (uVar2 = (int)(((int)uVar4 / 10 + (uVar2 & 0xff)) * 0x1000000) >> 0x18, uVar2 == 0)) ||
+           (uVar2 == 0x40)) break;
+        if (0x40 < (int)uVar2) {
+          uVar2 = 0x40;
         }
-        cVar6 = (char)uVar1;
+        cVar6 = (char)uVar2;
         if (cVar6 < '\0') {
           cVar6 = '\0';
         }
-        cVar7 = cVar7 + -1;
-        uVar1 = (uint)cVar6;
-      } while (cVar7 != '\0');
-      puVar2[0x11a] = (char)uVar1;
-      iVar8 = iVar8 + 1;
-      puVar2 = puVar2 + 1;
-    } while (iVar8 != 3);
-    start_tx_tone_step(0,0xe0,uVar1 & 0xff,0,0,0);
+        cVar8 = cVar8 + -1;
+        uVar2 = (uint)cVar6;
+      } while (cVar8 != '\0');
+      puVar1[0x11a] = (char)uVar2;
+      iVar9 = iVar9 + 1;
+      puVar1 = puVar1 + 1;
+    } while (iVar9 != 3);
+    start_tx_tone_step(0,0xe0,uVar2 & 0xff,0,0,0);
     txcal_work_mode();
     _DAT_0001310c = _DAT_0001310c | 0x8000;
   }

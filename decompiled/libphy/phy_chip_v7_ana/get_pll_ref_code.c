@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7_ana.o -> get_pll_ref_code
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,10 @@
 void get_pll_ref_code(void)
 
 {
-  _DAT_00013052 = _DAT_0001308e + 600;
-  _DAT_00013050 = _DAT_0001308e;
-  _DAT_00013054 = _DAT_0001308e - 600;
-  _DAT_00013056 = (short)(((uint)_DAT_0001308e << 3) / 10);
+  _DAT_00013056 = _DAT_00013092 + 600;
+  _DAT_00013054 = _DAT_00013092;
+  _DAT_00013058 = _DAT_00013092 - 600;
+  _DAT_0001305a = (short)(((uint)_DAT_00013092 << 3) / 10);
   return;
 }
 

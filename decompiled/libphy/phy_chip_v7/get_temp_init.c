@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7.o -> get_temp_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,17 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void get_temp_init(void)
 
 {
   tsens_temp_read();
-  DAT_00012de8 = DAT_00012de6;
-  if (DAT_00012f2c == '\x11') {
-    DAT_00012de8 = DAT_00012f34;
+  DAT_00012e60 = DAT_00012e5e;
+  if (DAT_00012fa4 == '\x11') {
+    DAT_00012e60 = _DAT_00012fac;
   }
-  DAT_00012dea = DAT_00012de8;
+  _DAT_00012e62 = DAT_00012e60;
   return;
 }
 

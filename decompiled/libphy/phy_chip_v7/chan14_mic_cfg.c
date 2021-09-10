@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libphy -> phy_chip_v7.o -> chan14_mic_cfg
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,12 +17,12 @@ void chan14_mic_cfg(int param_1)
 {
   if (param_1 == 1) {
     _DAT_6001c400 = _DAT_6001c400 & 0xffff9fff | 0x2000;
-    DAT_00012dec = DAT_00012e38;
+    DAT_00012e64 = DAT_00012eb0;
   }
   else {
     _DAT_6001c400 = _DAT_6001c400 | 0x6000;
   }
-  wifi_set_tx_gain(DAT_00012f1c,0);
+  wifi_set_tx_gain(DAT_00012f94,0);
   return;
 }
 

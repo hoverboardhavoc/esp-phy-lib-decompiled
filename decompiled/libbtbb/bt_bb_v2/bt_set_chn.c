@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
+ * Upstream date: 2021-09-10 13:00:58 +0800
+ * Upstream subject: esp32h2: fix tx/rx channel setting
  * Source: libbtbb -> bt_bb_v2.o -> bt_set_chn
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,13 +10,10 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void bt_set_chn(undefined1 param_1)
 
 {
-  _DAT_6000e0c4 = _DAT_6000e0c4 | 0x2000000;
-  set_chan_freq_sw_start(param_1,0,0);
+  phy_set_chan_freq(param_1);
   return;
 }
 
