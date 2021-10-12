@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit b7095b90157d98f116ba43c35b12d51192dc91c8
+ * https://github.com/espressif/esp-phy-lib/commit/b7095b90157d98f116ba43c35b12d51192dc91c8
+ * Upstream date: 2021-10-12 21:50:40 +0800
+ * Upstream subject: Update libphy and libbb
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_init_cmplx
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void bt_bb_v2_init_cmplx(int param_1)
   if (param_1 == 0) {
     return;
   }
-  ets_printf("libbtbb version: %s, %s, %s\n","7c96ce5","Aug 19 2021","14:36:20");
+  ets_printf("libbtbb version: %s, %s, %s\n","0f130a5","Sep 18 2021","20:17:16");
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit b7095b90157d98f116ba43c35b12d51192dc91c8
+ * https://github.com/espressif/esp-phy-lib/commit/b7095b90157d98f116ba43c35b12d51192dc91c8
+ * Upstream date: 2021-10-12 21:50:40 +0800
+ * Upstream subject: Update libphy and libbb
  * Source: libphy -> phy_chip_v7.o -> wr_rx_gain_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,7 +43,7 @@ void wr_rx_gain_mem(uint param_1,int param_2,int param_3)
     pbus_force_test(1,2,uVar3 << 2 | uVar2 << 8 | uVar4 << 6);
     pbus_rx_dco_cal(0x800,&uStack_34,0);
     write_gain_mem((int)(short)uStack_34,
-                   (*(ushort *)(&DAT_00012e30 + (uVar5 + 0x78) * 2) & 0x7ff) +
+                   (*(ushort *)(&DAT_00012e6c + (uVar5 + 0x78) * 2) & 0x7ff) +
                    uStack_34._2_2_ * 0x1000000 + 0x500000 + uVar5 * 0x40000 + uVar4 * 0x10000 +
                    uVar3 * 0x1000 + uVar2 * 0x800,uVar6 + iVar1 & 0xff);
   }

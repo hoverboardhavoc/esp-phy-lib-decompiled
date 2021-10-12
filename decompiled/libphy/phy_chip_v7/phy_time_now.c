@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/b7095b90157d98f116ba43c35b12d51192dc91c8
  * Upstream date: 2021-10-12 21:50:40 +0800
  * Upstream subject: Update libphy and libbb
- * Source: libphy -> phy_chip_v7.o -> chan14_mic_cfg
+ * Source: libphy -> phy_chip_v7.o -> phy_time_now
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,17 +12,10 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void chan14_mic_cfg(int param_1)
+int phy_time_now(void)
 
 {
-  if (param_1 == 1) {
-    _DAT_6001c400 = _DAT_6001c400 & 0xffff9fff | 0x2000;
-    DAT_00012ea0 = DAT_00012eec;
-  }
-  else {
-    _DAT_6001c400 = _DAT_6001c400 | 0x6000;
-  }
-  wifi_set_tx_gain(DAT_00012fd0,0);
-  return;
+  _DAT_6000800c = _DAT_6000800c | 0x80000000;
+  return _DAT_60008010 << 3;
 }
 

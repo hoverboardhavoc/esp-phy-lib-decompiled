@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit b7095b90157d98f116ba43c35b12d51192dc91c8
+ * https://github.com/espressif/esp-phy-lib/commit/b7095b90157d98f116ba43c35b12d51192dc91c8
+ * Upstream date: 2021-10-12 21:50:40 +0800
+ * Upstream subject: Update libphy and libbb
  * Source: libphy -> phy_chip_v7.o -> phy_tx_gain_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,21 +25,21 @@ void phy_tx_gain_print(void)
     puVar2 = puVar4 + 0x90;
     puVar4 = puVar4 + 1;
     ets_printf("0x%x,",*puVar2);
-  } while (puVar4 != (undefined2 *)0x12e44);
+  } while (puVar4 != (undefined2 *)0x12e80);
   ets_printf("\nbt_bbgain:");
   puVar4 = puVar3;
   do {
     puVar2 = puVar4 + 0xa0;
     puVar4 = puVar4 + 1;
     ets_printf("0x%x,",*puVar2);
-  } while (puVar4 != (undefined2 *)0x12e44);
+  } while (puVar4 != (undefined2 *)0x12e80);
   ets_printf("\nbt_diggain:");
   do {
     pcVar1 = (char *)(puVar3 + 0xb0);
     puVar3 = (undefined2 *)((int)puVar3 + 1);
     ets_printf(&_LC30,(int)*pcVar1);
-  } while (puVar3 != (undefined2 *)0x12e34);
-  ets_printf("\nbt_correct_power:%d\n",(int)DAT_00012f9e);
+  } while (puVar3 != (undefined2 *)0x12e70);
+  ets_printf("\nbt_correct_power:%d\n",(int)DAT_00012fda);
   return;
 }
 
