@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_phy_close_rf
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,7 +17,7 @@ void rom_phy_close_rf(void)
 {
   noise_check_loop(1,1);
   (**(code **)(_g_phyFuns + 0xe0))(*(code **)(_g_phyFuns + 0xe0));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,0,2,6,*(code **)(_g_phyFuns + 0x1b4));
+  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,2,6,*(code **)(_g_phyFuns + 0x1b4));
   _DAT_6000e040 = _DAT_6000e040 & 0xfffffff3 | 8;
   return;
 }

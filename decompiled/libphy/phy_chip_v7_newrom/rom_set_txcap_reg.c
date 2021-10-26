@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_set_txcap_reg
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ void rom_set_txcap_reg(byte *param_1,uint param_2)
     pbVar2 = pbVar2 + 1;
   } while (pbVar1 != param_1);
   (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,1,3,0,abStack_18[0],*(code **)(_g_phyFuns + 0x1bc));
-                    /* WARNING: Could not recover jumptable at 0x00010210. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010222. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x1b4))
             (0x6b,0,2,((int)(char)abStack_18[2] & 0xfU) << 4 | (uint)abStack_18[1]);

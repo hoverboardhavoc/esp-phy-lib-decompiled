@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_set_chan_reg
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,25 +15,20 @@
 void rom_set_chan_reg(int param_1)
 
 {
-  undefined1 uVar1;
+  char cVar1;
   
-  uVar1 = *(undefined1 *)(phy_param_rom + 0x1f2);
-  (**(code **)(_g_phyFuns + 0x78))
-            ((int)*(char *)(phy_param_rom + 500),*(code **)(_g_phyFuns + 0x78));
+  cVar1 = DAT_000121fe;
+  (**(code **)(_g_phyFuns + 0x78))((int)DAT_00012200,*(code **)(_g_phyFuns + 0x78));
   (**(code **)(_g_phyFuns + 0x60))
-            ((int)*(char *)(phy_param_rom + 0x1f2),(int)*(char *)(phy_param_rom + 500),0,
-             *(undefined1 *)(phy_param_rom + 0xf3),*(undefined2 *)(phy_param_rom + 0x11c),
-             *(undefined2 *)(phy_param_rom + 0x118),*(undefined1 *)(phy_param_rom + 0x11a),
-             *(code **)(_g_phyFuns + 0x60));
+            ((int)DAT_000121fe,(int)DAT_00012200,0,DAT_000120ff,_DAT_00012128,_DAT_00012124,
+             DAT_00012126,*(code **)(_g_phyFuns + 0x60));
   (**(code **)(_g_phyFuns + 0xd0))
-            (uVar1,phy_param_rom + 0xb6,phy_param_rom + 0xb9,*(undefined1 *)(phy_param_rom + 0xbc),
-             *(code **)(_g_phyFuns + 0xd0));
-  (**(code **)(_g_phyFuns + 0x8c))
-            ((int)*(short *)(phy_param_rom + 0x164),*(code **)(_g_phyFuns + 0x8c));
+            (cVar1,&phy_param,&phy_param,DAT_000120c8,*(code **)(_g_phyFuns + 0xd0));
+  (**(code **)(_g_phyFuns + 0x8c))((int)_DAT_00012170,*(code **)(_g_phyFuns + 0x8c));
   if (param_1 != 0) {
-                    /* WARNING: Could not recover jumptable at 0x000108c0. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000110e8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_g_phyFuns + 0x114))(phy_param_rom + 0x158,*(undefined1 *)(phy_param_rom + 0x1f2));
+    (**(code **)(_g_phyFuns + 0x114))(&phy_param,DAT_000121fe);
     return;
   }
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7.o -> phy_internal_delay
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,9 +13,9 @@
 undefined1 phy_internal_delay(void)
 
 {
-  if (DAT_00014124 == '\0') {
-    return DAT_0001401d;
+  if (DAT_00014890 == '\0') {
+    return DAT_000148ac;
   }
-  return DAT_0001401e;
+  return DAT_000148ad;
 }
 

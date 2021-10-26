@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_tsens_temp_read
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,13 +22,12 @@ undefined4 rom_tsens_temp_read(void)
     uVar1 = (**(code **)(_g_phyFuns + 0x208))(*(code **)(_g_phyFuns + 0x208));
   }
   else {
-    uVar1 = (uint)*(byte *)(phy_param_rom + 0x92);
+    uVar1 = (uint)DAT_0001209e;
   }
-  uVar2 = (**(code **)(_g_phyFuns + 0x210))
-                    (*(undefined1 *)(phy_param_rom + 0xaa),*(code **)(_g_phyFuns + 0x210));
+  uVar2 = (**(code **)(_g_phyFuns + 0x210))(DAT_000120b6,*(code **)(_g_phyFuns + 0x210));
   uVar2 = (**(code **)(_g_phyFuns + 0x218))(uVar1,uVar2,*(code **)(_g_phyFuns + 0x218));
-  (**(code **)(_g_phyFuns + 0x214))(phy_param_rom + 0xaa,*(code **)(_g_phyFuns + 0x214));
-  *(short *)(phy_param_rom + 0x92) = (short)uVar2;
+  (**(code **)(_g_phyFuns + 0x214))(&phy_param,*(code **)(_g_phyFuns + 0x214));
+  _DAT_0001209e = (short)uVar2;
   return uVar2;
 }
 

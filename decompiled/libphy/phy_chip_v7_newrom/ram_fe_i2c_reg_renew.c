@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
  * Upstream date: 2021-10-26 15:21:29 +0800
  * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
- * Source: libphy -> phy_chip_v7_newrom.o -> rom_wifi_track_pll_cap
+ * Source: libphy -> phy_chip_v7_newrom.o -> ram_fe_i2c_reg_renew
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,21 +12,17 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void rom_wifi_track_pll_cap(void)
+void ram_fe_i2c_reg_renew(void)
 
 {
-  uint uVar1;
-  
-  if (DAT_000120a8 != '\0') {
-    uVar1 = 0x54;
-    if (DAT_000121fe < 0xe) {
-      uVar1 = (DAT_000121fe + -1) * 5 + 0xcU & 0xffff;
-    }
-                    /* WARNING: Could not recover jumptable at 0x00011370. Too many branches */
+  _DAT_6000e058 = _DAT_6000e058 & 0xffffff00 | 0x20;
+  _DAT_6000e060 = _DAT_6000e060 & 0xffff00ff | 0x1000;
+  _DAT_60006000 = _DAT_60006000 | 0xc000000;
+  _DAT_6000e048 = _DAT_6000e048 & 0xfffe000f | 0x1fe00;
+  (**(code **)(_g_phyFuns + 0x1b4))(0x66,0,4,phy_bbpll_i2c,*(code **)(_g_phyFuns + 0x1b4));
+                    /* WARNING: Could not recover jumptable at 0x000117c4. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_g_phyFuns + 0x22c))(uVar1 & 0xff,&phy_param,1,DAT_000120a7);
-    return;
-  }
+  (**(code **)(_g_phyFuns + 0x1b4))(0x66,0,5,DAT_00012019);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_pll_vol_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,7 +37,9 @@ int ram_pll_vol_cal(undefined4 param_1,ushort *param_2,int param_3,int param_4)
   uVar3 = param_2[3];
   do {
   } while (_DAT_6000e0c4 << 0xd < 0);
-  (**(code **)(_g_phyFuns + 0x1bc))(0x62,1,8,3,0,9,*(code **)(_g_phyFuns + 0x1bc));
+  if (param_3 == 0) {
+    (**(code **)(_g_phyFuns + 0x1bc))(0x62,1,8,3,0,9,*(code **)(_g_phyFuns + 0x1bc));
+  }
   uVar8 = read_pll_cap();
   iVar14 = 0;
   iVar15 = 1;
@@ -46,7 +48,7 @@ int ram_pll_vol_cal(undefined4 param_1,ushort *param_2,int param_3,int param_4)
   uVar13 = uVar8;
   bVar11 = false;
   do {
-    ets_delay_us(2);
+    ets_delay_us(1);
     uVar9 = (**(code **)(_g_phyFuns + 0x154))(0,*(code **)(_g_phyFuns + 0x154));
     bVar4 = uVar9 < uVar7;
     uVar10 = uVar13;
@@ -92,7 +94,9 @@ int ram_pll_vol_cal(undefined4 param_1,ushort *param_2,int param_3,int param_4)
     bVar11 = bVar4;
   } while (iVar14 != 100);
   ram_write_pll_cap(uVar10);
-  (**(code **)(_g_phyFuns + 0x1bc))(0x62,1,8,3,0,0,*(code **)(_g_phyFuns + 0x1bc));
+  if (param_3 == 0) {
+    (**(code **)(_g_phyFuns + 0x1bc))(0x62,1,8,3,0,0,*(code **)(_g_phyFuns + 0x1bc));
+  }
   return (int)((uVar10 - uVar8) * 0x1000000) >> 0x18;
 }
 

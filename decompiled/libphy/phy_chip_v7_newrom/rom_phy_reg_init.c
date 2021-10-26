@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_phy_reg_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,11 +16,9 @@ void rom_phy_reg_init(void)
 
 {
   (**(code **)(_g_phyFuns + 0xb0))(*(code **)(_g_phyFuns + 0xb0));
-  (**(code **)(_g_phyFuns + 0xb8))
-            (*(undefined1 *)(phy_param_rom + 0x1f6),*(undefined1 *)(phy_param_rom + 0x1f5),
-             *(code **)(_g_phyFuns + 0xb8));
-  _DAT_6001c064 = *(undefined4 *)(phy_param_rom + 0xd4);
-  _DAT_6001c114 = _DAT_6001c064;
+  (**(code **)(_g_phyFuns + 0xb8))(DAT_00012202,DAT_00012201,*(code **)(_g_phyFuns + 0xb8));
+  _DAT_6001c064 = _DAT_000120e0;
+  _DAT_6001c114 = _DAT_000120e0;
   (**(code **)(_g_phyFuns + 0xbc))(*(code **)(_g_phyFuns + 0xbc));
   (**(code **)(_g_phyFuns + 0xc4))(*(code **)(_g_phyFuns + 0xc4));
   (**(code **)(_g_phyFuns + 0xa8))(*(code **)(_g_phyFuns + 0xa8));
@@ -29,7 +27,7 @@ void rom_phy_reg_init(void)
   (**(code **)(_g_phyFuns + 0x7c))(*(code **)(_g_phyFuns + 0x7c));
   rom_phy_ant_init();
   rom_bt_filter_reg();
-                    /* WARNING: Could not recover jumptable at 0x00010d5e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011630. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0xc0))();
   return;

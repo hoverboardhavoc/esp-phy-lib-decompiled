@@ -3,28 +3,17 @@
  * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
  * Upstream date: 2021-10-26 15:21:29 +0800
  * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
- * Source: libphy -> phy_chip_v7_newrom.o -> ram_temp_to_power
+ * Source: libphy -> phy_chip_v7_eco2.o -> rom_phy_param_addr
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-int ram_temp_to_power(int param_1,int param_2)
+void rom_phy_param_addr(undefined4 param_1)
 
 {
-  char cVar1;
-  int iVar2;
-  int iVar3;
-  
-  iVar2 = (param_1 - param_2) * 0x10000;
-  iVar3 = iVar2 >> 0x10;
-  if (iVar3 < 1) {
-    cVar1 = (char)(iVar3 / 4);
-  }
-  else {
-    cVar1 = (char)(iVar2 >> 0x12);
-  }
-  return (int)cVar1;
+  phy_param_rom = param_1;
+  return;
 }
 

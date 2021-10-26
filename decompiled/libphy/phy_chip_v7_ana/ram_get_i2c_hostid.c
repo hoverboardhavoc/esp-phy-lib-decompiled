@@ -3,33 +3,19 @@
  * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
  * Upstream date: 2021-10-26 15:21:29 +0800
  * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
- * Source: libphy -> phy_chip_v7.o -> ram_check_noise_floor
+ * Source: libphy -> phy_chip_v7_ana.o -> ram_get_i2c_hostid
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000117b6) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-int ram_check_noise_floor(void)
+bool ram_get_i2c_hostid(int param_1)
 
 {
-  short sVar1;
-  uint uVar2;
-  
-  _DAT_6001c018 = _DAT_6001c018 & 0xfd7fffff | 0x800000;
-  do {
-  } while (-1 < (int)(_DAT_6001c018 << 7));
-  uVar2 = _DAT_6001c050 | 0xfffffc00;
-  if ((int)uVar2 < -0x188) {
-    uVar2 = 0xfffffe78;
-  }
-  sVar1 = (short)uVar2;
-  if (-0x160 < sVar1) {
-    sVar1 = -0x160;
-  }
-  return (int)sVar1;
+  _DAT_6000e048 = _DAT_6000e048 & 0xfffe000f | 0x1fe00;
+  return (param_1 - 0x62U & 0xff) < 10 && (1 << (param_1 - 0x62U & 0x1f) & 0x227U) != 0;
 }
 

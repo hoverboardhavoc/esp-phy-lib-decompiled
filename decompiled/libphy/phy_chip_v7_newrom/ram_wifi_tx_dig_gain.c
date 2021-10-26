@@ -1,9 +1,9 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
- * Source: libphy -> phy_chip_v7_newrom.o -> rom_wifi_tx_dig_gain
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Source: libphy -> phy_chip_v7_newrom.o -> ram_wifi_tx_dig_gain
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,16 +12,17 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void rom_wifi_tx_dig_gain(int param_1)
+void ram_wifi_tx_dig_gain(int param_1)
 
 {
-  undefined1 *puVar1;
-  undefined1 *puVar2;
+  char *pcVar1;
+  char *pcVar2;
   char cVar3;
   char cVar4;
   int iVar5;
   undefined4 *puVar6;
   undefined4 *puVar7;
+  char *pcVar8;
   undefined4 local_10;
   undefined4 uStack_c;
   undefined4 uStack_8;
@@ -30,10 +31,11 @@ void rom_wifi_tx_dig_gain(int param_1)
   
   iVar5 = 0;
   do {
-    puVar1 = (undefined1 *)(param_1 + iVar5);
-    puVar2 = (undefined1 *)((int)&local_10 + iVar5);
+    pcVar2 = (char *)(param_1 + iVar5);
+    pcVar8 = &phy_param + iVar5;
+    pcVar1 = (char *)((int)&local_10 + iVar5);
     iVar5 = iVar5 + 1;
-    *puVar2 = *puVar1;
+    *pcVar1 = *pcVar2 + *pcVar8;
   } while (iVar5 != 0xe);
   cVar3 = (char)local_10 + '\x04';
   cVar4 = local_10._1_1_ + '\x04';

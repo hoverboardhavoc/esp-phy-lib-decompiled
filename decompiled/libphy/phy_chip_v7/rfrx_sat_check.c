@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7.o -> rfrx_sat_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -115,11 +115,11 @@ void rfrx_sat_check(int param_1)
       phy_printf("dac=%d, atten=%d, sat=%d, %d, %d %d, num=%d\n",uVar16,(int)sVar2,uVar18,
                  local_58 >> 8 & 0xff,local_58 >> 0x10 & 0xff,local_58 >> 0x18,bVar1);
     }
-    if (bVar1 < 3) goto _L506;
+    if (bVar1 < 3) goto _L570;
     uVar16 = uVar16 - 1;
   } while (uVar16 != 0);
   uVar17 = 0;
-_L506:
+_L570:
   (**(code **)(g_phyFuns + 0x1bc))(100,1,8,7,3,uVar17,*(code **)(g_phyFuns + 0x1bc));
   _DAT_6001c05c = _DAT_6001c05c | 0x1080000;
   (**(code **)(g_phyFuns + 0x24))(0,*(code **)(g_phyFuns + 0x24));

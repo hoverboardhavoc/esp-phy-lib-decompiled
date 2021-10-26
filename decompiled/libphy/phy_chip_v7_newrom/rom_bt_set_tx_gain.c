@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_bt_set_tx_gain
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,15 +15,13 @@
 void rom_bt_set_tx_gain(void)
 
 {
-  ram_bt_get_tx_gain(phy_param_rom + 0x179,(int)*(char *)(phy_param_rom + 0x17c),
-                     (int)*(char *)(phy_param_rom + 0x1fc),phy_param_rom + 0x68,phy_param_rom + 0x20
-                     ,phy_param_rom + 0x76,phy_param_rom + 0x1aa,phy_param_rom + 0x19a);
-  rom_set_tx_gain_mem(1,0x10,phy_param_rom + 0x19a,phy_param_rom + 0x17e,phy_param_rom + 0x182,
-                      phy_param_rom + 0x180);
-  _DAT_60006014 = *(undefined4 *)(phy_param_rom + 0x1aa);
-  _DAT_60006018 = *(undefined4 *)(phy_param_rom + 0x1ae);
-  _DAT_6000601c = *(undefined4 *)(phy_param_rom + 0x1b2);
-  _DAT_60006020 = *(undefined4 *)(phy_param_rom + 0x1b6);
+  ram_bt_get_tx_gain(&phy_param,(int)DAT_00012188,(int)DAT_00012208,&phy_param,&phy_param,&phy_param
+                     ,&phy_param,&phy_param);
+  rom_set_tx_gain_mem(1,0x10,&phy_param,&phy_param,&phy_param,&phy_param);
+  _DAT_60006014 = _phy_param;
+  _DAT_60006018 = _chip7_phy_init_ctrl;
+  _DAT_6000601c = _noise_check_loop;
+  _DAT_60006020 = _phy_bbpll_i2c;
   return;
 }
 

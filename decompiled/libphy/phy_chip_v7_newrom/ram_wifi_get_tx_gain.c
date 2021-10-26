@@ -1,9 +1,9 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
- * Source: libphy -> phy_chip_v7_newfunc.o -> ram_wifi_get_tx_gain
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Source: libphy -> phy_chip_v7_newrom.o -> ram_wifi_get_tx_gain
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -19,13 +19,12 @@ void ram_wifi_get_tx_gain
 {
   int iVar1;
   int iVar2;
-  short sVar3;
-  undefined2 *puVar4;
+  undefined2 *puVar3;
+  short sVar4;
   int iVar5;
   int in_stack_00000000;
   int in_stack_00000004;
   int in_stack_00000008;
-  int in_stack_0000000c;
   char in_stack_00000010;
   undefined1 uStack_45;
   short sStack_44;
@@ -36,21 +35,20 @@ void ram_wifi_get_tx_gain
     iVar2 = (**(code **)(_g_phyFuns + 0x110))(param_2,param_1,*(code **)(_g_phyFuns + 0x110));
     iVar5 = ((*(char *)(param_3 + iVar1) - param_4) + param_5) * 0x10000 >> 0x10;
     ram_get_tx_gain_value(iVar5,&uStack_45,auStack_42,&sStack_44,param_6,param_7,param_8,0x12);
-    iVar2 = ((sStack_44 - iVar2) + (int)*(char *)(in_stack_0000000c + iVar1)) * 0x10000 >> 0x10;
-    puVar4 = (undefined2 *)(iVar1 * 2 + in_stack_00000004);
-    *puVar4 = auStack_42[0];
+    puVar3 = (undefined2 *)(iVar1 * 2 + in_stack_00000004);
+    *puVar3 = auStack_42[0];
+    sVar4 = (short)(sStack_44 - iVar2);
     *(undefined1 *)(in_stack_00000008 + iVar1) = uStack_45;
-    if (0x18 < iVar2) {
-      iVar2 = 0x18;
+    if (0x18 < (sStack_44 - iVar2) * 0x10000 >> 0x10) {
+      sVar4 = 0x18;
     }
-    sVar3 = (short)iVar2;
-    if (sVar3 < -0x50) {
-      sVar3 = -0x50;
+    if (sVar4 < -0x50) {
+      sVar4 = -0x50;
     }
-    *(char *)(in_stack_00000000 + iVar1) = (char)sVar3;
+    *(char *)(in_stack_00000000 + iVar1) = (char)sVar4;
     if (in_stack_00000010 != '\0') {
       phy_printf("%d,0x%x,0x%x,%d, %d, power=%d, %d\n",iVar1,
-                 *(undefined1 *)(in_stack_00000008 + iVar1),*puVar4,(int)*(char *)(param_3 + iVar1),
+                 *(undefined1 *)(in_stack_00000008 + iVar1),*puVar3,(int)*(char *)(param_3 + iVar1),
                  iVar5);
     }
     iVar1 = iVar1 + 1;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
+ * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
+ * Upstream date: 2021-10-26 15:21:29 +0800
+ * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_i2c_sar2_init_code
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void rom_i2c_sar2_init_code(uint param_1)
 
 {
   (**(code **)(_g_phyFuns + 0x1bc))(0x69,0,4,3,0,param_1 >> 8,*(code **)(_g_phyFuns + 0x1bc));
-                    /* WARNING: Could not recover jumptable at 0x00010820. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010e20. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x1b4))(0x69,0,3,param_1 & 0xff);
   return;
