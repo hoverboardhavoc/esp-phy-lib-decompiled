@@ -3,19 +3,17 @@
  * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
  * Upstream date: 2021-11-08 20:19:30 +0800
  * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
- * Source: libphy -> phy_chip_v7.o -> phy_internal_delay
+ * Source: libphy -> phy_chip_v7.o -> phy_init_flag
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined1 phy_internal_delay(void)
+void phy_init_flag(void)
 
 {
-  if (DAT_000148dc == '\0') {
-    return DAT_000148f8;
-  }
-  return DAT_000148f9;
+  DAT_00014808 = DAT_00014808 & 0xffffffdf;
+  return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * Upstream date: 2021-11-08 20:19:30 +0800
+ * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
  * Source: libphy -> phy_chip_v7.o -> bt_tx_gain_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ void bt_tx_gain_init(void)
     uVar3 = uVar1 * 3;
     uVar1 = uVar1 + 1;
     _DAT_6000e148 =
-         ((int)(((uint)DAT_0001469d - iVar2) * 0x1000000) >> 0x18 & 0xffU) << 0x10 |
+         ((int)(((uint)DAT_000146e9 - iVar2) * 0x1000000) >> 0x18 & 0xffU) << 0x10 |
          _DAT_6000e0c0 & 0xff00ffff;
     _DAT_6000e0c4 = (_DAT_6000e0c4 & 0xffffff00 | uVar3) & 0xfffffdff;
   } while (uVar1 != 0x55);

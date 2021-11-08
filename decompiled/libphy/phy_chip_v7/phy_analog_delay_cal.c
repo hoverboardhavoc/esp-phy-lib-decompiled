@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * Upstream date: 2021-11-08 20:19:30 +0800
+ * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
  * Source: libphy -> phy_chip_v7.o -> phy_analog_delay_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,9 +31,9 @@ void phy_analog_delay_cal(void)
   
   uStack_68 = 0x1000100;
   uStack_64 = 0x1000100;
-  memcpy(local_60,&DAT_0001454c,0x15);
-  memcpy(abStack_4c + 4,&DAT_00014564,0x15);
-  if ((int)(DAT_000147bc << 6) < 0) {
+  memcpy(local_60,&DAT_00014598,0x15);
+  memcpy(abStack_4c + 4,&DAT_000145b0,0x15);
+  if ((int)(DAT_00014808 << 6) < 0) {
     return;
   }
   iVar7 = 0;
@@ -98,15 +98,15 @@ void phy_analog_delay_cal(void)
       else {
         cVar3 = (char)((uVar5 - 0x20) * 0x1000000 >> 0x18);
       }
-      DAT_000148ac = ((local_6c[0] * '\x02' + -0x1c) - cVar2) - cVar3;
-      DAT_000148ad = ((local_6c[1] * '\x02' + -0x1c) - cVar2) - cVar3;
+      DAT_000148f8 = ((local_6c[0] * '\x02' + -0x1c) - cVar2) - cVar3;
+      DAT_000148f9 = ((local_6c[1] * '\x02' + -0x1c) - cVar2) - cVar3;
       _DAT_6000607c = _DAT_6000607c | 0x8000800;
       _DAT_60006078 = _DAT_60006078 | 0x2000000;
       (**(code **)(g_phyFuns + 0x50))(0,*(code **)(g_phyFuns + 0x50));
       (**(code **)(g_phyFuns + 0x54))(0,*(code **)(g_phyFuns + 0x54));
       (**(code **)(g_phyFuns + 0x1e4))(0,*(code **)(g_phyFuns + 0x1e4));
       (**(code **)(g_phyFuns + 0x1d8))(*(code **)(g_phyFuns + 0x1d8));
-      DAT_000147bc = DAT_000147bc | 0x2000000;
+      DAT_00014808 = DAT_00014808 | 0x2000000;
       return;
     }
     iVar7 = 1;

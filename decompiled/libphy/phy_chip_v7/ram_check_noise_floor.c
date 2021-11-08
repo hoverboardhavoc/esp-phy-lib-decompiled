@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * Upstream date: 2021-11-08 20:19:30 +0800
+ * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
  * Source: libphy -> phy_chip_v7.o -> ram_check_noise_floor
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000117b6) */
+/* WARNING: Removing unreachable block (ram,0x000117ea) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 int ram_check_noise_floor(void)

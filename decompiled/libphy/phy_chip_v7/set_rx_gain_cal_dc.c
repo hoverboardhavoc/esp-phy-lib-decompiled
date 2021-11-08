@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * Upstream date: 2021-11-08 20:19:30 +0800
+ * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
  * Source: libphy -> phy_chip_v7.o -> set_rx_gain_cal_dc
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,7 +60,7 @@ void set_rx_gain_cal_dc(int param_1,uint param_2,uint param_3,int param_4,int pa
     }
     uVar12 = (uint)in_stack_00000000;
     if ((param_2 == 0) || (uVar12 = param_8, param_2 == 1)) {
-_L72:
+_L74:
       pcVar7 = *(code **)(g_phyFuns + 0x1cc);
       if (param_2 == 0) {
         (*pcVar7)(2,1,0x100);
@@ -70,7 +70,7 @@ _L72:
       }
       else {
         cVar13 = '\x01';
-        if (param_2 != 1) goto _L49;
+        if (param_2 != 1) goto _L51;
         if (param_1 == 0) {
           (*pcVar7)(2,2,*(undefined2 *)((int)param_6 + 2));
           uVar5 = *param_6 & 0x1ff;
@@ -90,11 +90,11 @@ _L72:
     else {
       if (param_2 != 2) {
         uVar12 = 1;
-        goto _L72;
+        goto _L74;
       }
       cVar13 = '\x0e';
       uVar12 = 1;
-_L49:
+_L51:
       (**(code **)(g_phyFuns + 0x1cc))
                 (2,2,*(undefined2 *)((int)param_6 + 2),*(code **)(g_phyFuns + 0x1cc));
       (**(code **)(g_phyFuns + 0x1cc))(3,2,*param_6 & 0x1ff,*(code **)(g_phyFuns + 0x1cc));

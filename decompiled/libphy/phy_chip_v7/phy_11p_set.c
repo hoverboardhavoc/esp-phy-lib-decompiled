@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
+ * Upstream date: 2021-11-08 20:19:30 +0800
+ * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
  * Source: libphy -> phy_chip_v7.o -> phy_11p_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,18 +19,18 @@ void phy_11p_set(int param_1,int param_2)
   uint uVar1;
   int iVar2;
   
-  DAT_0001478b = (undefined1)param_1;
-  DAT_0001478c = (undefined1)param_2;
+  DAT_000147d7 = (undefined1)param_1;
+  DAT_000147d8 = (undefined1)param_2;
   if (param_1 == 0) {
     _DAT_6001c030 = _DAT_6001c030 | 0x20;
-    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,4,DAT_00014803);
-    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,5,DAT_00014803,*(code **)(g_phyFuns + 0x1b4));
-    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,0xc,DAT_00014803,*(code **)(g_phyFuns + 0x1b4));
-    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,0xd,DAT_00014803,*(code **)(g_phyFuns + 0x1b4));
-    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,6,DAT_00014804,*(code **)(g_phyFuns + 0x1b4));
-    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,7,DAT_00014804,*(code **)(g_phyFuns + 0x1b4));
-    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,0xe,DAT_00014804,*(code **)(g_phyFuns + 0x1b4));
-    uVar1 = (uint)DAT_00014804;
+    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,4,DAT_0001484f);
+    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,5,DAT_0001484f,*(code **)(g_phyFuns + 0x1b4));
+    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,0xc,DAT_0001484f,*(code **)(g_phyFuns + 0x1b4));
+    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,0xd,DAT_0001484f,*(code **)(g_phyFuns + 0x1b4));
+    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,6,DAT_00014850,*(code **)(g_phyFuns + 0x1b4));
+    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,7,DAT_00014850,*(code **)(g_phyFuns + 0x1b4));
+    (**(code **)(g_phyFuns + 0x1b4))(0x67,1,0xe,DAT_00014850,*(code **)(g_phyFuns + 0x1b4));
+    uVar1 = (uint)DAT_00014850;
     UNRECOVERED_JUMPTABLE = *(code **)(g_phyFuns + 0x1b4);
   }
   else {
@@ -44,7 +44,7 @@ void phy_11p_set(int param_1,int param_2)
     }
     _DAT_6002600c = _DAT_6002600c & 0xfffffff3 | iVar2 << 2;
     _DAT_6001c030 = _DAT_6001c030 & 0xffffffdf;
-    uVar1 = ((DAT_00014802 + 0x38) * 0x67) / uVar1 - 8;
+    uVar1 = ((DAT_0001484e + 0x38) * 0x67) / uVar1 - 8;
     if (0x3f < (int)uVar1) {
       uVar1 = 0x3f;
     }
@@ -58,7 +58,7 @@ void phy_11p_set(int param_1,int param_2)
     (**(code **)(g_phyFuns + 0x1b4))(0x67,1,0xe,uVar1,*(code **)(g_phyFuns + 0x1b4));
     UNRECOVERED_JUMPTABLE = *(code **)(g_phyFuns + 0x1b4);
   }
-                    /* WARNING: Could not recover jumptable at 0x0001311e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013152. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE)(0x67,1,0xf,uVar1);
   return;
