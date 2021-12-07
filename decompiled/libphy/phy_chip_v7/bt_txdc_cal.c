@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
- * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
- * Upstream date: 2021-11-08 20:19:30 +0800
- * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7.o -> bt_txdc_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,8 +21,8 @@ void bt_txdc_cal(void)
   undefined2 *puVar6;
   
   (**(code **)(g_phyFuns + 0x1bc))(0x6a,0,0,3,0,0xc,*(code **)(g_phyFuns + 0x1bc));
-  if (-1 < (int)(DAT_00014808 << 0x13)) {
-    puVar6 = &DAT_0001486a;
+  if (-1 < (int)(DAT_000146fc << 0x13)) {
+    puVar6 = &DAT_0001475e;
     (**(code **)(g_phyFuns + 0x1d4))(*(code **)(g_phyFuns + 0x1d4));
     (**(code **)(g_phyFuns + 0x1ec))(0xf,0x20,*(code **)(g_phyFuns + 0x1ec));
     pcVar3 = *(code **)(g_phyFuns + 0x1cc);
@@ -39,9 +39,9 @@ void bt_txdc_cal(void)
     } while (sVar2 != 3);
     (**(code **)(g_phyFuns + 0x1e4))(0,*(code **)(g_phyFuns + 0x1e4));
     (**(code **)(g_phyFuns + 0x1d8))(*(code **)(g_phyFuns + 0x1d8));
-    DAT_00014808 = DAT_00014808 | 0x1000;
+    DAT_000146fc = DAT_000146fc | 0x1000;
   }
-                    /* WARNING: Could not recover jumptable at 0x00010ba2. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010bee. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(g_phyFuns + 0x1bc))(0x6a,0,0,3,0,2);
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
- * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
- * Upstream date: 2021-11-08 20:19:30 +0800
- * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7.o -> phy_set_rate
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,23 +26,23 @@ void phy_set_rate(byte param_1)
       (**(code **)(g_phyFuns + 0x1bc))(0x6b,0,3,7,4,0,*(code **)(g_phyFuns + 0x1bc));
       (**(code **)(g_phyFuns + 0x1bc))(0x6b,0,4,3,0,4,*(code **)(g_phyFuns + 0x1bc));
       (**(code **)(g_phyFuns + 0x1bc))(0x6b,0,4,7,4,10,*(code **)(g_phyFuns + 0x1bc));
-      DAT_000147a7 = 8;
-      DAT_000147a8 = 0xa4;
+      DAT_0001469b = 8;
+      DAT_0001469c = 0xa4;
     }
     else {
       (**(code **)(g_phyFuns + 0x1bc))(0x6b,0,3,3,0,6);
       (**(code **)(g_phyFuns + 0x1bc))(0x6b,0,3,7,4,0,*(code **)(g_phyFuns + 0x1bc));
       (**(code **)(g_phyFuns + 0x1bc))(0x6b,0,4,3,0,6,*(code **)(g_phyFuns + 0x1bc));
       (**(code **)(g_phyFuns + 0x1bc))(0x6b,0,4,7,4,6,*(code **)(g_phyFuns + 0x1bc));
-      DAT_000147a7 = 6;
-      DAT_000147a8 = 0x66;
+      DAT_0001469b = 6;
+      DAT_0001469c = 0x66;
     }
     iVar1 = 0;
     do {
       (&phy_param)[iVar1] = cVar2;
       iVar1 = iVar1 + 1;
     } while (iVar1 != 0xe);
-    ram_wifi_tx_dig_gain(&DAT_000148a2);
+    ram_wifi_tx_dig_gain(&DAT_00014796);
     return;
   }
   return;

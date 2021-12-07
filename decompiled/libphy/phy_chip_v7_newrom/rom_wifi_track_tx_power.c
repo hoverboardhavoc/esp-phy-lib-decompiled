@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_wifi_track_tx_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,11 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000119d6) */
-/* WARNING: Removing unreachable block (ram,0x00011a2a) */
-/* WARNING: Removing unreachable block (ram,0x00011a30) */
-/* WARNING: Removing unreachable block (ram,0x00011a3a) */
-/* WARNING: Removing unreachable block (ram,0x00011b92) */
+/* WARNING: Removing unreachable block (ram,0x000119e8) */
+/* WARNING: Removing unreachable block (ram,0x00011a3c) */
+/* WARNING: Removing unreachable block (ram,0x00011a42) */
+/* WARNING: Removing unreachable block (ram,0x00011a4c) */
+/* WARNING: Removing unreachable block (ram,0x00011ba4) */
 /* WARNING: Removing unreachable block (ram,0x00010000) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -47,7 +47,7 @@ void rom_wifi_track_tx_power(int param_1,int param_2)
     DAT_00012206 = (char)iVar2;
     ram_txpwr_correct(0,&phy_param,&phy_param,iVar1);
     if (param_2 != 0) {
-      phy_printf("correct_power=%d,temp=%d %d\n",(int)DAT_00012206,(int)_DAT_0001209e,iVar1);
+      ets_printf("correct_power=%d,temp=%d %d\n",(int)DAT_00012206,(int)_DAT_0001209e,iVar1);
     }
     _DAT_6000e040 = _DAT_6000e040 & 0xfffffff3 | 4;
     return;

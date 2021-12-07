@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_txpwr_correct
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,8 +60,8 @@ void ram_txpwr_correct(int param_1,char *param_2,short *param_3,int param_4,unde
   rom_set_tx_gain_mem(1,0x10,&phy_param,&phy_param,&phy_param,&phy_param);
   _DAT_60006014 = _phy_param;
   _DAT_60006018 = _chip7_phy_init_ctrl;
-  _DAT_6000601c = _noise_check_loop;
-  _DAT_60006020 = _phy_bbpll_i2c;
+  _DAT_6000601c = _phy_bbpll_i2c;
+  _DAT_60006020 = uRam00012018;
   return;
 }
 

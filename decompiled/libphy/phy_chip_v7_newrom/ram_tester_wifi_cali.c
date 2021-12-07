@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_tester_wifi_cali
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,23 +39,23 @@ void ram_tester_wifi_cali(undefined4 param_1,int param_2,int param_3)
   _DAT_0001217c = 0x808;
   iVar2 = (**(code **)(_g_phyFuns + 0x110))(&phy_param,param_1,*(code **)(_g_phyFuns + 0x110));
   iVar3 = (**(code **)(_g_phyFuns + 0x110))(&phy_param,param_1,*(code **)(_g_phyFuns + 0x110));
-  DAT_00011d39 = (char)(((uint)(byte)(&DAT_00012100)[DAT_00012211 >> 4] - iVar3) * 0x1000000 >> 0x18
+  DAT_00011d4d = (char)(((uint)(byte)(&DAT_00012100)[DAT_00012211 >> 4] - iVar3) * 0x1000000 >> 0x18
                        );
   cVar5 = (char)(((uint)(byte)(&DAT_00012100)[DAT_00012211 & 0xf] - iVar2) * 0x1000000 >> 0x18);
   wifi_cali_offset = cVar5;
   if ((DAT_00012211 & 0xe) == 0) {
-    wifi_cali_offset = DAT_00011d39;
-    DAT_00011d39 = cVar5;
+    wifi_cali_offset = DAT_00011d4d;
+    DAT_00011d4d = cVar5;
   }
   if (param_3 != 0) {
-    phy_printf("interp_index=%d,%d,offset=%d %d\n",iVar2,iVar3,(int)wifi_cali_offset,
-               (int)DAT_00011d39);
+    ets_printf("interp_index=%d,%d,offset=%d %d\n",iVar2,iVar3,(int)wifi_cali_offset,
+               (int)DAT_00011d4d);
   }
   uVar6 = 0;
   do {
     cVar5 = wifi_cali_offset;
     if (uVar6 < 2) {
-      cVar5 = DAT_00011d39;
+      cVar5 = DAT_00011d4d;
     }
     *(char *)(param_2 + uVar6) = puVar1[0xf4] - cVar5;
     uVar6 = uVar6 + 1;

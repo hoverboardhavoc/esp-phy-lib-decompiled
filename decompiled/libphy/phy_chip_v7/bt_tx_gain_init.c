@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
- * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
- * Upstream date: 2021-11-08 20:19:30 +0800
- * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7.o -> bt_tx_gain_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ void bt_tx_gain_init(void)
     uVar3 = uVar1 * 3;
     uVar1 = uVar1 + 1;
     _DAT_6000e148 =
-         ((int)(((uint)DAT_000146e9 - iVar2) * 0x1000000) >> 0x18 & 0xffU) << 0x10 |
+         ((int)(((uint)DAT_000145dd - iVar2) * 0x1000000) >> 0x18 & 0xffU) << 0x10 |
          _DAT_6000e0c0 & 0xff00ffff;
     _DAT_6000e0c4 = (_DAT_6000e0c4 & 0xffffff00 | uVar3) & 0xfffffdff;
   } while (uVar1 != 0x55);

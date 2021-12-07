@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7_cal.o -> pbus_rx_dco_cal_1step
  *
  * (C) Espressif, Apache License 2.0.
@@ -118,9 +118,9 @@ void pbus_rx_dco_cal_1step(int param_1,int param_2,undefined4 param_3,short *par
     if (iVar6 < (int)uVar5) {
       if (iVar14 == 0) {
         iVar6 = 0;
-        goto _L189;
+        goto _L188;
       }
-_L190:
+_L189:
       iVar6 = 1;
       if (param_5[1] < 1) {
         iVar6 = -1;
@@ -129,13 +129,13 @@ _L190:
     else {
       iVar6 = (int)(short)(param_5[1] >> (uVar13 & 0x1f));
       if (iVar14 == 0) {
-_L189:
+_L188:
         iVar14 = 1;
         if (*param_5 < 1) {
           iVar14 = -1;
         }
       }
-      if (iVar6 == 0) goto _L190;
+      if (iVar6 == 0) goto _L189;
     }
     if (param_2 == 2) {
       sVar3 = (**(code **)(_g_phyFuns + 0x28))(iVar14,5,0xfffffffb,*(code **)(_g_phyFuns + 0x28));
@@ -150,11 +150,11 @@ _L189:
       if (param_1 == 0) {
         *param_4 = *param_4 - (short)iStack_58;
         param_4[1] = param_4[1] - (short)iStack_54;
-        goto _L170;
+        goto _L169;
       }
       *param_4 = *param_4 + (short)(iStack_58 / -6);
       param_4[1] = param_4[1] + (short)(iStack_54 / -6);
-      goto _L169;
+      goto _L168;
     }
     iVar7 = (**(code **)(_g_phyFuns + 0x100))(*param_5,*(code **)(_g_phyFuns + 0x100));
     if ((int)uVar5 < iVar7) {
@@ -183,7 +183,7 @@ _L189:
     cVar10 = cVar10 + -1;
     if (cVar10 == '\0') {
       if (param_1 == 0) {
-_L170:
+_L169:
         if ((param_2 != 0) && ((uVar18 != 0x100 || (iVar12 != 0x100)))) {
           iVar8 = (**(code **)(_g_phyFuns + 0x100))(iStack_58,*(code **)(_g_phyFuns + 0x100));
           if ((0x14 < iVar8) ||
@@ -209,7 +209,7 @@ _L170:
           }
         }
       }
-_L169:
+_L168:
       if (*param_4 < 0) {
         *param_4 = 0;
       }

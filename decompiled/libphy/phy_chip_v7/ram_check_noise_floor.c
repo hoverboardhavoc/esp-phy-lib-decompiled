@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
- * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
- * Upstream date: 2021-11-08 20:19:30 +0800
- * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7.o -> ram_check_noise_floor
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000117ea) */
+/* WARNING: Removing unreachable block (ram,0x00011836) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 int ram_check_noise_floor(void)

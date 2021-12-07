@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
- * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
- * Upstream date: 2021-11-08 20:19:30 +0800
- * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
+ * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
+ * Upstream date: 2021-12-07 14:34:50 +0800
+ * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
  * Source: libphy -> phy_chip_v7.o -> phy_analog_delay_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,9 +31,9 @@ void phy_analog_delay_cal(void)
   
   uStack_68 = 0x1000100;
   uStack_64 = 0x1000100;
-  memcpy(local_60,&DAT_00014598,0x15);
-  memcpy(abStack_4c + 4,&DAT_000145b0,0x15);
-  if ((int)(DAT_00014808 << 6) < 0) {
+  memcpy(local_60,&DAT_00014494,0x15);
+  memcpy(abStack_4c + 4,&DAT_000144ac,0x15);
+  if ((int)(DAT_000146fc << 6) < 0) {
     return;
   }
   iVar7 = 0;
@@ -78,7 +78,7 @@ void phy_analog_delay_cal(void)
     }
     local_6c[iVar7] = cVar2 + -0x58 + cVar3;
     if ((cVar3 == '\0') || (cVar3 == '\x14')) {
-      phy_printf("phy_filt_delay fail!!!, k=%d\n");
+      ets_printf("phy_filt_delay fail!!!, k=%d\n");
     }
     if (iVar7 != 0) {
       iVar7 = (int)(((uint)local_6c[0] - (uint)local_6c[1]) * 0x1000000) >> 0x18;
@@ -98,15 +98,15 @@ void phy_analog_delay_cal(void)
       else {
         cVar3 = (char)((uVar5 - 0x20) * 0x1000000 >> 0x18);
       }
-      DAT_000148f8 = ((local_6c[0] * '\x02' + -0x1c) - cVar2) - cVar3;
-      DAT_000148f9 = ((local_6c[1] * '\x02' + -0x1c) - cVar2) - cVar3;
+      DAT_000147ec = ((local_6c[0] * '\x02' + -0x1c) - cVar2) - cVar3;
+      DAT_000147ed = ((local_6c[1] * '\x02' + -0x1c) - cVar2) - cVar3;
       _DAT_6000607c = _DAT_6000607c | 0x8000800;
       _DAT_60006078 = _DAT_60006078 | 0x2000000;
       (**(code **)(g_phyFuns + 0x50))(0,*(code **)(g_phyFuns + 0x50));
       (**(code **)(g_phyFuns + 0x54))(0,*(code **)(g_phyFuns + 0x54));
       (**(code **)(g_phyFuns + 0x1e4))(0,*(code **)(g_phyFuns + 0x1e4));
       (**(code **)(g_phyFuns + 0x1d8))(*(code **)(g_phyFuns + 0x1d8));
-      DAT_00014808 = DAT_00014808 | 0x2000000;
+      DAT_000146fc = DAT_000146fc | 0x2000000;
       return;
     }
     iVar7 = 1;
