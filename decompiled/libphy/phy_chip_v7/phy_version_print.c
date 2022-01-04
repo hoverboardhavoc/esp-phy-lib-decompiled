@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b7095b90157d98f116ba43c35b12d51192dc91c8
- * https://github.com/espressif/esp-phy-lib/commit/b7095b90157d98f116ba43c35b12d51192dc91c8
- * Upstream date: 2021-10-12 21:50:40 +0800
- * Upstream subject: Update libphy and libbb
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7.o -> phy_version_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void phy_version_print(void)
 
 {
-  ets_printf("phy_version: %d, %s, %s, %s\n",0x65,"d082b50-dirty","Sep 18 2021","20:17:07");
+  phy_printf("phy_version: %d, %s, %s, %s\n",0x65,"d082b50-dirty","Sep 18 2021","20:17:07");
   return;
 }
 

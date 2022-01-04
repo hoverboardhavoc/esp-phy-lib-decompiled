@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * Upstream date: 2021-12-07 14:34:50 +0800
- * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_pll_vol_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -54,7 +54,7 @@ int ram_pll_vol_cal(undefined4 param_1,ushort *param_2,int param_3,int param_4)
     uVar10 = uVar13;
     if (((param_3 != 0) && (uVar9 < uVar7)) && (uVar3 < uVar9)) break;
     if (param_4 != 0) {
-      ets_printf("i=%d,freq=%d,cap_step=%d,cap_ext=%d,vol_code=%d,flagl=%d\n",iVar14,param_1,iVar15,
+      phy_printf("i=%d,freq=%d,cap_step=%d,cap_ext=%d,vol_code=%d,flagl=%d\n",iVar14,param_1,iVar15,
                  uVar13,uVar9,bVar4);
     }
     if ((iVar14 == 0) || (bVar4 == bVar11)) {
@@ -78,12 +78,12 @@ int ram_pll_vol_cal(undefined4 param_1,ushort *param_2,int param_3,int param_4)
     }
     uVar10 = iVar6 + uVar13 & 0xffff;
     if (uVar10 < 10) {
-      ets_printf("pll_cap_ext %d\n",10);
+      phy_printf("pll_cap_ext %d\n",10);
       uVar10 = 10;
       break;
     }
     if (500 < uVar10) {
-      ets_printf("pll_cap_ext %d\n",500);
+      phy_printf("pll_cap_ext %d\n",500);
       uVar10 = 500;
       break;
     }

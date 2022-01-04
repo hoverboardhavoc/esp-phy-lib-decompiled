@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7_cal.o -> get_rfcal_rxiq_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ uint get_rfcal_rxiq_data(undefined4 param_1,undefined4 param_2,int param_3)
   do {
     rfcal_rxiq(0xe,param_1,param_2,&cStack_34,param_3);
     if (param_3 != 0) {
-      ets_printf("%d_%d_%d\n",iVar12,(int)cStack_34,(int)cStack_33);
+      phy_printf("%d_%d_%d\n",iVar12,(int)cStack_34,(int)cStack_33);
     }
     iVar9 = (int)cStack_34;
     iVar7 = (int)cStack_33;

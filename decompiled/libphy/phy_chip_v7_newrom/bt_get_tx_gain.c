@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7_newrom.o -> bt_get_tx_gain
  *
  * (C) Espressif, Apache License 2.0.
@@ -58,7 +58,7 @@ void bt_get_tx_gain(int param_1,int param_2,int param_3,undefined4 param_4,undef
     }
     *(char *)(param_6 + uVar3) = (char)sVar8;
     if (in_stack_0000000c != '\0') {
-      ets_printf("%d,0x%x,0x%x,%d, %d, power=%d, %d,%d\n",uVar3,*puVar6,*puVar5,(int)(short)uVar2,
+      phy_printf("%d,0x%x,0x%x,%d, %d, power=%d, %d,%d\n",uVar3,*puVar6,*puVar5,(int)(short)uVar2,
                  iVar9);
     }
     uVar3 = uVar3 + 1;

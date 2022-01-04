@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * Upstream date: 2021-12-07 14:34:50 +0800
- * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_wifi_get_tx_gain
  *
  * (C) Espressif, Apache License 2.0.
@@ -47,7 +47,7 @@ void ram_wifi_get_tx_gain
     }
     *(char *)(in_stack_00000000 + iVar1) = (char)sVar4;
     if (in_stack_00000010 != '\0') {
-      ets_printf("%d,0x%x,0x%x,%d, %d, power=%d, %d\n",iVar1,
+      phy_printf("%d,0x%x,0x%x,%d, %d, power=%d, %d\n",iVar1,
                  *(undefined1 *)(in_stack_00000008 + iVar1),*puVar3,(int)*(char *)(param_3 + iVar1),
                  iVar5);
     }

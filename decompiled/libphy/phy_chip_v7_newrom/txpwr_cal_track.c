@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7_newrom.o -> txpwr_cal_track
  *
  * (C) Espressif, Apache License 2.0.
@@ -48,7 +48,7 @@ _L125:
     DAT_000121a8 = cVar1;
     txpwr_correct(param_1 != 0,&phy_param,&phy_param,iVar4);
     if (param_3 != 0) {
-      ets_printf("correct_power=%d,temp=%d %d\n",(int)DAT_000121a8,(int)(short)_DAT_0001206a,iVar4);
+      phy_printf("correct_power=%d,temp=%d %d\n",(int)DAT_000121a8,(int)(short)_DAT_0001206a,iVar4);
     }
     _DAT_6000e040 = _DAT_6000e040 & 0xfffffff3 | 4;
     return;

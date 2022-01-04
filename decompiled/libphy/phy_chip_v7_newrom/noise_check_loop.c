@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7_newrom.o -> noise_check_loop
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,7 +31,7 @@ void noise_check_loop(int param_1,int param_2)
   _write_chan_freq = (undefined2)((uint)iVar4 >> 0x10);
   iVar4 = (int)_DAT_000121a6;
   if (param_1 == 0xff) {
-    ets_printf("noise value: %d, %d, %d\n",iVar5,iVar4,(int)_DAT_00012140);
+    phy_printf("noise value: %d, %d, %d\n",iVar5,iVar4,(int)_DAT_00012140);
   }
   if ((uVar3 - 0x26d & 0xffff) < 0x3f) {
     if (iVar5 < -0x188) {
@@ -67,7 +67,7 @@ void noise_check_loop(int param_1,int param_2)
     }
     _DAT_00012140 = sVar1;
     if ((param_2 != 0) && (set_noise_floor((int)_DAT_00012140), param_1 == 0xff)) {
-      ets_printf("rx noise set : old=%d, new=%d\n",iVar5,(int)_DAT_00012140);
+      phy_printf("rx noise set : old=%d, new=%d\n",iVar5,(int)_DAT_00012140);
     }
   }
 _L191:

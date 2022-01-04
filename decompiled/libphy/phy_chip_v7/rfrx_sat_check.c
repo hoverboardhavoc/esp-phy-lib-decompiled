@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * Upstream date: 2021-12-07 14:34:50 +0800
- * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7.o -> rfrx_sat_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -66,7 +66,7 @@ void rfrx_sat_check(int param_1)
     start_tx_tone_step(1,0x40,uVar3 & 0xff,0,0,0);
     (**(code **)(g_phyFuns + 0x10c))(1,0x400,&uStack_4c,*(code **)(g_phyFuns + 0x10c));
     if (param_1 != 0) {
-      ets_printf("%d, atten=%d, %d, %d %d\n",iVar15,uVar3,uStack_4c,uStack_48,iStack_44);
+      phy_printf("%d, atten=%d, %d, %d %d\n",iVar15,uVar3,uStack_4c,uStack_48,iStack_44);
     }
     if (iStack_44 - 0x21U < 3) break;
     iVar12 = (int)(((uVar3 & 0xffff) + (0x22 - iStack_44) * -4) * 0x10000) >> 0x10;
@@ -112,7 +112,7 @@ void rfrx_sat_check(int param_1)
       bVar1 = bVar1 + (*pcVar11 != '\0');
     } while (iVar15 != 4);
     if (param_1 != 0) {
-      ets_printf("dac=%d, atten=%d, sat=%d, %d, %d %d, num=%d\n",uVar16,(int)sVar2,uVar18,
+      phy_printf("dac=%d, atten=%d, sat=%d, %d, %d %d, num=%d\n",uVar16,(int)sVar2,uVar18,
                  local_58 >> 8 & 0xff,local_58 >> 0x10 & 0xff,local_58 >> 0x18,bVar1);
     }
     if (bVar1 < 3) goto _L559;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7_cal.o -> rfcal_txcap
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ void rfcal_txcap(undefined4 param_1,undefined4 param_2,int param_3,byte *param_4
       sVar2 = read_sar2_code();
       iVar4 = (int)sVar2;
       if (param_3 != 0) {
-        ets_printf("%d, %d; ",uVar1,iVar4);
+        phy_printf("%d, %d; ",uVar1,iVar4);
       }
       if (iVar6 < iVar4) {
         *param_4 = (byte)uVar1;
@@ -45,7 +45,7 @@ void rfcal_txcap(undefined4 param_1,undefined4 param_2,int param_3,byte *param_4
       uVar1 = uVar1 - 1;
     } while (uVar1 != 0xffffffff);
     if (param_3 != 0) {
-      ets_printf("reg_i=%d, indata=%d\n",cVar5,*param_4);
+      phy_printf("reg_i=%d, indata=%d\n",cVar5,*param_4);
     }
     uVar3 = 2;
     if (cVar5 == '\x01') {

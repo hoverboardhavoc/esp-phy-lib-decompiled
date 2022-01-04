@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b7095b90157d98f116ba43c35b12d51192dc91c8
- * https://github.com/espressif/esp-phy-lib/commit/b7095b90157d98f116ba43c35b12d51192dc91c8
- * Upstream date: 2021-10-12 21:50:40 +0800
- * Upstream subject: Update libphy and libbb
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7.o -> phy_get_most_tpw
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ uint phy_get_most_tpw(void)
       uVar2 = (uint)(char)uVar5;
     } while (iVar3 != 0x10);
     uVar5 = uVar4 + 1;
-    ets_printf("chan:%d,max_power:%d\n",uVar4,uVar2);
+    phy_printf("chan:%d,max_power:%d\n",uVar4,uVar2);
     uVar4 = uVar5;
   } while (uVar5 != 0xf);
   DAT_00012fe0 = uVar1;

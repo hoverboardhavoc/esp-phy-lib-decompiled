@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * Upstream date: 2021-12-07 14:34:50 +0800
- * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7.o -> phy_2480m_opt
  *
  * (C) Espressif, Apache License 2.0.
@@ -62,7 +62,7 @@ _L668:
     }
     else if (param_1 != 0) {
 _L671:
-      ets_printf("%d, dreg=%d, sig_pwr=%d, %d\n",uVar5,uVar1,uVar6);
+      phy_printf("%d, dreg=%d, sig_pwr=%d, %d\n",uVar5,uVar1,uVar6);
       goto _L668;
     }
     uVar5 = uVar5 + 1;

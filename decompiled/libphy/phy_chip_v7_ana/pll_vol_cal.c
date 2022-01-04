@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
+ * Upstream date: 2022-01-04 15:41:20 +0800
+ * Upstream subject: fix the bug that phy libs still have ets_printf
  * Source: libphy -> phy_chip_v7_ana.o -> pll_vol_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -53,7 +53,7 @@ int pll_vol_cal(undefined4 param_1,ushort *param_2,int param_3,int param_4)
     uVar10 = uVar12;
     if (((param_3 != 0) && (uVar9 < uVar7)) && (uVar3 < uVar9)) break;
     if (param_4 != 0) {
-      ets_printf("i=%d,freq=%d,cap_step=%d,cap_ext=%d,vol_code=%d,flagl=%d\n",iVar13,param_1,iVar15,
+      phy_printf("i=%d,freq=%d,cap_step=%d,cap_ext=%d,vol_code=%d,flagl=%d\n",iVar13,param_1,iVar15,
                  uVar12,uVar9,bVar4);
     }
     if ((iVar13 == 0) || (bVar4 == bVar11)) {
@@ -77,12 +77,12 @@ int pll_vol_cal(undefined4 param_1,ushort *param_2,int param_3,int param_4)
     }
     uVar10 = iVar6 + uVar12 & 0xffff;
     if (uVar10 < 10) {
-      ets_printf("pll_cap_ext %d\n",10);
+      phy_printf("pll_cap_ext %d\n",10);
       uVar10 = 10;
       break;
     }
     if (0x15e < uVar10) {
-      ets_printf("pll_cap_ext %d\n",0x15e);
+      phy_printf("pll_cap_ext %d\n",0x15e);
       uVar10 = 0x15e;
       break;
     }
