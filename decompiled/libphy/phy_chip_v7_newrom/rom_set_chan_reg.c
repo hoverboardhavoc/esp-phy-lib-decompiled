@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * Upstream date: 2021-12-07 14:34:50 +0800
- * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
+ * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
+ * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
+ * Upstream date: 2022-02-24 11:32:38 +0800
+ * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_set_chan_reg
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,18 +17,18 @@ void rom_set_chan_reg(int param_1)
 {
   char cVar1;
   
-  cVar1 = DAT_000121fe;
-  (**(code **)(_g_phyFuns + 0x78))((int)DAT_00012200,*(code **)(_g_phyFuns + 0x78));
+  cVar1 = DAT_000121f6;
+  (**(code **)(_g_phyFuns + 0x78))((int)DAT_000121f8,*(code **)(_g_phyFuns + 0x78));
   (**(code **)(_g_phyFuns + 0x60))
-            ((int)DAT_000121fe,(int)DAT_00012200,0,DAT_000120ff,_DAT_00012128,_DAT_00012124,
-             DAT_00012126,*(code **)(_g_phyFuns + 0x60));
+            ((int)DAT_000121f6,(int)DAT_000121f8,0,DAT_000120f7,_DAT_00012120,_DAT_0001211c,
+             DAT_0001211e,*(code **)(_g_phyFuns + 0x60));
   (**(code **)(_g_phyFuns + 0xd0))
-            (cVar1,&phy_param,&phy_param,DAT_000120c8,*(code **)(_g_phyFuns + 0xd0));
-  (**(code **)(_g_phyFuns + 0x8c))((int)_DAT_00012170,*(code **)(_g_phyFuns + 0x8c));
+            (cVar1,&phy_param,&phy_param,DAT_000120c0,*(code **)(_g_phyFuns + 0xd0));
+  (**(code **)(_g_phyFuns + 0x8c))((int)_DAT_00012168,*(code **)(_g_phyFuns + 0x8c));
   if (param_1 != 0) {
-                    /* WARNING: Could not recover jumptable at 0x000110fc. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010f46. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_g_phyFuns + 0x114))(&phy_param,DAT_000121fe);
+    (**(code **)(_g_phyFuns + 0x114))(&phy_param,DAT_000121f6);
     return;
   }
   return;

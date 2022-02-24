@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * Upstream date: 2022-01-04 15:41:20 +0800
- * Upstream subject: fix the bug that phy libs still have ets_printf
+ * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
+ * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
+ * Upstream date: 2022-02-24 11:32:38 +0800
+ * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
  * Source: libphy -> phy_chip_v7.o -> phy_analog_delay_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,9 +31,9 @@ void phy_analog_delay_cal(void)
   
   uStack_68 = 0x1000100;
   uStack_64 = 0x1000100;
-  memcpy(local_60,&DAT_00014494,0x15);
-  memcpy(abStack_4c + 4,&DAT_000144ac,0x15);
-  if ((int)(DAT_000146fc << 6) < 0) {
+  memcpy(local_60,&DAT_00014204,0x15);
+  memcpy(abStack_4c + 4,&DAT_0001421c,0x15);
+  if ((int)(DAT_0001446c << 6) < 0) {
     return;
   }
   iVar7 = 0;
@@ -98,15 +98,15 @@ void phy_analog_delay_cal(void)
       else {
         cVar3 = (char)((uVar5 - 0x20) * 0x1000000 >> 0x18);
       }
-      DAT_000147ec = ((local_6c[0] * '\x02' + -0x1c) - cVar2) - cVar3;
-      DAT_000147ed = ((local_6c[1] * '\x02' + -0x1c) - cVar2) - cVar3;
+      DAT_0001455c = ((local_6c[0] * '\x02' + -0x1c) - cVar2) - cVar3;
+      DAT_0001455d = ((local_6c[1] * '\x02' + -0x1c) - cVar2) - cVar3;
       _DAT_6000607c = _DAT_6000607c | 0x8000800;
       _DAT_60006078 = _DAT_60006078 | 0x2000000;
       (**(code **)(g_phyFuns + 0x50))(0,*(code **)(g_phyFuns + 0x50));
       (**(code **)(g_phyFuns + 0x54))(0,*(code **)(g_phyFuns + 0x54));
       (**(code **)(g_phyFuns + 0x1e4))(0,*(code **)(g_phyFuns + 0x1e4));
       (**(code **)(g_phyFuns + 0x1d8))(*(code **)(g_phyFuns + 0x1d8));
-      DAT_000146fc = DAT_000146fc | 0x2000000;
+      DAT_0001446c = DAT_0001446c | 0x2000000;
       return;
     }
     iVar7 = 1;

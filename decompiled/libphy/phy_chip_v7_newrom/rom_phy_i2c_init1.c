@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7586abbf591ab63d609d7afeb377559deabec808
- * https://github.com/espressif/esp-phy-lib/commit/7586abbf591ab63d609d7afeb377559deabec808
- * Upstream date: 2021-10-26 15:21:29 +0800
- * Upstream subject: update phy lib to fix usb & rssi issue(cc45c1a)
+ * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
+ * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
+ * Upstream date: 2022-02-24 11:32:38 +0800
+ * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_phy_i2c_init1
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,35 +50,35 @@ void rom_phy_i2c_init1(void)
   undefined1 uStack_24;
   undefined1 uStack_23;
   
-  uStack_50 = DAT_000120c9;
-  uStack_4f = DAT_000120ca;
-  uStack_4e = DAT_000120cb;
-  uStack_4d = DAT_000120cc;
-  uStack_4c = DAT_000120cd;
-  uStack_4b = DAT_000120ce;
-  uStack_4a = DAT_000120cf;
-  uStack_49 = DAT_000120d0;
-  uStack_48 = DAT_000120d1;
+  uStack_50 = DAT_000120c1;
+  uStack_4f = DAT_000120c2;
+  uStack_4e = DAT_000120c3;
+  uStack_4d = DAT_000120c4;
+  uStack_4c = DAT_000120c5;
+  uStack_4b = DAT_000120c6;
+  uStack_4a = DAT_000120c7;
+  uStack_49 = DAT_000120c8;
+  uStack_48 = DAT_000120c9;
   uStack_68 = 0x6b6b6b6b;
   uStack_64 = 0x6b6b6b6b;
   uStack_60 = 0x6b6b;
   uStack_5c = 0x4030201;
   uStack_58 = 0x8070605;
   uStack_54 = 0xb0a;
-  uStack_47 = DAT_000120d2;
-  uStack_2c = DAT_000120d3;
-  uStack_2b = DAT_000120d4;
-  uStack_2a = DAT_000120d5;
-  uStack_29 = DAT_000120d6;
-  uStack_28 = DAT_000120d7;
-  uStack_27 = DAT_000120d8;
-  uStack_26 = DAT_000120d9;
-  uStack_25 = DAT_000120da;
-  uStack_24 = DAT_000120db;
+  uStack_47 = DAT_000120ca;
+  uStack_2c = DAT_000120cb;
+  uStack_2b = DAT_000120cc;
+  uStack_2a = DAT_000120cd;
+  uStack_29 = DAT_000120ce;
+  uStack_28 = DAT_000120cf;
+  uStack_27 = DAT_000120d0;
+  uStack_26 = DAT_000120d1;
+  uStack_25 = DAT_000120d2;
+  uStack_24 = DAT_000120d3;
   uStack_44 = 0x62626262;
   uStack_40 = 0x64636262;
   uStack_3c = 0x6764;
-  uStack_23 = DAT_000120dc;
+  uStack_23 = DAT_000120d4;
   uStack_38 = 0x90a0803;
   uStack_34 = 0x8010004;
   uStack_30 = 0x204;

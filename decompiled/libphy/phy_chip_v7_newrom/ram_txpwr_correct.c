@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * Upstream date: 2021-12-07 14:34:50 +0800
- * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
+ * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
+ * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
+ * Upstream date: 2022-02-24 11:32:38 +0800
+ * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_txpwr_correct
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,15 +38,15 @@ void ram_txpwr_correct(int param_1,char *param_2,short *param_3,int param_4,unde
   }
   if (param_1 == 0) {
     uVar4 = _phy_param & 0xff;
-    iVar2 = (int)DAT_00012207;
-    iVar5 = (int)DAT_000120a6;
+    iVar2 = (int)DAT_000121ff;
+    iVar5 = (int)DAT_0001209e;
     ram_tester_wifi_cali(auStack_30,0);
-    if (DAT_000120a5 == '\0') {
+    if (DAT_0001209d == '\0') {
       ram_get_chan_target_power
-                (uVar4,(int)DAT_000120a4,auStack_40,auStack_30,DAT_00012110,&chip7_phy_init_ctrl,
+                (uVar4,(int)DAT_0001209c,auStack_40,auStack_30,DAT_00012108,&chip7_phy_init_ctrl,
                  &phy_param);
       ram_wifi_get_tx_gain
-                (uVar4,&phy_param,auStack_40,(int)DAT_00012181,(iVar2 - iVar5) * 0x1000000 >> 0x18,
+                (uVar4,&phy_param,auStack_40,(int)DAT_00012179,(iVar2 - iVar5) * 0x1000000 >> 0x18,
                  &phy_param,&phy_param,&phy_param);
       rom_set_tx_gain_mem(0,0xe,&phy_param,&phy_param,&phy_param,&phy_param);
       ram_wifi_tx_dig_gain(&phy_param);
@@ -54,14 +54,14 @@ void ram_txpwr_correct(int param_1,char *param_2,short *param_3,int param_4,unde
     return;
   }
   uStack_1c = 3;
-  uStack_20 = 0xffffff9c;
-  ram_bt_get_tx_gain(&phy_param,(int)DAT_00012188,(int)DAT_00012208,&phy_param,&phy_param,&phy_param
+  uStack_20 = 0xffffffa0;
+  ram_bt_get_tx_gain(&phy_param,(int)DAT_00012180,(int)DAT_00012200,&phy_param,&phy_param,&phy_param
                      ,&phy_param,&phy_param);
   rom_set_tx_gain_mem(1,0x10,&phy_param,&phy_param,&phy_param,&phy_param);
   _DAT_60006014 = _phy_param;
-  _DAT_60006018 = _chip7_phy_init_ctrl;
-  _DAT_6000601c = _phy_bbpll_i2c;
-  _DAT_60006020 = uRam00012018;
+  _DAT_60006018 = _phy_printf;
+  _DAT_6000601c = _chip7_phy_init_ctrl;
+  _DAT_60006020 = _rfpll_cap_correct;
   return;
 }
 

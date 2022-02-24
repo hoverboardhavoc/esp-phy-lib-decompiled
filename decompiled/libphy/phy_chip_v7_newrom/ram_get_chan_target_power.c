@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * https://github.com/espressif/esp-phy-lib/commit/2d89c532ccba0bb9988d1d1c6d719bbe1d8b65b8
- * Upstream date: 2021-12-07 14:34:50 +0800
- * Upstream subject: Update esp32c3 and esp32s3 phy lib and bb lib Fix the ble task watchdog timeout issue caused by phy enable when exit modem sleep.
+ * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
+ * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
+ * Upstream date: 2022-02-24 11:32:38 +0800
+ * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_get_chan_target_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,10 +36,10 @@ void ram_get_chan_target_power
       cVar5 = (char)((uint)uStack_14 >> 0x18);
     }
     iVar4 = param_1;
-    if ((DAT_00012210 & 0xf) == 1) {
+    if ((DAT_00012208 & 0xf) == 1) {
       bVar2 = wifi_cali_offset;
       if (uVar3 < 2) {
-        bVar2 = DAT_00011d4d;
+        bVar2 = DAT_00011c49;
       }
       cVar5 = cVar5 - bVar2;
       iVar4 = (int)((param_1 - (uint)bVar2) * 0x1000000) >> 0x18;
