@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7_newrom.o -> rom_noise_check_loop
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void rom_noise_check_loop(int param_1,int param_2)
     iVar4 = (int)_DAT_000121fc;
     sVar2 = _DAT_000121fc;
     if (DAT_000120af == '\0') {
-      if ((iVar4 <= iVar5 + 4) && (iVar5 + -4 <= iVar4)) goto _L256;
+      if ((iVar4 <= iVar5 + 4) && (iVar5 + -4 <= iVar4)) goto _L265;
     }
     else if (-0x180 < iVar4) {
       sVar2 = (short)((iVar4 + -0x180) / 2);
@@ -69,7 +69,7 @@ void rom_noise_check_loop(int param_1,int param_2)
       phy_printf("rx noise set : old=%d, new=%d\n",iVar5,(int)_DAT_00012168);
     }
   }
-_L256:
+_L265:
   _DAT_6001d044 = _DAT_6001d044 | 1;
   return;
 }

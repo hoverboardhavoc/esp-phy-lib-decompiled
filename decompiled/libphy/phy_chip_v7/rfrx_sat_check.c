@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * Upstream date: 2022-01-04 15:41:20 +0800
- * Upstream subject: fix the bug that phy libs still have ets_printf
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7.o -> rfrx_sat_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -115,11 +115,11 @@ void rfrx_sat_check(int param_1)
       phy_printf("dac=%d, atten=%d, sat=%d, %d, %d %d, num=%d\n",uVar16,(int)sVar2,uVar18,
                  local_58 >> 8 & 0xff,local_58 >> 0x10 & 0xff,local_58 >> 0x18,bVar1);
     }
-    if (bVar1 < 3) goto _L559;
+    if (bVar1 < 3) goto _L557;
     uVar16 = uVar16 - 1;
   } while (uVar16 != 0);
   uVar17 = 0;
-_L559:
+_L557:
   (**(code **)(g_phyFuns + 0x1bc))(100,1,8,7,3,uVar17,*(code **)(g_phyFuns + 0x1bc));
   _DAT_6001c05c = _DAT_6001c05c | 0x1080000;
   (**(code **)(g_phyFuns + 0x24))(0,*(code **)(g_phyFuns + 0x24));

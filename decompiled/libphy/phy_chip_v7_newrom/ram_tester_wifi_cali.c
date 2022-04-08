@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_tester_wifi_cali
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,23 +39,23 @@ void ram_tester_wifi_cali(undefined4 param_1,int param_2,int param_3)
   _DAT_00012174 = 0x808;
   iVar2 = (**(code **)(_g_phyFuns + 0x110))(&phy_param,param_1,*(code **)(_g_phyFuns + 0x110));
   iVar3 = (**(code **)(_g_phyFuns + 0x110))(&phy_param,param_1,*(code **)(_g_phyFuns + 0x110));
-  DAT_00011c49 = (char)(((uint)(byte)(&DAT_000120f8)[DAT_00012209 >> 4] - iVar3) * 0x1000000 >> 0x18
+  DAT_00011cad = (char)(((uint)(byte)(&DAT_000120f8)[DAT_00012209 >> 4] - iVar3) * 0x1000000 >> 0x18
                        );
   cVar5 = (char)(((uint)(byte)(&DAT_000120f8)[DAT_00012209 & 0xf] - iVar2) * 0x1000000 >> 0x18);
   wifi_cali_offset = cVar5;
   if ((DAT_00012209 & 0xe) == 0) {
-    wifi_cali_offset = DAT_00011c49;
-    DAT_00011c49 = cVar5;
+    wifi_cali_offset = DAT_00011cad;
+    DAT_00011cad = cVar5;
   }
   if (param_3 != 0) {
     phy_printf("interp_index=%d,%d,offset=%d %d\n",iVar2,iVar3,(int)wifi_cali_offset,
-               (int)DAT_00011c49);
+               (int)DAT_00011cad);
   }
   uVar6 = 0;
   do {
     cVar5 = wifi_cali_offset;
     if (uVar6 < 2) {
-      cVar5 = DAT_00011c49;
+      cVar5 = DAT_00011cad;
     }
     *(char *)(param_2 + uVar6) = puVar1[0xf4] - cVar5;
     uVar6 = uVar6 + 1;

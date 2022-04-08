@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7.o -> bt_tx_gain_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ void bt_tx_gain_init(void)
     uVar3 = uVar1 * 3;
     uVar1 = uVar1 + 1;
     _DAT_6000e148 =
-         ((int)(((uint)DAT_0001434d - iVar2) * 0x1000000) >> 0x18 & 0xffU) << 0x10 |
+         ((int)(((uint)DAT_0001446d - iVar2) * 0x1000000) >> 0x18 & 0xffU) << 0x10 |
          _DAT_6000e0c0 & 0xff00ffff;
     _DAT_6000e0c4 = (_DAT_6000e0c4 & 0xffffff00 | uVar3) & 0xfffffdff;
   } while (uVar1 != 0x55);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7.o -> bt_txdc_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,8 +21,8 @@ void bt_txdc_cal(void)
   undefined2 *puVar6;
   
   (**(code **)(g_phyFuns + 0x1bc))(0x6a,0,0,3,0,0xc,*(code **)(g_phyFuns + 0x1bc));
-  if (-1 < (int)(DAT_0001446c << 0x13)) {
-    puVar6 = &DAT_000144ce;
+  if (-1 < (int)(DAT_0001458c << 0x13)) {
+    puVar6 = &DAT_000145ee;
     (**(code **)(g_phyFuns + 0x1d4))(*(code **)(g_phyFuns + 0x1d4));
     (**(code **)(g_phyFuns + 0x1ec))(0xf,0x20,*(code **)(g_phyFuns + 0x1ec));
     pcVar3 = *(code **)(g_phyFuns + 0x1cc);
@@ -39,9 +39,9 @@ void bt_txdc_cal(void)
     } while (sVar2 != 3);
     (**(code **)(g_phyFuns + 0x1e4))(0,*(code **)(g_phyFuns + 0x1e4));
     (**(code **)(g_phyFuns + 0x1d8))(*(code **)(g_phyFuns + 0x1d8));
-    DAT_0001446c = DAT_0001446c | 0x1000;
+    DAT_0001458c = DAT_0001458c | 0x1000;
   }
-                    /* WARNING: Could not recover jumptable at 0x00010bee. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010c42. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(g_phyFuns + 0x1bc))(0x6a,0,0,3,0,2);
   return;

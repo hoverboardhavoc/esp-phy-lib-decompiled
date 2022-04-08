@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7_ana.o -> rfpll_cap_correct
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ undefined4 rfpll_cap_correct(int param_1)
       uVar1 = 0;
       iVar5 = 0;
       iVar4 = 0;
-      goto _L10;
+      goto _L13;
     }
   }
   sVar2 = read_pll_cap();
@@ -40,7 +40,7 @@ undefined4 rfpll_cap_correct(int param_1)
   iVar5 = (int)(short)(sVar2 + (short)uVar1);
   ram_write_pll_cap();
   pll_cap_mem_update(uVar1);
-_L10:
+_L13:
   if (param_1 != 0) {
     phy_printf("%d,%d,%d\n",uVar1,iVar4,iVar5);
   }

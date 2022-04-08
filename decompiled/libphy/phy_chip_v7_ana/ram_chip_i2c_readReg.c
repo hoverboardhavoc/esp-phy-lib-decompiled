@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
  * Upstream date: 2022-04-07 23:37:47 -0400
  * Upstream subject: C3/S3 fix "i2c critical" and iram functions
- * Source: libphy -> phy_chip_v7_newrom.o -> ram_bt_track_pll_cap
+ * Source: libphy -> phy_chip_v7_ana.o -> ram_chip_i2c_readReg
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,22 +12,21 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ram_bt_track_pll_cap(void)
+undefined4 ram_chip_i2c_readReg(undefined4 param_1,undefined4 param_2)
 
 {
   undefined4 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
   
   uVar1 = (**(code **)(_g_phyFuns + 0x184))(*(code **)(_g_phyFuns + 0x184));
-  rom_tsens_temp_read();
-  if (DAT_000120a0 != '\0') {
-    rfpll_cap_track(DAT_0001209f);
-  }
-  if (DAT_000120a1 != '\0') {
-    rom_bt_track_tx_power(1,DAT_0001209f);
-  }
-                    /* WARNING: Could not recover jumptable at 0x0001176a. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x188))(uVar1);
-  return;
+  phy_i2c_enter_critical();
+  uVar2 = (**(code **)(_g_phyFuns + 0x178))(param_1,*(code **)(_g_phyFuns + 0x178));
+  uVar3 = (**(code **)(_g_phyFuns + 0x180))(param_1,*(code **)(_g_phyFuns + 0x180));
+  uVar2 = (**(code **)(_g_phyFuns + 0x18c))
+                    (param_1,uVar2,uVar3,param_2,*(code **)(_g_phyFuns + 0x18c));
+  phy_i2c_exit_critical();
+  (**(code **)(_g_phyFuns + 0x188))(uVar1,*(code **)(_g_phyFuns + 0x188));
+  return uVar2;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7_newrom.o -> rfpll_cap_track
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,10 @@ void rfpll_cap_track(int param_1)
       phy_printf("temp=%d,%d,delta=%d\n",(int)_DAT_00012096,(int)_DAT_00012098,uVar2);
     }
     _DAT_00012098 = _DAT_00012096;
-                    /* WARNING: Could not recover jumptable at 0x00011256. Too many branches */
+    if (DAT_000120a3 != '\0') {
+      ulp_code_track(param_1);
+    }
+                    /* WARNING: Could not recover jumptable at 0x000112f2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_g_phyFuns + 0x224))();
     return;

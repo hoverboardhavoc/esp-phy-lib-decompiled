@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7_ana.o -> set_chan_freq_sw_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,8 +36,8 @@ undefined4 set_chan_freq_sw_start(uint param_1,undefined4 param_2,undefined4 par
     } while (_DAT_6000e168 < 0);
   } while ((param_1 != (_DAT_6000e170 >> 0x11 & 0x7f)) && (cVar1 = cVar1 + -1, cVar1 != '\0'));
   uVar4 = ets_delay_us(5);
-  cVar1 = DAT_000120af;
-  if (DAT_000120b0 == '\0') {
+  cVar1 = DAT_0001209f;
+  if (DAT_000120a0 == '\0') {
     return uVar4;
   }
   uVar3 = (**(code **)(_g_phyFuns + 0x1ac))(0x62,1,0xc,*(code **)(_g_phyFuns + 0x1ac));
@@ -51,7 +51,7 @@ undefined4 set_chan_freq_sw_start(uint param_1,undefined4 param_2,undefined4 par
       uVar4 = 0;
       iVar6 = 0;
       iVar5 = 0;
-      goto _L10;
+      goto _L13;
     }
   }
   sVar2 = read_pll_cap();
@@ -59,7 +59,7 @@ undefined4 set_chan_freq_sw_start(uint param_1,undefined4 param_2,undefined4 par
   iVar6 = (int)(short)(sVar2 + (short)uVar4);
   ram_write_pll_cap();
   pll_cap_mem_update(uVar4);
-_L10:
+_L13:
   if (cVar1 != '\0') {
     phy_printf("%d,%d,%d\n",uVar4,iVar5,iVar6);
   }

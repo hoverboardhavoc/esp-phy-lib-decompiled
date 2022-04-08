@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
  * Upstream date: 2022-04-07 23:37:47 -0400
  * Upstream subject: C3/S3 fix "i2c critical" and iram functions
- * Source: libphy -> phy_chip_v7_newrom.o -> ram_phy_close_rf
+ * Source: libphy -> phy_chip_v7_newrom.o -> rom_phy_bbpll_cal.part.0
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,15 +12,10 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ram_phy_close_rf(void)
+void rom_phy_bbpll_cal_part_0(void)
 
 {
-  (**(code **)(_g_phyFuns + 0xe0))(*(code **)(_g_phyFuns + 0xe0));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,2,6,*(code **)(_g_phyFuns + 0x1b4));
-  rom_phy_bbpll_cal_part_0();
-                    /* WARNING: Could not recover jumptable at 0x00011598. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x228))();
+  _DAT_6000e040 = _DAT_6000e040 & 0xfffffff3 | 8;
   return;
 }
 

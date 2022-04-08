@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_txpwr_correct
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,8 +60,8 @@ void ram_txpwr_correct(int param_1,char *param_2,short *param_3,int param_4,unde
   rom_set_tx_gain_mem(1,0x10,&phy_param,&phy_param,&phy_param,&phy_param);
   _DAT_60006014 = _phy_param;
   _DAT_60006018 = _phy_printf;
-  _DAT_6000601c = _chip7_phy_init_ctrl;
-  _DAT_60006020 = _rfpll_cap_correct;
+  _DAT_6000601c = _phy_i2c_enter_critical;
+  _DAT_60006020 = _phy_i2c_exit_critical;
   return;
 }
 

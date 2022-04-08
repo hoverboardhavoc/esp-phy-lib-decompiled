@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fe7dc9599bd318518eccc165d9e751114e28e7d2
- * https://github.com/espressif/esp-phy-lib/commit/fe7dc9599bd318518eccc165d9e751114e28e7d2
- * Upstream date: 2021-11-08 20:19:30 +0800
- * Upstream subject: fix the issue of phy register context loss caused by power off the wifi power domain
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7.o -> set_rx_gain_cal_dc
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,7 +60,7 @@ void set_rx_gain_cal_dc(int param_1,uint param_2,uint param_3,int param_4,int pa
     }
     uVar12 = (uint)in_stack_00000000;
     if ((param_2 == 0) || (uVar12 = param_8, param_2 == 1)) {
-_L74:
+_L75:
       pcVar7 = *(code **)(g_phyFuns + 0x1cc);
       if (param_2 == 0) {
         (*pcVar7)(2,1,0x100);
@@ -70,7 +70,7 @@ _L74:
       }
       else {
         cVar13 = '\x01';
-        if (param_2 != 1) goto _L51;
+        if (param_2 != 1) goto _L52;
         if (param_1 == 0) {
           (*pcVar7)(2,2,*(undefined2 *)((int)param_6 + 2));
           uVar5 = *param_6 & 0x1ff;
@@ -90,11 +90,11 @@ _L74:
     else {
       if (param_2 != 2) {
         uVar12 = 1;
-        goto _L74;
+        goto _L75;
       }
       cVar13 = '\x0e';
       uVar12 = 1;
-_L51:
+_L52:
       (**(code **)(g_phyFuns + 0x1cc))
                 (2,2,*(undefined2 *)((int)param_6 + 2),*(code **)(g_phyFuns + 0x1cc));
       (**(code **)(g_phyFuns + 0x1cc))(3,2,*param_6 & 0x1ff,*(code **)(g_phyFuns + 0x1cc));

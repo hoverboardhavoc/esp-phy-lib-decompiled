@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
  * Source: libphy -> phy_chip_v7_newrom.o -> ram_get_chan_target_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,7 +39,7 @@ void ram_get_chan_target_power
     if ((DAT_00012208 & 0xf) == 1) {
       bVar2 = wifi_cali_offset;
       if (uVar3 < 2) {
-        bVar2 = DAT_00011c49;
+        bVar2 = DAT_00011cad;
       }
       cVar5 = cVar5 - bVar2;
       iVar4 = (int)((param_1 - (uint)bVar2) * 0x1000000) >> 0x18;

@@ -1,9 +1,9 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
- * Source: libphy -> phy_chip_v7_newrom.o -> rom_phy_i2c_init1
+ * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
+ * Upstream date: 2022-04-07 23:37:47 -0400
+ * Upstream subject: C3/S3 fix "i2c critical" and iram functions
+ * Source: libphy -> phy_chip_v7_newrom.o -> ram_phy_i2c_init1
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void rom_phy_i2c_init1(void)
+void ram_phy_i2c_init1(void)
 
 {
   uint uVar1;
@@ -50,6 +50,7 @@ void rom_phy_i2c_init1(void)
   undefined1 uStack_24;
   undefined1 uStack_23;
   
+  phy_i2c_enter_critical();
   uStack_50 = DAT_000120c1;
   uStack_4f = DAT_000120c2;
   uStack_4e = DAT_000120c3;
@@ -91,6 +92,7 @@ void rom_phy_i2c_init1(void)
   if (iVar2 == 0) {
     rom_i2c_sar2_init_code(0x578);
   }
+  phy_i2c_exit_critical();
   return;
 }
 
