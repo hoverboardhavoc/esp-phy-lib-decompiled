@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * Upstream date: 2022-04-07 23:37:47 -0400
- * Upstream subject: C3/S3 fix "i2c critical" and iram functions
+ * Last changed at upstream commit 97e9e8992ea947fa46bc35545000b2c45d7b3060
+ * https://github.com/espressif/esp-phy-lib/commit/97e9e8992ea947fa46bc35545000b2c45d7b3060
+ * Upstream date: 2022-04-19 15:45:53 +0800
+ * Upstream subject: BLE deinit phy_init_flag make wifi light sleep RX problem
  * Source: libphy -> phy_chip_v7.o -> phy_analog_delay_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,9 +31,9 @@ void phy_analog_delay_cal(void)
   
   uStack_68 = 0x1000100;
   uStack_64 = 0x1000100;
-  memcpy(local_60,&DAT_00014324,0x15);
-  memcpy(abStack_4c + 4,&DAT_0001433c,0x15);
-  if ((int)(DAT_0001458c << 6) < 0) {
+  memcpy(local_60,&DAT_00014334,0x15);
+  memcpy(abStack_4c + 4,&DAT_0001434c,0x15);
+  if ((int)(DAT_0001459c << 6) < 0) {
     return;
   }
   iVar7 = 0;
@@ -98,15 +98,15 @@ void phy_analog_delay_cal(void)
       else {
         cVar3 = (char)((uVar5 - 0x20) * 0x1000000 >> 0x18);
       }
-      DAT_0001467c = ((local_6c[0] * '\x02' + -0x1c) - cVar2) - cVar3;
-      DAT_0001467d = ((local_6c[1] * '\x02' + -0x1c) - cVar2) - cVar3;
+      DAT_0001468c = ((local_6c[0] * '\x02' + -0x1c) - cVar2) - cVar3;
+      DAT_0001468d = ((local_6c[1] * '\x02' + -0x1c) - cVar2) - cVar3;
       _DAT_6000607c = _DAT_6000607c | 0x8000800;
       _DAT_60006078 = _DAT_60006078 | 0x2000000;
       (**(code **)(g_phyFuns + 0x50))(0,*(code **)(g_phyFuns + 0x50));
       (**(code **)(g_phyFuns + 0x54))(0,*(code **)(g_phyFuns + 0x54));
       (**(code **)(g_phyFuns + 0x1e4))(0,*(code **)(g_phyFuns + 0x1e4));
       (**(code **)(g_phyFuns + 0x1d8))(*(code **)(g_phyFuns + 0x1d8));
-      DAT_0001458c = DAT_0001458c | 0x2000000;
+      DAT_0001459c = DAT_0001459c | 0x2000000;
       return;
     }
     iVar7 = 1;
