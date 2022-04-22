@@ -1,14 +1,16 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_ana.o -> freq_get_i2c_data
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,undefined1 *param_3,
                       undefined1 *param_4,undefined1 *param_5,undefined1 *param_6,
@@ -17,17 +19,20 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,undefined1 *param
 {
   undefined1 uVar1;
   byte bVar2;
-  byte bVar3;
-  uint uVar4;
+  undefined1 uVar3;
+  undefined1 uVar4;
+  uint uVar5;
   int in_stack_00000000;
   
-  i2c_writeReg_Mask(0x62,1,0xb,6,6,1);
-  uVar1 = chip_i2c_readReg(0x62,1,0xb);
-  bVar2 = chip_i2c_readReg(99,1,0);
-  bVar3 = chip_i2c_readReg(0x62,1,0);
-  for (uVar4 = 0; (uVar4 & 0xff) < param_8; uVar4 = uVar4 + 1) {
-    *(undefined1 *)(in_stack_00000000 + uVar4) = 0;
-    switch(uVar4 & 0xff) {
+  (**(code **)(_g_phyFuns + 0x1bc))(0x62,1,0xb,6,6,1,*(code **)(_g_phyFuns + 0x1bc));
+  uVar1 = (**(code **)(_g_phyFuns + 0x1ac))(0x62,1,0xb,*(code **)(_g_phyFuns + 0x1ac));
+  bVar2 = (**(code **)(_g_phyFuns + 0x1ac))(99,1,0,*(code **)(_g_phyFuns + 0x1ac));
+  (**(code **)(_g_phyFuns + 0x114))(&phy_param,6,*(code **)(_g_phyFuns + 0x114));
+  uVar3 = (**(code **)(_g_phyFuns + 0x1ac))(0x6b,0,1,*(code **)(_g_phyFuns + 0x1ac));
+  uVar4 = (**(code **)(_g_phyFuns + 0x1ac))(0x6b,0,2,*(code **)(_g_phyFuns + 0x1ac));
+  for (uVar5 = 0; (uVar5 & 0xff) < param_8; uVar5 = uVar5 + 1) {
+    *(undefined1 *)(in_stack_00000000 + uVar5) = 0;
+    switch(uVar5 & 0xff) {
     case 0:
       *param_1 = 1;
       *param_2 = 99;
@@ -36,7 +41,7 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,undefined1 *param
       *param_6 = 0xf;
       *param_5 = 0;
       *param_7 = 0;
-      *(undefined1 *)(in_stack_00000000 + uVar4) = 1;
+      *(undefined1 *)(in_stack_00000000 + uVar5) = 1;
       break;
     case 1:
       param_1[1] = 1;
@@ -62,8 +67,8 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,undefined1 *param
       param_3[3] = 0;
       param_4[3] = 0;
       param_6[3] = 0;
-      param_5[3] = bVar2 & 0xf7;
-      param_7[3] = bVar2 & 0xf7;
+      param_5[3] = bVar2 & 0xef;
+      param_7[3] = bVar2 & 0xef;
       break;
     case 4:
       param_1[4] = 1;
@@ -98,8 +103,8 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,undefined1 *param
       param_3[7] = 0;
       param_4[7] = 1;
       param_6[7] = 1;
-      param_5[7] = bVar2 | 8;
-      param_7[7] = bVar2 | 8;
+      param_5[7] = bVar2 | 0x10;
+      param_7[7] = bVar2 | 0x10;
       break;
     case 8:
       param_1[8] = 1;
@@ -112,21 +117,30 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,undefined1 *param
       break;
     case 9:
       param_1[9] = 1;
-      param_2[9] = 0x62;
-      param_3[9] = 0;
+      param_2[9] = 0x67;
+      param_3[9] = 3;
       param_4[9] = 3;
-      param_6[9] = 3;
-      param_5[9] = bVar3 & 0xdf;
-      param_7[9] = bVar3 & 0xdf;
+      param_6[9] = 4;
+      param_5[9] = 0xf0;
+      param_7[9] = 0xf4;
       break;
     case 10:
-      param_1[10] = 1;
-      param_2[10] = 0x62;
-      param_3[10] = 0;
-      param_4[10] = 4;
-      param_6[10] = 4;
-      param_5[10] = bVar3 | 0x20;
-      param_7[10] = bVar3 | 0x20;
+      param_1[10] = 0;
+      param_2[10] = 0x6b;
+      param_3[10] = 1;
+      param_4[10] = 5;
+      param_6[10] = 5;
+      param_5[10] = uVar3;
+      param_7[10] = uVar3;
+      break;
+    case 0xb:
+      param_1[0xb] = 0;
+      param_2[0xb] = 0x6b;
+      param_3[0xb] = 2;
+      param_4[0xb] = 6;
+      param_6[0xb] = 6;
+      param_5[0xb] = uVar4;
+      param_7[0xb] = uVar4;
     }
   }
   return;

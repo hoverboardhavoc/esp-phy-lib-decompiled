@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * Upstream date: 2022-01-04 15:41:20 +0800
- * Upstream subject: fix the bug that phy libs still have ets_printf
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_init_cmplx
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,13 +17,13 @@ void bt_bb_v2_init_cmplx(int param_1)
 {
   _DAT_6000e0c4 = _DAT_6000e0c4 | 0x2000000;
   bt_bb_v2_tx_set(0);
-  bt_bb_v2_rx_set(3);
+  bt_bb_v2_rx_set(4);
   _DAT_600060fc = _DAT_600060fc & 0xffff00ff | 0xc800;
   _DAT_6000e0c4 = _DAT_6000e0c4 & 0xfdffffff;
   if (param_1 == 0) {
     return;
   }
-  rtc_printf("libbtbb version: %s, %s, %s\n","0f130a5","Sep 18 2021","20:17:16");
+  rtc_printf("libbtbb version: %s, %s, %s\n","ef0aae3","Apr 16 2022","13:42:23");
   return;
 }
 

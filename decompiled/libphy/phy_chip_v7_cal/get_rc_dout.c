@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_cal.o -> get_rc_dout
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,31 +10,33 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 undefined4 get_rc_dout(int param_1)
 
 {
-  uint uVar1;
-  undefined4 uVar2;
-  undefined1 uVar3;
+  undefined4 uVar1;
   
-  i2c_writeReg_Mask(0x6a,0,2,6,5,2);
-  i2c_writeReg_Mask(0x6a,0,6,4,0,2);
-  uVar1 = param_1 - 1U & 0xff;
-  if (uVar1 < 3) {
-    uVar3 = (&_LANCHOR0)[uVar1];
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6a,0,2,6,5,2,*(code **)(_g_phyFuns + 0x1bc));
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6a,0,6,4,0,2,*(code **)(_g_phyFuns + 0x1bc));
+  if (param_1 == 1) {
+    uVar1 = 7;
   }
   else {
-    uVar3 = 0xb;
+    uVar1 = 6;
+    if (param_1 != 2) {
+      uVar1 = 0xb;
+    }
   }
-  i2c_writeReg_Mask(0x6a,0,4,7,4,uVar3);
-  i2c_writeReg_Mask(0x61,0,4,2,2,1);
-  i2c_writeReg_Mask(0x6a,0,4,0,0,1);
-  i2c_writeReg_Mask(0x6a,0,4,3,3,0);
-  i2c_writeReg_Mask(0x6a,0,4,3,3,1);
-  ets_delay_us(500);
-  uVar2 = i2c_readReg_Mask(0x6a,0,5,5,0);
-  i2c_writeReg_Mask(0x61,0,4,2,2,0);
-  i2c_writeReg_Mask(0x6a,0,4,0,0,0);
-  return uVar2;
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6a,0,4,7,4,uVar1,*(code **)(_g_phyFuns + 0x1bc));
+  (**(code **)(_g_phyFuns + 0x1bc))(0x61,0,8,2,2,1,*(code **)(_g_phyFuns + 0x1bc));
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6a,0,4,0,0,1,*(code **)(_g_phyFuns + 0x1bc));
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6a,0,4,3,3,0,*(code **)(_g_phyFuns + 0x1bc));
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6a,0,4,3,3,1,*(code **)(_g_phyFuns + 0x1bc));
+  ets_delay_us(100);
+  uVar1 = (**(code **)(_g_phyFuns + 0x1b8))(0x6a,0,5,5,0,*(code **)(_g_phyFuns + 0x1b8));
+  (**(code **)(_g_phyFuns + 0x1bc))(0x61,0,8,2,2,0,*(code **)(_g_phyFuns + 0x1bc));
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6a,0,4,0,0,0,*(code **)(_g_phyFuns + 0x1bc));
+  return uVar1;
 }
 

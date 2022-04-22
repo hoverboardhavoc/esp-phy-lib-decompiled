@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b7095b90157d98f116ba43c35b12d51192dc91c8
- * https://github.com/espressif/esp-phy-lib/commit/b7095b90157d98f116ba43c35b12d51192dc91c8
- * Upstream date: 2021-10-12 21:50:40 +0800
- * Upstream subject: Update libphy and libbb
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7.o -> rx_blocking_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,47 +12,72 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-uint rx_blocking_set(void)
+void rx_blocking_set(int param_1)
 
 {
   uint uVar1;
   uint uVar2;
-  uint uVar3;
-  undefined4 uStack_f0;
-  undefined1 uStack_ec;
-  undefined4 uStack_e8;
-  undefined1 uStack_e4;
-  undefined4 uStack_e0;
-  undefined1 uStack_dc;
-  undefined1 auStack_d8 [208];
+  undefined1 auStack_209 [13];
+  undefined1 auStack_1fc [12];
+  undefined1 auStack_1f0 [16];
+  undefined1 auStack_1e0 [16];
+  undefined1 auStack_1d0 [16];
+  undefined1 auStack_1c0 [16];
+  undefined1 auStack_1b0 [200];
+  undefined1 auStack_e8 [204];
   
-  DAT_00012f54 = DAT_00012f54 & 0xfffdfdbf;
-  uStack_f0 = 0xe7d7c7c7;
-  uStack_ec = 0xf7;
-  uStack_e8 = 0x7100a06;
-  uStack_e4 = 0x20;
-  uStack_e0 = 0x3030300;
-  uStack_dc = 3;
-  uVar2 = gen_rx_gain_table(auStack_d8,0x20,&uStack_f0,&uStack_e8,&uStack_e0,5,0);
-  if (uVar2 < 0x50) {
-    DAT_00012fd3 = (char)uVar2;
+  DAT_0001459c = DAT_0001459c & 0xfffdfdbf;
+  memcpy(auStack_209 + 1,&DAT_00014300,9);
+  memcpy(auStack_1fc,&DAT_00014300,9);
+  memcpy(auStack_1f0,&_LANCHOR2,0xf);
+  memcpy(auStack_1e0,&DAT_0001430c,0xf);
+  memcpy(auStack_1d0,&DAT_0001431c,0xf);
+  memcpy(auStack_1c0,&DAT_0001431c,0xf);
+  uVar1 = 9U - param_1 & 0xff;
+  DAT_0001456d = auStack_209[uVar1];
+  if ((DAT_0001459c & 0x200) == 0) {
+    uVar2 = gen_rx_gain_table(auStack_1b0,0x16,auStack_1fc,auStack_1e0,auStack_1c0,9,0);
+    if (uVar2 < 0x50) {
+      DAT_00014671 = (byte)uVar2;
+    }
+    else {
+      DAT_00014671 = 0x4f;
+    }
+    uVar2 = gen_rx_gain_table(auStack_e8,0x16,auStack_209 + 1,auStack_1f0,auStack_1d0,9,0);
+    if (uVar2 < 0x50) {
+      DAT_00014672 = (byte)uVar2;
+    }
+    else {
+      DAT_00014672 = 0x4f;
+    }
+    DAT_0001459c = DAT_0001459c | 0x200;
   }
-  else {
-    DAT_00012fd3 = 'O';
+  if ((DAT_0001459c & 0x100) == 0) {
+    set_rf_freq_offset(DAT_0001456f,0x985,0);
+    set_rx_gain_param(1,&DAT_0001459c,auStack_1fc,DAT_00014671 + 1,auStack_1b0,9);
+    DAT_0001459c = DAT_0001459c | 0x100;
   }
-  uVar3 = DAT_00012f54 | 0x200;
-  DAT_00012fd4 = DAT_00012fd3;
-  uVar1 = DAT_00012f54 & 0x400;
-  DAT_00012f54 = uVar3;
-  if (uVar1 == 0) {
-    uVar2 = set_rx_gain_cal_iq(&DAT_00012f5c,0);
-    DAT_00012f54 = DAT_00012f54 | 0x400;
+  if (-1 < (int)(DAT_0001459c << 0xe)) {
+    set_rx_gain_param(0,&DAT_0001459c,auStack_209 + 1,DAT_00014672 + 1,auStack_e8,uVar1);
+    DAT_0001459c = DAT_0001459c | 0x20000;
   }
-  if ((DAT_00012f54 & 0x40) == 0) {
-    uVar2 = wr_rx_gain_mem(DAT_00012fd3 + '\x01',auStack_d8,1);
-    DAT_00012f54 = DAT_00012f54 | 0x40;
+  if ((DAT_0001459c & 0x40) == 0) {
+    wr_rx_gain_mem(1,0,auStack_1fc,&phy_rxrf_dc,&phy_rxbb_dc,&phy_chan_dc,DAT_00014671 + 1,
+                   auStack_1b0);
+    wr_rx_gain_mem(0,0,auStack_209 + 1,&DAT_0001442c,&phy_rxbb_dc,&phy_chan_dc,DAT_00014672 + 1,
+                   auStack_e8);
+    DAT_0001459c = DAT_0001459c | 0x40;
   }
+  _DAT_6001c02c = (DAT_00014672 & 0x7f) << 8 | _DAT_6001c02c & 0xffff80ff;
+  uVar1 = (uint)DAT_00014672;
+  if (0x4c < uVar1) {
+    uVar1 = 0x4c;
+  }
+  _DAT_6001c13c = uVar1 << 0x12 | _DAT_6001c13c & 0xfe03ffff;
+  _DAT_6001c0d0 = _DAT_6001c0d0 & 0xfe01ffff | 0xa00000;
+  _DAT_60011848 = _DAT_60011848 & 0xff00ffff | 0x500000;
+  _DAT_6001c0a4 = (DAT_00014671 & 0x7f) << 0xf | _DAT_6001c0a4 & 0xffc07fff;
   _DAT_6000607c = _DAT_6000607c | 0x18001800;
-  return uVar2;
+  return;
 }
 

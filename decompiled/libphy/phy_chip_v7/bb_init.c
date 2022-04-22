@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b7095b90157d98f116ba43c35b12d51192dc91c8
- * https://github.com/espressif/esp-phy-lib/commit/b7095b90157d98f116ba43c35b12d51192dc91c8
- * Upstream date: 2021-10-12 21:50:40 +0800
- * Upstream subject: Update libphy and libbb
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7.o -> bb_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,23 +13,27 @@
 void bb_init(void)
 
 {
-  set_pbus_mem();
-  if (-1 < (int)(DAT_00012f54 << 0xc)) {
-    txdc_cal_init(&DAT_00012f58);
-    DAT_00012f54 = DAT_00012f54 | 0x80000;
+  if (-1 < (int)(DAT_0001459c << 0xf)) {
+    set_pbus_mem();
+    DAT_0001459c = DAT_0001459c | 0x10000;
   }
+  if (-1 < (int)(DAT_0001459c << 0xc)) {
+    txdc_cal_init(&DAT_000145a0,0xf,0x20,0);
+    DAT_0001459c = DAT_0001459c | 0x80000;
+  }
+  pwdet_code_cal();
   tx_cap_init();
-  bt_tx_pwctrl_init();
+  freq_i2c_data_write();
+  txpwr_offset(0);
+  tx_pwctrl_init(0);
   txiq_cal_init();
-  bt_set_tx_gain(0);
-  bt_txpwr_freq(&DAT_00012f7a);
-  write_txrate_power_offset();
+  (**(code **)(g_phyFuns + 0x124))(*(code **)(g_phyFuns + 0x124));
+  bt_tx_gain_init();
   set_rx_gain_table(0x985,0);
-  phy_reg_init();
-  set_chan_reg(1);
-  enable_agc();
-  DAT_00012f70 = 0xfe80;
-  DAT_00012fd6 = 0xfe80;
+  rom_phy_reg_init();
+  (**(code **)(g_phyFuns + 4))(*(code **)(g_phyFuns + 4));
+  DAT_000145e0 = 0xfe80;
+  DAT_00014674 = 0xfe80;
   chip_v7_set_chan(0xb,0);
   return;
 }

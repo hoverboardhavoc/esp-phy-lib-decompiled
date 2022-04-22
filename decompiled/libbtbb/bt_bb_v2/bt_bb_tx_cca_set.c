@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_tx_cca_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,23 +34,24 @@ void bt_bb_tx_cca_set(int param_1,uint param_2,int param_3,uint param_4,uint par
   else {
     _DAT_600110bc = _DAT_600110bc | 0x40000000;
   }
-  uVar2 = (param_5 & 0x1f) << 0x14;
-  uVar1 = (param_4 & 0x1f) << 0x19 | _DAT_600110bc & 0xc00fffff;
+  uVar1 = (param_4 & 0xf) << 0x1a;
+  uVar2 = (param_5 & 0xf) << 0x16;
   if (param_6 == 0) {
-    uVar1 = uVar2 & 0xffdfffff | uVar1;
+    uVar2 = uVar2 | uVar1 | _DAT_600110bc & 0xc01fffff;
   }
   else {
-    uVar1 = uVar2 | uVar1 | 0x200000;
+    uVar2 = uVar2 | uVar1 | _DAT_600110bc & 0xc03fffff | 0x200000;
   }
-  uVar2 = (param_7 & 0xff) << 0xd;
+  uVar1 = (param_7 & 0xff) << 0xd;
   if (param_8 == 0) {
-    uVar2 = uVar2 | uVar1 & 0xffe00fff;
+    uVar1 = uVar1 | uVar2 & 0xffe00fff;
   }
   else {
-    uVar2 = uVar2 | uVar1 & 0xffe01fff | 0x1000;
+    uVar1 = uVar1 | uVar2 & 0xffe01fff | 0x1000;
   }
   _DAT_600110bc =
-       (in_stack_00000004 & 0x1f) << 2 | (in_stack_00000000 & 0x1f) << 7 | uVar2 & 0xfffff003;
+       (in_stack_00000004 & 0xf) << 4 | (in_stack_00000000 & 0xf) << 8 | uVar1 & 0xfffff00f |
+       0x80000000;
   return;
 }
 

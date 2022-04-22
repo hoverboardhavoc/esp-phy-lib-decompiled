@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * Upstream date: 2022-01-04 15:41:20 +0800
- * Upstream subject: fix the bug that phy libs still have ets_printf
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_ana.o -> wait_rfpll_cal_end
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,17 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void wait_rfpll_cal_end(void)
 
 {
   char cVar1;
-  uint uVar2;
+  int iVar2;
   
   cVar1 = '\0';
   do {
     ets_delay_us(0x14);
-    uVar2 = chip_i2c_readReg(0x62,1,7);
-    if ((uVar2 & 2) != 0) {
+    iVar2 = (**(code **)(_g_phyFuns + 0x1b8))(0x62,1,7,1,1,*(code **)(_g_phyFuns + 0x1b8));
+    if (iVar2 != 0) {
       return;
     }
     if (cVar1 == 'c') {

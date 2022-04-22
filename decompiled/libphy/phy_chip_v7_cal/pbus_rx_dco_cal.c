@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * https://github.com/espressif/esp-phy-lib/commit/4779ddaaf29e1d6aa2d26980103a1c1bbaa29462
- * Upstream date: 2022-01-04 15:41:20 +0800
- * Upstream subject: fix the bug that phy libs still have ets_printf
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_cal.o -> pbus_rx_dco_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,100 +10,170 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void pbus_rx_dco_cal(undefined4 param_1,short *param_2,int param_3)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void pbus_rx_dco_cal(undefined4 param_1,short *param_2,undefined4 param_3,int param_4,int param_5)
 
 {
-  byte bVar1;
-  int iVar2;
+  uint uVar1;
+  uint uVar2;
   int iVar3;
-  uint uVar4;
+  int iVar4;
   uint uVar5;
-  short sVar6;
+  char cVar6;
   uint uVar7;
   int iVar8;
-  uint uVar9;
-  int iVar10;
+  int iVar9;
+  code *pcVar10;
   uint uVar11;
-  uint uStack_5c;
-  uint uStack_58;
-  byte abStack_50 [28];
+  int iVar12;
+  int iVar13;
+  short sVar14;
+  int iVar15;
+  char cVar16;
+  int iVar17;
+  int iStack_70;
+  int iStack_6c;
+  int iStack_4c;
+  int iStack_48;
   
-  memcpy(abStack_50,&_LANCHOR1,0x10);
-  uVar4 = pbus_rd(1,2);
-  uVar7 = uVar4 >> 2 & 0xf;
-  iVar10 = 4;
-  if ((uVar4 >> 2 & 8) == 0) {
-    iVar10 = 2;
+  uVar2 = (**(code **)(_g_phyFuns + 0x1d0))(1,2,*(code **)(_g_phyFuns + 0x1d0));
+  uVar1 = 0;
+  for (uVar11 = uVar2 & 0x30; uVar11 != 0; uVar11 = uVar11 >> 1) {
+    uVar1 = uVar1 + (uVar11 & 1) & 0xff;
   }
-  uVar11 = (uint)*param_2;
-  uVar9 = (uint)param_2[1];
-  bVar1 = abStack_50[uVar7];
-  iVar3 = 0;
+  uVar11 = 0;
+  for (uVar7 = uVar2 & 0xf; uVar7 != 0; uVar7 = uVar7 >> 1) {
+    uVar11 = uVar11 + (uVar7 & 1) & 0xff;
+  }
+  uVar2 = uVar2 >> 6 & 0xff;
+  (**(code **)(_g_phyFuns + 0x1cc))(2,2,0x100,*(code **)(_g_phyFuns + 0x1cc));
+  uVar1 = uVar1 + uVar11 & 0xff;
+  (**(code **)(_g_phyFuns + 0x1cc))(3,2,0x100,*(code **)(_g_phyFuns + 0x1cc));
+  iVar15 = 5;
+  if (2 < uVar1) {
+    iVar15 = 0xf;
+  }
+  uVar7 = 4;
+  if (uVar11 != 0) {
+    uVar7 = uVar11 + 5;
+  }
+  uVar11 = (uVar7 & 0xff) + 2;
+  iVar8 = 5;
+  if (uVar1 < 4) {
+    iVar8 = 2;
+  }
+  uVar7 = uVar1 + 6 & 0xff;
+  iVar17 = 0;
+  iVar9 = 0;
+  iVar13 = ((int)*param_2 << 0x11) >> 0x10;
+  iVar12 = ((int)param_2[1] << 0x11) >> 0x10;
+  cVar6 = '\f';
   do {
-    pbus_force_test(2,1,uVar11 & 0xffff);
-    pbus_force_test(2,2,uVar9 & 0xffff);
-    ets_delay_us(2);
-    dc_iq_est(1,param_1,&uStack_5c);
-    iVar2 = 0;
-    if (iVar10 < (int)(((int)uStack_5c >> 0x1f ^ uStack_5c) - ((int)uStack_5c >> 0x1f))) {
-      iVar2 = (int)(short)((int)(bVar1 * uStack_5c) >> 5);
-    }
-    if (iVar10 < (int)(((int)uStack_58 >> 0x1f ^ uStack_58) - ((int)uStack_58 >> 0x1f))) {
-      iVar8 = (int)(short)((int)(bVar1 * uStack_58) >> 5);
-      if ((iVar2 == 0) && (iVar2 = 1, (int)uStack_5c < 1)) {
-_L162:
-        iVar2 = -1;
+    cVar16 = '\0';
+    do {
+      uVar5 = iVar13 + 1 >> 1;
+      pcVar10 = *(code **)(_g_phyFuns + 0x1cc);
+      *param_2 = (short)uVar5;
+      (*pcVar10)(2,iVar9 + 1,uVar5 & 0xffff,pcVar10);
+      pcVar10 = *(code **)(_g_phyFuns + 0x1cc);
+      uVar5 = iVar12 + 1 >> 1;
+      param_2[1] = (short)uVar5;
+      (*pcVar10)(3,iVar9 + 1,uVar5 & 0xffff,pcVar10);
+      ets_delay_us(param_3);
+      (**(code **)(_g_phyFuns + 0x10c))(1,param_1,&iStack_4c,*(code **)(_g_phyFuns + 0x10c));
+      if (param_5 != 0) {
+        phy_printf(" (%d,%d) ",(int)*param_2,(int)param_2[1]);
+        phy_printf("%d,%d ",iStack_4c,iStack_48);
       }
-      if (iVar8 == 0) goto _L161;
-    }
-    else {
-      if (iVar2 == 0) {
-        iVar2 = 1;
-        iVar8 = 0;
-        if ((int)uStack_5c < 1) goto _L162;
+      iVar3 = (**(code **)(_g_phyFuns + 0x100))(iStack_4c,*(code **)(_g_phyFuns + 0x100));
+      if ((iVar3 <= iVar15) &&
+         (iVar3 = (**(code **)(_g_phyFuns + 0x100))(iStack_48,*(code **)(_g_phyFuns + 0x100)),
+         iVar3 <= iVar15)) break;
+      if (cVar16 == '\0') {
+        iStack_70 = iStack_4c;
+        iStack_6c = iStack_48;
       }
-_L161:
-      iVar8 = 1;
-      if ((int)uStack_58 < 1) {
-        iVar8 = -1;
+      if (iVar17 == 0) {
+        iVar3 = (**(code **)(_g_phyFuns + 0x100))();
+        uVar5 = uVar7;
+        if (iVar15 < iVar3) {
+          iVar3 = (**(code **)(_g_phyFuns + 0x100))
+                            (iStack_4c - iStack_70,*(code **)(_g_phyFuns + 0x100));
+          iVar4 = (**(code **)(_g_phyFuns + 0x100))
+                            ((iStack_4c * 3) / 2,*(code **)(_g_phyFuns + 0x100));
+          if (iVar4 < iVar3) {
+            uVar5 = uVar1 + 7 & 0xff;
+          }
+          iVar13 = (iVar13 - ((int)((uint)(byte)(&_LANCHOR0)[uVar2] * iStack_4c * 6) >>
+                             (uVar5 + 2 & 0x1f))) * 0x10000 >> 0x10;
+        }
+        iVar3 = (**(code **)(_g_phyFuns + 0x100))(iStack_48,*(code **)(_g_phyFuns + 0x100));
+        if (iVar15 < iVar3) {
+          iVar3 = (**(code **)(_g_phyFuns + 0x100))
+                            (iStack_48 - iStack_6c,*(code **)(_g_phyFuns + 0x100));
+          iVar4 = (**(code **)(_g_phyFuns + 0x100))
+                            ((iStack_48 * 3) / 2,*(code **)(_g_phyFuns + 0x100));
+          if (iVar4 < iVar3) {
+            uVar5 = uVar5 + 1 & 0xff;
+          }
+          sVar14 = (short)((int)((uint)(byte)(&_LANCHOR0)[uVar2] * iStack_48 * 6) >>
+                          (uVar5 + 2 & 0x1f));
+_L139:
+          iVar12 = (int)(short)((short)iVar12 - sVar14);
+        }
       }
+      else {
+        iVar3 = (**(code **)(_g_phyFuns + 0x100))();
+        if (iVar15 < iVar3) {
+          iVar13 = (iVar13 - (iStack_4c * 0x118 >> (uVar11 & 0x1f))) * 0x10000 >> 0x10;
+        }
+        iVar3 = (**(code **)(_g_phyFuns + 0x100))(iStack_48,*(code **)(_g_phyFuns + 0x100));
+        if (iVar15 < iVar3) {
+          sVar14 = (short)(iStack_48 * 0x118 >> (uVar11 & 0x1f));
+          goto _L139;
+        }
+      }
+      if (0x3fe < iVar13) {
+        iVar13 = 0x3fe;
+      }
+      sVar14 = (short)iVar13;
+      if (iVar13 << 0x10 < 0) {
+        sVar14 = 0;
+      }
+      iVar13 = (int)sVar14;
+      if (0x3fe < iVar12) {
+        iVar12 = 0x3fe;
+      }
+      sVar14 = (short)iVar12;
+      if (iVar12 << 0x10 < 0) {
+        sVar14 = 0;
+      }
+      iStack_70 = iStack_4c;
+      cVar16 = cVar16 + '\x01';
+      iStack_6c = iStack_48;
+      iVar12 = (int)sVar14;
+    } while (cVar6 != cVar16);
+    if (param_4 != 0) {
+      phy_printf("stage %d: CGAIN=%d FGAIN=%d, (%d,%d) %d; ",iVar17 + 1,uVar1,uVar2,iStack_4c,
+                 iStack_48,cVar16);
     }
-    if (param_3 != 0) {
-      phy_printf("%d,bb2=0x%03x,vga=%02d,lpf=%d,dco=%d,%d,est=%d,%d,scale=%d,%d\n",iVar3,uVar4,uVar7
-                 ,uVar4 >> 6 & 3,uVar11,uVar9);
+    if (param_5 != 0) {
+      phy_printf(&_LC3);
     }
-    iVar2 = get_data_sat(iVar2,10,0xfffffff6);
-    iVar8 = get_data_sat(iVar8,10,0xfffffff6);
-    uVar5 = (int)uStack_58 >> 0x1f;
-    if (iVar10 < (int)((uStack_5c ^ (int)uStack_5c >> 0x1f) - ((int)uStack_5c >> 0x1f))) {
-      uVar11 = (int)(((uVar11 & 0xffff) - iVar2) * 0x10000) >> 0x10;
-      if (iVar10 < (int)((uStack_58 ^ uVar5) - uVar5)) goto _L154;
+    param_2 = param_2 + 2;
+    if (iVar17 != 0) {
+      if (param_4 != 0) {
+        phy_printf(&_LC3);
+      }
+      return;
     }
-    else {
-      if ((int)((uStack_58 ^ uVar5) - uVar5) <= iVar10) break;
-_L154:
-      uVar9 = (int)(((uVar9 & 0xffff) - iVar8) * 0x10000) >> 0x10;
-    }
-    if (0xff < (int)uVar11) {
-      uVar11 = 0xff;
-    }
-    sVar6 = (short)uVar11;
-    if ((int)(uVar11 << 0x10) < 0) {
-      sVar6 = 0;
-    }
-    uVar11 = (uint)sVar6;
-    if (0xff < (int)uVar9) {
-      uVar9 = 0xff;
-    }
-    sVar6 = (short)uVar9;
-    if ((int)(uVar9 << 0x10) < 0) {
-      sVar6 = 0;
-    }
-    iVar3 = iVar3 + 1;
-    uVar9 = (uint)sVar6;
-  } while (iVar3 != 0x18);
-  *param_2 = (short)uVar11;
-  param_2[1] = (short)uVar9;
-  return;
+    iVar17 = 1;
+    iVar9 = 1;
+    iVar12 = 0x200;
+    iVar13 = 0x200;
+    cVar6 = '\x04';
+    iVar15 = iVar8;
+  } while( true );
 }
 

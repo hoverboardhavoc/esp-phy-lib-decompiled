@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_cal.o -> txiq_cover
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,41 +10,38 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void txiq_cover(int param_1,undefined4 param_2,byte *param_3)
 
 {
-  byte bVar1;
+  int iVar1;
   int iVar2;
   short sVar3;
   int iVar4;
   uint uVar5;
   uint uVar6;
-  uint uVar7;
+  byte bVar7;
   uint uVar8;
-  uint uVar9;
+  int iVar9;
   int iVar10;
-  int iVar11;
-  int iVar12;
-  byte bVar13;
   short local_44;
   short asStack_42 [7];
   
   uVar5 = (param_1 + -0xc) * 0x1000000 >> 0x18;
-  uVar9 = 0;
+  uVar8 = 0;
   if (-1 < (int)uVar5) {
-    uVar9 = uVar5 & 0xff;
+    uVar8 = uVar5 & 0xff;
   }
-  iVar11 = 0;
   iVar10 = 0;
+  iVar9 = 0;
+  iVar1 = 0;
   iVar2 = 0;
-  iVar12 = 0;
-  bVar13 = 0;
+  bVar7 = 0;
   do {
-    if (bVar13 < 3) {
-      iVar12 = txiq_set_reg(iVar12,1);
-      iVar2 = txiq_set_reg(iVar2,0);
-    }
-    txiq_get_mis_pwr(1,uVar9,param_2,&local_44,asStack_42);
+    iVar2 = txiq_set_reg(iVar2,1);
+    iVar1 = txiq_set_reg(iVar1,0);
+    txiq_get_mis_pwr(1,uVar8,param_2,&local_44,asStack_42);
     sVar3 = asStack_42[0];
     if ((int)local_44 < (int)asStack_42[0]) {
       sVar3 = local_44;
@@ -59,35 +56,35 @@ void txiq_cover(int param_1,undefined4 param_2,byte *param_3)
     if (iVar4 == 0) {
       iVar4 = 1;
     }
-    bVar1 = *param_3;
-    uVar5 = (uint)bVar1;
+    uVar5 = (uint)*param_3;
     uVar6 = (((int)local_44 - (int)asStack_42[0]) * 0x1000) / iVar4 + 0x10 >> 5;
     param_3[1] = (byte)uVar6;
-    uVar7 = uVar6 & 0xff;
-    if (bVar13 < 3) {
-_L309:
-      iVar12 = (int)((iVar12 - uVar5) * 0x1000000) >> 0x18;
-      iVar2 = (int)((iVar2 - uVar7) * 0x1000000) >> 0x18;
+    uVar6 = uVar6 & 0xff;
+    if (bVar7 < 3) {
+_L87:
+      iVar2 = (int)((iVar2 - uVar5) * 0x1000000) >> 0x18;
+      iVar1 = (int)((iVar1 - uVar6) * 0x1000000) >> 0x18;
     }
     else {
-      uVar8 = (int)(char)bVar1 >> 0x1f;
-      iVar10 = (int)((iVar10 + uVar5) * 0x1000000) >> 0x18;
-      iVar11 = (int)((uVar7 + iVar11) * 0x1000000) >> 0x18;
-      if (((int)(((int)(char)bVar1 ^ uVar8) - uVar8) < 2) &&
-         (uVar5 = (int)(uVar6 << 0x18) >> 0x1f,
-         (int)(((int)(uVar6 << 0x18) >> 0x18 ^ uVar5) - uVar5) < 2)) break;
-      if (bVar13 == 6) {
-        uVar5 = iVar10 + 2 >> 2;
-        uVar7 = iVar11 + 2 >> 2;
-        goto _L309;
+      iVar9 = (int)((iVar9 + uVar5) * 0x1000000) >> 0x18;
+      iVar4 = (**(code **)(_g_phyFuns + 0x100))(*(code **)(_g_phyFuns + 0x100));
+      iVar10 = (int)((iVar10 + uVar6) * 0x1000000) >> 0x18;
+      if ((iVar4 < 2) &&
+         (iVar4 = (**(code **)(_g_phyFuns + 0x100))
+                            ((int)(char)param_3[1],*(code **)(_g_phyFuns + 0x100)), iVar4 < 2))
+      break;
+      if (bVar7 == 6) {
+        uVar5 = iVar9 + 2 >> 2;
+        uVar6 = iVar10 + 2 >> 2;
+        goto _L87;
       }
     }
-    bVar13 = bVar13 + 1;
-  } while (bVar13 != 7);
-  txiq_set_reg(iVar12,1);
-  txiq_set_reg(iVar2,0);
-  param_3[1] = (byte)iVar2;
-  *param_3 = (byte)iVar12;
+    bVar7 = bVar7 + 1;
+  } while (bVar7 != 7);
+  txiq_set_reg(iVar2,1);
+  txiq_set_reg(iVar1,0);
+  param_3[1] = (byte)iVar1;
+  *param_3 = (byte)iVar2;
   return;
 }
 

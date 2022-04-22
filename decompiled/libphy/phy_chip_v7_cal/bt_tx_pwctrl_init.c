@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_cal.o -> bt_tx_pwctrl_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,66 +15,38 @@
 void bt_tx_pwctrl_init(void)
 
 {
-  undefined *puVar1;
-  uint uVar2;
-  int iVar3;
+  ushort uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
   uint uVar4;
-  uint uVar5;
-  char cVar6;
-  int iVar7;
-  char cVar8;
-  int iVar9;
+  code *pcVar5;
   
-  puVar1 = &phy_param;
-  if (chip_lp_en == '\0') {
-    DAT_00013135 = 0x28;
-    iVar7 = 0xd8;
-  }
-  else {
-    DAT_00013135 = 0xc;
-    iVar7 = 0x1d3;
-  }
-  if (-1 < (int)(_DAT_0001310c << 0x10)) {
+  if (-1 < (int)(_DAT_00013128 << 0x10)) {
+    uVar2 = (**(code **)(_g_phyFuns + 0x1ac))(0x67,1,0x1c,*(code **)(_g_phyFuns + 0x1ac));
+    uVar3 = (**(code **)(_g_phyFuns + 0x1ac))(0x67,1,0x1e,*(code **)(_g_phyFuns + 0x1ac));
+    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1c,2,*(code **)(_g_phyFuns + 0x1b4));
+    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1d,2,*(code **)(_g_phyFuns + 0x1b4));
+    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1e,2,*(code **)(_g_phyFuns + 0x1b4));
+    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1f,2,*(code **)(_g_phyFuns + 0x1b4));
     txcal_debuge_mode();
-    iVar9 = 0;
-    uVar2 = 0x18;
-    do {
-      set_channel_rfpll_freq((int)(char)(&CSWTCH_197)[iVar9],DAT_000130b3,0);
-      start_tx_tone_step(1,0xe0,uVar2 & 0xff,0,0,0);
-      _DAT_6000e05c = _DAT_6000e05c & 0xffff0000;
-      ets_delay_us(2);
-      _DAT_0001309c = read_sar2_code();
-      _DAT_6000e05c = _DAT_6000e05c & 0xffff0000 | 0xaaaa;
-      ets_delay_us(2);
-      _DAT_0001309a = read_sar2_code();
-      cVar8 = '\b';
-      do {
-        start_tx_tone_step(1,0xe0,uVar2 & 0xff,0,0,0);
-        ets_delay_us(2);
-        iVar3 = read_sar2_code();
-        iVar3 = (iVar3 - ((uint)_DAT_0001309c + iVar7)) * 0x10000;
-        uVar4 = iVar3 >> 0x10;
-        uVar5 = iVar3 >> 0x1f;
-        if ((((int)((uVar5 ^ uVar4) - uVar5) < 10) ||
-            (uVar2 = (int)(((int)uVar4 / 10 + (uVar2 & 0xff)) * 0x1000000) >> 0x18, uVar2 == 0)) ||
-           (uVar2 == 0x40)) break;
-        if (0x40 < (int)uVar2) {
-          uVar2 = 0x40;
-        }
-        cVar6 = (char)uVar2;
-        if (cVar6 < '\0') {
-          cVar6 = '\0';
-        }
-        cVar8 = cVar8 + -1;
-        uVar2 = (uint)cVar6;
-      } while (cVar8 != '\0');
-      puVar1[0x11a] = (char)uVar2;
-      iVar9 = iVar9 + 1;
-      puVar1 = puVar1 + 1;
-    } while (iVar9 != 3);
-    start_tx_tone_step(0,0xe0,uVar2 & 0xff,0,0,0);
+    (**(code **)(_g_phyFuns + 0x1cc))(5,1,0x2f,*(code **)(_g_phyFuns + 0x1cc));
+    (**(code **)(_g_phyFuns + 0x1cc))(1,2,0,*(code **)(_g_phyFuns + 0x1cc));
+    pcVar5 = *(code **)(_g_phyFuns + 0x1cc);
+    uVar1 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
+    (*pcVar5)(1,1,uVar1 | 2);
+    (**(code **)(_g_phyFuns + 0x1cc))(4,2,0,*(code **)(_g_phyFuns + 0x1cc));
+    uVar4 = (**(code **)(_g_phyFuns + 0x38))(0,*(code **)(_g_phyFuns + 0x38));
+    (**(code **)(_g_phyFuns + 0x1f0))((uVar4 & 0xff) * 8 + 0x1318a,*(code **)(_g_phyFuns + 0x1f0));
+    if ((DAT_0001320c & 0xf0) != 0x10) {
+      tx_pwctrl_init_cal(1,&phy_param,&phy_param,&phy_param);
+    }
+    _DAT_00013186 = 0;
+    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1c,uVar2,*(code **)(_g_phyFuns + 0x1b4));
+    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1d,uVar2,*(code **)(_g_phyFuns + 0x1b4));
+    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1e,uVar3,*(code **)(_g_phyFuns + 0x1b4));
+    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1f,uVar3,*(code **)(_g_phyFuns + 0x1b4));
     txcal_work_mode();
-    _DAT_0001310c = _DAT_0001310c | 0x8000;
+    _DAT_00013128 = _DAT_00013128 | 0x8000;
   }
   return;
 }

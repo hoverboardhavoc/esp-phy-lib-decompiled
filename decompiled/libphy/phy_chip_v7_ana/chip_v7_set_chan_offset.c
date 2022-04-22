@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * https://github.com/espressif/esp-phy-lib/commit/8a9ecaae72c68ad0b54f06cec82c014d40fbfd2f
- * Upstream date: 2021-09-10 13:00:58 +0800
- * Upstream subject: esp32h2: fix tx/rx channel setting
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_ana.o -> chip_v7_set_chan_offset
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,14 +15,20 @@
 void chip_v7_set_chan_offset(short param_1)
 
 {
-  _DAT_00013094 = param_1 + 2U & 0xfffc;
-  if (DAT_000130fe != '\0') {
-    _DAT_00013094 = _DAT_00013094 + (short)((int)DAT_000130ff << 3);
+  undefined4 uVar1;
+  
+  uVar1 = (**(code **)(_g_phyFuns + 0x184))(*(code **)(_g_phyFuns + 0x184));
+  _DAT_000120e4 = param_1 + 2U & 0xfffc;
+  if (DAT_00012122 != '\0') {
+    _DAT_000120e4 = _DAT_000120e4 + (short)((int)DAT_00012123 << 3);
   }
-  phy_freq_correct_part_1((int)(short)_DAT_00013094);
-  disable_wifi_agc();
-  set_channel_rfpll_freq((int)DAT_0001317c,DAT_000130a7,(int)(short)_DAT_00013094);
-  enable_wifi_agc();
+  phy_freq_correct_part_0((int)(short)_DAT_000120e4);
+  (**(code **)(_g_phyFuns + 8))(*(code **)(_g_phyFuns + 8));
+  set_channel_rfpll_freq((int)DAT_000121f6,DAT_000120f7,(int)(short)_DAT_000120e4);
+  (**(code **)(_g_phyFuns + 0xc))(*(code **)(_g_phyFuns + 0xc));
+                    /* WARNING: Could not recover jumptable at 0x00011c46. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_g_phyFuns + 0x188))(uVar1);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7.o -> set_pbus_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,95 +15,154 @@
 void set_pbus_mem(void)
 
 {
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint *puVar5;
-  int iVar6;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
-  uint uVar9;
-  undefined4 auStack_6c [2];
-  undefined4 auStack_64 [3];
-  undefined4 auStack_58 [3];
-  undefined4 auStack_4c [3];
-  undefined4 local_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  undefined4 uStack_24;
+  uint uVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  uint *puVar4;
+  int iVar5;
+  undefined4 *puVar6;
+  uint uVar7;
+  int iVar8;
+  int iVar9;
+  undefined4 local_b0;
+  undefined4 uStack_ac;
+  undefined4 uStack_a8;
+  undefined4 uStack_a4;
+  undefined4 uStack_a0;
+  undefined4 uStack_9c;
+  undefined4 uStack_98;
+  undefined4 uStack_94;
+  undefined4 uStack_90;
+  undefined4 uStack_8c;
+  undefined4 uStack_88;
+  undefined4 uStack_84;
+  undefined4 local_80 [4];
+  undefined4 uStack_70;
+  undefined4 uStack_6c;
+  undefined4 uStack_68;
+  undefined4 uStack_64;
+  undefined4 local_60 [6];
+  undefined4 local_48 [9];
   
-  local_40 = 0x68fff;
-  uStack_3c = 0x141bff;
-  uStack_30 = 0x419ff;
-  uStack_38 = 0xf40000;
-  uStack_34 = 0xf50000;
-  uStack_2c = 0x150dff;
-  uStack_28 = 0xf00000;
-  uStack_24 = 0xf10000;
-  uVar2 = 6;
-  puVar8 = &local_40;
-  iVar1 = 4;
-  iVar6 = 0;
-  uVar3 = 0;
-  puVar5 = (uint *)&DAT_600060ec;
-_L31:
-  while( true ) {
-    uVar9 = iVar1 + uVar3;
-    *puVar5 = ~(0xffff << iVar6) & *puVar5 | (((uVar9 - 1) * 0x100 | uVar3) & 0xffff) << iVar6;
-    uVar3 = (uVar3 + 0x200) * 0x100;
-    iVar6 = 0;
-    do {
-      puVar7 = puVar8 + iVar6;
-      uVar4 = uVar3 & 0x3ff00;
-      iVar6 = iVar6 + 1;
-      _DAT_600060cc = *puVar7;
-      uVar3 = uVar3 + 0x100;
-      _DAT_600060c8 = _DAT_600060c8 & 0xfffc00ff | uVar4;
-    } while (iVar1 != iVar6);
-    uVar2 = uVar2 + 1;
-    if (uVar2 == 0xc) {
-      return;
-    }
-    uVar3 = uVar9;
-    if (uVar2 != 8) break;
-    puVar8 = &uStack_30;
-    iVar1 = 4;
-    iVar6 = 0;
-_L43:
-    puVar5 = (uint *)0x600060f0;
+  memcpy(local_80,&DAT_000142d8,0x10);
+  local_b0 = 0x401ff;
+  uStack_ac = 0x1401ff;
+  memcpy(local_60,&DAT_000142e8,0x18);
+  uStack_a0 = 0x44ffff;
+  uStack_9c = 0xf30000;
+  uStack_98 = 0x4401ff;
+  uStack_94 = 0x5401ff;
+  uStack_70 = 0x709ff;
+  uStack_68 = 0xf50000;
+  uStack_64 = 0xf60000;
+  uStack_a8 = 0x401ff;
+  uStack_a4 = 0x1401ff;
+  uStack_90 = 0x401ff;
+  uStack_8c = 0x1401ff;
+  iVar5 = 0;
+  do {
+    *(undefined4 *)((int)local_48 + iVar5) = *(undefined4 *)((int)local_60 + iVar5);
+    iVar5 = iVar5 + 4;
+  } while (iVar5 != 0x18);
+  uStack_88 = 0x401ff;
+  uStack_84 = 0x1401ff;
+  uStack_6c = 0x1717ff;
+  local_48[1] = 0x14fdff;
+  iVar2 = 4;
+  iVar5 = 0;
+  puVar3 = local_80;
+  puVar4 = (uint *)&DAT_600060e0;
+  uVar7 = 0;
+  iVar8 = 0;
+_L136:
+  uVar1 = uVar7 + iVar2;
+  *puVar4 = ~(0xffff << iVar5) & *puVar4 | (((uVar1 - 1) * 0x100 | uVar7) & 0xffff) << iVar5;
+  iVar5 = 0;
+  uVar7 = (uVar7 + 0x200) * 0x100;
+  do {
+    puVar6 = puVar3 + iVar5;
+    iVar5 = iVar5 + 1;
+    _DAT_600060cc = *puVar6;
+    _DAT_600060c8 = _DAT_600060c8 & 0xfffc00ff | uVar7 & 0xff00;
+    uVar7 = uVar7 + 0x100;
+  } while (iVar2 != iVar5);
+  iVar9 = iVar8 + 1;
+  if (iVar9 == 0xc) {
+    return;
   }
-  puVar5 = (uint *)&DAT_600060f4;
-  if (uVar2 < 9) {
-    if (uVar2 == 7) {
-      puVar8 = auStack_58;
-      iVar1 = 3;
-      iVar6 = 0x10;
-      puVar5 = (uint *)&DAT_600060ec;
-      goto _L31;
-    }
+  puVar4 = (uint *)&DAT_600060f0;
+  uVar7 = uVar1;
+  switch(iVar8) {
+  case 0:
+    iVar2 = 2;
+    iVar5 = 0x10;
+    puVar3 = &local_b0;
+    puVar4 = (uint *)&DAT_600060e0;
+    iVar8 = iVar9;
+    goto _L136;
+  case 1:
+    puVar3 = local_60;
+    iVar2 = 6;
+    iVar5 = 0;
+    break;
+  case 2:
+    puVar3 = &uStack_a8;
+    iVar2 = 2;
+    iVar5 = 0x10;
+    break;
+  case 3:
+    puVar3 = &uStack_a0;
+    iVar5 = 0;
+    goto _L158;
+  case 4:
+    puVar3 = &uStack_98;
+    iVar5 = 0x10;
+_L158:
+    iVar2 = 2;
+    puVar4 = (uint *)0x600060e8;
+    iVar8 = iVar9;
+    goto _L136;
+  case 5:
+    puVar3 = &uStack_70;
+    iVar2 = 4;
+    iVar5 = 0;
+    puVar4 = (uint *)0x600060ec;
+    iVar8 = iVar9;
+    goto _L136;
+  case 6:
+    puVar3 = &uStack_90;
+    iVar2 = 2;
+    iVar5 = 0x10;
+    puVar4 = (uint *)0x600060ec;
+    iVar8 = iVar9;
+    goto _L136;
+  case 7:
+    puVar3 = local_48;
+    iVar2 = 6;
+    iVar5 = 0;
+    iVar8 = iVar9;
+    goto _L136;
+  case 8:
+    puVar3 = &uStack_88;
+    iVar2 = 2;
+    iVar5 = 0x10;
+    iVar8 = iVar9;
+    goto _L136;
+  case 9:
+    puVar3 = &uStack_a0;
+    iVar5 = 0;
+    goto _L155;
+  default:
+    puVar3 = &uStack_98;
+    iVar5 = 0x10;
+_L155:
+    iVar2 = 2;
+    puVar4 = (uint *)0x600060f4;
+    iVar8 = iVar9;
+    goto _L136;
   }
-  else {
-    if (uVar2 == 9) {
-      puVar8 = auStack_4c;
-      iVar1 = 3;
-      iVar6 = 0x10;
-      goto _L43;
-    }
-    if (uVar2 == 10) {
-      puVar8 = auStack_64;
-      iVar1 = 3;
-      iVar6 = 0;
-      goto _L31;
-    }
-  }
-  puVar8 = auStack_6c;
-  iVar1 = 2;
-  iVar6 = 0x10;
-  goto _L31;
+  puVar4 = (uint *)0x600060e4;
+  iVar8 = iVar9;
+  goto _L136;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_cal.o -> rxdc_est_min
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,49 +10,52 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rxdc_est_min(undefined4 param_1,int param_2,uint *param_3,char *param_4)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void rxdc_est_min(undefined4 param_1,int param_2,int *param_3,char *param_4)
 
 {
   char cVar1;
-  uint uVar2;
-  byte bVar3;
-  int iVar4;
-  uint uStack_2c;
-  uint uStack_28;
-  int iStack_24;
+  int iVar2;
+  int iVar3;
+  byte bVar4;
+  int iVar5;
+  int iStack_3c;
+  int iStack_38;
+  int iStack_34;
   
   *param_3 = 1000;
   param_3[1] = 1000;
-  iVar4 = 100;
+  iVar5 = 100;
   if (param_2 != 0) {
-    iVar4 = 0x35;
+    iVar5 = 0x35;
   }
-  bVar3 = 0;
+  bVar4 = 0;
   cVar1 = '\0';
   do {
-    dc_iq_est(1,param_1,&uStack_2c);
-    if (iStack_24 < iVar4) {
-      uVar2 = (int)*param_3 >> 0x1f;
-      if ((int)(((int)uStack_2c >> 0x1f ^ uStack_2c) - ((int)uStack_2c >> 0x1f)) <
-          (int)((*param_3 ^ uVar2) - uVar2)) {
-        *param_3 = uStack_2c;
+    (**(code **)(_g_phyFuns + 0x10c))(1,param_1,&iStack_3c,*(code **)(_g_phyFuns + 0x10c));
+    if (iStack_34 < iVar5) {
+      iVar2 = (**(code **)(_g_phyFuns + 0x100))(*param_3,*(code **)(_g_phyFuns + 0x100));
+      iVar3 = (**(code **)(_g_phyFuns + 0x100))(iStack_3c,*(code **)(_g_phyFuns + 0x100));
+      if (iVar3 < iVar2) {
+        *param_3 = iStack_3c;
       }
-      uVar2 = (int)param_3[1] >> 0x1f;
-      if ((int)(((int)uStack_28 >> 0x1f ^ uStack_28) - ((int)uStack_28 >> 0x1f)) <
-          (int)((param_3[1] ^ uVar2) - uVar2)) {
-        param_3[1] = uStack_28;
+      iVar2 = (**(code **)(_g_phyFuns + 0x100))(param_3[1],*(code **)(_g_phyFuns + 0x100));
+      iVar3 = (**(code **)(_g_phyFuns + 0x100))(iStack_38,*(code **)(_g_phyFuns + 0x100));
+      if (iVar3 < iVar2) {
+        param_3[1] = iStack_38;
       }
-      bVar3 = bVar3 + 1;
-      if ((iStack_24 < 0x24) || (3 < bVar3)) break;
+      bVar4 = bVar4 + 1;
+      if ((iStack_34 < 0x24) || (3 < bVar4)) break;
     }
     cVar1 = cVar1 + '\x01';
   } while (cVar1 != '\x03');
   *param_4 = cVar1;
   if (*param_3 == 1000) {
-    *param_3 = uStack_2c;
+    *param_3 = iStack_3c;
   }
   if (param_3[1] == 1000) {
-    param_3[1] = uStack_28;
+    param_3[1] = iStack_38;
   }
   return;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_cal.o -> phy_get_vdd33
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,9 +10,25 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined4 phy_get_vdd33(void)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+uint phy_get_vdd33(void)
 
 {
-  return 0;
+  int iVar1;
+  uint uVar2;
+  
+  iVar1 = get_bias_ref_code();
+  (**(code **)(_g_phyFuns + 0x1d4))(*(code **)(_g_phyFuns + 0x1d4));
+  (**(code **)(_g_phyFuns + 0x1cc))(4,1,2,*(code **)(_g_phyFuns + 0x1cc));
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,9,7,7,1,*(code **)(_g_phyFuns + 0x1bc));
+  uVar2 = (**(code **)(_g_phyFuns + 0x150))(3,*(code **)(_g_phyFuns + 0x150));
+  if (iVar1 != 0) {
+    uVar2 = (int)(uVar2 * 0xf00) / iVar1 & 0xffff;
+  }
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,9,7,7,0,*(code **)(_g_phyFuns + 0x1bc));
+  (**(code **)(_g_phyFuns + 0x1cc))(4,1,0,*(code **)(_g_phyFuns + 0x1cc));
+  (**(code **)(_g_phyFuns + 0x1d8))(*(code **)(_g_phyFuns + 0x1d8));
+  return uVar2;
 }
 

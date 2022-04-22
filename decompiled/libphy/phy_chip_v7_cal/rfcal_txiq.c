@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
+ * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
+ * Upstream date: 2022-04-22 15:59:29 +0800
+ * Upstream subject: support libphy&libbtbb for esp32h2beta2
  * Source: libphy -> phy_chip_v7_cal.o -> rfcal_txiq
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,86 +10,55 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-uint rfcal_txiq(int param_1)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void rfcal_txiq(undefined4 param_1,undefined4 param_2,ushort *param_3,short param_4,
+               undefined4 param_5,int param_6)
 
 {
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
-  char cVar5;
-  int iVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
-  bool bVar10;
-  int iVar11;
-  char cVar12;
-  char cVar13;
-  uint uVar14;
-  char acStack_a0 [32];
-  ushort auStack_80 [38];
+  undefined4 uVar1;
+  char cVar2;
+  undefined1 uVar3;
+  ushort uVar4;
+  byte bVar5;
+  code *pcVar6;
+  byte bStack_34;
+  byte bStack_33;
   
-  txiq_set_reg(0,1);
-  txiq_set_reg(0,0);
-  pkdet_code_range();
-  iVar11 = 8;
-  if (param_1 == 0) {
-    iVar11 = 0x10;
+  cVar2 = '8' - power_cal_offset;
+  _DAT_6000607c = _DAT_6000607c & 0xffffefff | 0x800;
+  txcal_debuge_mode();
+  (**(code **)(_g_phyFuns + 0x1cc))(1,2,param_1,*(code **)(_g_phyFuns + 0x1cc));
+  if (param_6 == 1) {
+    pcVar6 = *(code **)(_g_phyFuns + 0x1cc);
+    uVar4 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
+    (*pcVar6)(1,1,uVar4 | 2);
   }
-  uVar9 = 0;
-  uVar14 = 0;
-  uVar2 = 0;
-  cVar13 = '\x01';
-  uVar7 = 0;
-  while( true ) {
-    iVar1 = 0;
-    bVar10 = false;
-    cVar12 = -1;
-    uVar8 = 0xffff;
-    while( true ) {
-      pll_cap_cal();
-      iVar4 = iVar1 + 0x10;
-      cVar5 = '\0';
-      do {
-        txiq_set_reg((int)cVar5,uVar9 ^ 1);
-        ets_delay_us(1);
-        uVar3 = pkdet_code_range();
-        if (uVar3 < uVar8) {
-          uVar8 = uVar3;
-          uVar14 = (int)cVar5;
-        }
-        auStack_80[iVar1] = (ushort)uVar3;
-        acStack_a0[iVar1] = cVar5;
-        iVar1 = (iVar1 + 1) * 0x1000000 >> 0x18;
-      } while (((int)(uVar3 - uVar8) <= iVar11) &&
-              (cVar5 = cVar5 + cVar13 * cVar12, iVar1 != iVar4 * 0x1000000 >> 0x18));
-      cVar12 = '\x01';
-      if (bVar10) break;
-      bVar10 = true;
-    }
-    iVar4 = 0;
-    iVar6 = 0;
-    for (uVar3 = 1; (int)uVar3 < iVar1; uVar3 = uVar3 + 1 & 0xff) {
-      if ((int)(auStack_80[uVar3] - uVar8) < 6) {
-        iVar6 = (iVar6 + acStack_a0[uVar3]) * 0x10000 >> 0x10;
-        iVar4 = (iVar4 + 1) * 0x10000 >> 0x10;
-      }
-    }
-    if (1 < iVar4) {
-      uVar14 = (uint)(char)(iVar6 / iVar4);
-    }
-    uVar8 = uVar14;
-    if (uVar9 == 0) {
-      uVar2 = uVar14;
-      uVar8 = uVar7;
-    }
-    txiq_set_reg(uVar14,uVar9 ^ 1);
-    cVar13 = '\x02';
-    if (uVar9 == 1) break;
-    uVar9 = 1;
-    uVar7 = uVar8;
+  else if (param_6 == 2) {
+    (**(code **)(_g_phyFuns + 0x24))(1,*(code **)(_g_phyFuns + 0x24));
+    txdc_cal_v70(param_2);
+    goto _L320;
   }
-  return uVar8 & 0x3f | (uVar2 & 0x1f) << 6;
+  (**(code **)(_g_phyFuns + 0x1f0))(param_2,*(code **)(_g_phyFuns + 0x1f0));
+_L320:
+  uVar1 = _DAT_60006040;
+  uVar3 = get_power_atten((int)param_4,param_5,cVar2,0xfc,0);
+  txiq_cover(uVar3,(int)param_4,&bStack_34);
+  txcal_work_mode();
+  bVar5 = 0xf;
+  if (('\x0f' < (char)bStack_34) || (bVar5 = 0xf1, (char)bStack_34 < -0xf)) {
+    bStack_34 = bVar5;
+  }
+  bVar5 = 0x1f;
+  if (('\x1f' < (char)bStack_33) || (bVar5 = 0xe1, (char)bStack_33 < -0x1f)) {
+    bStack_33 = bVar5;
+  }
+  *param_3 = (bStack_34 & 0x1f) << 6 | bStack_33 & 0x3f;
+  _DAT_60006040 = uVar1;
+  if (param_6 == 2) {
+    (**(code **)(_g_phyFuns + 0x24))(0,*(code **)(_g_phyFuns + 0x24));
+  }
+  _DAT_6000607c = _DAT_6000607c | 0x1000;
+  return;
 }
 
