@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/d8ee8f776acd1aafdfc3046f526db024b175b094
  * Upstream date: 2022-05-09 07:50:30 -0400
  * Upstream subject: esp32c2: optimize rf performace
- * Source: libphy -> phy_reg.o -> ram_tx_paon_set
+ * Source: libphy -> phy_i2c.o -> phy_get_i2c_data_new
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,15 +12,16 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ram_tx_paon_set(void)
+void phy_get_i2c_data_new(void)
 
 {
-  _DAT_60049000 = _DAT_60049000 & 0xffe007ff | 0xa000;
-  _DAT_600440f8 = _DAT_600440f8 & 0xffff00ff | 0x5000;
-  _DAT_6004906c = 0x381b856;
-  _DAT_6004a400 = _DAT_6004a400 & 0xfff8ffff;
-  rfagc_disable_new();
-  _DAT_6004a02c = _DAT_6004a02c & 0xffbfffff;
+  DAT_000110bd = 2;
+  _DAT_000110be = 0x972;
+  _DAT_000110c0 = 0xfb8801d4;
+  _DAT_000110c4 = 0x2c29a811;
+  _DAT_000110c8 = 0x70f0a080;
+  _DAT_000110cc = 0x4100ab70;
+  DAT_000110d0 = 0x26;
   return;
 }
 

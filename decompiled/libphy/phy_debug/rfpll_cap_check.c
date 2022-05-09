@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * https://github.com/espressif/esp-phy-lib/commit/478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * Upstream date: 2022-05-07 21:35:33 +0800
- * Upstream subject: add phy for esp32c2
+ * Last changed at upstream commit d8ee8f776acd1aafdfc3046f526db024b175b094
+ * https://github.com/espressif/esp-phy-lib/commit/d8ee8f776acd1aafdfc3046f526db024b175b094
+ * Upstream date: 2022-05-09 07:50:30 -0400
+ * Upstream subject: esp32c2: optimize rf performace
  * Source: libphy -> phy_debug.o -> rfpll_cap_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,21 +41,21 @@ void rfpll_cap_check(int param_1)
     puVar7 = puVar7 + 1;
   } while (cVar2 != '\x0e');
   if (param_1 != 0) {
-    ets_printf("ir_cap_ext:");
+    phy_printf("ir_cap_ext:");
     do {
       uVar5 = *puVar1;
       puVar1 = puVar1 + 1;
-      ets_printf(&_LC17,uVar5);
+      phy_printf(&_LC17,uVar5);
     } while (puVar1 != auStack_30);
-    ets_printf(&_LC27);
-    ets_printf("ir_dac_ext:");
+    phy_printf(&_LC27);
+    phy_printf("ir_dac_ext:");
     iVar3 = 0;
     do {
       puVar6 = local_5c + iVar3;
       iVar3 = iVar3 + 1;
-      ets_printf(&_LC17,*puVar6);
+      phy_printf(&_LC17,*puVar6);
     } while (iVar3 != 0xe);
-    ets_printf(&_LC27);
+    phy_printf(&_LC27);
     return;
   }
   return;
