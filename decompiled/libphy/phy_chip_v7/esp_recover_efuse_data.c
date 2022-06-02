@@ -1,14 +1,16 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7.o -> esp_recover_efuse_data
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void esp_recover_efuse_data(int param_1)
 
@@ -43,9 +45,9 @@ void esp_recover_efuse_data(int param_1)
     puVar7 = puVar8;
   } while (puVar8 != (undefined4 *)0x6000897c);
   if (local_30[0] != 0) {
-    DAT_00014680 = local_30[0];
+    DAT_00014628 = local_30[0];
     if ((local_30[0] & 0xf) == 1) {
-      DAT_00014681 = local_30[1];
+      DAT_00014629 = local_30[1];
       puVar3 = &phy_param;
       do {
         pbVar6 = pbVar4 + 2;
@@ -53,7 +55,7 @@ void esp_recover_efuse_data(int param_1)
         puVar3[0x206] = *pbVar6;
         puVar3 = puVar3 + 1;
       } while (pbVar4 != local_30 + 6);
-      DAT_00014688 = uStack_24;
+      DAT_00014630 = uStack_24;
       puVar3 = &phy_param;
       do {
         pbVar6 = pbVar5 + 0x10;
@@ -63,10 +65,10 @@ void esp_recover_efuse_data(int param_1)
       } while (pbVar5 != local_30 + 9);
     }
     if ((local_30[0] & 0xf0) == 0x10) {
-      DAT_000145f8 = local_30[8];
-      DAT_000145f5 = local_30[9];
-      DAT_000145f6 = uStack_26;
-      DAT_0001468a = CONCAT11(uStack_21,uStack_22);
+      DAT_000145a0 = local_30[8];
+      DAT_0001459d = local_30[9];
+      _DAT_0001459e = uStack_26;
+      DAT_00014632 = CONCAT11(uStack_21,uStack_22);
     }
   }
   if (param_1 == 1) {

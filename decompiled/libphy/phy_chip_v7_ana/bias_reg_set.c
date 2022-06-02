@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7_ana.o -> bias_reg_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ void bias_reg_set(int param_1)
   }
   (*pcVar2)(0x6a,0,0,7,4,uVar1,pcVar2);
   (**(code **)(_g_phyFuns + 0x1bc))(0x61,0,8,0,0,0,*(code **)(_g_phyFuns + 0x1bc));
-                    /* WARNING: Could not recover jumptable at 0x00010a0a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001098c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x1bc))(0x61,0,8,4,4,0);
   return;

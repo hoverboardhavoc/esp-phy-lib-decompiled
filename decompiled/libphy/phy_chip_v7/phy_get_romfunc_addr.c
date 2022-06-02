@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7.o -> phy_get_romfunc_addr
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,6 @@ void phy_get_romfunc_addr(void)
   else {
     *(undefined **)(g_phyFuns + 0xb8) = &rom_agc_reg_init;
     *(undefined **)(iVar1 + 0xbc) = &rom_bb_reg_init;
-    *(undefined **)(iVar1 + 0xd4) = &rom_set_pbus_reg;
     *(undefined **)(iVar1 + 0xe0) = &rom_phy_xpd_rf;
     *(undefined **)(iVar1 + 0x114) = &rom_set_txcap_reg;
     *(undefined **)(iVar1 + 0x124) = &rom_write_txrate_power_offset;
@@ -43,6 +42,7 @@ void phy_get_romfunc_addr(void)
     *(undefined **)(iVar1 + 0x214) = &rom_tsens_dac_cal;
     *(undefined **)(iVar1 + 0x48) = &rom_set_tx_dig_gain;
     *(undefined **)(iVar1 + 0xec) = &rom_txbbgain_to_index;
+    *(undefined **)(iVar1 + 0xd4) = &ram_set_pbus_reg;
     *(undefined **)(iVar1 + 0x168) = &ram_temp_to_power;
     *(undefined **)(iVar1 + 0x22c) = &ram_pll_vol_cal;
     *(undefined **)(iVar1 + 0xf0) = &rom_index_to_txbbgain;
@@ -61,6 +61,7 @@ void phy_get_romfunc_addr(void)
   *(undefined **)(iVar1 + 0x1b0) = &ram_chip_i2c_writeReg;
   *(undefined **)(iVar1 + 400) = &ram_chip_i2c_readReg;
   *(undefined **)(iVar1 + 0x278) = &ram_phy_i2c_init1;
+  *(undefined **)(iVar1 + 0xd4) = &ram_set_pbus_reg;
   *(code **)(iVar1 + 600) = ram_i2c_master_reset;
   return;
 }

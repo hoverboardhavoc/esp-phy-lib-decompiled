@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * Upstream date: 2022-04-07 23:37:47 -0400
- * Upstream subject: C3/S3 fix "i2c critical" and iram functions
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7.o -> set_rx_gain_cal_dc
  *
  * (C) Espressif, Apache License 2.0.
@@ -143,7 +143,7 @@ _L52:
           uVar3 = 3;
         }
         (*pcVar7)(uVar3,uVar4,uVar2,pcVar7);
-        pbus_rx_dco_cal_1step(param_1,param_2,4000,&uStack_5c,auStack_4c);
+        pbus_rx_dco_cal_1step(param_1,param_2,0x800,&uStack_5c,auStack_4c);
         if (param_2 == 0) {
           param_6[uVar10] = (int)(short)uStack_5c << 0x10 | (int)uStack_5c._2_2_;
           uVar10 = uVar10 + 1 & 0xff;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * Upstream date: 2022-04-07 23:37:47 -0400
- * Upstream subject: C3/S3 fix "i2c critical" and iram functions
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7_ana.o -> i2c_bbpll_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ void i2c_bbpll_set(void)
   if (bbpll_en_usb == '\0') {
     (**(code **)(_g_phyFuns + 0x1bc))(0x66,0,5,7,7,0,*(code **)(_g_phyFuns + 0x1bc));
   }
-  DAT_00011c85 = (**(code **)(_g_phyFuns + 0x1ac))(0x66,0,5,*(code **)(_g_phyFuns + 0x1ac));
+  DAT_00011cd1 = (**(code **)(_g_phyFuns + 0x1ac))(0x66,0,5,*(code **)(_g_phyFuns + 0x1ac));
   return;
 }
 

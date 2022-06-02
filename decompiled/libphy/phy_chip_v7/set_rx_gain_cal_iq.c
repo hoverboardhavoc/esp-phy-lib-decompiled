@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7.o -> set_rx_gain_cal_iq
  *
  * (C) Espressif, Apache License 2.0.
@@ -97,7 +97,6 @@ _L208:
       sVar2 = (short)uVar6 + 0x14;
     }
     (**(code **)(g_phyFuns + 0x1c))(uVar1,0x104,iVar11,*(code **)(g_phyFuns + 0x1c));
-    pbus_rx_dco_cal(4000,auStack_48,10,0,0);
     iVar12 = (int)sVar2;
     if (0x78 < iVar12) {
       iVar12 = 0x78;

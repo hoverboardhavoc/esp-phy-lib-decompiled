@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7.o -> bb_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,13 +13,13 @@
 void bb_init(void)
 
 {
-  if (-1 < (int)(DAT_0001459c << 0xf)) {
+  if (-1 < (int)(DAT_00014544 << 0xf)) {
     set_pbus_mem();
-    DAT_0001459c = DAT_0001459c | 0x10000;
+    DAT_00014544 = DAT_00014544 | 0x10000;
   }
-  if (-1 < (int)(DAT_0001459c << 0xc)) {
-    txdc_cal_init(&DAT_000145a0,0xf,0x20,0);
-    DAT_0001459c = DAT_0001459c | 0x80000;
+  if (-1 < (int)(DAT_00014544 << 0xc)) {
+    txdc_cal_init(&DAT_00014548,0xf,0x20,0);
+    DAT_00014544 = DAT_00014544 | 0x80000;
   }
   pwdet_code_cal();
   tx_cap_init();
@@ -32,8 +32,8 @@ void bb_init(void)
   set_rx_gain_table(0x985,0);
   rom_phy_reg_init();
   (**(code **)(g_phyFuns + 4))(*(code **)(g_phyFuns + 4));
-  DAT_000145e0 = 0xfe80;
-  DAT_00014674 = 0xfe80;
+  DAT_00014588 = 0xfe80;
+  DAT_0001461c = 0xfe80;
   chip_v7_set_chan(0xb,0);
   return;
 }

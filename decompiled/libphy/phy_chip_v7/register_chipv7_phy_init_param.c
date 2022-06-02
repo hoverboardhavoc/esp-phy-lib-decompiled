@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7.o -> register_chipv7_phy_init_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,8 +19,8 @@ void register_chipv7_phy_init_param(undefined1 *param_1)
   int iVar4;
   undefined1 *puVar5;
   
-  DAT_0001456e = *param_1;
-  DAT_0001456f = param_1[1];
+  DAT_00014516 = *param_1;
+  DAT_00014517 = param_1[1];
   puVar3 = param_1 + 2;
   puVar5 = &phy_param;
   do {
@@ -29,11 +29,11 @@ void register_chipv7_phy_init_param(undefined1 *param_1)
     puVar5[0xf4] = uVar1;
     puVar5 = puVar5 + 1;
   } while (puVar3 != param_1 + 0x10);
-  DAT_0001457e = param_1[0x10];
-  if ((char)DAT_0001457e < '\0') {
-    power_cal_offset = DAT_0001457e & 0x7f;
+  DAT_00014526 = param_1[0x10];
+  if ((char)DAT_00014526 < '\0') {
+    power_cal_offset = DAT_00014526 & 0x7f;
   }
-  DAT_00014580 = param_1[0x12];
+  DAT_00014528 = param_1[0x12];
   iVar4 = 0;
   do {
     iVar2 = iVar4 + 0x13;
@@ -63,11 +63,11 @@ void register_chipv7_phy_init_param(undefined1 *param_1)
     puVar5[0x105] = uVar1;
     puVar5 = puVar5 + 1;
   } while (param_1 + 0x46 != puVar3);
-  DAT_00014594 = CONCAT11(param_1[0x46],param_1[0x47]);
-  DAT_00014596 = param_1[0x48];
-  DAT_00014598 = ((byte)param_1[0x49] & 0x7f) << 8 | (ushort)(byte)param_1[0x4a];
-  DAT_0001459a = param_1[0x4b];
-  DAT_0001459b = param_1[0x4c];
+  DAT_0001453c = CONCAT11(param_1[0x46],param_1[0x47]);
+  DAT_0001453e = param_1[0x48];
+  DAT_00014540 = ((byte)param_1[0x49] & 0x7f) << 8 | (ushort)(byte)param_1[0x4a];
+  DAT_00014542 = param_1[0x4b];
+  DAT_00014543 = param_1[0x4c];
   return;
 }
 

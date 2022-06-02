@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 97e9e8992ea947fa46bc35545000b2c45d7b3060
- * https://github.com/espressif/esp-phy-lib/commit/97e9e8992ea947fa46bc35545000b2c45d7b3060
- * Upstream date: 2022-04-19 15:45:53 +0800
- * Upstream subject: BLE deinit phy_init_flag make wifi light sleep RX problem
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7.o -> ram_check_noise_floor
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x0001189a) */
+/* WARNING: Removing unreachable block (ram,0x00011872) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 int ram_check_noise_floor(void)

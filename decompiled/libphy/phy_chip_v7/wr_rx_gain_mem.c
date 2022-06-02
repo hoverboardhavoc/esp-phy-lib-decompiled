@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7.o -> wr_rx_gain_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -81,7 +81,7 @@ void wr_rx_gain_mem(int param_1,int param_2,byte *param_3,int param_4,int param_
       uVar1 = (uint)*param_3 << 8 | (uint)abStack_5c[(uVar2 / 6) * 2] * 8 + uVar2 % 6 & 0xff;
     }
     if ((param_1 == 0) && (uVar9 <= uVar3)) {
-      uVar8 = *(uint *)(((int)DAT_0001466e - 1U & 0xffff) * 4 + param_6);
+      uVar8 = *(uint *)(((int)DAT_00014616 - 1U & 0xffff) * 4 + param_6);
       uVar12 = uVar8 >> 0x10;
       uVar8 = uVar8 & 0xffff;
 _L111:

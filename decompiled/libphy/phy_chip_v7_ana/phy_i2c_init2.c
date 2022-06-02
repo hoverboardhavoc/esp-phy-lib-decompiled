@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * Upstream date: 2022-04-07 23:37:47 -0400
- * Upstream subject: C3/S3 fix "i2c critical" and iram functions
+ * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
+ * Upstream date: 2022-06-02 17:02:45 +0800
+ * Upstream subject: cut init time and fix cal time 2ms!
  * Source: libphy -> phy_chip_v7_ana.o -> phy_i2c_init2
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,9 +41,9 @@ void phy_i2c_init2(void)
   (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1f,DAT_00012172,*(code **)(_g_phyFuns + 0x1b4));
   (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x38,0xff,*(code **)(_g_phyFuns + 0x1b4));
   (**(code **)(_g_phyFuns + 0x1bc))(0x67,1,2,3,2,1,*(code **)(_g_phyFuns + 0x1bc));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x62,1,0,0xb0,*(code **)(_g_phyFuns + 0x1b4));
+  (**(code **)(_g_phyFuns + 0x1b4))(0x62,1,0,0xa8,*(code **)(_g_phyFuns + 0x1b4));
   (**(code **)(_g_phyFuns + 0x1b4))(0x62,1,0xb,0x68,*(code **)(_g_phyFuns + 0x1b4));
-                    /* WARNING: Could not recover jumptable at 0x00010900. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010882. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x1b4))(0x62,1,2,0x88);
   return;
