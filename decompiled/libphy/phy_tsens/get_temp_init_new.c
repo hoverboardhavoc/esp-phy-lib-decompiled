@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
  * Upstream date: 2022-07-01 15:45:54 +0800
  * Upstream subject: Support 26M and 40M Crystal
- * Source: libphy -> phy_i2c.o -> phy_get_i2c_data_new
+ * Source: libphy -> phy_tsens.o -> get_temp_init_new
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,16 +12,20 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void phy_get_i2c_data_new(void)
+void get_temp_init_new(int param_1,int param_2)
 
 {
-  DAT_000110c1 = 2;
-  _DAT_000110c2 = 0x972;
-  _DAT_000110c4 = 0xfb8801d4;
-  _DAT_000110c8 = 0x2c29a811;
-  _DAT_000110cc = 0x70f0a080;
-  _DAT_000110d0 = 0x4160ab70;
-  DAT_000110d4 = 0x26;
+  undefined2 uVar1;
+  
+  (**(code **)(_g_phyFuns + 0x1a4))(*(code **)(_g_phyFuns + 0x1a4));
+  uVar1 = _DAT_00011238;
+  if ((DAT_00011230 == '\x11') || (uVar1 = _DAT_00011096, param_2 != 0)) {
+    _DAT_00011240 = uVar1;
+  }
+  _DAT_0001109a = _DAT_00011240;
+  if (param_1 != 0) {
+    _DAT_0001128c = _DAT_00011096;
+  }
   return;
 }
 

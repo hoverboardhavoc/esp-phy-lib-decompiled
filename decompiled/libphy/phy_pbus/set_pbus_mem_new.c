@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * https://github.com/espressif/esp-phy-lib/commit/478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * Upstream date: 2022-05-07 21:35:33 +0800
- * Upstream subject: add phy for esp32c2
+ * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
+ * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
+ * Upstream date: 2022-07-01 15:45:54 +0800
+ * Upstream subject: Support 26M and 40M Crystal
  * Source: libphy -> phy_pbus.o -> set_pbus_mem_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,9 @@ void set_pbus_mem_new(void)
   int iVar7;
   int iVar8;
   uint uVar9;
-  uint uStack_d8;
+  uint uStack_e8;
+  uint uStack_e4;
+  uint auStack_e0 [3];
   uint auStack_d4 [3];
   uint auStack_c8 [4];
   uint auStack_b8 [4];
@@ -41,8 +43,9 @@ void set_pbus_mem_new(void)
   local_88[4] = 0xf50000;
   local_88[5] = 0xf60000;
   memcpy(auStack_c8,&_LANCHOR0,0x10);
-  memcpy(local_58,&DAT_000102bc,0x1c);
-  memcpy(auStack_b8,&DAT_000102d8,0x10);
+  memcpy(local_58,&DAT_000102d4,0x1c);
+  memcpy(auStack_b8,&DAT_000102f0,0x10);
+  memcpy(auStack_e0,&DAT_00010300,0xc);
   iVar5 = 0;
   do {
     *(undefined4 *)((int)local_88 + iVar5 + 0x18) = *(undefined4 *)((int)local_88 + iVar5);
@@ -54,7 +57,6 @@ void set_pbus_mem_new(void)
     iVar5 = iVar5 + 4;
   } while (iVar5 != 0x1c);
   local_88[9] = 0x4807ff;
-  local_3c[1] = 0x14fdff;
   local_88[8] = 0x1717ff;
   local_3c[2] = (uint)DAT_000110a6 << 0xc | 0x4801ff;
   puVar3 = local_88;
@@ -81,7 +83,7 @@ _L4:
     return;
   }
   uVar1 = uVar9;
-  puVar4 = (uint *)0x600440f4;
+  puVar4 = (uint *)&DAT_600440f4;
   switch(iVar7) {
   case 0:
     puVar3 = auStack_c8;
@@ -101,12 +103,12 @@ _L4:
     iVar6 = 0x10;
     break;
   case 3:
-    puVar3 = auStack_d4;
+    puVar3 = auStack_e0;
     iVar5 = 3;
     iVar6 = 0;
     goto _L27;
   case 4:
-    puVar3 = &uStack_d8;
+    puVar3 = &uStack_e8;
     iVar5 = 1;
     iVar6 = 0x10;
 _L27:
@@ -131,14 +133,14 @@ _L27:
     puVar3 = local_3c;
     iVar5 = 7;
     iVar6 = 0;
-    puVar4 = (uint *)&DAT_600440f0;
+    puVar4 = (uint *)0x600440f0;
     iVar7 = iVar8;
     goto _L4;
   case 8:
     puVar3 = auStack_98;
     iVar5 = 4;
     iVar6 = 0x10;
-    puVar4 = (uint *)&DAT_600440f0;
+    puVar4 = (uint *)0x600440f0;
     iVar7 = iVar8;
     goto _L4;
   case 9:
@@ -154,7 +156,7 @@ _L27:
   iVar7 = iVar8;
   goto _L4;
 _L5:
-  puVar3 = &uStack_d8;
+  puVar3 = &uStack_e4;
   iVar5 = 1;
   iVar6 = 0x10;
   iVar7 = iVar8;

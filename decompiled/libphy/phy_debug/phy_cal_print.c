@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8ee8f776acd1aafdfc3046f526db024b175b094
- * https://github.com/espressif/esp-phy-lib/commit/d8ee8f776acd1aafdfc3046f526db024b175b094
- * Upstream date: 2022-05-09 07:50:30 -0400
- * Upstream subject: esp32c2: optimize rf performace
+ * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
+ * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
+ * Upstream date: 2022-07-01 15:45:54 +0800
+ * Upstream subject: Support 26M and 40M Crystal
  * Source: libphy -> phy_debug.o -> phy_cal_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -140,10 +140,6 @@ void phy_cal_print(void)
     puVar10 = puVar10 + 4;
     phy_printf("%d, %d; ",*puVar5 >> 0x10,*puVar5 & 0xffff);
   } while (puVar10 != (undefined *)0x12034);
-  phy_printf(&_LC27);
-  phy_printf("RXDC_RXBB_WIFI, ");
-  phy_printf(&_LC27);
-  phy_printf("RXDC_CHAN_WIFI, ");
   phy_printf(&_LC27);
   (**(code **)(_g_phyFuns + 0x1e8))(DAT_0001222a,0,*(code **)(_g_phyFuns + 0x1e8));
   phy_printf("sar_dc_code=%d, sar_ref_code=%d\n",_DAT_000120ee,_DAT_000120f0);

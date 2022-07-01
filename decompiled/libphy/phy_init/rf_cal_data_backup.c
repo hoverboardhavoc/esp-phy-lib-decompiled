@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * https://github.com/espressif/esp-phy-lib/commit/478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * Upstream date: 2022-05-07 21:35:33 +0800
- * Upstream subject: add phy for esp32c2
+ * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
+ * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
+ * Upstream date: 2022-07-01 15:45:54 +0800
+ * Upstream subject: Support 26M and 40M Crystal
  * Source: libphy -> phy_init.o -> rf_cal_data_backup
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,6 +13,7 @@
 undefined4 rf_cal_data_backup(void)
 
 {
+  phy_rfcal_data_sub(1);
   return 0;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8ee8f776acd1aafdfc3046f526db024b175b094
- * https://github.com/espressif/esp-phy-lib/commit/d8ee8f776acd1aafdfc3046f526db024b175b094
- * Upstream date: 2022-05-09 07:50:30 -0400
- * Upstream subject: esp32c2: optimize rf performace
+ * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
+ * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
+ * Upstream date: 2022-07-01 15:45:54 +0800
+ * Upstream subject: Support 26M and 40M Crystal
  * Source: libphy -> phy_init.o -> rc_cal_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ void rc_cal_init(void)
   undefined4 auStack_14 [4];
   
   uStack_18 = 0x141e1428;
-  auStack_1c[0] = 0x2913;
+  auStack_1c[0] = 0x2914;
   auStack_14[0] = 0x1e192819;
   rc_cal_new(&uStack_18,auStack_1c,auStack_14);
   return;
