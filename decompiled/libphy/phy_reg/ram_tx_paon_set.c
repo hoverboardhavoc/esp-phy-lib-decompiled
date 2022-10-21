@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8ee8f776acd1aafdfc3046f526db024b175b094
- * https://github.com/espressif/esp-phy-lib/commit/d8ee8f776acd1aafdfc3046f526db024b175b094
- * Upstream date: 2022-05-09 07:50:30 -0400
- * Upstream subject: esp32c2: optimize rf performace
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_reg.o -> ram_tx_paon_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,12 +15,10 @@
 void ram_tx_paon_set(void)
 
 {
-  _DAT_60049000 = _DAT_60049000 & 0xffe007ff | 0xa000;
-  _DAT_600440f8 = _DAT_600440f8 & 0xffff00ff | 0x5000;
-  _DAT_6004906c = 0x381b856;
-  _DAT_6004a400 = _DAT_6004a400 & 0xfff8ffff;
-  rfagc_disable_new();
-  _DAT_6004a02c = _DAT_6004a02c & 0xffbfffff;
+  _DAT_6001d000 = _DAT_6001d000 & 0xffe007ff | 0xa000;
+  _DAT_600060f8 = _DAT_600060f8 & 0xffff00ff | 0x9600;
+  _DAT_6001d06c = 0x782a094;
+  _DAT_6001c400 = _DAT_6001c400 & 0xfff8ffff;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7_cal.o -> tx_pwctrl_init_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,64 +10,24 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
 
-void tx_pwctrl_init_cal(int param_1,char *param_2,char *param_3,int param_4)
+S16 tx_pwctrl_init_cal(U8 chan_num,u8 backoff_en)
 
 {
-  char cVar1;
-  char cVar2;
-  char *pcVar3;
-  char cVar4;
-  char cVar5;
-  char cVar6;
-  undefined4 uVar7;
-  int iVar8;
-  char *pcVar9;
-  char acStack_41 [13];
+  undefined3 unaff_00002009;
+  int in_a4;
+  undefined8 in_fa3;
+  U8 target_power [6];
+  bool linear_flag;
   
-  acStack_41[0] = '8' - power_cal_offset;
-  if (param_1 == 0) {
-    cVar4 = '(';
-    uVar7 = 0x80;
-    cVar2 = '\b';
-    cVar6 = '\x10';
-    cVar5 = '\x04';
+  *(undefined8 *)(CONCAT31(unaff_00002009,chan_num) + 0x80) = in_fa3;
+  if (in_a4 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  else {
-    cVar4 = '\x06';
-    (**(code **)(_g_phyFuns + 0x114))(&phy_param,6,*(code **)(_g_phyFuns + 0x114));
-    uVar7 = 0x20;
-    cVar2 = '\x10';
-    cVar6 = ' ';
-    cVar5 = '\b';
-  }
-  iVar8 = 0;
-  do {
-    cVar1 = (&CSWTCH_334)[iVar8];
-    set_channel_rfpll_freq((int)cVar1,DAT_000130fb,0);
-    if (param_1 == 0) {
-      (**(code **)(_g_phyFuns + 0x114))(&phy_param,cVar1,*(code **)(_g_phyFuns + 0x114));
-    }
-    pcVar9 = (char *)(param_4 + iVar8);
-    rfcal_pwrctrl(uVar7,acStack_41,1,cVar4,pcVar9,0xfc,(int)DAT_000130e0,0);
-    pcVar3 = param_2 + iVar8;
-    iVar8 = iVar8 + 1;
-    cVar1 = *pcVar9;
-    *pcVar3 = cVar1;
-    DAT_000130e0 = cVar1 + cVar4;
-  } while (iVar8 != 3);
-  cVar4 = *param_2;
-  if ((cVar4 < cVar5) || (cVar6 < cVar4)) {
-    *param_3 = (acStack_41[0] + cVar4) - cVar2;
-    cVar2 = cVar2 - cVar4;
-    *param_2 = *param_2 + cVar2;
-    param_2[1] = param_2[1] + cVar2;
-    param_2[2] = cVar2 + param_2[2];
-  }
-  else {
-    *param_3 = acStack_41[0];
-  }
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

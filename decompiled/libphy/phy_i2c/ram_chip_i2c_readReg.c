@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
- * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
- * Upstream date: 2022-07-01 15:45:54 +0800
- * Upstream subject: Support 26M and 40M Crystal
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_i2c.o -> ram_chip_i2c_readReg
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,14 +19,14 @@ undefined4 ram_chip_i2c_readReg(undefined4 param_1,undefined4 param_2)
   undefined4 uVar2;
   undefined4 uVar3;
   
-  uVar1 = (**(code **)(_g_phyFuns + 4))(*(code **)(_g_phyFuns + 4));
+  uVar1 = (**(code **)(_g_phyFuns + 0x184))(*(code **)(_g_phyFuns + 0x184));
   phy_i2c_enter_critical();
-  uVar2 = (**(code **)(_g_phyFuns + 0x1c))(param_1,*(code **)(_g_phyFuns + 0x1c));
-  uVar3 = (**(code **)(_g_phyFuns + 0x24))(param_1,*(code **)(_g_phyFuns + 0x24));
-  uVar2 = (**(code **)(_g_phyFuns + 0x28))
-                    (param_1,uVar2,uVar3,param_2,*(code **)(_g_phyFuns + 0x28));
+  uVar2 = (**(code **)(_g_phyFuns + 0x178))(param_1,*(code **)(_g_phyFuns + 0x178));
+  uVar3 = (**(code **)(_g_phyFuns + 0x180))(param_1,*(code **)(_g_phyFuns + 0x180));
+  uVar2 = (**(code **)(_g_phyFuns + 0x18c))
+                    (param_1,uVar2,uVar3,param_2,*(code **)(_g_phyFuns + 0x18c));
   phy_i2c_exit_critical();
-  (**(code **)(_g_phyFuns + 8))(uVar1,*(code **)(_g_phyFuns + 8));
+  (**(code **)(_g_phyFuns + 0x188))(uVar1,*(code **)(_g_phyFuns + 0x188));
   return uVar2;
 }
 

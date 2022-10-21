@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
- * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
- * Upstream date: 2022-07-01 15:45:54 +0800
- * Upstream subject: Support 26M and 40M Crystal
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_init.o -> rf_cal_data_recovery
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,8 +10,8 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000104e0) */
-/* WARNING: Removing unreachable block (ram,0x000104e2) */
+/* WARNING: Removing unreachable block (ram,0x00010716) */
+/* WARNING: Removing unreachable block (ram,0x00010718) */
 
 void rf_cal_data_recovery(void)
 
@@ -20,14 +20,14 @@ void rf_cal_data_recovery(void)
   int iVar2;
   undefined4 uVar3;
   
-  puVar1 = (undefined4 *)&phy_param;
+  puVar1 = &phy_param;
   iVar2 = 0xc;
   do {
-    uVar3 = phy_byte_to_word();
+    uVar3 = (**(code **)(g_phyFuns + 0xa4))(*(code **)(g_phyFuns + 0xa4));
     *puVar1 = uVar3;
     iVar2 = iVar2 + 4;
     puVar1 = puVar1 + 1;
-  } while (iVar2 != 0x29c);
+  } while (iVar2 != 0x224);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7_cal.o -> tx_pwctrl_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,23 +10,13 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
 
-void tx_pwctrl_init(void)
+void tx_pwctrl_init(u8 backoff_en)
 
 {
-  if (-1 < (int)(_DAT_00013128 << 0xb)) {
-    txcal_debuge_mode();
-    set_channel_rfpll_freq(1,DAT_000130fb,0);
-    (**(code **)(_g_phyFuns + 0x114))(&phy_param,1,*(code **)(_g_phyFuns + 0x114));
-    pwdet_ref_code(0x50);
-    if ((DAT_0001320c & 0xf) != 1) {
-      tx_pwctrl_init_cal(0,&phy_param,&phy_param,&phy_param);
-    }
-    txcal_work_mode();
-    _DAT_00013128 = _DAT_00013128 | 0x100000;
-    DAT_000131fa = 0xb;
-  }
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,6 +27,7 @@ void bt_bb_v2_rx_set(uint param_1)
   bt_bb_v2_recorrect();
   _DAT_60033c18 = _DAT_60033c18 & 0x7fffffff;
   _DAT_60011888 = _DAT_60011888 & 0xdffbffff;
+  _DAT_600118a0 = _DAT_600118a0 & 0xcfffff00 | 0x2000000a;
   return;
 }
 

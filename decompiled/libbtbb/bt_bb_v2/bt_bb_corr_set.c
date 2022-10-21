@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f2c056340505399429dbc8792e7109b7c69f5d77
- * https://github.com/espressif/esp-phy-lib/commit/f2c056340505399429dbc8792e7109b7c69f5d77
- * Upstream date: 2021-06-03 19:05:33 +0800
- * Upstream subject: esp_phy: add phy libraries
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_corr_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void bt_bb_corr_set(void)
 
 {
-  _DAT_60011064 = _DAT_60011064 & 0xfc000003 | 0x208704;
+  _DAT_60011064 = _DAT_60011064 & 0xfc000003 | 0x208904;
   _DAT_60011068 = _DAT_60011068 & 0x81f | 0x10da1860;
   return;
 }

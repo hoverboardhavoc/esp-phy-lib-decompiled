@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
- * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
- * Upstream date: 2022-07-01 15:45:54 +0800
- * Upstream subject: Support 26M and 40M Crystal
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_init.o -> phy_get_mac_addr
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,9 +18,9 @@ void phy_get_mac_addr(undefined1 *param_1)
   undefined4 uVar1;
   undefined4 uVar2;
   
-  uVar2 = _DAT_60008844;
-  uVar1 = _DAT_60008840;
-  param_1[5] = (char)_DAT_60008840;
+  uVar2 = _DAT_60008848;
+  uVar1 = _DAT_60008844;
+  param_1[5] = (char)_DAT_60008844;
   *param_1 = (char)((uint)uVar2 >> 8);
   param_1[2] = (char)((uint)uVar1 >> 0x18);
   param_1[1] = (char)uVar2;

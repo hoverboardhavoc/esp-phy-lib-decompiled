@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7.o -> wifi_rifs_mode_en
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,12 +10,20 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
 
-void wifi_rifs_mode_en(uint param_1)
+void wifi_rifs_mode_en(bool enable)
 
 {
-  _DAT_6001c0f4 = _DAT_6001c0f4 & 0xfffffffe | param_1 & 1;
-  return;
+  int in_a0;
+  int in_a5;
+  undefined8 in_fa3;
+  
+  do {
+  } while (in_a5 != 0);
+  *(undefined8 *)(in_a0 + 0xd8) = in_fa3;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

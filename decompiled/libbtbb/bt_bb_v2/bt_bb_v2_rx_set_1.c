@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8ee8f776acd1aafdfc3046f526db024b175b094
- * https://github.com/espressif/esp-phy-lib/commit/d8ee8f776acd1aafdfc3046f526db024b175b094
- * Upstream date: 2022-05-09 07:50:30 -0400
- * Upstream subject: esp32c2: optimize rf performace
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set_1
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,15 +20,14 @@ void bt_bb_v2_rx_set_1(void)
   bt_agc_gain_offset(0x50);
   bt_agc_gain_set();
   bt_agc_rssi_thresh();
-  bt_agc_target_set();
-  bt_agc_restart_set();
+  bt_agc_target_set_1();
+  bt_agc_restart_set_1();
   bt_agc_recorrect_set();
   bt_agc_detect_set();
   bt_bb_rx_correlator_set();
   bt_bb_rx_dpo_set();
   bt_bb_rx_filter_sel();
   _DAT_6004684c = _DAT_6004684c & 0xf7ffffff;
-  _DAT_600468a4 = _DAT_600468a4 & 0xffe07fff | 0x38000;
   return;
 }
 

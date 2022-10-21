@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7.o -> phy_chan_filt_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,24 +10,24 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
 
-void phy_chan_filt_set(int param_1,int param_2)
+void phy_chan_filt_set(bool filt_en,bool merge_en)
 
 {
-  if (param_1 == 0) {
-    _DAT_6001cd08 = _DAT_6001cd08 & 0xfffffff8 | 0x10000000;
-    _DAT_6001cd04 = _DAT_6001cd04 & 0xfffffff8 | 0x10000000;
+  int in_a4;
+  int in_a5;
+  
+  if (in_a4 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  else {
-    _DAT_6001cd04 = _DAT_6001cd04 & 0xefffffff;
-    _DAT_6001cd08 = _DAT_6001cd08 & 0xefffffff;
+  if (in_a5 != 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  if (param_2 != 0) {
-    _DAT_6001c074 = _DAT_6001c074 & 0xffffdfff;
-    return;
-  }
-  _DAT_6001c074 = _DAT_6001c074 | 0x2000;
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

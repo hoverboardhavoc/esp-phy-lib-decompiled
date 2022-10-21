@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7_ana.o -> chip_v7_set_chan_ana
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,13 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void chip_v7_set_chan_ana(undefined1 param_1)
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
+
+void chip_v7_set_chan_ana(int8 channel)
 
 {
-  set_channel_rfpll_freq(DAT_000120f7,0);
-  DAT_000121f6 = param_1;
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

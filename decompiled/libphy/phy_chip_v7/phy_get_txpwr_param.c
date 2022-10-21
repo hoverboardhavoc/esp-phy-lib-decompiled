@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * Upstream date: 2022-06-02 17:02:45 +0800
- * Upstream subject: cut init time and fix cal time 2ms!
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7.o -> phy_get_txpwr_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,14 +10,24 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void phy_get_txpwr_param(undefined1 *param_1,undefined1 *param_2)
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
+
+void phy_get_txpwr_param(S8 *txpwr_backoff,S8 *txpwr_diff_flash,U16 *txpwr_ana_gain,
+                        sint8 *txpwr_dig_atten,S8 *txpwr_correct_pwr,S16 *txpwr_meas_error)
 
 {
-  *param_2 = DAT_00014593;
-  param_2[1] = DAT_00014594;
-  param_2[2] = DAT_00014595;
-  *param_1 = 0;
-  param_1[1] = 0;
-  return;
+  undefined4 unaff_s0;
+  undefined4 *in_a0;
+  int in_a5;
+  undefined8 in_ft0;
+  int in_stack_0000004c;
+  
+  do {
+    *in_a0 = unaff_s0;
+  } while (in_a5 != 0);
+  *(undefined8 *)(in_stack_0000004c + 0x40) = in_ft0;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

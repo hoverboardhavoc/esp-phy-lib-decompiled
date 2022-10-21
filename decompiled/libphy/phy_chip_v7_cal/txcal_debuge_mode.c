@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7_cal.o -> txcal_debuge_mode
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,21 +10,31 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
 
 void txcal_debuge_mode(void)
 
 {
-  int iVar1;
+  undefined8 *unaff_s0;
+  int in_a0;
+  int in_a5;
+  undefined8 uVar1;
+  undefined8 in_fa2;
+  undefined8 in_fa3;
+  undefined8 in_fa5;
+  int in_stack_0000004c;
   
-  (**(code **)(_g_phyFuns + 0x50))(1,*(code **)(_g_phyFuns + 0x50));
-  (**(code **)(_g_phyFuns + 0x1d4))(*(code **)(_g_phyFuns + 0x1d4));
-  (**(code **)(_g_phyFuns + 0x1ec))(0x3f,0,*(code **)(_g_phyFuns + 0x1ec));
-  iVar1 = (**(code **)(_g_phyFuns + 0xec))(0,*(code **)(_g_phyFuns + 0xec));
-  (**(code **)(_g_phyFuns + 0x1f0))(iVar1 * 8 + 0x1312c,*(code **)(_g_phyFuns + 0x1f0));
-                    /* WARNING: Could not recover jumptable at 0x0001035a. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0xfc))();
-  return;
+  *(undefined8 *)(in_a5 + 0x7c) = in_fa5;
+  unaff_s0[8] = in_fa2;
+  uVar1 = *(undefined8 *)(in_a0 + 0x20);
+  if (in_a5 == 0) {
+    *(undefined8 *)(in_stack_0000004c + 0x120) = in_fa3;
+    *unaff_s0 = uVar1;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

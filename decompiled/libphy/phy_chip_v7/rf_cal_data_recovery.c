@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * Upstream date: 2022-06-02 17:02:45 +0800
- * Upstream subject: cut init time and fix cal time 2ms!
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7.o -> rf_cal_data_recovery
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,24 +10,47 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x00012286) */
-/* WARNING: Removing unreachable block (ram,0x00012288) */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
 
-void rf_cal_data_recovery(void)
+void rf_cal_data_recovery(uint8 *rf_cal_data)
 
 {
-  undefined4 *puVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int unaff_s0;
+  int in_a2;
+  int in_a3;
+  int in_a5;
+  undefined8 unaff_fs0;
+  int in_stack_0000004c;
   
-  puVar1 = (undefined4 *)&phy_param;
-  iVar2 = 0xc;
-  do {
-    uVar3 = (**(code **)(g_phyFuns + 0xa4))(*(code **)(g_phyFuns + 0xa4));
-    *puVar1 = uVar3;
-    iVar2 = iVar2 + 4;
-    puVar1 = puVar1 + 1;
-  } while (iVar2 != 0x220);
-  return;
+  *(undefined8 *)(in_a2 + 0x20) = unaff_fs0;
+  if (in_a5 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  if (unaff_s0 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  if (unaff_s0 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  if (unaff_s0 == 0) {
+    FUN_00014c9e();
+    return;
+  }
+  if (unaff_s0 != 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  if (in_stack_0000004c == -600) {
+    do {
+    } while (in_a3 == 0);
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

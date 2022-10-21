@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * Upstream date: 2022-04-07 23:37:47 -0400
- * Upstream subject: C3/S3 fix "i2c critical" and iram functions
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7_ana.o -> ram_chip_i2c_writeReg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,26 +10,20 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
 
-void ram_chip_i2c_writeReg(uint param_1,int param_2,int param_3)
+void ram_chip_i2c_writeReg(uint8 block,uint8 host_id,uint8 reg_add,uint8 pData)
 
 {
-  undefined4 uVar1;
-  int iVar2;
-  uint *puVar3;
+  CriticalType crit_level;
+  int in_a1;
   
-  uVar1 = (**(code **)(_g_phyFuns + 0x184))(*(code **)(_g_phyFuns + 0x184));
-  phy_i2c_enter_critical();
-  iVar2 = (**(code **)(_g_phyFuns + 0x180))(param_1,*(code **)(_g_phyFuns + 0x180));
-  puVar3 = (uint *)((iVar2 + 0x18003800) * 4);
-  *puVar3 = param_3 << 0x10 | param_1 | param_2 << 8 | 0x5000000;
-  do {
-  } while ((int)(*puVar3 << 6) < 0);
-  phy_i2c_exit_critical();
-                    /* WARNING: Could not recover jumptable at 0x00010354. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x188))(uVar1);
-  return;
+  if (in_a1 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

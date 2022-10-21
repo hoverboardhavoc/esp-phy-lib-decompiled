@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * Upstream date: 2022-06-02 17:02:45 +0800
- * Upstream subject: cut init time and fix cal time 2ms!
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7.o -> txiq_cal_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,30 +10,29 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
+
 void txiq_cal_init(void)
 
 {
-  int iVar1;
-  char cVar2;
-  undefined1 auStack_18 [12];
+  int unaff_s0;
+  int in_a0;
+  int in_a2;
+  int in_a5;
+  uint16 lb_txdc [4];
   
-  if (-1 < (int)(DAT_00014544 << 0x11)) {
-    iVar1 = (int)(short)DAT_000144fc;
-    cVar2 = DAT_000144fc;
-    if (DAT_000144fc < '\0') {
-      cVar2 = '\0';
-    }
-    rfcal_txiq(0,&DAT_00014548,&DAT_00014570,0x80,(int)cVar2,0);
-    if (iVar1 < 0) {
-      iVar1 = 0;
-    }
-    iVar1 = (iVar1 + -0x14) * 0x10000 >> 0x10;
-    if (iVar1 < 0) {
-      iVar1 = 0;
-    }
-    rfcal_txiq(0,auStack_18,&DAT_00014586,0x80,(int)(char)iVar1,2);
-    DAT_00014544 = DAT_00014544 | 0x4000;
+  if (in_a5 != 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  return;
+  if (in_a0 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  *(undefined8 *)(in_a2 + 0x40) = *(undefined8 *)(in_a0 + 0x20);
+  *(int *)(unaff_s0 + 0x40) = unaff_s0;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

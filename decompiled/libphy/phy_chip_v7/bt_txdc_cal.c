@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * Upstream date: 2022-06-02 17:02:45 +0800
- * Upstream subject: cut init time and fix cal time 2ms!
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7.o -> bt_txdc_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,40 +10,39 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
+
 void bt_txdc_cal(void)
 
 {
-  short sVar1;
-  short sVar2;
-  code *pcVar3;
-  ushort uVar4;
-  undefined4 uVar5;
-  undefined2 *puVar6;
+  int iVar1;
+  int unaff_s1;
+  int *in_a0;
+  int in_a2;
+  int in_a5;
+  undefined4 in_ft5;
+  undefined8 in_fa2;
+  undefined8 in_fa4;
+  u16 txdc [4];
   
-  (**(code **)(g_phyFuns + 0x1bc))(0x6a,0,0,3,0,0xc,*(code **)(g_phyFuns + 0x1bc));
-  if (-1 < (int)(DAT_00014544 << 0x13)) {
-    puVar6 = &DAT_000145a6;
-    (**(code **)(g_phyFuns + 0x1d4))(*(code **)(g_phyFuns + 0x1d4));
-    (**(code **)(g_phyFuns + 0x1ec))(0xf,0x20,*(code **)(g_phyFuns + 0x1ec));
-    pcVar3 = *(code **)(g_phyFuns + 0x1cc);
-    uVar4 = (**(code **)(g_phyFuns + 0x1d0))(1,1,*(code **)(g_phyFuns + 0x1d0));
-    (*pcVar3)(1,1,uVar4 | 2);
-    sVar1 = 0;
-    do {
-      sVar2 = sVar1 + 1;
-      uVar5 = (**(code **)(g_phyFuns + 0x34))(sVar1,*(code **)(g_phyFuns + 0x34));
-      (**(code **)(g_phyFuns + 0x1cc))(1,2,uVar5,*(code **)(g_phyFuns + 0x1cc));
-      txdc_cal_v70(puVar6);
-      puVar6 = puVar6 + 4;
-      sVar1 = sVar2;
-    } while (sVar2 != 3);
-    (**(code **)(g_phyFuns + 0x1e4))(0,*(code **)(g_phyFuns + 0x1e4));
-    (**(code **)(g_phyFuns + 0x1d8))(*(code **)(g_phyFuns + 0x1d8));
-    DAT_00014544 = DAT_00014544 | 0x1000;
+  iVar1 = *in_a0;
+  *(undefined8 *)(in_a5 + 0x7c) = in_fa4;
+  *(undefined8 *)(iVar1 + 0x40) = in_fa2;
+  if (in_a2 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-                    /* WARNING: Could not recover jumptable at 0x00010c86. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(g_phyFuns + 0x1bc))(0x6a,0,0,3,0,2);
-  return;
+  while (in_a5 != 0) {
+    *(undefined4 *)((int)register0x00002008 + 0x24) = in_ft5;
+    register0x00002008 = *(BADSPACEBASE **)register0x00002008;
+  }
+  if (unaff_s1 == -0xb) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  *(undefined4 *)register0x00002008 = 0;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

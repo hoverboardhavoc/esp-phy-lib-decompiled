@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * Upstream date: 2022-06-02 17:02:45 +0800
- * Upstream subject: cut init time and fix cal time 2ms!
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7.o -> bb_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,31 +10,22 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
+
 void bb_init(void)
 
 {
-  if (-1 < (int)(DAT_00014544 << 0xf)) {
-    set_pbus_mem();
-    DAT_00014544 = DAT_00014544 | 0x10000;
+  int unaff_s0;
+  int in_a5;
+  undefined8 in_fa0;
+  
+  *(undefined8 *)(in_a5 + 0x7c) = in_fa0;
+  if (unaff_s0 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  if (-1 < (int)(DAT_00014544 << 0xc)) {
-    txdc_cal_init(&DAT_00014548,0xf,0x20,0);
-    DAT_00014544 = DAT_00014544 | 0x80000;
-  }
-  pwdet_code_cal();
-  tx_cap_init();
-  freq_i2c_data_write();
-  txpwr_offset(0);
-  tx_pwctrl_init(0);
-  txiq_cal_init();
-  (**(code **)(g_phyFuns + 0x124))(*(code **)(g_phyFuns + 0x124));
-  bt_tx_gain_init();
-  set_rx_gain_table(0x985,0);
-  rom_phy_reg_init();
-  (**(code **)(g_phyFuns + 4))(*(code **)(g_phyFuns + 4));
-  DAT_00014588 = 0xfe80;
-  DAT_0001461c = 0xfe80;
-  chip_v7_set_chan(0xb,0);
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

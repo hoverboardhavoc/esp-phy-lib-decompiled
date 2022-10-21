@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * https://github.com/espressif/esp-phy-lib/commit/329de7fd3c1dfbfe482ebf2aa63235a910d6da20
- * Upstream date: 2022-06-02 17:02:45 +0800
- * Upstream subject: cut init time and fix cal time 2ms!
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7.o -> phy_wakeup_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,15 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention -- yet parameter storage is locked */
+
 void phy_wakeup_init(void)
 
 {
-  ram_phy_wakeup_init();
-  if ((DAT_00014544 & 0x20) == 0) {
-    get_rf_freq_init();
-    (**(code **)(g_phyFuns + 0xd8))(DAT_00014616,*(code **)(g_phyFuns + 0xd8));
-    DAT_00014544 = DAT_00014544 | 0x20;
-  }
-  return;
+  CriticalType crit_level;
+  
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

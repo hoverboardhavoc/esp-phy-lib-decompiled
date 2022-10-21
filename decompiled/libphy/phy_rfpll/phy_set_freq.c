@@ -1,0 +1,21 @@
+/*
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Source: libphy -> phy_rfpll.o -> phy_set_freq
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+void phy_set_freq(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined1 auStack_14 [16];
+  
+  set_rfpll_freq(phy_param,param_1,param_2,auStack_14);
+  return;
+}
+

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7_ana.o -> phy_get_fetx_delay
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,17 +10,35 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
 
-uint phy_get_fetx_delay(void)
+uint16 phy_get_fetx_delay(void)
 
 {
-  uint uVar1;
+  uint32_t val;
+  int unaff_s0;
+  int unaff_s1;
+  undefined8 *in_a0;
+  uint32_t val_1;
+  int in_a1;
+  undefined4 unaff_s9;
+  undefined8 unaff_fs0;
   
-  uVar1 = 0;
-  if (-1 < _DAT_60006070 << 1) {
-    uVar1 = _DAT_60006090 & 0x1ff;
+  *in_a0 = unaff_fs0;
+  custom3.rd.rs1.rs2(unaff_s9,0);
+  if (unaff_s1 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  return uVar1;
+  if (unaff_s1 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  *(int *)(unaff_s0 + 0x40) = unaff_s0;
+  do {
+  } while (in_a1 != -0xb);
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

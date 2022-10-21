@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * https://github.com/espressif/esp-phy-lib/commit/478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * Upstream date: 2022-05-07 21:35:33 +0800
- * Upstream subject: add phy for esp32c2
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_feature.o -> phy_set_rate
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,33 +12,69 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void phy_set_rate(int param_1)
+void phy_set_rate(byte param_1)
 
 {
   char cVar1;
-  int iVar2;
+  undefined1 uVar2;
+  undefined4 uVar3;
+  int iVar4;
   
-  cVar1 = -6;
-  if (((1 < (param_1 - 0x10U & 0xff)) && (param_1 != 0xb)) && (cVar1 = '\0', param_1 == 0xf)) {
-    cVar1 = -6;
+  (**(code **)(_g_phyFuns + 0x1bc))(0x6a,0,0,3,0,2,*(code **)(_g_phyFuns + 0x1bc));
+  cVar1 = '\0';
+  if (((2 < (byte)(param_1 - 0x15)) && ((param_1 & 0xfb) != 8)) &&
+     (cVar1 = -5, chip_eco_ver != '\x05')) {
+    cVar1 = -4;
   }
   if (phy_param != cVar1) {
-    if ((param_1 == 0xb) || ((param_1 - 0xfU & 0xff) < 3)) {
-      DAT_000110c0 = 0xa5;
-      DAT_000110c3 = 0x6f;
+    if (((byte)(param_1 - 0x15) < 3) || ((param_1 & 0xfb) == 8)) {
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,3,3,0,8);
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,3,7,4,0,*(code **)(_g_phyFuns + 0x1bc));
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,4,3,0,4,*(code **)(_g_phyFuns + 0x1bc));
+      uVar3 = 6;
+      if (chip_eco_ver != '\x05') {
+        uVar3 = 10;
+      }
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,4,7,4,uVar3,*(code **)(_g_phyFuns + 0x1bc));
+      DAT_000110cb = 8;
+      DAT_000110cc = 100;
+      if (chip_eco_ver != '\x05') {
+        DAT_000110cc = 0xa4;
+      }
+      uVar2 = 0;
     }
     else {
-      DAT_000110c0 = 0xa4;
-      DAT_000110c3 = 0x5f;
+      uVar3 = 4;
+      if (chip_eco_ver != '\x05') {
+        uVar3 = 6;
+      }
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,3,3,0,uVar3);
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,3,7,4,0,*(code **)(_g_phyFuns + 0x1bc));
+      uVar3 = 8;
+      if (chip_eco_ver != '\x05') {
+        uVar3 = 6;
+      }
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,4,3,0,uVar3,*(code **)(_g_phyFuns + 0x1bc));
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,4,7,4,3,*(code **)(_g_phyFuns + 0x1bc));
+      DAT_000110cb = 4;
+      if (chip_eco_ver != '\x05') {
+        DAT_000110cb = 6;
+      }
+      DAT_000110cc = 0x38;
+      if (chip_eco_ver != '\x05') {
+        DAT_000110cc = 0x36;
+      }
+      uVar2 = 0xfa;
+      if (chip_eco_ver != '\x05') {
+        uVar2 = 0xfc;
+      }
     }
-    iVar2 = 0;
+    iVar4 = 0;
     do {
-      (&phy_param)[iVar2] = cVar1;
-      iVar2 = iVar2 + 1;
-    } while (iVar2 != 0xe);
-                    /* WARNING: Could not recover jumptable at 0x00010078. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(code **)(_g_phyFuns + 0x1e4))(&phy_param);
+      (&phy_param)[iVar4] = uVar2;
+      iVar4 = iVar4 + 1;
+    } while (iVar4 != 0xe);
+    ram_wifi_tx_dig_gain(&phy_param);
     return;
   }
   return;

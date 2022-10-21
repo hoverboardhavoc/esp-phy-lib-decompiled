@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
- * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
- * Upstream date: 2022-07-01 15:45:54 +0800
- * Upstream subject: Support 26M and 40M Crystal
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_debug.o -> phy_version_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void phy_version_print(void)
   undefined4 uVar1;
   
   uVar1 = phy_get_rf_cal_version();
-  phy_printf("phy_version: %d, %s, %s, %s\n",uVar1,"3610ac5","Jul  1 2022","15:24:10");
+  phy_printf("phy_version: %d, %s, %s, %s\n",uVar1,"11a46e9","Oct 21 2022","08:56:12");
   return;
 }
 

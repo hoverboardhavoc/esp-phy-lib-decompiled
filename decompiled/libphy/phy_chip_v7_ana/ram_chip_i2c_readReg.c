@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * https://github.com/espressif/esp-phy-lib/commit/dcbe6085e0215e2ea6a2e43b1106bdb15807f398
- * Upstream date: 2022-04-07 23:37:47 -0400
- * Upstream subject: C3/S3 fix "i2c critical" and iram functions
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_chip_v7_ana.o -> ram_chip_i2c_readReg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,23 +10,20 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Unknown calling convention */
 
-undefined4 ram_chip_i2c_readReg(undefined4 param_1,undefined4 param_2)
+uint8 ram_chip_i2c_readReg(uint8 block,uint8 host_id,uint8 reg_add)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  CriticalType crit_level;
+  int in_a3;
   
-  uVar1 = (**(code **)(_g_phyFuns + 0x184))(*(code **)(_g_phyFuns + 0x184));
-  phy_i2c_enter_critical();
-  uVar2 = (**(code **)(_g_phyFuns + 0x178))(param_1,*(code **)(_g_phyFuns + 0x178));
-  uVar3 = (**(code **)(_g_phyFuns + 0x180))(param_1,*(code **)(_g_phyFuns + 0x180));
-  uVar2 = (**(code **)(_g_phyFuns + 0x18c))
-                    (param_1,uVar2,uVar3,param_2,*(code **)(_g_phyFuns + 0x18c));
-  phy_i2c_exit_critical();
-  (**(code **)(_g_phyFuns + 0x188))(uVar1,*(code **)(_g_phyFuns + 0x188));
-  return uVar2;
+  if (in_a3 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

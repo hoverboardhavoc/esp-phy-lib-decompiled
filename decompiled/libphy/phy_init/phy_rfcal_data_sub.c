@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 240e008e89a447f2f1edf990efefa45b870e6e8a
- * https://github.com/espressif/esp-phy-lib/commit/240e008e89a447f2f1edf990efefa45b870e6e8a
- * Upstream date: 2022-07-01 15:45:54 +0800
- * Upstream subject: Support 26M and 40M Crystal
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libphy -> phy_init.o -> phy_rfcal_data_sub
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,11 +18,11 @@ void phy_rfcal_data_sub(int param_1,int param_2)
   undefined1 *puVar3;
   uint uVar4;
   
-  puVar1 = (uint *)&phy_param;
+  puVar1 = &phy_param;
   iVar2 = 0xc;
   do {
     if (param_2 == 0) {
-      uVar4 = phy_byte_to_word();
+      uVar4 = (**(code **)(g_phyFuns + 0xa4))(*(code **)(g_phyFuns + 0xa4));
       *puVar1 = uVar4;
     }
     else {
@@ -36,7 +36,7 @@ void phy_rfcal_data_sub(int param_1,int param_2)
     }
     iVar2 = iVar2 + 4;
     puVar1 = puVar1 + 1;
-  } while (iVar2 != 0x29c);
+  } while (iVar2 != 0x224);
   return;
 }
 

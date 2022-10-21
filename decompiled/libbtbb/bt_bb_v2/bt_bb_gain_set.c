@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 449b432d94b968a75ffabffae91fe15796de7644
- * https://github.com/espressif/esp-phy-lib/commit/449b432d94b968a75ffabffae91fe15796de7644
- * Upstream date: 2022-02-24 11:32:38 +0800
- * Upstream subject: Update phy lib: S3_20220128_fbd66bc :  for high/low temperature performance C3_20220119_908_049c04c : for high/low temperature performance
+ * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
+ * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
+ * Upstream date: 2022-10-21 09:45:04 +0800
+ * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_gain_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,9 +19,10 @@ void bt_bb_gain_set(void)
   
   _DAT_6001c094 = _DAT_6001c094 | 1;
   _DAT_6001104c = _DAT_6001104c | 4;
+  uVar1 = _DAT_6001c0d0 >> 9;
   _DAT_60011844 =
-       _DAT_6001c0d0 >> 9 & 0x7f | (_DAT_6001c0d0 >> 9 & 0x7f) << 7 | _DAT_60011844 & 0xff07c000 |
-       0xe00000;
+       ((char)uVar1 + 0x12) * 0x80000 & 0xf80000U |
+       (uVar1 & 0x7f) << 7 | _DAT_60011844 & 0xff07c000 | uVar1 & 0x7f;
   _DAT_60011854 = _DAT_60011854 & 0xfffffe03 | 0xc9;
   uVar1 = _DAT_6001c0a4 >> 0xf & 0x7f;
   _DAT_60011850 =
