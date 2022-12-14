@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * https://github.com/espressif/esp-phy-lib/commit/9ff6110a98b8b3c5a26c8ef5bdbd2d1b30831541
- * Upstream date: 2021-08-11 11:36:04 +0800
- * Upstream subject: update libphy.a and libbtbb.a
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libbtbb -> bt_bb_v2.o -> force_coex_timer1_bt_pti_v2
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,12 +10,9 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void force_coex_timer1_bt_pti_v2(uint param_1)
+void force_coex_timer1_bt_pti_v2(void)
 
 {
-  _DAT_600350b0 = (param_1 & 0xf) << 0x18 | _DAT_600350b0 & 0xf0ffffff;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_rx_gain.o -> wr_rx_gain_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,113 +12,80 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void wr_rx_gain_mem(int param_1,int param_2,byte *param_3,int param_4,int param_5,int param_6,
-                   uint param_7,int param_8)
+void wr_rx_gain_mem(int param_1,uint param_2,int param_3,int param_4)
 
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  byte *pbVar5;
-  uint uVar6;
-  int iVar7;
+  ushort uVar1;
+  ushort uVar2;
+  undefined4 uVar3;
+  int iVar4;
+  uint uVar5;
+  int iVar6;
+  ushort *puVar7;
   uint uVar8;
-  uint uVar9;
+  int iVar9;
   int iVar10;
   uint uVar11;
   uint uVar12;
   uint uVar13;
-  byte abStack_5c [12];
-  byte local_50 [28];
+  undefined4 uStack_48;
+  uint uStack_44;
   
-  iVar10 = 0;
-  if (param_1 != 0) {
+  if (param_1 == 0) {
+    iVar10 = 0;
+    iVar9 = 8;
+  }
+  else {
     iVar10 = 0x50;
+    iVar9 = 7;
   }
-  abStack_5c[0] = 0;
-  abStack_5c[1] = 0;
-  abStack_5c[2] = 1;
-  abStack_5c[3] = 0;
-  abStack_5c[4] = 5;
-  abStack_5c[5] = 0;
-  abStack_5c[6] = 0xd;
-  abStack_5c[7] = 0;
-  abStack_5c[8] = 0x1d;
-  abStack_5c[9] = 0;
-  memcpy(local_50,&_LANCHOR0,0xf);
-  iVar7 = 0;
-  uVar9 = 0;
-  do {
-    pbVar5 = local_50 + iVar7;
-    iVar7 = iVar7 + 1;
-    uVar9 = uVar9 + *pbVar5 & 0xff;
-  } while (iVar7 != 8);
-  uVar3 = uVar9;
-  if (param_2 == 0) {
-    uVar3 = 0;
-  }
-  uVar2 = 0xc;
-  uVar11 = 0;
-  do {
-    if (param_7 <= uVar3) {
-      return;
+  uStack_48 = 0x1000100;
+  uStack_44 = 0x1000100;
+  pbus_debugmode();
+  (**(code **)(_g_phyFuns + 0x84))(0,*(code **)(_g_phyFuns + 0x84));
+  set_rxclk_en(1);
+  set_txclk_en(1);
+  uVar12 = 0x100;
+  uVar11 = 0x100;
+  for (uVar8 = 0; param_2 != uVar8; uVar8 = uVar8 + 1) {
+    uVar13 = *(uint *)(uVar8 * 4 + param_3);
+    iVar4 = (**(code **)(_g_phyFuns + 0xa8))(uVar13 >> 4 & 0x3f,*(code **)(_g_phyFuns + 0xa8));
+    uVar5 = rfrx_gain_index_new(param_1,uVar13 >> 0xc & 0xffff);
+    iVar6 = 7;
+    if (iVar9 == 7) {
+      iVar6 = 6;
     }
-    if (param_2 == 0) {
-      uVar1 = *(uint *)((uVar3 >> 1) * 4 + param_8);
-      if ((uVar3 & 1) == 0) {
-        uVar1 = uVar1 << 0x10;
+    if (iVar6 <= (int)uVar5) {
+      uVar5 = iVar4 + uVar5;
+    }
+    puVar7 = (ushort *)((uVar5 & 0x7f) * 4 + param_4);
+    uVar1 = *puVar7;
+    uVar2 = puVar7[1];
+    uVar3 = *(undefined4 *)puVar7;
+    if (param_1 == 0) {
+      if ((uVar8 & 1) == 0) {
+        (**(code **)(_g_phyFuns + 0x7c))(uVar13,*(code **)(_g_phyFuns + 0x7c));
+        uStack_48 = uVar3;
+        pbus_rx_dco_cal_new(0x800,&uStack_48,10,0,0,1);
+        uVar11 = uStack_44 & 0xffff;
+        uVar12 = uStack_44 >> 0x10;
       }
-      uVar1 = uVar1 >> 0x10;
-      uVar8 = 3;
-      uVar2 = 0;
-      do {
-        uVar12 = uVar8 & 0x1f;
-        uVar8 = uVar8 + 1;
-        uVar2 = uVar2 + ((int)uVar1 >> uVar12 & 1U) & 0xff;
-      } while (uVar8 != 9);
-      uVar2 = uVar2 * 6 + (uVar1 & 7) & 0xff;
     }
     else {
-      uVar1 = (uint)*param_3 << 8 | (uint)abStack_5c[(uVar2 / 6) * 2] * 8 + uVar2 % 6 & 0xff;
+      uVar12 = 0x100;
+      uVar11 = 0x100;
     }
-    if ((param_1 == 0) && (uVar9 <= uVar3)) {
-      uVar8 = *(uint *)(((int)DAT_000111fa - 1U & 0xffff) * 4 + param_6);
-      uVar12 = uVar8 >> 0x10;
-      uVar8 = uVar8 & 0xffff;
-_L34:
-      uVar4 = (int)uVar1 >> 3 & 0x1f;
-      uVar13 = *(uint *)((uVar2 >> 1) * 4 + param_5);
-      iVar7 = (uVar4 >> 1 & 1) +
-              (uVar4 >> 4) + ((int)uVar1 >> 3 & 1U) + (uVar4 >> 3 & 1) + (uVar4 >> 2 & 1);
-      uVar4 = uVar13 >> 0x10;
-      uVar13 = uVar13 & 0xffff;
-      if (iVar7 != 0) {
-        iVar7 = 1;
-      }
-      uVar6 = (uint)(*(ushort *)(&phy_param + (iVar7 + 0xa8) * 2) >> 7) << 6 |
-              *(ushort *)(&phy_param + (iVar7 + 0xa8) * 2) & 0x3f;
-    }
-    else {
-      if ((uVar1 & 0xffffff00) != (uint)param_3[uVar11] << 8) {
-        uVar11 = uVar11 + 1 & 0xff;
-      }
-      uVar8 = *(uint *)(uVar11 * 4 + param_4);
-      uVar12 = uVar8 >> 0x10;
-      uVar8 = uVar8 & 0xffff;
-      if (param_1 == 0) goto _L34;
-      uVar13 = 0x100;
-      uVar4 = 0x100;
-      uVar6 = 0;
-    }
-    (**(code **)(_g_phyFuns + 0x2c))
-              (((int)uVar4 >> 1) + uVar1 * 0x20000 + uVar12 * 0x100,
-               uVar8 * 0x400000 + uVar4 * -0x80000000 + uVar13 * 0x2000 + (uVar6 & 0x7ff) * 4,
-               uVar3 + iVar10 & 0xff,*(code **)(_g_phyFuns + 0x2c));
-    if (param_2 != 0) {
-      uVar2 = uVar2 + 1 & 0xff;
-    }
-    uVar3 = uVar3 + 1 & 0xff;
-  } while( true );
+    write_gain_mem_new(_DAT_000110e4 & 0x1fff | (uint)uVar2 << 0x16 | uVar11 << 0x1f | uVar12 << 0xd
+                       ,uVar11 >> 1 |
+                        (uint)DAT_00011012 << 0x1d | (uVar13 & 7) << 0x11 |
+                        (uVar13 >> 4 & 0x7f) << 0x14 | (uint)uVar1 << 8,
+                       (uint)(DAT_00011012 >> 6) | (uVar13 >> 0xc & 7) << 2 | uVar13 >> 10 & 0xe0,
+                       iVar10 + (uVar8 & 0xff) & 0xff);
+  }
+  set_rxclk_en(0);
+  set_txclk_en(0);
+  (**(code **)(_g_phyFuns + 0x84))(0,*(code **)(_g_phyFuns + 0x84));
+  pbus_workmode();
+  return;
 }
 

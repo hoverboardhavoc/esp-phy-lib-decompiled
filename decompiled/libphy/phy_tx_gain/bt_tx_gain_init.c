@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_tx_gain.o -> bt_tx_gain_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,11 +13,10 @@
 void bt_tx_gain_init(void)
 
 {
-  bt_txdc_cal();
-  bt_txiq_cal();
-  bt_tx_pwctrl_init();
-  ram_bt_set_tx_gain(0);
-  bt_txpwr_freq(&phy_param);
+  set_channel_rfpll_freq(0x985,phy_param,0);
+  bt_txdc_cal_new();
+  bt_tx_pwctrl_init_new();
+  bt_set_tx_gain(0);
   return;
 }
 

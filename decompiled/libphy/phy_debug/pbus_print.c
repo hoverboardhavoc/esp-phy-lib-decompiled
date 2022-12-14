@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_debug.o -> pbus_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void pbus_print(undefined4 param_1)
+void pbus_print(void)
 
 {
   undefined4 uVar1;
@@ -20,20 +20,19 @@ void pbus_print(undefined4 param_1)
   undefined4 uVar3;
   undefined4 uVar4;
   
-  phy_printf(&_LC22,param_1);
-  uVar1 = (**(code **)(_g_phyFuns + 0x1d0))(0,1,*(code **)(_g_phyFuns + 0x1d0));
-  uVar2 = (**(code **)(_g_phyFuns + 0x1d0))(0,2,*(code **)(_g_phyFuns + 0x1d0));
+  uVar1 = (**(code **)(_g_phyFuns + 0x78))(0,1,*(code **)(_g_phyFuns + 0x78));
+  uVar2 = (**(code **)(_g_phyFuns + 0x78))(0,2,*(code **)(_g_phyFuns + 0x78));
   phy_printf("rfrx:0x%x,0x%x;",uVar1,uVar2);
-  uVar1 = (**(code **)(_g_phyFuns + 0x1d0))(4,1,*(code **)(_g_phyFuns + 0x1d0));
-  uVar2 = (**(code **)(_g_phyFuns + 0x1d0))(5,1,*(code **)(_g_phyFuns + 0x1d0));
+  uVar1 = (**(code **)(_g_phyFuns + 0x78))(4,1,*(code **)(_g_phyFuns + 0x78));
+  uVar2 = (**(code **)(_g_phyFuns + 0x78))(5,1,*(code **)(_g_phyFuns + 0x78));
   phy_printf("rftx:0x%x,0x%x;",uVar1,uVar2);
-  uVar1 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
-  uVar2 = (**(code **)(_g_phyFuns + 0x1d0))(1,2,*(code **)(_g_phyFuns + 0x1d0));
-  phy_printf("bb:0x%x,0x%x,0x%x,0x%x;",uVar1,uVar2);
-  uVar1 = (**(code **)(_g_phyFuns + 0x1d0))(2,1,*(code **)(_g_phyFuns + 0x1d0));
-  uVar2 = (**(code **)(_g_phyFuns + 0x1d0))(3,1,*(code **)(_g_phyFuns + 0x1d0));
-  uVar3 = (**(code **)(_g_phyFuns + 0x1d0))(2,2,*(code **)(_g_phyFuns + 0x1d0));
-  uVar4 = (**(code **)(_g_phyFuns + 0x1d0))(3,2,*(code **)(_g_phyFuns + 0x1d0));
+  uVar1 = (**(code **)(_g_phyFuns + 0x78))(1,1,*(code **)(_g_phyFuns + 0x78));
+  uVar2 = (**(code **)(_g_phyFuns + 0x78))(1,2,*(code **)(_g_phyFuns + 0x78));
+  phy_printf("bb:0x%x,0x%x;",uVar1,uVar2);
+  uVar1 = (**(code **)(_g_phyFuns + 0x78))(2,1,*(code **)(_g_phyFuns + 0x78));
+  uVar2 = (**(code **)(_g_phyFuns + 0x78))(3,1,*(code **)(_g_phyFuns + 0x78));
+  uVar3 = (**(code **)(_g_phyFuns + 0x78))(2,2,*(code **)(_g_phyFuns + 0x78));
+  uVar4 = (**(code **)(_g_phyFuns + 0x78))(3,2,*(code **)(_g_phyFuns + 0x78));
   phy_printf("dco:%d,%d,%d,%d\n",uVar1,uVar2,uVar3,uVar4);
   return;
 }

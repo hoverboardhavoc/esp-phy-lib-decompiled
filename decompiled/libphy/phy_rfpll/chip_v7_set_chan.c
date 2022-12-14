@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_rfpll.o -> chip_v7_set_chan
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,29 +18,29 @@ void chip_v7_set_chan(int param_1,int param_2)
   undefined4 uVar1;
   int iVar2;
   
-  uVar1 = (**(code **)(_g_phyFuns + 0x184))(*(code **)(_g_phyFuns + 0x184));
-  DAT_00011203 = param_2 != 0;
-  DAT_00011202 = (undefined1)param_1;
-  DAT_00011204 = (undefined1)param_2;
-  iVar2 = (int)_DAT_000110f0;
-  (**(code **)(_g_phyFuns + 8))(*(code **)(_g_phyFuns + 8));
-  set_channel_rfpll_freq(param_1,DAT_00011103,iVar2);
-  (**(code **)(_g_phyFuns + 0x78))(param_2,*(code **)(_g_phyFuns + 0x78));
-  (**(code **)(_g_phyFuns + 0x60))
-            (param_1,param_2,0,DAT_00011103,_DAT_0001112c,_DAT_00011128,DAT_0001112a,
-             *(code **)(_g_phyFuns + 0x60));
+  uVar1 = (*(code *)*_g_phyFuns)((code *)*_g_phyFuns);
+  iVar2 = (int)_set_channel_rfpll_freq;
+  DAT_0001111f = (undefined1)param_2;
+  DAT_0001111e = param_2 != 0;
+  _DAT_0001111c = (undefined2)param_1;
+  disable_agc();
+  fe_adc_on(0);
+  chan_to_freq(param_1);
+  set_channel_rfpll_freq(DAT_0001104f,iVar2);
   chip_v7_set_chan_misc(param_1);
-  get_txcap_data();
-  if (DAT_000110f6 != '\0') {
+  phy_i2c_master_mem_txcap();
+  if (DAT_00011026 != '\0') {
     chan14_mic_cfg(param_1 == 0xe);
   }
-  if (DAT_000110ff != '\0') {
-    phy_11p_set(DAT_00011100);
+  fe_adc_on(1);
+  if (chan14_mic_cfg != (code)0x0) {
+    phy_11p_set(DAT_00011029);
   }
-  (**(code **)(_g_phyFuns + 0xc))(*(code **)(_g_phyFuns + 0xc));
-                    /* WARNING: Could not recover jumptable at 0x000106b4. Too many branches */
+  set_rx_comp_new();
+  enable_agc();
+                    /* WARNING: Could not recover jumptable at 0x0001011c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x188))(uVar1);
+  (*(code *)_g_phyFuns[1])(uVar1);
   return;
 }
 

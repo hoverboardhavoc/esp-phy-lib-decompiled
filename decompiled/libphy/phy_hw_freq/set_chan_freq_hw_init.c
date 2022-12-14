@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_hw_freq.o -> set_chan_freq_hw_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,17 +10,18 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void set_chan_freq_hw_init(uint param_1,uint param_2)
+void set_chan_freq_hw_init(void)
 
 {
-  _phy_param = get_bias_ref_code();
-  get_rf_freq_init();
-  freq_i2c_data_write();
-  _DAT_6003509c = _DAT_6003509c & 0xffff | 0xc800000;
-  _DAT_6000e0c4 =
-       (param_2 & 0xf) << 0x14 | (param_1 & 0xf) << 0x10 | _DAT_6000e0c4 & 0xdf00ffff | 0x41000000;
+  undefined1 auStack_64 [12];
+  undefined1 auStack_58 [12];
+  undefined1 auStack_4c [12];
+  undefined1 auStack_40 [60];
+  
+  freq_reg_init();
+  get_rf_freq_init_new(0x55,0);
+  freq_get_i2c_data(auStack_64,auStack_58,auStack_4c,auStack_40,0xc);
+  freq_i2c_write_set_new(auStack_64,auStack_58,auStack_4c,auStack_40,0xc);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_feature.o -> phy_set_most_tpw
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,13 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void phy_set_most_tpw(undefined1 param_1)
 
 {
-  DAT_000110a4 = param_1;
-  ram_wifi_set_tx_gain(DAT_000111fe,0);
+  DAT_00011006 = param_1;
+  wifi_set_tx_gain(_DAT_0001111c,0);
   return;
 }
 

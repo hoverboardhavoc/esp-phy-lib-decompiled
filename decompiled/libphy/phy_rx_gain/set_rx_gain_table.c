@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_rx_gain.o -> set_rx_gain_table
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,64 +12,100 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void set_rx_gain_table(undefined4 param_1,int param_2)
+void set_rx_gain_table(void)
 
 {
-  uint uVar1;
+  ushort uVar1;
   uint uVar2;
-  undefined1 auStack_209 [13];
-  undefined1 auStack_1fc [12];
-  undefined1 auStack_1f0 [16];
-  undefined1 auStack_1e0 [16];
-  undefined1 auStack_1d0 [16];
-  undefined1 auStack_1c0 [16];
-  undefined1 auStack_1b0 [200];
-  undefined1 auStack_e8 [204];
+  undefined1 auStack_1d4 [16];
+  undefined4 uStack_1c4;
+  undefined2 uStack_1c0;
+  undefined2 uStack_1be;
+  undefined2 uStack_1bc;
+  undefined2 uStack_1ba;
+  undefined2 uStack_1b8;
+  undefined1 uStack_1b6;
+  undefined4 uStack_1b4;
+  undefined2 uStack_1b0;
+  undefined2 uStack_1ae;
+  undefined2 uStack_1ac;
+  undefined2 uStack_1aa;
+  undefined2 uStack_1a8;
+  undefined1 uStack_1a6;
+  undefined4 uStack_1a4;
+  undefined4 uStack_1a0;
+  undefined4 uStack_19c;
+  undefined2 uStack_198;
+  undefined1 uStack_196;
+  undefined4 uStack_194;
+  undefined4 uStack_190;
+  undefined4 uStack_18c;
+  undefined2 uStack_188;
+  undefined1 uStack_186;
+  undefined1 auStack_184 [16];
+  undefined1 auStack_174 [348];
   
-  memcpy(auStack_209 + 1,&DAT_00010824,9);
-  memcpy(auStack_1fc,&DAT_00010824,9);
-  memcpy(auStack_1f0,&_LANCHOR0,0xf);
-  memcpy(auStack_1e0,&DAT_00010830,0xf);
-  memcpy(auStack_1d0,&DAT_00010840,0xf);
-  memcpy(auStack_1c0,&DAT_00010850,0xf);
-  uVar1 = 9U - param_2 & 0xff;
-  DAT_000110f9 = auStack_209[uVar1];
-  if ((_DAT_00011128 & 0x200) == 0) {
-    uVar2 = gen_rx_gain_table(auStack_1b0,0x16,auStack_1fc,auStack_1e0,auStack_1c0,9,0);
+  memcpy(auStack_184,&DAT_0001078c,0x10);
+  memcpy(auStack_1d4,&DAT_0001079c,0xe);
+  uVar1 = _rfrx_gain_index_new;
+  uStack_1c4 = 0x6060a0e;
+  uStack_1c0 = 0x606;
+  uStack_1b4 = 0x5060e0b;
+  uStack_194 = 0x8080000;
+  uStack_1b0 = 0x806;
+  uStack_1be = 8;
+  uStack_1a4 = 0x8080800;
+  uStack_190 = 0x80808;
+  uStack_1bc = 0;
+  uStack_1ba = 0;
+  uStack_1b8 = 0;
+  uStack_1b6 = 0;
+  uStack_1ae = 0;
+  uStack_1ac = 0;
+  uStack_1aa = 0;
+  uStack_1a8 = 0;
+  uStack_1a6 = 0;
+  uStack_19c = 0;
+  uStack_198 = 0;
+  uStack_196 = 0;
+  uStack_1a0 = 0x8080808;
+  uStack_18c = 0;
+  uStack_188 = 0;
+  uStack_186 = 0;
+  if ((_DAT_000110b4 & 0x200) == 0) {
+    if ((_DAT_000110b4 & 0x80) == 0) {
+      set_rx_gain_cal_dc_new(1,&phy_param);
+      set_rx_gain_cal_dc_new(0,&phy_param);
+      _DAT_000110b4 = _DAT_000110b4 | 0x80;
+    }
+    uVar1 = uVar1 >> 8 & 1;
+    uVar2 = gen_rx_gain_table_new(auStack_174,0x20,auStack_184,&uStack_1c4,&uStack_1a4,8,uVar1);
     if (uVar2 < 0x50) {
-      DAT_000111fd = (byte)uVar2;
+      DAT_00011131 = (byte)uVar2;
     }
     else {
-      DAT_000111fd = 0x4f;
+      DAT_00011131 = 0x4f;
     }
-    uVar2 = gen_rx_gain_table(auStack_e8,0x16,auStack_209 + 1,auStack_1f0,auStack_1d0,9,0);
+    wr_rx_gain_mem(0,DAT_00011131 + 1,auStack_174,&phy_param);
+    uVar2 = gen_rx_gain_table_new(auStack_174,0x1c,auStack_1d4,&uStack_1b4,&uStack_194,7,uVar1);
     if (uVar2 < 0x50) {
-      DAT_000111fe = (byte)uVar2;
+      DAT_00011130 = (char)uVar2;
     }
     else {
-      DAT_000111fe = 0x4f;
+      DAT_00011130 = 'O';
     }
-    set_rf_freq_offset(DAT_000110fb,param_1,0);
-    set_rx_gain_param(1,&phy_param,auStack_1fc,DAT_000111fd + 1,auStack_1b0,9);
-    if (DAT_000110aa != '\x11') {
-      set_rx_gain_param(0,&phy_param,auStack_209 + 1,DAT_000111fe + 1,auStack_e8,uVar1);
-    }
-    wr_rx_gain_mem(1,0,auStack_1fc,&phy_rxrf_dc,&phy_rxbb_dc,&phy_chan_dc,DAT_000111fd + 1,
-                   auStack_1b0);
-    wr_rx_gain_mem(0,0,auStack_209 + 1,&phy_rxrf_dc,&phy_rxbb_dc,&phy_chan_dc,DAT_000111fe + 1,
-                   auStack_e8);
-    _DAT_00011128 = _DAT_00011128 | 0x200;
+    wr_rx_gain_mem(1,DAT_00011130 + '\x01',auStack_174,&phy_param);
+    _DAT_000110b4 = _DAT_000110b4 | 0x200;
   }
-  _DAT_6001c02c = (DAT_000111fe & 0x7f) << 8 | _DAT_6001c02c & 0xffff80ff;
-  uVar1 = (uint)DAT_000111fe;
-  if (0x4c < uVar1) {
-    uVar1 = 0x4c;
+  _DAT_600a702c = (DAT_00011131 & 0x7f) << 8 | _DAT_600a702c & 0xffff80ff;
+  uVar2 = (uint)DAT_00011131;
+  if (0x4c < uVar2) {
+    uVar2 = 0x4c;
   }
-  _DAT_6001c13c = uVar1 << 0x12 | _DAT_6001c13c & 0xfe03ffff;
-  _DAT_6001c0d0 = _DAT_6001c0d0 & 0xfe01ffff | 0xa00000;
-  _DAT_60011848 = _DAT_60011848 & 0xff00ffff | 0x500000;
-  _DAT_6001c0a4 = (DAT_000111fd & 0x7f) << 0xf | _DAT_6001c0a4 & 0xffc07fff;
-  _DAT_6000607c = _DAT_6000607c | 0x18001800;
+  _DAT_600a713c = uVar2 << 0x12 | _DAT_600a713c & 0xfe03ffff;
+  bt_gain_offset(0x50);
+  iq_corr_enable();
+  _DAT_00011058 = _phy_param;
   return;
 }
 

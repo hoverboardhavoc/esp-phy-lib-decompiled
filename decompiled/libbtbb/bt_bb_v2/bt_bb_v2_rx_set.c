@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,22 +12,24 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void bt_bb_v2_rx_set(uint param_1)
+void bt_bb_v2_rx_set(void)
 
 {
-  _DAT_60026010 = _DAT_60026010 | 0xf000f;
-  _DAT_60011008 = (param_1 & 0x3f) << 0x17 | _DAT_60011008 & 0xe07fffff;
-  bt_bb_corr_set();
-  bt_bb_dpo_set();
-  bt_bb_restart_set();
-  bt_bb_target_set();
-  bt_bb_detect_set();
-  bt_bb_gain_set();
-  bt_bb_v2_rx_rssi_thresh(0xffffff9c,0xffffff92);
-  bt_bb_v2_recorrect();
-  _DAT_60033c18 = _DAT_60033c18 & 0x7fffffff;
-  _DAT_60011888 = _DAT_60011888 & 0xdffbffff;
-  _DAT_600118a0 = _DAT_600118a0 & 0xcfffff00 | 0x2000000a;
+  bt_bb_rx_set();
+  bt_set_rx_comp(0x10,0,0xfffffffa,0xfffffffa,0);
+  bt_agc_gain_offset(0x50);
+  bt_agc_gain_set();
+  bt_agc_rssi_thresh();
+  bt_agc_target_set();
+  bt_agc_restart_set();
+  bt_agc_recorrect_set();
+  bt_agc_detect_set();
+  bt_bb_rx_correlator_set();
+  bt_bb_rx_dpo_set();
+  bt_bb_rx_filter_sel();
+  zb_rx_core_set();
+  zb_rx_v0_0_set();
+  _DAT_600a2c48 = _DAT_600a2c48 & 0x403fffff | 0x28400000;
   return;
 }
 

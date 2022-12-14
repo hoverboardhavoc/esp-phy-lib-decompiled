@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libbtbb -> bt_bb_v2.o -> set_gauss_coeff_1m
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,10 @@
 void set_gauss_coeff_1m(void)
 
 {
-  _DAT_600460e0 = _DAT_600460e0 & 3 | 0xc;
-  _DAT_600460e4 = _DAT_600460e4 & 3 | 0x10192aa8;
-  _DAT_600460e8 = _DAT_600460e8 & 0x3ff | 0xaa9cd400;
-  _DAT_600460ec = _DAT_600460ec & 0x3ff | 0xfbdfec00;
+  _DAT_600a20e0 = _DAT_600a20e0 & 3 | 0x1128588;
+  _DAT_600a20e4 = _DAT_600a20e4 & 3 | 0x77bcccfc;
+  _DAT_600a20e8 = _DAT_600a20e8 & 0x3ff | 0x98185c00;
+  _DAT_600a20ec = _DAT_600a20ec & 0x3ff | 0xe0ddf000;
   return;
 }
 

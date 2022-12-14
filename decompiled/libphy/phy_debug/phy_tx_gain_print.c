@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_debug.o -> phy_tx_gain_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,59 +10,78 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void phy_tx_gain_print(void)
 
 {
-  char *pcVar1;
-  undefined *puVar2;
-  undefined2 *puVar3;
-  undefined *puVar4;
-  undefined *puVar5;
+  undefined2 uVar1;
+  char *pcVar2;
+  undefined *puVar3;
+  undefined2 *puVar4;
+  int iVar5;
+  char *pcVar6;
+  char local_120 [16];
+  char local_110 [32];
+  char local_f0 [32];
+  char local_d0 [32];
+  undefined2 local_b0 [32];
+  undefined2 local_70 [32];
+  undefined2 auStack_30 [4];
   
+  pcVar2 = local_f0;
+  wifi_get_tx_tab(_DAT_0001212c,local_d0,local_b0,local_70,0);
+  bt_get_tx_tab(local_110,pcVar2,local_120,0);
+  puVar3 = &phy_param;
   phy_printf("wifi_init_power:");
-  puVar4 = &phy_param;
-  puVar5 = &phy_param;
   do {
-    pcVar1 = puVar5 + 0xf4;
-    puVar5 = puVar5 + 1;
-    phy_printf(&_LC22,(int)*pcVar1);
-  } while (puVar5 != (undefined *)0x1201e);
+    pcVar6 = puVar3 + 0x50;
+    puVar3 = puVar3 + 1;
+    phy_printf(&_LC28,(int)*pcVar6);
+  } while (puVar3 != (undefined *)0x12022);
   phy_printf("\nwifi_pagain:");
-  puVar5 = puVar4;
+  puVar4 = local_70;
   do {
-    puVar2 = puVar5 + 0x1e4;
-    puVar5 = puVar5 + 1;
-    phy_printf("0x%x,",*puVar2);
-  } while (puVar5 != (undefined *)0x1201e);
-  phy_printf("\nwifi_bbgain:");
-  puVar5 = puVar4;
-  do {
-    puVar3 = (undefined2 *)(puVar5 + 0x1c8);
-    puVar5 = puVar5 + 2;
-    phy_printf("0x%x,",*puVar3);
-  } while (puVar5 != (undefined *)0x1202c);
-  phy_printf("\nwifi_diggain:");
-  puVar5 = puVar4;
-  do {
-    pcVar1 = puVar5 + 0x1ba;
-    puVar5 = puVar5 + 1;
-    phy_printf(&_LC22,(int)*pcVar1);
-  } while (puVar5 != (undefined *)0x1201e);
-  phy_printf("\nwifi_correct_power:%d\n",(int)DAT_0001220b);
-  phy_printf("bt_pagain:");
-  puVar5 = puVar4;
-  do {
-    puVar2 = puVar5 + 0x19a;
-    puVar5 = puVar5 + 1;
-    phy_printf("0x%x,",*puVar2);
-  } while (puVar5 != &phy_rxbb_dc);
-  phy_printf("\nbt_diggain:");
-  do {
-    pcVar1 = puVar4 + 0x1aa;
+    uVar1 = *puVar4;
     puVar4 = puVar4 + 1;
-    phy_printf(&_LC22,(int)*pcVar1);
-  } while (puVar4 != &phy_rxbb_dc);
-  phy_printf("\nbt_correct_power:%d\n",(int)DAT_0001220c);
+    phy_printf("0x%x,",uVar1);
+  } while (puVar4 != auStack_30);
+  phy_printf("\nwifi_bbgain:");
+  puVar4 = local_b0;
+  do {
+    uVar1 = *puVar4;
+    puVar4 = puVar4 + 1;
+    phy_printf("0x%x,",uVar1);
+  } while (local_70 != puVar4);
+  phy_printf("\nwifi_diggain:");
+  iVar5 = 0;
+  do {
+    pcVar6 = local_d0 + iVar5;
+    iVar5 = iVar5 + 1;
+    phy_printf(&_LC28,(int)*pcVar6);
+  } while (iVar5 != 0x20);
+  phy_printf("\nwifi_correct_power:%d\n",(int)DAT_00012133);
+  phy_printf("bt_pagain:");
+  pcVar6 = local_110;
+  do {
+    uVar1 = *(undefined2 *)pcVar6;
+    pcVar6 = pcVar6 + 2;
+    phy_printf("0x%x,",uVar1);
+  } while (pcVar2 != pcVar6);
+  phy_printf("\nbt_bbgain:");
+  do {
+    uVar1 = *(undefined2 *)pcVar2;
+    pcVar2 = pcVar2 + 2;
+    phy_printf("0x%x,",uVar1);
+  } while (local_d0 != pcVar2);
+  phy_printf("\nbt_diggain:");
+  iVar5 = 0;
+  do {
+    pcVar2 = local_120 + iVar5;
+    iVar5 = iVar5 + 1;
+    phy_printf(&_LC28,(int)*pcVar2);
+  } while (iVar5 != 0x10);
+  phy_printf("\nbt_correct_power:%d\n",(int)DAT_00012134);
   return;
 }
 

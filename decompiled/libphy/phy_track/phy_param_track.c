@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_track.o -> phy_param_track
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,16 +10,25 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void phy_param_track(undefined4 param_1,undefined4 param_2)
 
 {
   undefined4 uVar1;
   
-  uVar1 = phy_enter_critical();
-  ram_tsens_temp_read();
-  rom_wifi_track_tx_power(param_1,param_2);
-  rom_bt_track_tx_power(param_1,param_2);
-  phy_exit_critical(uVar1);
+  uVar1 = (*(code *)*_g_phyFuns)((code *)*_g_phyFuns);
+  if (DAT_00011017 == '\0') {
+    tsens_temp_read_new();
+    if (DAT_0001100a != '\0') {
+      rfpll_cap_track(DAT_00011009);
+    }
+    wifi_track_tx_power(param_1,param_2);
+    bt_track_tx_power(param_1,param_2);
+  }
+                    /* WARNING: Could not recover jumptable at 0x000103b0. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*(code *)_g_phyFuns[1])(uVar1);
   return;
 }
 

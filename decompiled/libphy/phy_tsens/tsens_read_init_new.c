@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_tsens.o -> tsens_read_init_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,13 +16,12 @@ void tsens_read_init_new(int param_1,int param_2)
 
 {
   if (param_1 != 0) {
-    (**(code **)(_g_phyFuns + 0x1bc))
-              (0x69,0,6,3,0,phy_tsens_attribute[param_2 * 6 + 1],*(code **)(_g_phyFuns + 0x1bc));
+    (**(code **)(_g_phyFuns + 0x60))
+              (0x69,0,6,3,0,phy_tsens_attribute[param_2 * 6 + 1],*(code **)(_g_phyFuns + 0x60));
   }
-  _DAT_600c0014 = _DAT_600c0014 | 0x400;
-  _DAT_600c001c = _DAT_600c001c & 0xfffffbff;
-  _DAT_6004005c = _DAT_6004005c | 0x8000;
-  _DAT_60040058 = _DAT_60040058 | 0x400000;
+  _DAT_60096088 = _DAT_60096088 & 0xff7fffff | 0x400000;
+  _DAT_6000e05c = _DAT_6000e05c | 0x8000;
+  _DAT_6000e058 = _DAT_6000e058 | 0x400000;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c0491ee7cc60288244268b04b523637a6e297739
- * https://github.com/espressif/esp-phy-lib/commit/c0491ee7cc60288244268b04b523637a6e297739
- * Upstream date: 2022-04-22 15:59:29 +0800
- * Upstream subject: support libphy&libbtbb for esp32h2beta2
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_tx_cca_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,41 +17,38 @@ void bt_bb_tx_cca_set(int param_1,uint param_2,int param_3,uint param_4,uint par
 
 {
   uint uVar1;
-  uint uVar2;
   uint in_stack_00000000;
   uint in_stack_00000004;
   
   if (param_1 == 0) {
-    _DAT_600110b8 = _DAT_600110b8 & 0x7fffffff;
+    _DAT_600a20b8 = _DAT_600a20b8 & 0x7fffffff;
   }
   else {
-    _DAT_600110b8 = _DAT_600110b8 | 0x80000000;
+    _DAT_600a20b8 = _DAT_600a20b8 | 0x80000000;
   }
-  _DAT_600110b8 = (param_2 & 0xff) << 1 | _DAT_600110b8 & 0xfffffe01 | 1;
+  _DAT_600a20b8 = (param_2 & 0xff) << 1 | _DAT_600a20b8 & 0xfffffe01 | 1;
   if (param_3 == 0) {
-    _DAT_600110bc = _DAT_600110bc & 0xbfffffff;
+    _DAT_600a20bc = _DAT_600a20bc & 0xbfffffff;
   }
   else {
-    _DAT_600110bc = _DAT_600110bc | 0x40000000;
+    _DAT_600a20bc = _DAT_600a20bc | 0x40000000;
   }
-  uVar1 = (param_4 & 0xf) << 0x1a;
-  uVar2 = (param_5 & 0xf) << 0x16;
+  _DAT_600a20bc = (param_5 & 0x1f) << 0x14 | (param_4 & 0x1f) << 0x19 | _DAT_600a20bc & 0xc00fffff;
   if (param_6 == 0) {
-    uVar2 = uVar2 | uVar1 | _DAT_600110bc & 0xc01fffff;
+    _DAT_600a20c0 = _DAT_600a20c0 & 0xffdfffff;
   }
   else {
-    uVar2 = uVar2 | uVar1 | _DAT_600110bc & 0xc03fffff | 0x200000;
+    _DAT_600a20c0 = _DAT_600a20c0 | 0x200000;
   }
   uVar1 = (param_7 & 0xff) << 0xd;
   if (param_8 == 0) {
-    uVar1 = uVar1 | uVar2 & 0xffe00fff;
+    uVar1 = uVar1 | _DAT_600a20c0 & 0xffe00fff;
   }
   else {
-    uVar1 = uVar1 | uVar2 & 0xffe01fff | 0x1000;
+    uVar1 = uVar1 | _DAT_600a20c0 & 0xffe01fff | 0x1000;
   }
-  _DAT_600110bc =
-       (in_stack_00000004 & 0xf) << 4 | (in_stack_00000000 & 0xf) << 8 | uVar1 & 0xfffff00f |
-       0x80000000;
+  _DAT_600a20c0 =
+       (in_stack_00000004 & 0x1f) << 2 | (in_stack_00000000 & 0x1f) << 7 | uVar1 & 0xfffff003;
   return;
 }
 

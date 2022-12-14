@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_i2c.o -> i2c_bbpll_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,20 +12,17 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void i2c_bbpll_set(void)
+void i2c_bbpll_set(int param_1)
 
 {
-  (**(code **)(_g_phyFuns + 0x1bc))(0x66,0,9,3,2,3,*(code **)(_g_phyFuns + 0x1bc));
-  (**(code **)(_g_phyFuns + 0x1bc))(0x66,0,9,5,4,2,*(code **)(_g_phyFuns + 0x1bc));
-  (**(code **)(_g_phyFuns + 0x1bc))(0x66,0,10,1,0,1,*(code **)(_g_phyFuns + 0x1bc));
-  (**(code **)(_g_phyFuns + 0x1bc))(0x66,0,4,3,2,3,*(code **)(_g_phyFuns + 0x1bc));
-  DAT_000110d5 = (**(code **)(_g_phyFuns + 0x1ac))(0x66,0,9,*(code **)(_g_phyFuns + 0x1ac));
-  DAT_000110d6 = (**(code **)(_g_phyFuns + 0x1ac))(0x66,0,10,*(code **)(_g_phyFuns + 0x1ac));
-  phy_bbpll_i2c = (**(code **)(_g_phyFuns + 0x1ac))(0x66,0,4,*(code **)(_g_phyFuns + 0x1ac));
-  if (bbpll_en_usb == '\0') {
-    (**(code **)(_g_phyFuns + 0x1bc))(0x66,0,5,7,7,0,*(code **)(_g_phyFuns + 0x1bc));
+  if (param_1 != 0) {
+    (**(code **)(_g_phyFuns + 0x60))(0x66,0,4,3,2,2,*(code **)(_g_phyFuns + 0x60));
+    DAT_0001104e = (**(code **)(_g_phyFuns + 0x50))(0x66,0,4,*(code **)(_g_phyFuns + 0x50));
+    return;
   }
-  DAT_00010949 = (**(code **)(_g_phyFuns + 0x1ac))(0x66,0,5,*(code **)(_g_phyFuns + 0x1ac));
+                    /* WARNING: Could not recover jumptable at 0x00010542. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_g_phyFuns + 0x58))(0x66,0,4,DAT_0001104e);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_basic.o -> chan14_mic_cfg
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,12 +18,12 @@ void chan14_mic_cfg(int param_1)
   char cVar1;
   
   if (param_1 == 1) {
-    _DAT_6001c400 = _DAT_6001c400 & 0xffff9fff | 0x2000;
-    cVar1 = DAT_000110f0;
+    _DAT_600a7400 = _DAT_600a7400 & 0xffff9fff | 0x2000;
+    cVar1 = DAT_00011034;
   }
   else {
-    _DAT_6001c400 = _DAT_6001c400 | 0x6000;
-    cVar1 = DAT_000110a4;
+    _DAT_600a7400 = _DAT_600a7400 | 0x6000;
+    cVar1 = DAT_00011016;
   }
   phy_set_most_tpw((int)cVar1);
   return;

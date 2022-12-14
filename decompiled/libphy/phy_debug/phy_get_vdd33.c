@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
+ * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
+ * Upstream date: 2022-12-14 13:04:45 +0800
+ * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
  * Source: libphy -> phy_debug.o -> phy_get_vdd33
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,19 +16,14 @@ uint phy_get_vdd33(void)
 
 {
   int iVar1;
-  uint uVar2;
   
-  iVar1 = get_bias_ref_code();
-  (**(code **)(_g_phyFuns + 0x1d4))(*(code **)(_g_phyFuns + 0x1d4));
-  (**(code **)(_g_phyFuns + 0x1cc))(4,1,2,*(code **)(_g_phyFuns + 0x1cc));
-  (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,9,7,7,1,*(code **)(_g_phyFuns + 0x1bc));
-  uVar2 = (**(code **)(_g_phyFuns + 0x150))(3,*(code **)(_g_phyFuns + 0x150));
-  if (iVar1 != 0) {
-    uVar2 = (int)(uVar2 * 0xf00) / iVar1 & 0xffff;
-  }
-  (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,9,7,7,0,*(code **)(_g_phyFuns + 0x1bc));
-  (**(code **)(_g_phyFuns + 0x1cc))(4,1,0,*(code **)(_g_phyFuns + 0x1cc));
-  (**(code **)(_g_phyFuns + 0x1d8))(*(code **)(_g_phyFuns + 0x1d8));
-  return uVar2;
+  pbus_debugmode();
+  (**(code **)(_g_phyFuns + 0x74))(5,1,0x80,*(code **)(_g_phyFuns + 0x74));
+  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,0xd,1,*(code **)(_g_phyFuns + 0x58));
+  iVar1 = get_sar2_vol_new(3);
+  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,0xd,0,*(code **)(_g_phyFuns + 0x58));
+  (**(code **)(_g_phyFuns + 0x74))(5,1,0,*(code **)(_g_phyFuns + 0x74));
+  pbus_workmode();
+  return (iVar1 * 0xf8c) / 1000 & 0xffff;
 }
 
