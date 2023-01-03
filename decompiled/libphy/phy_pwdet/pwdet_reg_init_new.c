@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_pwdet.o -> pwdet_reg_init_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,6 +21,7 @@ void pwdet_reg_init_new(void)
   _DAT_600a0810 = _DAT_600a0810 & 0xff8ff00f | 0x200380;
   _DAT_600a0814 = _DAT_600a0814 & 0xffffff00 | 8;
   _DAT_6000e000 = _DAT_6000e000 | 0x20000000;
+  _DAT_600b1054 = _DAT_600b1054 & 0x1fffffff;
   return;
 }
 

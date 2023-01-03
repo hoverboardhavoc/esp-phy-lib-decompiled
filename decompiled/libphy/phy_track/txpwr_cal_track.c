@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_track.o -> txpwr_cal_track
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void txpwr_cal_track(int param_1,int param_2,int param_3)
   undefined4 uStack_28;
   undefined4 uStack_24;
   
-  uStack_28 = 0x69ffc4;
+  uStack_28 = 0x4bffc4;
   uStack_24 = 0x69ffc4;
   iVar3 = (int)_DAT_0001112e;
   iVar1 = abs_temp(_phy_param - iVar3);

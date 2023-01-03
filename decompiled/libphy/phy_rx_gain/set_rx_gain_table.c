@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_rx_gain.o -> set_rx_gain_table
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,21 +45,20 @@ void set_rx_gain_table(void)
   undefined1 auStack_184 [16];
   undefined1 auStack_174 [348];
   
-  memcpy(auStack_184,&DAT_0001078c,0x10);
-  memcpy(auStack_1d4,&DAT_0001079c,0xe);
+  memcpy(auStack_184,&DAT_00010794,0x10);
+  memcpy(auStack_1d4,&DAT_000107a4,0xe);
   uVar1 = _rfrx_gain_index_new;
-  uStack_1c4 = 0x6060a0e;
+  uStack_1c4 = 0x6060a0b;
   uStack_1c0 = 0x606;
   uStack_1b4 = 0x5060e0b;
   uStack_194 = 0x8080000;
   uStack_1b0 = 0x806;
-  uStack_1be = 8;
-  uStack_1a4 = 0x8080800;
-  uStack_190 = 0x80808;
+  uStack_1a0 = 0x8080808;
   uStack_1bc = 0;
   uStack_1ba = 0;
   uStack_1b8 = 0;
   uStack_1b6 = 0;
+  uStack_1be = 8;
   uStack_1ae = 0;
   uStack_1ac = 0;
   uStack_1aa = 0;
@@ -68,10 +67,11 @@ void set_rx_gain_table(void)
   uStack_19c = 0;
   uStack_198 = 0;
   uStack_196 = 0;
-  uStack_1a0 = 0x8080808;
+  uStack_1a4 = 0x8080803;
   uStack_18c = 0;
   uStack_188 = 0;
   uStack_186 = 0;
+  uStack_190 = 0x80808;
   if ((_DAT_000110b4 & 0x200) == 0) {
     if ((_DAT_000110b4 & 0x80) == 0) {
       set_rx_gain_cal_dc_new(1,&phy_param);
@@ -79,7 +79,7 @@ void set_rx_gain_table(void)
       _DAT_000110b4 = _DAT_000110b4 | 0x80;
     }
     uVar1 = uVar1 >> 8 & 1;
-    uVar2 = gen_rx_gain_table_new(auStack_174,0x20,auStack_184,&uStack_1c4,&uStack_1a4,8,uVar1);
+    uVar2 = gen_rx_gain_table_new(auStack_174,0x21,auStack_184,&uStack_1c4,&uStack_1a4,8,uVar1);
     if (uVar2 < 0x50) {
       DAT_00011131 = (byte)uVar2;
     }

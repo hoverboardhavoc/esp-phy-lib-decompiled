@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  rtc_printf("libbtbb version: %s, %s, %s\n","c44ca13","Dec  7 2022","14:01:28");
+  rtc_printf("libbtbb version: %s, %s, %s\n","d208bbb","Dec 20 2022","14:21:45");
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_hw_freq.o -> freq_reg_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void freq_reg_init(uint param_1,int param_2)
   ;
   _DAT_600a00d4 = _DAT_600a00d4 & 0xfffff87f | 0x300;
   _DAT_600a00c8 = 0x33000492;
-  _DAT_600a00cc = 0x49836e60;
+  _DAT_600a00cc = 0x49836e58;
   return;
 }
 

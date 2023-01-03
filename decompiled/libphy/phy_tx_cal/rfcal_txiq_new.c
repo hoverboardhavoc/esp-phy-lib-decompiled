@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_tx_cal.o -> rfcal_txiq_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,8 +24,8 @@ void rfcal_txiq_new(undefined4 param_1,ushort *param_2,short param_3,undefined4 
   byte bStack_34;
   char cStack_33;
   
-  uVar1 = _DAT_00011016;
-  cVar3 = '@' - DAT_00011033;
+  uVar1 = _DAT_0001101e;
+  cVar3 = '@' - DAT_0001103b;
   _DAT_600a0450 = _DAT_600a0450 & 0xffffbfff | 0x2000;
   (**(code **)(_g_phyFuns + 0x94))(*(code **)(_g_phyFuns + 0x94));
   (**(code **)(_g_phyFuns + 0x74))(1,2,0,*(code **)(_g_phyFuns + 0x74));
@@ -37,10 +37,10 @@ void rfcal_txiq_new(undefined4 param_1,ushort *param_2,short param_3,undefined4 
   else if (param_5 == 2) {
     (**(code **)(_g_phyFuns + 0xc))(1,*(code **)(_g_phyFuns + 0xc));
     txdc_cal_new(param_1);
-    goto _L44;
+    goto _L71;
   }
   pbus_set_dco(param_1);
-_L44:
+_L71:
   uVar2 = _DAT_600a0420;
   uVar4 = get_power_atten((int)param_3,param_4,cVar3,uVar1,0);
   txiq_cover(uVar4,(int)param_3,&bStack_34,0,0);

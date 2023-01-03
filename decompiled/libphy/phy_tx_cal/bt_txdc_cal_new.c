@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_tx_cal.o -> bt_txdc_cal_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,18 +18,18 @@ void bt_txdc_cal_new(void)
   ushort uVar1;
   code *pcVar2;
   
-  if (-1 < (int)(_DAT_000110ac << 0x13)) {
+  if (-1 < (int)(_DAT_000110b4 << 0x13)) {
     pbus_debugmode();
     (**(code **)(_g_phyFuns + 0x8c))(0xf,0,*(code **)(_g_phyFuns + 0x8c));
     pcVar2 = *(code **)(_g_phyFuns + 0x74);
     uVar1 = (**(code **)(_g_phyFuns + 0x78))(1,1,*(code **)(_g_phyFuns + 0x78));
     (*pcVar2)(1,1,uVar1 | 2);
     (**(code **)(_g_phyFuns + 0x74))
-              (4,2,(uint)(byte)pbus_set_dco << 3,*(code **)(_g_phyFuns + 0x74));
+              (4,2,(uint)(byte)pbus_workmode << 3,*(code **)(_g_phyFuns + 0x74));
     txdc_cal_new(&phy_param);
     (**(code **)(_g_phyFuns + 0x84))(0,*(code **)(_g_phyFuns + 0x84));
     pbus_workmode();
-    _DAT_000110ac = _DAT_000110ac | 0x1000;
+    _DAT_000110b4 = _DAT_000110b4 | 0x1000;
   }
   return;
 }

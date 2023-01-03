@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_rx_gain.o -> wr_rx_gain_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,32 +12,33 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void wr_rx_gain_mem(int param_1,uint param_2,int param_3,int param_4)
+void wr_rx_gain_mem(int param_1,char param_2,uint *param_3,int param_4)
 
 {
   ushort uVar1;
   ushort uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  uint uVar5;
+  uint uVar3;
+  undefined4 uVar4;
+  char cVar5;
   int iVar6;
-  ushort *puVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
+  uint uVar7;
+  int iVar8;
+  uint uVar9;
+  ushort *puVar10;
   uint uVar11;
   uint uVar12;
-  uint uVar13;
+  int iVar13;
+  uint uVar14;
   undefined4 uStack_48;
   uint uStack_44;
   
   if (param_1 == 0) {
-    iVar10 = 0;
-    iVar9 = 8;
+    cVar5 = '\0';
+    iVar13 = 8;
   }
   else {
-    iVar10 = 0x50;
-    iVar9 = 7;
+    cVar5 = 'P';
+    iVar13 = 7;
   }
   uStack_48 = 0x1000100;
   uStack_44 = 0x1000100;
@@ -46,41 +47,39 @@ void wr_rx_gain_mem(int param_1,uint param_2,int param_3,int param_4)
   set_rxclk_en(1);
   set_txclk_en(1);
   uVar12 = 0x100;
-  uVar11 = 0x100;
-  for (uVar8 = 0; param_2 != uVar8; uVar8 = uVar8 + 1) {
-    uVar13 = *(uint *)(uVar8 * 4 + param_3);
-    iVar4 = (**(code **)(_g_phyFuns + 0xa8))(uVar13 >> 4 & 0x3f,*(code **)(_g_phyFuns + 0xa8));
-    uVar5 = rfrx_gain_index_new(param_1,uVar13 >> 0xc & 0xffff);
-    iVar6 = 7;
-    if (iVar9 == 7) {
-      iVar6 = 6;
+  param_2 = param_2 + cVar5;
+  uVar14 = 0x100;
+  uVar9 = 10;
+  for (; param_2 != cVar5; cVar5 = cVar5 + '\x01') {
+    uVar11 = *param_3;
+    iVar6 = (**(code **)(_g_phyFuns + 0xa8))(uVar11 >> 4 & 0x3f,*(code **)(_g_phyFuns + 0xa8));
+    uVar7 = rfrx_gain_index_new(param_1,uVar11 >> 0xc & 0xffff);
+    iVar8 = 7;
+    if (iVar13 == 7) {
+      iVar8 = 6;
     }
-    if (iVar6 <= (int)uVar5) {
-      uVar5 = iVar4 + uVar5;
+    uVar3 = uVar7;
+    if (iVar8 <= (int)uVar7) {
+      uVar3 = iVar6 + uVar7;
     }
-    puVar7 = (ushort *)((uVar5 & 0x7f) * 4 + param_4);
-    uVar1 = *puVar7;
-    uVar2 = puVar7[1];
-    uVar3 = *(undefined4 *)puVar7;
-    if (param_1 == 0) {
-      if ((uVar8 & 1) == 0) {
-        (**(code **)(_g_phyFuns + 0x7c))(uVar13,*(code **)(_g_phyFuns + 0x7c));
-        uStack_48 = uVar3;
-        pbus_rx_dco_cal_new(0x800,&uStack_48,10,0,0,1);
-        uVar11 = uStack_44 & 0xffff;
-        uVar12 = uStack_44 >> 0x10;
-      }
+    puVar10 = (ushort *)((uVar3 & 0x7f) * 4 + param_4);
+    uVar1 = *puVar10;
+    uVar2 = puVar10[1];
+    uVar4 = *(undefined4 *)puVar10;
+    if ((param_1 == 0) && ((uVar9 != uVar7 || ((uVar11 & 0x2ff) == 0x200)))) {
+      (**(code **)(_g_phyFuns + 0x7c))(uVar11,*(code **)(_g_phyFuns + 0x7c));
+      uStack_48 = uVar4;
+      pbus_rx_dco_cal_new(0x800,&uStack_48,10,0,0,1);
+      uVar14 = uStack_44 & 0xffff;
+      uVar12 = uStack_44 >> 0x10;
     }
-    else {
-      uVar12 = 0x100;
-      uVar11 = 0x100;
-    }
-    write_gain_mem_new(_DAT_000110e4 & 0x1fff | (uint)uVar2 << 0x16 | uVar11 << 0x1f | uVar12 << 0xd
-                       ,uVar11 >> 1 |
-                        (uint)DAT_00011012 << 0x1d | (uVar13 & 7) << 0x11 |
-                        (uVar13 >> 4 & 0x7f) << 0x14 | (uint)uVar1 << 8,
-                       (uint)(DAT_00011012 >> 6) | (uVar13 >> 0xc & 7) << 2 | uVar13 >> 10 & 0xe0,
-                       iVar10 + (uVar8 & 0xff) & 0xff);
+    write_gain_mem_new(_DAT_000110e4 & 0x1fff | (uint)uVar2 << 0x16 | uVar14 << 0x1f | uVar12 << 0xd
+                       ,(uint)DAT_00011012 << 0x1d | (uVar11 & 7) << 0x11 |
+                        (uVar11 >> 4 & 0x7f) << 0x14 | (uint)uVar1 << 8 | uVar14 >> 1,
+                       uVar11 >> 10 & 0xe0 | (uVar11 >> 0xc & 7) << 2 | (uint)(DAT_00011012 >> 6),
+                       cVar5);
+    param_3 = param_3 + 1;
+    uVar9 = uVar7;
   }
   set_rxclk_en(0);
   set_txclk_en(0);

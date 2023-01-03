@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_rx_cal.o -> set_rx_gain_cal_dc_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -74,7 +74,7 @@ void set_rx_gain_cal_dc_new(int param_1,undefined2 *param_2)
       uVar2 = (uint)auStack_60[uVar9] << 4 | 0x7f000;
     }
     (**(code **)(_g_phyFuns + 0x7c))(uVar2,*(code **)(_g_phyFuns + 0x7c));
-    if (auStack_60[uVar9] < 0x3d) {
+    if (auStack_60[uVar9] < 0x39) {
       pbus_rx_dco_cal_new(0x800,&uStack_68,10,param_1,0,0);
     }
     uVar8 = uVar8 + 1;

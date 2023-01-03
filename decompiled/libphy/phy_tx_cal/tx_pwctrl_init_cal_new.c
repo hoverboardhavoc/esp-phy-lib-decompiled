@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_tx_cal.o -> tx_pwctrl_init_cal_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ void tx_pwctrl_init_cal_new(int param_1,char *param_2,char *param_3,int param_4)
   char *pcVar9;
   char acStack_41 [13];
   
-  acStack_41[0] = '8' - DAT_00011033;
+  acStack_41[0] = '8' - DAT_0001103b;
   if (param_1 == 0) {
     cVar6 = '\x1e';
     cVar3 = '(';
@@ -35,7 +35,7 @@ void tx_pwctrl_init_cal_new(int param_1,char *param_2,char *param_3,int param_4)
   else {
     cVar6 = '(';
     cVar3 = '\x0e';
-    uVar7 = DAT_0001100b;
+    uVar7 = DAT_00011013;
   }
   bVar5 = (byte)index_to_txbbgain & 1;
   if (param_1 != 0) {
@@ -44,12 +44,12 @@ void tx_pwctrl_init_cal_new(int param_1,char *param_2,char *param_3,int param_4)
   iVar8 = 0;
   do {
     uVar2 = (&_LANCHOR0)[iVar8];
-    set_channel_rfpll_freq(uVar2,DAT_00011057,0);
+    set_channel_rfpll_freq(uVar2,DAT_0001105f,0);
     if (param_1 == 0) {
       (**(code **)(_g_phyFuns + 100))(&phy_param,uVar2,*(code **)(_g_phyFuns + 100));
     }
     pcVar9 = (char *)(param_4 + iVar8);
-    rfcal_pwrctrl(uVar7,acStack_41,1,cVar3,pcVar9,_DAT_00011016,(int)(char)get_power_atten,bVar5);
+    rfcal_pwrctrl(uVar7,acStack_41,1,cVar3,pcVar9,_DAT_0001101e,(int)(char)get_power_atten,bVar5);
     pcVar4 = param_2 + iVar8;
     iVar8 = iVar8 + 1;
     cVar1 = *pcVar9;

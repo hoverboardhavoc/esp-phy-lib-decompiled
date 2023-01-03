@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_init.o -> rf_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,13 +25,15 @@ void rf_init(void)
   pwdet_reg_init_new();
   fe_reg_init();
   reg_set_new();
-  tsens_read_init_new(1,phy_param);
+  tsens_read_init_new(1,DAT_00010a42);
   tx_pwctrl_bg_init();
   _DAT_600a0910 = _DAT_600a0910 & 0xfffffcff;
   i2c_rc_cal_set(3,1);
   rc_cal_init();
   filter_dcap_set();
+  DAT_00010bea = (**(code **)(g_phyFuns + 0x50))(0x62,1,0xf,*(code **)(g_phyFuns + 0x50));
   phy_i2c_init1();
+  rfpll_chgp_cal();
   phy_i2c_master_cmd_mem_init();
   iVar1 = (**(code **)(g_phyFuns + 0x5c))(0x69,0,4,3,0,*(code **)(g_phyFuns + 0x5c));
   if (iVar1 == 0) {

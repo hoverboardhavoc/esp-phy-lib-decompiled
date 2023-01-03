@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_track.o -> bt_track_pll_cap
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ void bt_track_pll_cap(void)
     }
     bt_track_tx_power(DAT_0001100b,DAT_00011009);
   }
-                    /* WARNING: Could not recover jumptable at 0x00010328. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010330. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*(code *)_g_phyFuns[1])(uVar1);
   return;

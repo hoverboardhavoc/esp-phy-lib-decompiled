@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_pbus.o -> set_pbus_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,10 +57,10 @@ void set_pbus_mem(void)
   local_b0[6] = 0xf50000;
   local_b0[2] = 0x1713ff;
   local_b0[7] = 0xf60000;
-  memcpy(auStack_10c + 3,&DAT_00010478,0x14);
-  memcpy(local_b0 + 8,&DAT_0001048c,0x20);
-  memcpy(&uStack_ec,&DAT_000104ac,0x14);
-  memcpy(local_120 + 2,&DAT_000104c0,0xc);
+  memcpy(auStack_10c + 3,&DAT_000104e4,0x14);
+  memcpy(local_b0 + 8,&DAT_000104f8,0x20);
+  memcpy(&uStack_ec,&DAT_00010518,0x14);
+  memcpy(local_120 + 2,&DAT_0001052c,0xc);
   local_120[0] = 0x5401ff;
   iVar6 = 0;
   do {
@@ -94,7 +94,7 @@ void set_pbus_mem(void)
   uVar2 = 0;
   puVar5 = (uint *)&DAT_600a08e0;
   iVar8 = 0;
-_L32:
+_L34:
   uVar1 = iVar6 + uVar2;
   *puVar5 = ~(0xffff << iVar7) & *puVar5 | (((uVar1 - 1) * 0x100 | uVar2) & 0xffff) << iVar7;
   uVar2 = (uVar2 + 0x200) * 0x800;
@@ -120,7 +120,7 @@ _L32:
     iVar7 = 0x10;
     puVar5 = (uint *)&DAT_600a08e0;
     iVar8 = iVar9;
-    goto _L32;
+    goto _L34;
   case 1:
     puVar4 = local_b0 + 8;
     iVar6 = 8;
@@ -135,60 +135,60 @@ _L32:
     puVar4 = local_120 + 2;
     iVar6 = 3;
     iVar7 = 0;
-    goto _L55;
+    goto _L57;
   case 4:
     iVar6 = 1;
     iVar7 = 0x10;
     puVar4 = local_120;
-_L55:
+_L57:
     puVar5 = (uint *)&DAT_600a08e8;
     iVar8 = iVar9;
-    goto _L32;
+    goto _L34;
   case 5:
     puVar4 = local_70;
     iVar6 = 8;
     iVar7 = 0;
     puVar5 = (uint *)&DAT_600a08ec;
     iVar8 = iVar9;
-    goto _L32;
+    goto _L34;
   case 6:
     puVar4 = &uStack_d8;
     iVar6 = 5;
     iVar7 = 0x10;
     puVar5 = (uint *)&DAT_600a08ec;
     iVar8 = iVar9;
-    goto _L32;
+    goto _L34;
   case 7:
     puVar4 = local_50;
     iVar6 = 8;
     iVar7 = 0;
     puVar5 = (uint *)&DAT_600a08f0;
     iVar8 = iVar9;
-    goto _L32;
+    goto _L34;
   case 8:
     puVar4 = &uStack_c4;
     iVar6 = 5;
     iVar7 = 0x10;
     puVar5 = (uint *)&DAT_600a08f0;
     iVar8 = iVar9;
-    goto _L32;
+    goto _L34;
   case 9:
     puVar4 = auStack_10c;
     iVar6 = 3;
     iVar7 = 0;
     iVar8 = iVar9;
-    goto _L32;
+    goto _L34;
   default:
-    goto _L33;
+    goto _L35;
   }
   puVar5 = (uint *)&DAT_600a08e4;
   iVar8 = iVar9;
-  goto _L32;
-_L33:
+  goto _L34;
+_L35:
   puVar4 = local_120 + 1;
   iVar6 = 1;
   iVar7 = 0x10;
   iVar8 = iVar9;
-  goto _L32;
+  goto _L34;
 }
 

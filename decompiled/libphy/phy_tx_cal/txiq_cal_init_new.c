@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_tx_cal.o -> txiq_cal_init_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void txiq_cal_init_new(void)
   code cVar3;
   undefined1 auStack_18 [12];
   
-  if (-1 < (int)(_DAT_000110ac << 0x11)) {
+  if (-1 < (int)(_DAT_000110b4 << 0x11)) {
     iVar1 = (int)(short)(char)get_power_atten;
     cVar3 = get_power_atten;
     if ((char)get_power_atten < '\0') {
@@ -32,7 +32,7 @@ void txiq_cal_init_new(void)
     }
     cVar2 = get_data_sat((iVar1 + -0x14) * 0x10000 >> 0x10,0x78,0);
     rfcal_txiq_new(0,auStack_18,&phy_param,0x80,(int)cVar2,2);
-    _DAT_000110ac = _DAT_000110ac | 0x4000;
+    _DAT_000110b4 = _DAT_000110b4 | 0x4000;
   }
   return;
 }

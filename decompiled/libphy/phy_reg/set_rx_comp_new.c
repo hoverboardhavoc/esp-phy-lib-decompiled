@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
+ * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
+ * Upstream date: 2023-01-03 13:49:44 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_reg.o -> set_rx_comp_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,8 @@
 void set_rx_comp_new(void)
 
 {
-  _DAT_600a702c = _DAT_600a702c & 0xffffff00 | 0xe7;
-  _DAT_600a70a0 = _DAT_600a70a0 & 0xffffff | 0xe7000000;
+  _DAT_600a702c = _DAT_600a702c & 0xffffff00 | 0xe9;
+  _DAT_600a70a0 = _DAT_600a70a0 & 0xffffff | 0xe9000000;
   return;
 }
 
