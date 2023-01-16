@@ -3,31 +3,22 @@
  * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
  * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
- * Source: libphy -> phy_init.o -> rf_cal_data_recovery
+ * Source: libphy -> phy_tx_gain.o -> wifi_11g_rate_chg_new
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000107ca) */
-/* WARNING: Removing unreachable block (ram,0x000107cc) */
-
-void rf_cal_data_recovery(void)
+undefined1 wifi_11g_rate_chg_new(int param_1)
 
 {
-  undefined4 *puVar1;
-  int iVar2;
-  undefined4 uVar3;
+  uint uVar1;
   
-  puVar1 = &phy_param;
-  iVar2 = 0xc;
-  do {
-    uVar3 = phy_byte_to_word();
-    *puVar1 = uVar3;
-    iVar2 = iVar2 + 4;
-    puVar1 = puVar1 + 1;
-  } while (iVar2 != 0x1cc);
-  return;
+  uVar1 = param_1 - 8U & 0xff;
+  if (uVar1 < 8) {
+    return (&_LANCHOR0)[uVar1];
+  }
+  return 0;
 }
 

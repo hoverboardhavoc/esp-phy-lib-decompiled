@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_rx_cal.o -> set_lb_txiq_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,11 +14,11 @@ void set_lb_txiq_new(undefined4 param_1)
 
 {
   char cStack_14;
-  char cStack_13;
+  byte bStack_13;
   
   get_iq_value(&cStack_14,param_1);
   txiq_set_reg((int)cStack_14,1);
-  txiq_set_reg((int)cStack_13,0);
+  txiq_set_reg((int)((bStack_13 - 4) * 0x1000000) >> 0x18,0);
   return;
 }
 

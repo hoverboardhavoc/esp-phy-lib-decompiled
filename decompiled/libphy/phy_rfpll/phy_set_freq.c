@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_rfpll.o -> phy_set_freq
  *
@@ -15,8 +15,8 @@
 void phy_set_freq(undefined4 param_1,undefined4 param_2)
 
 {
-  _chan_to_freq = (undefined2)param_2;
-  set_rf_freq_offset(DAT_0001104f,param_1,param_2);
+  _set_channel_rfpll_freq = (undefined2)param_2;
+  set_rf_freq_offset(DAT_00011063,param_1,param_2);
   return;
 }
 

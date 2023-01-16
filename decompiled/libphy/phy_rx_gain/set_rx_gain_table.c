@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_rx_gain.o -> set_rx_gain_table
  *
@@ -45,8 +45,8 @@ void set_rx_gain_table(void)
   undefined1 auStack_184 [16];
   undefined1 auStack_174 [348];
   
-  memcpy(auStack_184,&DAT_00010794,0x10);
-  memcpy(auStack_1d4,&DAT_000107a4,0xe);
+  memcpy(auStack_184,&DAT_000106d4,0x10);
+  memcpy(auStack_1d4,&DAT_000106e4,0xe);
   uVar1 = _rfrx_gain_index_new;
   uStack_1c4 = 0x6060a0b;
   uStack_1c0 = 0x606;
@@ -96,6 +96,7 @@ void set_rx_gain_table(void)
     }
     wr_rx_gain_mem(1,DAT_00011130 + '\x01',auStack_174,&phy_param);
     _DAT_000110b4 = _DAT_000110b4 | 0x200;
+    _DAT_00011058 = _phy_param;
   }
   _DAT_600a702c = (DAT_00011131 & 0x7f) << 8 | _DAT_600a702c & 0xffff80ff;
   uVar2 = (uint)DAT_00011131;
@@ -105,7 +106,6 @@ void set_rx_gain_table(void)
   _DAT_600a713c = uVar2 << 0x12 | _DAT_600a713c & 0xfe03ffff;
   bt_gain_offset(0x50);
   iq_corr_enable();
-  _DAT_00011058 = _phy_param;
   return;
 }
 

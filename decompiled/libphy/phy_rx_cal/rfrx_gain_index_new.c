@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_rx_cal.o -> rfrx_gain_index_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,8 +19,8 @@ uint rfrx_gain_index_new(int param_1,uint param_2)
   undefined1 local_30 [16];
   undefined1 auStack_20 [16];
   
-  memcpy(auStack_20,&DAT_00010b18,0x10);
-  memcpy(local_30,&DAT_00010b28,0xe);
+  memcpy(auStack_20,&DAT_00010b1c,0x10);
+  memcpy(local_30,&DAT_00010b2c,0xe);
   uVar3 = 0;
   while( true ) {
     uVar2 = uVar3 & 0xff;

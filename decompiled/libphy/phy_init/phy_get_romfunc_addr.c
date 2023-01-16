@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_init.o -> phy_get_romfunc_addr
  *
@@ -35,6 +35,8 @@ void phy_get_romfunc_addr(void)
   *(undefined **)(iVar1 + 8) = &ram_set_chan_cal_interp;
   *(undefined **)(iVar1 + 0x10) = &ram_bb_bss_cbw40;
   *(undefined **)(iVar1 + 0x94) = &ram_txcal_debuge_mode;
+  *(undefined **)(iVar1 + 0x90) = &ram_set_loopback_gain;
+  *(undefined **)(iVar1 + 0x84) = &ram_pbus_xpd_rx_on;
   return;
 }
 

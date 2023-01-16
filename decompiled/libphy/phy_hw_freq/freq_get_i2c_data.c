@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_hw_freq.o -> freq_get_i2c_data
  *
@@ -56,7 +56,7 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,char *param_3,int
       param_2[2] = 0;
       param_3[2] = cVar8;
       *(uint *)(param_4 + 8) = uVar3 & 0xf7;
-      goto _L54;
+      goto _L55;
     case 3:
       param_1[3] = 99;
       param_2[3] = 6;
@@ -82,33 +82,33 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,char *param_3,int
       param_2[7] = 0;
       param_3[7] = cVar8;
       *(uint *)(param_4 + 0x1c) = uVar3 & 0xff | 8;
-      goto _L54;
+      goto _L55;
     case 8:
       param_1[8] = 0x62;
       param_2[8] = 0xb;
       param_3[8] = cVar8;
       *(undefined4 *)(param_4 + 0x20) = uVar2;
-_L54:
+_L55:
       cVar8 = cVar8 + '\x01';
-      goto _L37;
+      goto _L38;
     case 9:
       param_1[9] = 0x6b;
       param_2[9] = 6;
       param_3[9] = cVar6;
       *(uint *)(param_4 + 0x24) = uVar9 << 8 | uVar9 << 0x10 | uVar5;
-      goto _L53;
+      goto _L54;
     case 10:
       param_1[10] = 0x67;
       param_2[10] = 3;
       param_3[10] = cVar6;
       *(uint *)(param_4 + 0x28) = uVar4 << 0x10 | uVar4 | (uVar4 & 0xfb) << 8;
-_L53:
+_L54:
       cVar6 = cVar6 + '\x01';
     default:
-      goto _L37;
+      goto _L38;
     }
     cVar1 = cVar1 + '\x01';
-_L37:
+_L38:
     uVar7 = uVar7 + 1 & 0xff;
   } while( true );
 }

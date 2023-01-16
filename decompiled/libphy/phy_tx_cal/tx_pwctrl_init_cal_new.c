@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_tx_cal.o -> tx_pwctrl_init_cal_new
  *
@@ -29,7 +29,7 @@ void tx_pwctrl_init_cal_new(int param_1,char *param_2,char *param_3,int param_4)
   acStack_41[0] = '8' - DAT_0001103b;
   if (param_1 == 0) {
     cVar6 = '\x1e';
-    cVar3 = '(';
+    cVar3 = ' ';
     uVar7 = 0x80;
   }
   else {

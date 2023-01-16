@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_init.o -> phy_wakeup_init_
  *
@@ -30,7 +30,7 @@ void phy_wakeup_init_(void)
   phy_i2c_init1();
   freq_i2c_data_write_new();
   filter_dcap_set();
-  write_chan_freq(DAT_00010b48);
+  write_chan_freq(DAT_00010b68);
   tx_pwctrl_bg_init();
   set_pbus_reg();
   phy_reg_init();
@@ -40,8 +40,8 @@ void phy_wakeup_init_(void)
   enable_agc();
   phy_en_hw_set_freq();
   phy_bbpll_cal(0);
-  DAT_00010a43 = 0;
-                    /* WARNING: Could not recover jumptable at 0x00010618. Too many branches */
+  DAT_00010a63 = 0;
+                    /* WARNING: Could not recover jumptable at 0x00010638. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*(code *)g_phyFuns[1])(uVar1);
   return;

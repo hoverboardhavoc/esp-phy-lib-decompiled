@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_track.o -> bt_track_tx_power
  *
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x00010200) */
+/* WARNING: Removing unreachable block (ram,0x00010202) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void bt_track_tx_power(int param_1,int param_2)
@@ -29,7 +29,7 @@ void bt_track_tx_power(int param_1,int param_2)
     iVar3 = 2;
   }
   iVar1 = abs_temp((int)_phy_param - (int)_abs_temp);
-  if (((iVar3 <= iVar1) && (iVar1 = ram_temp_to_power((int)_phy_param,iVar2), param_1 != 0)) &&
+  if (((iVar3 <= iVar1) && (iVar1 = ram_temp_to_power((int)_phy_param,iVar2,1), param_1 != 0)) &&
      (DAT_00011122 != iVar1)) {
     phy_bbpll_cal(1);
     DAT_00011122 = (char)iVar1;

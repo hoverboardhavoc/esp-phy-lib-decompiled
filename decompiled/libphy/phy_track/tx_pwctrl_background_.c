@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_track.o -> tx_pwctrl_background_
  *
@@ -23,10 +23,11 @@ void tx_pwctrl_background_(undefined4 param_1,undefined4 param_2)
     if (DAT_0001100a != '\0') {
       rfpll_cap_track(DAT_00011009);
     }
+    tx_i2c_track();
     wifi_track_tx_power(param_1,param_2);
-    rx_table_track(param_2);
+    phy_cal_param_track(10,param_2);
   }
-                    /* WARNING: Could not recover jumptable at 0x00010430. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001053c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*(code *)_g_phyFuns[1])(uVar1);
   return;

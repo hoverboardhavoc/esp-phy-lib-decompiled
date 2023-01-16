@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_rx_cal.o -> set_rx_gain_cal_dc_new
  *
@@ -33,8 +33,8 @@ void set_rx_gain_cal_dc_new(int param_1,undefined2 *param_2)
   uStack_68 = 0x1000100;
   uStack_64 = 0x1000100;
   memcpy(auStack_60,&_LANCHOR0,0xe);
-  memcpy(local_40,&DAT_00010b18,0x10);
-  memcpy(auStack_50,&DAT_00010b28,0xe);
+  memcpy(local_40,&DAT_00010b1c,0x10);
+  memcpy(auStack_50,&DAT_00010b2c,0xe);
   if (param_1 == 0) {
     iVar5 = 8;
     uVar7 = 0xd;

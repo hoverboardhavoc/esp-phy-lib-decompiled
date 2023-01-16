@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_init.o -> bb_init
  *
@@ -19,19 +19,20 @@ void bb_init(void)
   pbus_debugmode();
   (**(code **)(g_phyFuns + 0x80))(*(code **)(g_phyFuns + 0x80));
   pbus_workmode();
-  if ((DAT_00010ad0 & 8) == 0) {
-    txdc_cal_init_new(&DAT_00010ad4,0xf,0,0);
+  if ((DAT_00010af0 & 8) == 0) {
+    txdc_cal_init_new(&DAT_00010af4,0xf,0,0);
     pwdet_code_cal();
     tx_cap_init();
+    tsens_temp_read_new();
     tx_pwctrl_init_new(0);
-    txdc_cal_pwdet_init(&DAT_00010ad4);
+    txdc_cal_pwdet_init(&DAT_00010af4);
     txiq_cal_init_new();
-    DAT_00010ad0 = DAT_00010ad0 | 8;
+    DAT_00010af0 = DAT_00010af0 | 8;
   }
   bt_tx_gain_init();
   set_pbus_mem();
   tsens_temp_read_new();
-  rxiq_cal_init(0,&DAT_00010ad0);
+  rxiq_cal_init(0,&DAT_00010af0);
   set_rx_gain_table(0x985,0);
   phy_reg_init();
   enable_agc();

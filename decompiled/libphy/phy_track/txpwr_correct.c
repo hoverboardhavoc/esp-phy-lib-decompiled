@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_track.o -> txpwr_correct
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void txpwr_correct(int param_1,char *param_2,short *param_3,int param_4,undefine
   
   cVar1 = *param_2;
   if ((param_3[1] < param_4) || (param_4 < *param_3)) {
-    cVar2 = ram_temp_to_power(param_5);
+    cVar2 = ram_temp_to_power(param_5,param_1);
     *param_2 = cVar2;
   }
   else {

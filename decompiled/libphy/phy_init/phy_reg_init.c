@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
  * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_init.o -> phy_reg_init
  *
@@ -15,7 +15,7 @@ void phy_reg_init(void)
 {
   reg_set_new();
   iq_corr_enable();
-  agc_reg_init_new(DAT_00010b4d,DAT_00010b4c);
+  agc_reg_init_new(DAT_00010b6d,DAT_00010b6c);
   wifi_agc_sat_gain(0x81828);
   bb_reg_init_new();
   bb_wdg_cfg();

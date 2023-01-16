@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
+ * Upstream date: 2023-01-16 19:19:06 +0800
+ * Upstream subject: esp32c6: phy update
  * Source: libphy -> phy_11ax.o -> rate_to_index
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ uint rate_to_index(uint param_1)
   uint uVar1;
   uint uVar2;
   
-  uVar1 = wifi_11g_rate_chg();
+  uVar1 = wifi_11g_rate_chg_new();
   if (param_1 < 8) {
     uVar1 = param_1 >> 1 & 1;
   }
