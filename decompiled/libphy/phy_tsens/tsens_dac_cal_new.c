@@ -1,16 +1,14 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_tsens.o -> tsens_dac_cal_new
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 undefined1 tsens_dac_cal_new(int param_1,int param_2)
 
@@ -26,7 +24,7 @@ undefined1 tsens_dac_cal_new(int param_1,int param_2)
         ))) {
       uVar1 = 0xb;
     }
-    (**(code **)(_g_phyFuns + 0x60))(0x69,0,6,3,0,uVar1,*(code **)(_g_phyFuns + 0x60));
+    i2c_writeReg_Mask(0x69,0,6,3,0,uVar1);
   }
   else {
     uVar1 = phy_tsens_attribute[param_2 + 1];

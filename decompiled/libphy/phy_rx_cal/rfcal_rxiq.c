@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rx_cal.o -> rfcal_rxiq
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ void rfcal_rxiq(undefined4 param_1,undefined1 *param_2,undefined4 param_3)
   undefined1 uStack_12;
   undefined1 uStack_11;
   
-  _DAT_6000607c = _DAT_6000607c & 0xefffffff | 0x8000000;
+  _DAT_600a0450 = _DAT_600a0450 & 0xbfffffff | 0x20000000;
   start_tx_tone_step(1,0,0,0);
   rxiq_cover_mg_mp(param_1,&uStack_12,&uStack_11,param_3);
   stop_tx_tone(1);

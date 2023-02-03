@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_reg.o -> read_hw_noisefloor
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,9 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 int read_hw_noisefloor(void)
 
 {
-  return (int)(((_DAT_6001c08c & 0xfff) - 0x1000) * 0x10000) >> 0x12;
+  return (int)(((CONCAT11(DAT_600123d2,DAT_600123d1) & 0xfff) - 0x1000) * 0x10000) >> 0x12;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,15 +12,23 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void bt_bb_rx_set(uint param_1)
+void bt_bb_rx_set(int param_1)
 
 {
+  undefined1 uVar1;
+  uint uVar2;
+  
+  uVar1 = DAT_60012f6c;
   _DAT_600a2050 = _DAT_600a2050 & 0xfffff800;
-  _DAT_600a2008 = (param_1 & 0x3f) << 0x17 | _DAT_600a2008 & 0xe07fffff;
-  _DAT_600a200c = _DAT_600a200c & 0xfff | 0x199a000;
-  _DAT_600a4c24 = _DAT_600a4c24 & 0x7fffffff;
+  _DAT_600a2170 = _DAT_600a2170 & 0xffff | param_1 << 0x10;
+  _DAT_600a200c = _DAT_600a200c & 0xfff | 0x4000000;
+  uVar2 = CONCAT13(DAT_60012f6c,CONCAT12(DAT_60012f6b,CONCAT11(DAT_60012f6a,DAT_60012f69))) &
+          0x7fffffff;
+  DAT_60012f6a = (undefined1)(uVar2 >> 8);
+  DAT_60012f6b = (undefined1)(uVar2 >> 0x10);
+  DAT_60012f6c = (undefined1)(uVar2 >> 0x18);
   _DAT_600a204c = _DAT_600a204c | 4;
-  bt_agc_v2_set();
+  bt_agc_v2_set(DAT_60012f69,uVar1);
   _DAT_600a2888 = _DAT_600a2888 & 0xdfffffff | 0x40000;
   _DAT_600a20bc = _DAT_600a20bc | 0x80000000;
   _DAT_600a20c0 = _DAT_600a20c0 & 0xfffffffd;
@@ -30,7 +38,7 @@ void bt_bb_rx_set(uint param_1)
   _DAT_600a2054 = _DAT_600a2054 & 0xffffffe0 | 0x14;
   _DAT_600a2000 = _DAT_600a2000 | 1;
   _DAT_600a2c0c = _DAT_600a2c0c & 0xfffffeff;
-  _DAT_600a2c00 = _DAT_600a2c00 & 0xfff | 0x199a000;
+  _DAT_600a2c00 = _DAT_600a2c00 & 0xfff | 0x4000000;
   _DAT_600a2c04 = _DAT_600a2c04 & 0xfffff7ff;
   return;
 }

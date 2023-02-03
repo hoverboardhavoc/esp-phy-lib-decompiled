@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rx_cal.o -> rxiq_get_mis
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,10 +28,10 @@ void rxiq_get_mis(int param_1,undefined1 *param_2,int param_3)
   uint uVar11;
   
   uVar4 = param_1 - 2;
-  iVar6 = _DAT_60006154 >> (uVar4 & 0x1f);
-  iVar8 = _DAT_60006148 >> (uVar4 & 0x1f);
-  iVar7 = _DAT_60006150 >> (uVar4 & 0x1f);
-  iVar9 = _DAT_6000614c >> (uVar4 & 0x1f);
+  iVar6 = _DAT_600a0484 >> (uVar4 & 0x1f);
+  iVar8 = _DAT_600a0478 >> (uVar4 & 0x1f);
+  iVar7 = _DAT_600a0480 >> (uVar4 & 0x1f);
+  iVar9 = _DAT_600a047c >> (uVar4 & 0x1f);
   iVar10 = iVar8 - iVar6;
   iVar5 = iVar7 + iVar9;
   iVar8 = iVar8 + iVar6;
@@ -61,7 +61,7 @@ void rxiq_get_mis(int param_1,undefined1 *param_2,int param_3)
   *param_2 = (char)iVar6;
   param_2[1] = (char)(cVar2 + 1 >> 1);
   if (param_3 != 0) {
-    phy_printf("%d, %d-%d, ",_DAT_60006164 >> (param_1 - 3U & 0x1f),iVar6);
+    phy_printf("%d, %d-%d, ",_DAT_600a0490 >> (param_1 - 3U & 0x1f),iVar6);
     return;
   }
   return;

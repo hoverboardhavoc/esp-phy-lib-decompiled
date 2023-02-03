@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_correlator_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,11 +16,11 @@ void bt_bb_rx_correlator_set(void)
 
 {
   _DAT_600a20fc = _DAT_600a20fc & 0x81ffffff | 0x12000000;
+  _DAT_600a2068 = _DAT_600a2068 & 0x81f | 0x10d9b860;
   _DAT_600a2060 = _DAT_600a2060 & 0x3ffffff | 0x10000000;
   _DAT_600a2100 = _DAT_600a2100 & 0xf33fffff | 0x400000;
-  _DAT_600a2064 = _DAT_600a2064 & 0xfc000003 | 0x310908;
+  _DAT_600a2064 = _DAT_600a2064 & 0xfc000003 | 0x30c908;
   _DAT_600a20f8 = _DAT_600a20f8 & 0x8000001f | 0x214f060;
-  _DAT_600a2068 = _DAT_600a2068 & 0x81f | 0x10d9b870;
   return;
 }
 

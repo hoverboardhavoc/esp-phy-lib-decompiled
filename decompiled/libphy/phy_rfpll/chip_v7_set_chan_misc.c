@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rfpll.o -> chip_v7_set_chan_misc
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,9 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void chip_v7_set_chan_misc(undefined4 param_1)
+void chip_v7_set_chan_misc(void)
 
 {
-  set_chan_reg(1);
-  wifi_set_tx_gain(param_1,0);
   return;
 }
 

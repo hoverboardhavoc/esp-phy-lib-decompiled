@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_init.o -> phy_rfcal_data_sub
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ void phy_rfcal_data_sub(int param_1,int param_2)
   undefined1 *puVar3;
   uint uVar4;
   
-  puVar1 = &phy_param;
+  puVar1 = (uint *)&phy_param;
   iVar2 = 0xc;
   do {
     if (param_2 == 0) {
@@ -36,7 +36,7 @@ void phy_rfcal_data_sub(int param_1,int param_2)
     }
     iVar2 = iVar2 + 4;
     puVar1 = puVar1 + 1;
-  } while (iVar2 != 0x1cc);
+  } while (iVar2 != 0x5c);
   return;
 }
 

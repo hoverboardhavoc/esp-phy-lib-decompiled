@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rfpll.o -> rfpll_cap_correct
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,41 +10,44 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-undefined4 rfpll_cap_correct(int param_1)
+int rfpll_cap_correct(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
-  short sVar2;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  bool bVar1;
+  int iVar2;
+  short sVar3;
+  uint uVar4;
+  uint uVar5;
+  int iVar6;
+  int iVar7;
   
-  uVar3 = (**(code **)(_g_phyFuns + 0x1ac))(0x62,1,0xc,*(code **)(_g_phyFuns + 0x1ac));
-  uVar3 = uVar3 >> 2 & 3;
-  if (uVar3 == 0) {
-    uVar1 = 0;
-    iVar5 = 0;
-    iVar4 = 0;
-  }
-  else {
-    sVar2 = read_pll_cap();
-    iVar4 = (int)sVar2;
-    uVar1 = 4;
-    if (uVar3 != 1) {
-      uVar1 = 0xfffffffc;
-      if (uVar3 != 2) {
-        uVar1 = 0;
-      }
+  bVar1 = false;
+  iVar2 = 0;
+  iVar7 = 0;
+  for (iVar6 = 0; param_1 != iVar6; iVar6 = iVar6 + 1) {
+    uVar4 = i2c_readReg(0x62,1,0xc);
+    uVar5 = uVar4 >> 2 & 3;
+    uVar4 = iVar2 + 1;
+    if (uVar5 != 1) {
+      if (uVar5 != 2) break;
+      uVar4 = iVar2 - 1;
     }
-    iVar5 = (int)(short)(sVar2 + (short)uVar1);
-    ram_write_pll_cap();
-    pll_cap_mem_update(uVar1);
+    iVar2 = (int)(short)uVar4;
+    if (!bVar1) {
+      sVar3 = read_pll_cap();
+      iVar7 = (int)sVar3;
+    }
+    uVar4 = (uVar4 & 0xffff) + iVar7;
+    write_pll_cap(uVar4 & 0xffff);
+    ets_delay_us(5);
+    if (param_2 != 0) {
+      phy_printf("%d,%d,%d,%d\n",iVar6,iVar2,iVar7,(int)(short)uVar4);
+    }
+    bVar1 = true;
   }
-  if (param_1 != 0) {
-    phy_printf("%d,%d,%d\n",uVar1,iVar4,iVar5);
+  if (iVar2 != 0) {
+    pll_cap_mem_update(iVar2);
   }
-  return uVar1;
+  return iVar2;
 }
 

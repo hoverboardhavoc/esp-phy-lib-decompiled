@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_api.o -> bb_wdt_int_enable
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,12 +10,17 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void bb_wdt_int_enable(uint param_1)
 
 {
-  _DAT_600a7c40 = (param_1 & 1) << 0x1e | _DAT_600a7c40 & 0xbfffffff;
+  uint uVar1;
+  
+  uVar1 = CONCAT13(DAT_60012388,CONCAT12(DAT_60012387,CONCAT11(DAT_60012386,DAT_60012385))) &
+          0xbfffffff;
+  DAT_60012385 = (char)uVar1;
+  DAT_60012386 = (char)(uVar1 >> 8);
+  DAT_60012387 = (char)(uVar1 >> 0x10);
+  DAT_60012388 = (byte)(((param_1 & 1) << 0x1e) >> 0x18) | (byte)(uVar1 >> 0x18);
   return;
 }
 

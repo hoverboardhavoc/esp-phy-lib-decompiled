@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_gain_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,6 +15,7 @@
 void bt_agc_gain_set(void)
 
 {
+  bt_agc_gain_offset(0);
   bt_agc_gain_max(phy_param);
   _DAT_600a2854 = _DAT_600a2854 & 0xfffffe03 | 0xc9;
   return;

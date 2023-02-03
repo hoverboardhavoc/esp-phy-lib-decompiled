@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_reg.o -> txiq_set_reg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,37 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void txiq_set_reg(uint param_1,int param_2)
+int txiq_set_reg(int param_1)
 
 {
-  int iVar1;
+  char cVar1;
+  int iVar2;
   
-  if (param_2 == 0) {
-    iVar1 = 0x1f;
-    if (0x1f < (int)param_1) {
-      param_1 = 0x1f;
-      goto _L31;
-    }
+  if (param_1 == 0) {
+    iVar2 = 0x3f;
   }
   else {
-    iVar1 = 0xf;
-    if (0xf < (int)param_1) {
-      param_1 = 0xf;
-      goto _L33;
-    }
+    iVar2 = 0x1f;
   }
-  if ((int)param_1 < -iVar1) {
-    param_1 = iVar1 * -0x1000000 >> 0x18;
-  }
-  if (param_2 != 0) {
-_L33:
-    _DAT_6000607c = _DAT_6000607c & 0xffffffe0 | param_1 & 0x1f;
-    return;
-  }
-_L31:
-  _DAT_6000607c = (param_1 & 0x3f) << 5 | _DAT_6000607c & 0xfffff81f;
-  return;
+  cVar1 = get_data_sat(-iVar2);
+  return (int)cVar1;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libbtbb -> bt_bb_v2.o -> set_gauss_coeff_2m
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,8 @@
 void set_gauss_coeff_2m(void)
 
 {
-  _DAT_600a20f0 = _DAT_600a20f0 & 0xff | 0xe6900;
-  _DAT_600a20f4 = 0x962d3f8f;
+  _DAT_600a20f0 = _DAT_600a20f0 & 0xff | 0x149100;
+  _DAT_600a20f4 = 0x9fac0760;
   return;
 }
 

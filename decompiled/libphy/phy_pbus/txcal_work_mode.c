@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_pbus.o -> txcal_work_mode
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,17 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Removing unreachable block (ram,0x00010024) */
+/* WARNING: Removing unreachable block (ram,0x00010000) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void txcal_work_mode(void)
 
 {
   stop_tx_tone(1);
-  (**(code **)(_g_phyFuns + 0x50))(0,*(code **)(_g_phyFuns + 0x50));
-  (**(code **)(_g_phyFuns + 0x1e4))(0,*(code **)(_g_phyFuns + 0x1e4));
-                    /* WARNING: Could not recover jumptable at 0x0001015a. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x1d8))();
+  set_txclk_en(0);
+  ets_delay_us(2);
+  pbus_xpd_rx_on(0);
+  _DAT_600a0904 = _DAT_600a0904 & 0xfffffffe;
+  _DAT_600a090c = _DAT_600a090c | 0x8000000;
   return;
 }
 

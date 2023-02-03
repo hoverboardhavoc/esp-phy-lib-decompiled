@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_tx_cal.o -> tx_pwctrl_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,17 +15,14 @@
 void tx_pwctrl_init(void)
 
 {
-  if (-1 < (int)(_DAT_00012128 << 0xb)) {
+  if (-1 < (int)(_set_txcap_reg << 0xb)) {
     txcal_debuge_mode();
-    set_channel_rfpll_freq(1,DAT_000120fb,0);
-    (**(code **)(_g_phyFuns + 0x114))(&phy_param,1,*(code **)(_g_phyFuns + 0x114));
+    set_channel_rfpll_freq(1,DAT_0001104f,0);
+    set_txcap_reg(&phy_param,1);
     pwdet_ref_code(0x50);
-    if ((DAT_0001220c & 0xf) != 1) {
-      tx_pwctrl_init_cal(0,&phy_param,&phy_param,&phy_param);
-    }
     txcal_work_mode();
-    _DAT_00012128 = _DAT_00012128 | 0x100000;
-    DAT_000121fa = 0xb;
+    _set_txcap_reg = _set_txcap_reg | 0x100000;
+    DAT_00011078 = 0xb;
   }
   return;
 }

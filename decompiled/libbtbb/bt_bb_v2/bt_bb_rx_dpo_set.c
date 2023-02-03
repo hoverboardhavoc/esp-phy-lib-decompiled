@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_dpo_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void bt_bb_rx_dpo_set(void)
 
 {
   _DAT_600a2038 = _DAT_600a2038 & 0xfffff87f | 0x300;
-  _DAT_600a2034 = _DAT_600a2034 & 0xffff | 0x77770000;
+  _DAT_600a2034 = _DAT_600a2034 & 0xffff | 0x66660000;
   _DAT_600a2020 = _DAT_600a2020 & 0xfffc03c0 | 0x19806;
   _DAT_600a2024 = _DAT_600a2024 & 0x83ffffff | 0x30000000;
   _DAT_600a2028 = _DAT_600a2028 & 0xffffffc3;

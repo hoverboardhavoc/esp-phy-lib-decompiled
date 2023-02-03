@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rx_gain.o -> wr_rx_gain_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,81 +10,42 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void wr_rx_gain_mem(int param_1,char param_2,uint *param_3,int param_4)
+void wr_rx_gain_mem(uint param_1,int param_2)
 
 {
-  ushort uVar1;
-  ushort uVar2;
+  uint uVar1;
+  uint uVar2;
   uint uVar3;
-  undefined4 uVar4;
-  char cVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  ushort *puVar10;
-  uint uVar11;
-  uint uVar12;
-  int iVar13;
-  uint uVar14;
-  undefined4 uStack_48;
-  uint uStack_44;
+  uint uVar4;
+  uint uVar5;
+  undefined4 uStack_34;
   
-  if (param_1 == 0) {
-    cVar5 = '\0';
-    iVar13 = 8;
-  }
-  else {
-    cVar5 = 'P';
-    iVar13 = 7;
-  }
-  uStack_48 = 0x1000100;
-  uStack_44 = 0x1000100;
+  uStack_34 = 0x800080;
   pbus_debugmode();
-  (**(code **)(_g_phyFuns + 0x84))(0,*(code **)(_g_phyFuns + 0x84));
+  pbus_xpd_rx_on(0);
   set_rxclk_en(1);
   set_txclk_en(1);
-  uVar12 = 0x100;
-  param_2 = param_2 + cVar5;
-  uVar14 = 0x100;
-  uVar9 = 10;
-  for (; param_2 != cVar5; cVar5 = cVar5 + '\x01') {
-    uVar11 = *param_3;
-    iVar6 = (**(code **)(_g_phyFuns + 0xa8))(uVar11 >> 4 & 0x3f,*(code **)(_g_phyFuns + 0xa8));
-    uVar7 = rfrx_gain_index_new(param_1,uVar11 >> 0xc & 0xffff);
-    iVar8 = 7;
-    if (iVar13 == 7) {
-      iVar8 = 6;
+  for (uVar5 = 0; uVar5 != param_1; uVar5 = uVar5 + 1 & 0xff) {
+    uVar1 = *(uint *)((uVar5 >> 1) * 4 + param_2);
+    if ((uVar5 & 1) == 0) {
+      uVar1 = uVar1 << 0x10;
     }
-    uVar3 = uVar7;
-    if (iVar8 <= (int)uVar7) {
-      uVar3 = iVar6 + uVar7;
-    }
-    puVar10 = (ushort *)((uVar3 & 0x7f) * 4 + param_4);
-    uVar1 = *puVar10;
-    uVar2 = puVar10[1];
-    uVar4 = *(undefined4 *)puVar10;
-    if ((param_1 == 0) && ((uVar9 != uVar7 || ((uVar11 & 0x2ff) == 0x200)))) {
-      (**(code **)(_g_phyFuns + 0x7c))(uVar11,*(code **)(_g_phyFuns + 0x7c));
-      uStack_48 = uVar4;
-      pbus_rx_dco_cal_new(0x800,&uStack_48,10,0,0,1);
-      uVar14 = uStack_44 & 0xffff;
-      uVar12 = uStack_44 >> 0x10;
-    }
-    write_gain_mem_new(_DAT_000110e4 & 0x1fff | (uint)uVar2 << 0x16 | uVar14 << 0x1f | uVar12 << 0xd
-                       ,(uint)DAT_00011012 << 0x1d | (uVar11 & 7) << 0x11 |
-                        (uVar11 >> 4 & 0x7f) << 0x14 | (uint)uVar1 << 8 | uVar14 >> 1,
-                       uVar11 >> 10 & 0xe0 | (uVar11 >> 0xc & 7) << 2 | (uint)(DAT_00011012 >> 6),
-                       cVar5);
-    param_3 = param_3 + 1;
-    uVar9 = uVar7;
+    uVar4 = uVar1 >> 0x1c & 3;
+    pbus_force_test(0,1,uVar4 << 4 | 0x147);
+    uVar2 = uVar1 >> 0x16 & 1;
+    uVar3 = uVar1 >> 0x14 & 3;
+    uVar1 = uVar1 >> 0x10 & 0xf;
+    pbus_force_test(1,2,uVar1 << 2 | uVar2 << 8 | uVar3 << 6);
+    pbus_rx_dco_cal(0x800,&uStack_34,0);
+    write_gain_mem((int)(short)uStack_34 << 2 | (int)uStack_34._2_2_ >> 6 & 3U,
+                   (*(ushort *)(pbus_rx_dco_cal + (uVar4 + 0x10) * 2) & 0x1fff) +
+                   uVar1 * 0x4000 +
+                   uStack_34._2_2_ * 0x4000000 + 0x1400000 + uVar4 * 0x100000 + uVar3 * 0x40000 +
+                   uVar2 * 0x2000,uVar5);
   }
+  pbus_workmode();
   set_rxclk_en(0);
   set_txclk_en(0);
-  (**(code **)(_g_phyFuns + 0x84))(0,*(code **)(_g_phyFuns + 0x84));
-  pbus_workmode();
   return;
 }
 

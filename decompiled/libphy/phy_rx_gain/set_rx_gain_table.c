@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rx_gain.o -> set_rx_gain_table
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,97 +15,36 @@
 void set_rx_gain_table(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  undefined1 auStack_1d4 [16];
-  undefined4 uStack_1c4;
-  undefined2 uStack_1c0;
-  undefined2 uStack_1be;
-  undefined2 uStack_1bc;
-  undefined2 uStack_1ba;
-  undefined2 uStack_1b8;
-  undefined1 uStack_1b6;
-  undefined4 uStack_1b4;
-  undefined2 uStack_1b0;
-  undefined2 uStack_1ae;
-  undefined2 uStack_1ac;
-  undefined2 uStack_1aa;
-  undefined2 uStack_1a8;
-  undefined1 uStack_1a6;
-  undefined4 uStack_1a4;
-  undefined4 uStack_1a0;
-  undefined4 uStack_19c;
-  undefined2 uStack_198;
-  undefined1 uStack_196;
-  undefined4 uStack_194;
-  undefined4 uStack_190;
-  undefined4 uStack_18c;
-  undefined2 uStack_188;
-  undefined1 uStack_186;
-  undefined1 auStack_184 [16];
-  undefined1 auStack_174 [348];
+  uint uVar1;
+  undefined4 local_f0;
+  undefined1 uStack_ec;
+  undefined4 uStack_e8;
+  undefined1 uStack_e4;
+  undefined4 uStack_e0;
+  undefined1 uStack_dc;
+  undefined1 auStack_d8 [208];
   
-  memcpy(auStack_184,&DAT_000106d4,0x10);
-  memcpy(auStack_1d4,&DAT_000106e4,0xe);
-  uVar1 = _rfrx_gain_index_new;
-  uStack_1c4 = 0x6060a0b;
-  uStack_1c0 = 0x606;
-  uStack_1b4 = 0x5060e0b;
-  uStack_194 = 0x8080000;
-  uStack_1b0 = 0x806;
-  uStack_1a0 = 0x8080808;
-  uStack_1bc = 0;
-  uStack_1ba = 0;
-  uStack_1b8 = 0;
-  uStack_1b6 = 0;
-  uStack_1be = 8;
-  uStack_1ae = 0;
-  uStack_1ac = 0;
-  uStack_1aa = 0;
-  uStack_1a8 = 0;
-  uStack_1a6 = 0;
-  uStack_19c = 0;
-  uStack_198 = 0;
-  uStack_196 = 0;
-  uStack_1a4 = 0x8080803;
-  uStack_18c = 0;
-  uStack_188 = 0;
-  uStack_186 = 0;
-  uStack_190 = 0x80808;
-  if ((_DAT_000110b4 & 0x200) == 0) {
-    if ((_DAT_000110b4 & 0x80) == 0) {
-      set_rx_gain_cal_dc_new(1,&phy_param);
-      set_rx_gain_cal_dc_new(0,&phy_param);
-      _DAT_000110b4 = _DAT_000110b4 | 0x80;
-    }
-    uVar1 = uVar1 >> 8 & 1;
-    uVar2 = gen_rx_gain_table_new(auStack_174,0x21,auStack_184,&uStack_1c4,&uStack_1a4,8,uVar1);
-    if (uVar2 < 0x50) {
-      DAT_00011131 = (byte)uVar2;
+  local_f0 = 0xe7d7c7c7;
+  uStack_ec = 0xf7;
+  uStack_e8 = 0x11100a12;
+  uStack_e4 = 10;
+  uStack_e0 = 0xc0c0c00;
+  uStack_dc = 0x16;
+  if ((_DAT_00011034 & 0x200) == 0) {
+    uVar1 = gen_rx_gain_table(auStack_d8,0x20,&local_f0,&uStack_e8,&uStack_e0,5,0);
+    if (uVar1 < 0x50) {
+      DAT_00011059 = (char)uVar1;
     }
     else {
-      DAT_00011131 = 0x4f;
+      DAT_00011059 = 'O';
     }
-    wr_rx_gain_mem(0,DAT_00011131 + 1,auStack_174,&phy_param);
-    uVar2 = gen_rx_gain_table_new(auStack_174,0x1c,auStack_1d4,&uStack_1b4,&uStack_194,7,uVar1);
-    if (uVar2 < 0x50) {
-      DAT_00011130 = (char)uVar2;
-    }
-    else {
-      DAT_00011130 = 'O';
-    }
-    wr_rx_gain_mem(1,DAT_00011130 + '\x01',auStack_174,&phy_param);
-    _DAT_000110b4 = _DAT_000110b4 | 0x200;
-    _DAT_00011058 = _phy_param;
+    _DAT_00011034 = _DAT_00011034 | 0x200;
   }
-  _DAT_600a702c = (DAT_00011131 & 0x7f) << 8 | _DAT_600a702c & 0xffff80ff;
-  uVar2 = (uint)DAT_00011131;
-  if (0x4c < uVar2) {
-    uVar2 = 0x4c;
+  if ((_DAT_00011034 & 0x40) == 0) {
+    wr_rx_gain_mem(DAT_00011059 + '\x01',auStack_d8,1);
+    _DAT_00011034 = _DAT_00011034 | 0x40;
   }
-  _DAT_600a713c = uVar2 << 0x12 | _DAT_600a713c & 0xfe03ffff;
-  bt_gain_offset(0x50);
-  iq_corr_enable();
+  _DAT_600a0450 = _DAT_600a0450 | 0x60000000;
   return;
 }
 

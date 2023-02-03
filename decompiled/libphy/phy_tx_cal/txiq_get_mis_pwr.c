@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_tx_cal.o -> txiq_get_mis_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,22 +12,20 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void txiq_get_mis_pwr(uint param_1,int param_2,uint param_3,undefined2 *param_4,undefined2 *param_5)
+void txiq_get_mis_pwr(uint param_1,uint param_2,undefined2 *param_3,undefined2 *param_4)
 
 {
   undefined2 uVar1;
   
-  _DAT_60006040 =
-       (param_2 * -0x400 & 0x3fc00U | (int)param_3 >> 2 | param_1 << 0x1a) & 0xfffffff | 0x2c0000 |
-       _DAT_60006040 & 0xf0000000;
-  _DAT_60006050 = _DAT_60006050 & 0xfffffffc | param_3 & 3;
+  _DAT_600a0420 =
+       ((param_1 << 0x10 | param_2) & 0x3ffff) << 10 | 0x2c0000 | _DAT_600a0420 & 0xf00003ff;
+  ets_delay_us(2);
+  uVar1 = txtone_linear_pwr();
+  *param_3 = uVar1;
+  _DAT_600a0420 = (~param_1 & 1 | (param_1 & 1) << 3) << 0x18 | _DAT_600a0420 & 0xf0ffffff;
   ets_delay_us(2);
   uVar1 = txtone_linear_pwr();
   *param_4 = uVar1;
-  _DAT_60006040 = (~param_1 & 1 | (param_1 & 1) << 3) << 0x18 | _DAT_60006040 & 0xf0ffffff;
-  ets_delay_us(2);
-  uVar1 = txtone_linear_pwr();
-  *param_5 = uVar1;
   return;
 }
 

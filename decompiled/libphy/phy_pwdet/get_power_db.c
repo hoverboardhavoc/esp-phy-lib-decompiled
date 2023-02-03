@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_pwdet.o -> get_power_db
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,19 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-int get_power_db(int param_1)
+int get_power_db(void)
 
 {
   int iVar1;
   int iVar2;
   short sStack_14;
-  short sStack_12;
+  short asStack_12 [5];
   
-  get_fm_sar_dout(&sStack_14,&sStack_12);
-  iVar1 = (**(code **)(_g_phyFuns + 0x118))((int)sStack_14,3,*(code **)(_g_phyFuns + 0x118));
-  iVar2 = (**(code **)(_g_phyFuns + 0x118))((int)sStack_12,3,*(code **)(_g_phyFuns + 0x118));
-  return ((param_1 + iVar1) - iVar2) * 0x10000 >> 0x10;
+  sStack_14 = 0;
+  asStack_12[0] = 0;
+  get_fm_sar_dout(&sStack_14,asStack_12);
+  iVar1 = linear_to_db((int)sStack_14,3);
+  iVar2 = linear_to_db((int)asStack_12[0],3);
+  return ((iVar1 + 0x14) - iVar2) * 0x10000 >> 0x10;
 }
 

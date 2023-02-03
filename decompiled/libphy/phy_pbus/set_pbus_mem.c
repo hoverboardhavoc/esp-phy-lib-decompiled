@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_pbus.o -> set_pbus_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,179 +16,90 @@ void set_pbus_mem(void)
 
 {
   uint uVar1;
-  uint uVar2;
+  int iVar2;
   uint uVar3;
-  uint *puVar4;
-  uint *puVar5;
-  int iVar6;
+  uint uVar4;
+  uint uVar5;
+  uint *puVar6;
   int iVar7;
-  int iVar8;
-  int iVar9;
-  uint local_120 [5];
-  uint auStack_10c [4];
-  undefined4 uStack_fc;
-  undefined4 uStack_f8;
-  undefined4 uStack_f4;
-  undefined4 uStack_f0;
-  uint uStack_ec;
-  undefined4 uStack_e8;
-  undefined4 uStack_e4;
-  undefined4 uStack_e0;
-  undefined4 uStack_dc;
-  uint uStack_d8;
-  undefined4 uStack_d4;
-  undefined4 uStack_d0;
-  undefined4 uStack_cc;
-  undefined4 uStack_c8;
-  uint uStack_c4;
-  undefined4 uStack_c0;
-  undefined4 uStack_bc;
-  undefined4 uStack_b8;
-  undefined4 uStack_b4;
-  uint local_b0 [16];
-  uint local_70 [8];
-  uint local_50 [11];
+  undefined4 *puVar8;
+  undefined4 *puVar9;
+  undefined4 auStack_68 [2];
+  undefined4 auStack_60 [3];
+  undefined4 auStack_54 [3];
+  undefined4 auStack_48 [3];
+  undefined4 auStack_3c [3];
+  undefined4 local_30;
+  undefined4 uStack_2c;
+  undefined4 uStack_28;
+  undefined4 uStack_24;
   
-  local_b0[0] = (uint)DAT_00011006 << 9 | 0x801ff;
-  local_b0[1] = 0x4841ff;
-  local_b0[3] = 0x4841ff;
-  local_b0[4] = 0x4841ff;
-  local_b0[5] = 0x487ff;
-  local_b0[6] = 0xf50000;
-  local_b0[2] = 0x1713ff;
-  local_b0[7] = 0xf60000;
-  memcpy(auStack_10c + 3,&DAT_000105f8,0x14);
-  memcpy(local_b0 + 8,&DAT_0001060c,0x20);
-  memcpy(&uStack_ec,&DAT_0001062c,0x14);
-  memcpy(local_120 + 2,&DAT_00010640,0xc);
-  local_120[0] = 0x5401ff;
-  iVar6 = 0;
-  do {
-    *(undefined4 *)((int)local_70 + iVar6) = *(undefined4 *)((int)local_b0 + iVar6);
-    iVar6 = iVar6 + 4;
-  } while (iVar6 != 0x20);
-  uStack_d8 = auStack_10c[3];
-  uStack_d4 = uStack_fc;
-  uStack_d0 = uStack_f8;
-  uStack_cc = uStack_f4;
-  uStack_c8 = uStack_f0;
-  iVar6 = 0;
-  do {
-    *(undefined4 *)((int)local_50 + iVar6) = *(undefined4 *)((int)local_b0 + iVar6 + 0x20);
-    iVar6 = iVar6 + 4;
-  } while (iVar6 != 0x20);
-  uStack_c4 = uStack_ec;
-  uStack_c0 = uStack_e8;
-  uStack_bc = uStack_e4;
-  uStack_b8 = uStack_e0;
-  uStack_b4 = uStack_dc;
-  auStack_10c[1] = 0x5781ff;
-  auStack_10c[2] = 0xf30000;
-  local_120[1] = 0x5401ff;
-  local_70[2] = 0x1717ff;
-  auStack_10c[0] = 0x14fdff;
-  puVar4 = local_b0;
-  iVar6 = 8;
-  local_50[2] = (uint)(byte)memcpy << 0xc | 0x4801ff;
+  local_30 = 0x68fff;
+  uStack_2c = 0x141bff;
+  uStack_28 = 0xf40000;
+  uStack_24 = 0xf50000;
+  memcpy(auStack_60,&_LANCHOR0,0xc);
+  memcpy(auStack_54,&DAT_00010584,0xc);
+  memcpy(auStack_48,&_LANCHOR0,0xc);
+  memcpy(auStack_3c,&DAT_00010590,0xc);
+  uVar3 = 0;
+  puVar9 = &local_30;
+  iVar2 = 4;
   iVar7 = 0;
-  uVar2 = 0;
-  puVar5 = (uint *)&DAT_600a08e0;
-  iVar8 = 0;
-_L38:
-  uVar1 = iVar6 + uVar2;
-  *puVar5 = ~(0xffff << iVar7) & *puVar5 | (((uVar1 - 1) * 0x100 | uVar2) & 0xffff) << iVar7;
-  uVar2 = (uVar2 + 0x200) * 0x800;
-  iVar7 = 0;
-  do {
-    _DAT_600a08cc = puVar4[iVar7];
-    uVar3 = uVar2 & 0x1ff800;
-    iVar7 = iVar7 + 1;
-    uVar2 = uVar2 + 0x800;
-    _DAT_600a08c8 = _DAT_600a08c8 & 0xffe007ff | uVar3;
-  } while (iVar6 != iVar7);
-  iVar9 = iVar8 + 1;
-  if (iVar9 == 0xc) {
-    save_pbus_reg();
-    return;
+  uVar4 = 0;
+  puVar6 = (uint *)&DAT_600a08ec;
+_L50:
+  while( true ) {
+    uVar1 = iVar2 + uVar4;
+    *puVar6 = ~(0xffff << iVar7) & *puVar6 | (((uVar1 - 1) * 0x100 | uVar4) & 0xffff) << iVar7;
+    uVar4 = (uVar4 + 0x200) * 0x800;
+    iVar7 = 0;
+    do {
+      puVar8 = puVar9 + iVar7;
+      uVar5 = uVar4 & 0x1ff800;
+      iVar7 = iVar7 + 1;
+      _DAT_600a08cc = *puVar8;
+      uVar4 = uVar4 + 0x800;
+      _DAT_600a08c8 = _DAT_600a08c8 & 0xffe007ff | uVar5;
+    } while (iVar2 != iVar7);
+    uVar3 = uVar3 + 1;
+    if (uVar3 == 6) {
+      return;
+    }
+    uVar4 = uVar1;
+    if (uVar3 != 2) break;
+    puVar9 = auStack_54;
+    iVar7 = 0;
+_L62:
+    iVar2 = 3;
+    puVar6 = (uint *)0x600a08f0;
   }
-  uVar2 = uVar1;
-  puVar5 = (uint *)&DAT_600a08f4;
-  switch(iVar8) {
-  case 0:
-    puVar4 = auStack_10c + 3;
-    iVar6 = 5;
-    iVar7 = 0x10;
-    puVar5 = (uint *)&DAT_600a08e0;
-    iVar8 = iVar9;
-    goto _L38;
-  case 1:
-    puVar4 = local_b0 + 8;
-    iVar6 = 8;
-    iVar7 = 0;
-    break;
-  case 2:
-    puVar4 = &uStack_ec;
-    iVar6 = 5;
-    iVar7 = 0x10;
-    break;
-  case 3:
-    puVar4 = local_120 + 2;
-    iVar6 = 3;
-    iVar7 = 0;
-    goto _L61;
-  case 4:
-    iVar6 = 1;
-    iVar7 = 0x10;
-    puVar4 = local_120;
-_L61:
-    puVar5 = (uint *)&DAT_600a08e8;
-    iVar8 = iVar9;
-    goto _L38;
-  case 5:
-    puVar4 = local_70;
-    iVar6 = 8;
-    iVar7 = 0;
-    puVar5 = (uint *)&DAT_600a08ec;
-    iVar8 = iVar9;
-    goto _L38;
-  case 6:
-    puVar4 = &uStack_d8;
-    iVar6 = 5;
-    iVar7 = 0x10;
-    puVar5 = (uint *)&DAT_600a08ec;
-    iVar8 = iVar9;
-    goto _L38;
-  case 7:
-    puVar4 = local_50;
-    iVar6 = 8;
-    iVar7 = 0;
-    puVar5 = (uint *)&DAT_600a08f0;
-    iVar8 = iVar9;
-    goto _L38;
-  case 8:
-    puVar4 = &uStack_c4;
-    iVar6 = 5;
-    iVar7 = 0x10;
-    puVar5 = (uint *)&DAT_600a08f0;
-    iVar8 = iVar9;
-    goto _L38;
-  case 9:
-    puVar4 = auStack_10c;
-    iVar6 = 3;
-    iVar7 = 0;
-    iVar8 = iVar9;
-    goto _L38;
-  default:
-    goto _L39;
+  puVar6 = (uint *)&DAT_600a08f4;
+  if (uVar3 < 3) {
+    if (uVar3 == 1) {
+      puVar9 = auStack_60;
+      iVar2 = 3;
+      iVar7 = 0x10;
+      puVar6 = (uint *)&DAT_600a08ec;
+      goto _L50;
+    }
   }
-  puVar5 = (uint *)&DAT_600a08e4;
-  iVar8 = iVar9;
-  goto _L38;
-_L39:
-  puVar4 = local_120 + 1;
-  iVar6 = 1;
+  else {
+    if (uVar3 == 3) {
+      puVar9 = auStack_48;
+      iVar7 = 0x10;
+      goto _L62;
+    }
+    if (uVar3 == 4) {
+      puVar9 = auStack_3c;
+      iVar2 = 3;
+      iVar7 = 0;
+      goto _L50;
+    }
+  }
+  puVar9 = auStack_68;
+  iVar2 = 2;
   iVar7 = 0x10;
-  iVar8 = iVar9;
-  goto _L38;
+  goto _L50;
 }
 

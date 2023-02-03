@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_pbus.o -> txcal_debuge_mode
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,25 +10,15 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void txcal_debuge_mode(void)
 
 {
-  undefined1 uVar1;
-  undefined2 uVar2;
-  int iVar3;
-  
-  uVar2 = *(undefined2 *)(&phy_param + (DAT_000110a7 + 0x10) * 2);
-  uVar1 = *(undefined1 *)(DAT_000110a7 + 0x11012);
-  (**(code **)(_g_phyFuns + 0x50))(1,*(code **)(_g_phyFuns + 0x50));
-  (**(code **)(_g_phyFuns + 0x1d4))(*(code **)(_g_phyFuns + 0x1d4));
-  (**(code **)(_g_phyFuns + 0x1ec))(uVar1,uVar2,*(code **)(_g_phyFuns + 0x1ec));
-  iVar3 = (**(code **)(_g_phyFuns + 0xec))(uVar2,*(code **)(_g_phyFuns + 0xec));
-  (**(code **)(_g_phyFuns + 0x1f0))(iVar3 * 8 + 0x11128,*(code **)(_g_phyFuns + 0x1f0));
-                    /* WARNING: Could not recover jumptable at 0x00010120. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0xfc))();
+  pbus_force_mode_part_0();
+  pbus_xpd_tx_on();
+  pbus_set_dco(&phy_param);
+  set_txclk_en(1);
+  ets_delay_us(2);
+  en_pwdet();
   return;
 }
 

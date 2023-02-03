@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_reg.o -> stop_tx_tone
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,25 +12,11 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void stop_tx_tone(int param_1)
+void stop_tx_tone(void)
 
 {
-  if (param_1 == 2) {
-    _DAT_60006044 = _DAT_60006044 & 0xfffbffff;
-  }
-  else if (param_1 == 3) {
-    _DAT_6000604c = _DAT_6000604c & 0xfffbffff;
-  }
-  else if (param_1 == 1) {
-    _DAT_60006040 = _DAT_60006040 & 0xfffbffff;
-  }
-  else {
-    _DAT_60006040 = _DAT_60006040 & 0xfffbffff;
-    _DAT_60006044 = _DAT_60006044 & 0xfffbffff;
-    _DAT_6000604c = _DAT_6000604c & 0xfffbffff;
-  }
-  _DAT_60006000 = _DAT_60006000 | 0x4000000;
-  _DAT_600061e4 = _DAT_600061e4 & 0xfffffbff;
+  _DAT_600a0420 = _DAT_600a0420 & 0xfffbffff;
+  _DAT_600a0424 = _DAT_600a0424 & 0xfffbffff;
   return;
 }
 

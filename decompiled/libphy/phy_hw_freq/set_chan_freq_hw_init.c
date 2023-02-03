@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_hw_freq.o -> set_chan_freq_hw_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,15 +13,15 @@
 void set_chan_freq_hw_init(void)
 
 {
-  undefined1 auStack_60 [12];
-  undefined1 auStack_54 [12];
-  undefined1 auStack_48 [12];
-  undefined1 auStack_3c [56];
+  undefined1 auStack_48 [8];
+  undefined1 auStack_40 [8];
+  undefined1 auStack_38 [8];
+  undefined1 auStack_30 [44];
   
   freq_reg_init();
   get_rf_freq_init_new(0x55,0);
-  freq_get_i2c_data(auStack_60,auStack_54,auStack_48,auStack_3c,0xb);
-  freq_i2c_write_set_new(auStack_60,auStack_54,auStack_48,auStack_3c,0xb);
+  freq_get_i2c_data(auStack_48,auStack_40,auStack_38,auStack_30,8);
+  freq_i2c_write_set_new(auStack_48,auStack_40,auStack_38,auStack_30,8);
   return;
 }
 

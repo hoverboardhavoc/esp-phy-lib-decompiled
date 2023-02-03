@@ -1,16 +1,14 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rx_cal.o -> get_rfcal_rxiq_data
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 uint get_rfcal_rxiq_data(undefined4 param_1,undefined4 param_2,int param_3)
 
@@ -25,8 +23,8 @@ uint get_rfcal_rxiq_data(undefined4 param_1,undefined4 param_2,int param_3)
   int iVar8;
   int iVar9;
   int iVar10;
-  char cStack_44;
-  char cStack_43;
+  char cStack_34;
+  char cStack_33;
   
   iVar9 = 0;
   iVar10 = 0;
@@ -34,24 +32,21 @@ uint get_rfcal_rxiq_data(undefined4 param_1,undefined4 param_2,int param_3)
   iVar1 = 0;
   iVar3 = 0;
   while( true ) {
-    rfcal_rxiq(0xe,param_1,param_2,&cStack_44,param_3);
+    rfcal_rxiq(0xe,param_1,param_2,&cStack_34,param_3);
     if (param_3 != 0) {
-      phy_printf("%d_%d_%d\n",iVar8,(int)cStack_44,(int)cStack_43);
+      phy_printf("%d_%d_%d\n",iVar8,(int)cStack_34,(int)cStack_33);
     }
-    if (((iVar8 != 0) &&
-        (iVar4 = (**(code **)(_g_phyFuns + 0x100))
-                           (iVar10 - cStack_44,*(code **)(_g_phyFuns + 0x100)), iVar4 < 2)) &&
-       (iVar4 = (**(code **)(_g_phyFuns + 0x100))(iVar9 - cStack_43,*(code **)(_g_phyFuns + 0x100)),
-       iVar4 < 2)) break;
-    iVar10 = (int)cStack_44;
-    iVar9 = (int)cStack_43;
+    if (((iVar8 != 0) && (iVar4 = abs_temp(iVar10 - cStack_34), iVar4 < 2)) &&
+       (iVar4 = abs_temp(iVar9 - cStack_33), iVar4 < 2)) break;
+    iVar10 = (int)cStack_34;
+    iVar9 = (int)cStack_33;
     iVar8 = iVar8 + 1;
     iVar3 = (iVar3 + iVar10) * 0x10000 >> 0x10;
     iVar1 = (iVar1 + iVar9) * 0x10000 >> 0x10;
     if (iVar8 == 4) {
       cVar2 = (char)(iVar3 + 2 >> 2);
       cVar6 = (char)(iVar1 + 2 >> 2);
-_L34:
+_L47:
       if (cVar2 < -0x1f) {
         cVar2 = -0x1f;
       }
@@ -69,8 +64,8 @@ _L34:
       return (uVar5 & 0x3f) << 6 | uVar7 & 0x3f;
     }
   }
-  cVar2 = (char)(cStack_44 + iVar10 + 1 >> 1);
-  cVar6 = (char)(cStack_43 + iVar9 + 1 >> 1);
-  goto _L34;
+  cVar2 = (char)(cStack_34 + iVar10 + 1 >> 1);
+  cVar6 = (char)(cStack_33 + iVar9 + 1 >> 1);
+  goto _L47;
 }
 

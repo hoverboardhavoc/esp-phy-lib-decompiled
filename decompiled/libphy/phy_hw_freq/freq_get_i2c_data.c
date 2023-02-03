@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_hw_freq.o -> freq_get_i2c_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,106 +10,77 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,char *param_3,int param_4,
                       uint param_5)
 
 {
-  char cVar1;
-  undefined4 uVar2;
+  undefined4 uVar1;
+  uint uVar2;
   uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  char cVar6;
-  uint uVar7;
-  char cVar8;
-  uint uVar9;
+  char cVar4;
+  char cVar5;
   
-  (**(code **)(_g_phyFuns + 0x60))(0x62,1,0xb,6,6,1,*(code **)(_g_phyFuns + 0x60));
-  uVar2 = (**(code **)(_g_phyFuns + 0x50))(0x62,1,0xb,*(code **)(_g_phyFuns + 0x50));
-  uVar3 = (**(code **)(_g_phyFuns + 0x50))(99,1,0,*(code **)(_g_phyFuns + 0x50));
-  uVar4 = (**(code **)(_g_phyFuns + 0x50))(0x67,1,3,*(code **)(_g_phyFuns + 0x50));
-  uVar5 = (**(code **)(_g_phyFuns + 0x50))(0x6b,1,6,*(code **)(_g_phyFuns + 0x50));
-  uVar9 = uVar5 & 199 | 0x28;
-  cVar8 = '\x10';
-  cVar1 = ' ';
-  cVar6 = '\0';
-  uVar7 = 0;
+  i2c_writeReg_Mask(0x62,1,0xb,6,6,1);
+  uVar1 = i2c_readReg(0x62,1,0xb);
+  uVar2 = i2c_readReg(99,1,4);
+  cVar5 = ' ';
+  cVar4 = '\x10';
+  uVar3 = 0;
   do {
-    if (uVar7 == param_5) {
+    if (uVar3 == param_5) {
       return;
     }
-    switch(uVar7) {
+    switch(uVar3) {
     case 0:
       *param_1 = 0x62;
       *param_2 = 1;
-      *param_3 = cVar1;
+      *param_3 = cVar5;
       break;
     case 1:
       param_1[1] = 0x62;
       param_2[1] = 2;
-      param_3[1] = cVar1;
+      param_3[1] = cVar5;
       break;
     case 2:
       param_1[2] = 99;
-      param_2[2] = 0;
-      param_3[2] = cVar8;
-      *(uint *)(param_4 + 8) = uVar3 & 0xf7;
-      goto _L55;
+      param_2[2] = 4;
+      param_3[2] = cVar4;
+      *(uint *)(param_4 + 8) = uVar2 & 0xfe;
+      goto _L68;
     case 3:
       param_1[3] = 99;
-      param_2[3] = 6;
-      param_3[3] = cVar1;
+      param_2[3] = 2;
+      param_3[3] = cVar5;
       break;
     case 4:
       param_1[4] = 99;
-      param_2[4] = 5;
-      param_3[4] = cVar1;
+      param_2[4] = 1;
+      param_3[4] = cVar5;
       break;
     case 5:
       param_1[5] = 99;
-      param_2[5] = 4;
-      param_3[5] = cVar1;
+      param_2[5] = 0;
+      param_3[5] = cVar5;
       break;
     case 6:
       param_1[6] = 99;
-      param_2[6] = 3;
-      param_3[6] = cVar1;
-      break;
+      param_2[6] = 4;
+      param_3[6] = cVar4;
+      *(uint *)(param_4 + 0x18) = uVar2 & 0xff | 1;
+      goto _L68;
     case 7:
-      param_1[7] = 99;
-      param_2[7] = 0;
-      param_3[7] = cVar8;
-      *(uint *)(param_4 + 0x1c) = uVar3 & 0xff | 8;
-      goto _L55;
-    case 8:
-      param_1[8] = 0x62;
-      param_2[8] = 0xb;
-      param_3[8] = cVar8;
-      *(undefined4 *)(param_4 + 0x20) = uVar2;
-_L55:
-      cVar8 = cVar8 + '\x01';
-      goto _L38;
-    case 9:
-      param_1[9] = 0x6b;
-      param_2[9] = 6;
-      param_3[9] = cVar6;
-      *(uint *)(param_4 + 0x24) = uVar9 << 8 | uVar9 << 0x10 | uVar5;
-      goto _L54;
-    case 10:
-      param_1[10] = 0x67;
-      param_2[10] = 3;
-      param_3[10] = cVar6;
-      *(uint *)(param_4 + 0x28) = uVar4 << 0x10 | uVar4 | (uVar4 & 0xfb) << 8;
-_L54:
-      cVar6 = cVar6 + '\x01';
+      param_1[7] = 0x62;
+      param_2[7] = 0xb;
+      param_3[7] = cVar4;
+      *(undefined4 *)(param_4 + 0x1c) = uVar1;
+_L68:
+      cVar4 = cVar4 + '\x01';
     default:
-      goto _L38;
+      goto _L55;
     }
-    cVar1 = cVar1 + '\x01';
-_L38:
-    uVar7 = uVar7 + 1 & 0xff;
+    cVar5 = cVar5 + '\x01';
+_L55:
+    uVar3 = uVar3 + 1 & 0xff;
   } while( true );
 }
 

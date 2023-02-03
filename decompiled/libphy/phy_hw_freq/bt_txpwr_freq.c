@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_hw_freq.o -> bt_txpwr_freq
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,19 +14,21 @@ void bt_txpwr_freq(int param_1)
 
 {
   byte bVar1;
-  char cVar2;
-  uint uVar3;
-  int iVar4;
+  uint uVar2;
+  char cVar3;
+  uint uVar4;
+  int iVar5;
   
-  uVar3 = get_freq_mem_param(2);
-  cVar2 = '\0';
+  uVar4 = get_freq_mem_param(2);
+  uVar2 = (uVar4 >> 0x10 & 0xff) + 6;
+  cVar3 = '\0';
   do {
     bVar1 = *(byte *)(param_1 + 1);
-    iVar4 = bt_chan_pwr_interp(param_1,cVar2);
-    get_freq_mem_addr(uVar3 >> 0x10 & 0xff,uVar3 >> 8 & 0xff,cVar2,6);
-    cVar2 = cVar2 + '\x01';
-    freq_i2c_mem_write_new((int)(((uint)bVar1 - iVar4) * 0x1000000) >> 0x18,1);
-  } while (cVar2 != 'U');
+    iVar5 = bt_chan_pwr_interp(param_1,cVar3);
+    cVar3 = cVar3 + '\x01';
+    freq_i2c_mem_write_new(uVar2,(int)(((uint)bVar1 - iVar5) * 0x1000000) >> 0x18,1);
+    uVar2 = uVar2 + (uVar4 >> 8 & 0xff) & 0xffff;
+  } while (cVar3 != 'U');
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_tx_cal.o -> txiq_cal_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,29 +12,18 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void txiq_cal_init(void)
+void txiq_cal_init(int param_1)
 
 {
-  int iVar1;
-  char cVar2;
-  undefined1 auStack_18 [12];
-  
-  if (-1 < (int)(_DAT_00012128 << 0x11)) {
-    iVar1 = (int)(short)DAT_000120e0;
-    cVar2 = DAT_000120e0;
-    if (DAT_000120e0 < '\0') {
-      cVar2 = '\0';
+  if (-1 < (int)(_set_txcap_reg << 0x11)) {
+    txcal_debuge_mode();
+    start_tx_tone_step(1,0x80,0x28,0,0,0);
+    _DAT_00011064 = rfcal_txiq(0,param_1);
+    if (param_1 == 0) {
+      start_tx_tone_step(0,0x80,0,0,0,0);
+      txcal_work_mode();
+      _set_txcap_reg = _set_txcap_reg | 0x4000;
     }
-    rfcal_txiq(0,&phy_param,&phy_param,0x80,(int)cVar2,0);
-    if (iVar1 < 0) {
-      iVar1 = 0;
-    }
-    iVar1 = (iVar1 + -0x14) * 0x10000 >> 0x10;
-    if (iVar1 < 0) {
-      iVar1 = 0;
-    }
-    rfcal_txiq(0,auStack_18,&phy_param,0x80,(int)(char)iVar1,2);
-    _DAT_00012128 = _DAT_00012128 | 0x4000;
   }
   return;
 }

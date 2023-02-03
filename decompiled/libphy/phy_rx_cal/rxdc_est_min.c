@@ -1,16 +1,14 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rx_cal.o -> rxdc_est_min
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void rxdc_est_min(undefined4 param_1,int param_2,int *param_3,char *param_4)
 
@@ -33,15 +31,15 @@ void rxdc_est_min(undefined4 param_1,int param_2,int *param_3,char *param_4)
   bVar4 = 0;
   cVar1 = '\0';
   do {
-    (**(code **)(_g_phyFuns + 0x10c))(1,param_1,&iStack_3c,*(code **)(_g_phyFuns + 0x10c));
+    dc_iq_est(1,param_1,&iStack_3c);
     if (iStack_34 < iVar5) {
-      iVar2 = (**(code **)(_g_phyFuns + 0x100))(*param_3,*(code **)(_g_phyFuns + 0x100));
-      iVar3 = (**(code **)(_g_phyFuns + 0x100))(iStack_3c,*(code **)(_g_phyFuns + 0x100));
+      iVar2 = abs_temp(*param_3);
+      iVar3 = abs_temp(iStack_3c);
       if (iVar3 < iVar2) {
         *param_3 = iStack_3c;
       }
-      iVar2 = (**(code **)(_g_phyFuns + 0x100))(param_3[1],*(code **)(_g_phyFuns + 0x100));
-      iVar3 = (**(code **)(_g_phyFuns + 0x100))(iStack_38,*(code **)(_g_phyFuns + 0x100));
+      iVar2 = abs_temp(param_3[1]);
+      iVar3 = abs_temp(iStack_38);
       if (iVar3 < iVar2) {
         param_3[1] = iStack_38;
       }

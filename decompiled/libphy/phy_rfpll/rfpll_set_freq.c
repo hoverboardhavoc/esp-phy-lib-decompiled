@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_rfpll.o -> rfpll_set_freq
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,25 +10,15 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rfpll_set_freq(int param_1,int param_2,int param_3,undefined1 *param_4)
+void rfpll_set_freq(int param_1,int param_2,undefined1 *param_3)
 
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
+  int iVar1;
   
-  iVar2 = 0x1a;
-  if ((param_2 != 1) && (iVar2 = 0x20, param_2 != 2)) {
-    iVar2 = 0x28;
-  }
-  iVar3 = iVar2 * 3000;
-  iVar2 = (param_1 * 1000 + param_3) * 4 + iVar2 * -96000;
-  uVar1 = iVar2 / iVar3;
-  *param_4 = (char)uVar1;
-  iVar2 = (iVar2 - (uVar1 & 0xff) * iVar3) * 0x100;
-  uVar1 = iVar2 / iVar3;
-  param_4[1] = (char)uVar1;
-  param_4[2] = (char)((int)((iVar2 - (uVar1 & 0xff) * iVar3) * 0x100) / iVar3);
+  iVar1 = (param_2 + param_1 * 0x400) * 2 + -0x200000;
+  param_3[2] = (char)((uint)iVar1 >> 0x10);
+  param_3[1] = (char)((uint)iVar1 >> 8);
+  *param_3 = (char)iVar1;
   return;
 }
 

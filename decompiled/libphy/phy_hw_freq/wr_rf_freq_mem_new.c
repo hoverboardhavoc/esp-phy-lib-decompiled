@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_hw_freq.o -> wr_rf_freq_mem_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,20 +12,16 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void wr_rf_freq_mem_new(undefined4 param_1,undefined4 *param_2)
+void wr_rf_freq_mem_new(int param_1,undefined4 *param_2)
 
 {
   uint uVar1;
-  uint uVar2;
   
-  uVar2 = get_freq_mem_param(2);
-  uVar1 = uVar2 >> 8 & 0xff;
-  uVar2 = uVar2 >> 0x10 & 0xff;
-  get_freq_mem_addr(uVar2,uVar1,param_1,0);
-  freq_i2c_mem_write_new(*param_2,7);
-  uVar1 = get_freq_mem_addr(uVar2,uVar1,param_1,3);
+  uVar1 = get_freq_mem_param(2);
+  uVar1 = param_1 * (uVar1 >> 8 & 0xff) + (uVar1 >> 0x10 & 0xff) & 0xffff;
+  freq_i2c_mem_write_new(uVar1,*param_2,7);
   _DAT_600a00d0 = param_2[1] | 0x7000000;
-  _DAT_600a00c0 = (uVar1 & 0x3ff) << 4 | _DAT_600a00c0 & 0xffff400f;
+  _DAT_600a00c0 = (uVar1 + 3 & 0x3ff) << 4 | _DAT_600a00c0 & 0xffff400f;
   return;
 }
 

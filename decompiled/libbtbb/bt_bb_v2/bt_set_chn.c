@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_set_chn
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,9 +16,7 @@ void bt_set_chn(undefined1 param_1)
 
 {
   _DAT_600a00c0 = _DAT_600a00c0 | 0x2000000;
-                    /* WARNING: Could not recover jumptable at 0x00011146. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x14))(param_1,0,0);
+  set_chan_freq_sw_start(param_1,0,0);
   return;
 }
 

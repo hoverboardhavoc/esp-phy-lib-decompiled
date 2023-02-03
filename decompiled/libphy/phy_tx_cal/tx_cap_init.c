@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_tx_cal.o -> tx_cap_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,38 +15,23 @@
 void tx_cap_init(void)
 
 {
-  int iVar1;
-  undefined *puVar2;
-  uint uVar3;
-  undefined4 uVar4;
+  undefined *puVar1;
+  undefined1 *puVar2;
+  int iVar3;
   
-  if (DAT_000120aa == '\x10') {
-    uVar4 = 0x14;
-    uVar3 = 0x78;
-  }
-  else {
-    uVar4 = 0x28;
-    uVar3 = 0x50;
-  }
-  if ((-1 < (int)(_DAT_00012128 << 0xd)) && (DAT_0001220c != '\x01')) {
+  if (-1 < (int)(_set_txcap_reg << 0xd)) {
     txcal_debuge_mode();
-    puVar2 = &phy_param;
-    iVar1 = 0;
+    puVar1 = &phy_param;
+    iVar3 = 0;
     do {
-      set_channel_rfpll_freq((int)(char)(&CSWTCH_168)[iVar1],DAT_000120fb,0);
-      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,1,3,0,10,*(code **)(_g_phyFuns + 0x1bc));
-      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,2,3,0,0xd,*(code **)(_g_phyFuns + 0x1bc));
-      (**(code **)(_g_phyFuns + 0x1bc))(0x6b,0,2,7,4,4,*(code **)(_g_phyFuns + 0x1bc));
-      if (iVar1 == 0) {
-        DAT_000120e0 = get_power_atten(0x80,uVar3,uVar4,0xf4,0);
-        uVar3 = (uint)DAT_000120e0;
-      }
-      rfcal_txcap(0x80,uVar3 & 0xff,0,puVar2);
-      iVar1 = iVar1 + 1;
-      puVar2 = puVar2 + 3;
-    } while (iVar1 != 3);
+      puVar2 = &CSWTCH_93 + iVar3;
+      iVar3 = iVar3 + 1;
+      set_channel_rfpll_freq(*puVar2,DAT_0001104f,0);
+      rfcal_txcap(0xe0,0x18,0,puVar1);
+      puVar1 = puVar1 + 3;
+    } while (iVar3 != 3);
     txcal_work_mode();
-    _DAT_00012128 = _DAT_00012128 | 0x40000;
+    _set_txcap_reg = _set_txcap_reg | 0x40000;
   }
   return;
 }

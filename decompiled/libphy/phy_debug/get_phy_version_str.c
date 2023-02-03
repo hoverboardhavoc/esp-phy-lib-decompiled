@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * https://github.com/espressif/esp-phy-lib/commit/478752a4b3e9286053ce9e81f386ee2bb8f9c030
- * Upstream date: 2022-05-07 21:35:33 +0800
- * Upstream subject: add phy for esp32c2
+ * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
+ * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
+ * Upstream date: 2023-02-03 08:24:50 +0000
+ * Upstream subject: [ESP32H2] Update libphy
  * Source: libphy -> phy_debug.o -> get_phy_version_str
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,7 +14,7 @@ undefined1 * get_phy_version_str(void)
 
 {
   phy_get_rf_cal_version();
-  sprintf(phy_version_str,"%d,%s,%s,%s");
+  sprintf(phy_version_str,"%d,%d,%s,%s,%s");
   return phy_version_str;
 }
 
