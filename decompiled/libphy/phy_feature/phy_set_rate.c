@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * Upstream date: 2023-02-17 16:30:31 +0800
+ * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
  * Source: libphy -> phy_feature.o -> phy_set_rate
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,9 +10,20 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void phy_set_rate(void)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void phy_set_rate(uint param_1)
 
 {
+  undefined4 uVar1;
+  
+  uVar1 = 0xf;
+  if (((param_1 & 0xfb) != 8) && (param_1 < 0x16)) {
+    uVar1 = 7;
+  }
+                    /* WARNING: Could not recover jumptable at 0x0001021e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_g_phyFuns + 0x60))(0x6b,1,4,7,4,uVar1);
   return;
 }
 

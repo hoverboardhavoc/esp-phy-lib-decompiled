@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * Upstream date: 2023-02-17 16:30:31 +0800
+ * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
  * Source: libphy -> phy_tx_gain.o -> wifi_get_tx_tab
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,10 +23,10 @@ void wifi_get_tx_tab(undefined4 param_1,undefined4 param_2)
   memset(auStack_62,0,0x1e);
   uStack_68 = 0x1000020;
   uStack_64 = 0x80;
-  memcpy(auStack_44,&DAT_0001049c,0x24);
+  memcpy(auStack_44,&DAT_000105f0,0x24);
   wifi_get_tx_gain_new
-            (param_1,&phy_param,(int)DAT_00011117,
-             (int)(((uint)DAT_00011143 - (uint)(byte)set_channel_rfpll_freq) * 0x1000000) >> 0x18,
+            (param_1,&phy_param,(int)DAT_0001111b,
+             (int)(((uint)DAT_00011147 - (uint)(byte)bt_txdc_cal_new) * 0x1000000) >> 0x18,
              auStack_8c,&uStack_68,auStack_44,param_2);
   return;
 }

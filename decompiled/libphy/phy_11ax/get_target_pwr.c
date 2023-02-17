@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * Upstream date: 2023-02-17 16:30:31 +0800
+ * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
  * Source: libphy -> phy_11ax.o -> get_target_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,8 +21,8 @@ int get_target_pwr(undefined4 param_1)
   
   wifi_get_target_power(_phy_param,acStack_24);
   iVar2 = rate_to_index(param_1);
-  cVar1 = 'T';
-  if (acStack_24[iVar2] < 'U') {
+  cVar1 = 'X';
+  if (acStack_24[iVar2] < 'Y') {
     cVar1 = acStack_24[iVar2];
   }
   return (int)cVar1;

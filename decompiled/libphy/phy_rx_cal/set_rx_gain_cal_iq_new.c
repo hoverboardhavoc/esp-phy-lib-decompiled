@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * Upstream date: 2023-02-17 16:30:31 +0800
+ * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
  * Source: libphy -> phy_rx_cal.o -> set_rx_gain_cal_iq_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ void set_rx_gain_cal_iq_new(int param_1,undefined4 param_2,undefined2 *param_3,i
   uStack_48 = 0x1000100;
   uStack_44 = 0x1000100;
   uStack_50 = 0x10307;
-  uVar6 = _set_rxclk_en >> 3 & 1;
+  uVar6 = _memcpy >> 3 & 1;
   uStack_4c = 0;
   uVar11 = 0;
   if (param_1 != 0) {
@@ -49,7 +49,7 @@ void set_rx_gain_cal_iq_new(int param_1,undefined4 param_2,undefined2 *param_3,i
   uVar8 = 1;
   (**(code **)(_g_phyFuns + 0x90))(uVar10,0x41,0xa0,*(code **)(_g_phyFuns + 0x90));
   uVar1 = 0x30;
-  set_lb_txiq_new(_DAT_000110f8);
+  set_lb_txiq_new(_DAT_000120f4);
   pbus_rx_dco_cal(4000,&uStack_48,10,0,uVar6);
   do {
     (**(code **)(_g_phyFuns + 0x74))(1,1,0,*(code **)(_g_phyFuns + 0x74));
@@ -68,7 +68,7 @@ void set_rx_gain_cal_iq_new(int param_1,undefined4 param_2,undefined2 *param_3,i
     (**(code **)(_g_phyFuns + 0x9c))(1,*(code **)(_g_phyFuns + 0x9c));
     if (iVar9 < 0x20001) {
       if (0xfff < iVar9) {
-_L73:
+_L138:
         if (param_4 != 0) {
           phy_printf("rxiq: rftx=0x%x, rfrx=x%x, att=%d, bb=0x%x, %d, %d\n",uVar10,0x104,uVar1,0xa0,
                      0,2);
@@ -97,7 +97,7 @@ _L73:
       sVar7 = 0;
     }
     uVar1 = (uint)sVar7;
-    if (iVar12 == 1) goto _L73;
+    if (iVar12 == 1) goto _L138;
     iVar12 = 1;
   } while( true );
 }

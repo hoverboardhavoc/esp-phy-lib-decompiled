@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * Upstream date: 2023-02-17 16:30:31 +0800
+ * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
  * Source: libphy -> phy_rx_cal.o -> rxiq_cover_mg_mp_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ void rxiq_cover_mg_mp_new(undefined4 param_1,char *param_2,char *param_3,undefin
   while( true ) {
     iVar4 = rxiq_set_reg(iVar4,1);
     iVar1 = rxiq_set_reg(iVar1,0);
-    rxiq_get_mis(param_1,&bStack_24,param_4);
+    rxiq_get_mis_new(param_1,&bStack_24,param_4);
     iVar4 = (int)(((uint)bStack_24 + iVar4) * 0x1000000) >> 0x18;
     iVar1 = (int)((iVar1 - (uint)bStack_23) * 0x1000000) >> 0x18;
     if (iVar5 == 1) break;

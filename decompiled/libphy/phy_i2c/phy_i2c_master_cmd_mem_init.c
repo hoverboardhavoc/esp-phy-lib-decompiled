@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * Upstream date: 2023-02-17 16:30:31 +0800
+ * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
  * Source: libphy -> phy_i2c.o -> phy_i2c_master_cmd_mem_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ void phy_i2c_master_cmd_mem_init(void)
   _DAT_600afc1c = 0x81086b;
   _DAT_600afc20 = 0x680062;
   _DAT_600afc24 = 0x280462;
-  _DAT_600afc28 = (uint)DAT_000111c2 << 0x10 | 0xf62;
+  _DAT_600afc28 = (uint)DAT_000111ba << 0x10 | 0xf62;
   _DAT_600afc2c = 0x260267;
   _DAT_600afc30 = (uint)DAT_000110ed << 0x10 | 0x467;
   _DAT_600afc34 = (uint)DAT_000110ed << 0x10 | 0x567;

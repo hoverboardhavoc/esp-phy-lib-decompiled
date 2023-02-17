@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
+ * Upstream date: 2023-02-17 16:30:31 +0800
+ * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
  * Source: libphy -> phy_rx_cal.o -> get_rfcal_rxiq_data_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,7 +46,7 @@ uint get_rfcal_rxiq_data_new(undefined4 param_1,undefined4 param_2,int param_3)
     if (iVar8 == 4) {
       cVar4 = (char)(iVar3 + 2 >> 2);
       cVar1 = (char)(iVar2 + 2 >> 2);
-_L22:
+_L29:
       uVar5 = get_data_sat((int)cVar4,0x1f,0xffffffe1);
       uVar6 = get_data_sat((int)cVar1,0x3f,0xffffffc1);
       return uVar6 & 0xff | (uVar5 & 0xff) << 8;
@@ -54,6 +54,6 @@ _L22:
   }
   cVar4 = (char)(cStack_34 + iVar10 + 1 >> 1);
   cVar1 = (char)(cStack_33 + iVar9 + 1 >> 1);
-  goto _L22;
+  goto _L29;
 }
 

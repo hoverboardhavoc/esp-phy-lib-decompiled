@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
  * Upstream date: 2023-02-17 16:30:31 +0800
  * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
- * Source: libphy -> phy_tx_cal.o -> tx_pwctrl_init_new
+ * Source: libphy -> phy_rx_gain.o -> rx_table_track
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,18 +12,26 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void tx_pwctrl_init_new(void)
+void rx_table_track(int param_1)
 
 {
-  if (-1 < (int)(_DAT_000120b4 << 0xb)) {
-    (**(code **)(_g_phyFuns + 0x94))(*(code **)(_g_phyFuns + 0x94));
-    set_channel_rfpll_freq(1,DAT_0001205f,0);
-    (**(code **)(_g_phyFuns + 100))(&phy_param,1,*(code **)(_g_phyFuns + 100));
-    pwdet_ref_code(0x50);
-    tx_pwctrl_init_cal_new(0,&phy_param,&phy_param,&phy_param);
-    txcal_work_mode();
-    _DAT_000120b4 = _DAT_000120b4 | 0x100000;
-    _DAT_0001212c = 0xb;
+  ushort uVar1;
+  int iVar2;
+  
+  iVar2 = abs_temp((int)_DAT_000111c8 - (int)_phy_param);
+  uVar1 = _DAT_0001112c;
+  if (0x28 < iVar2) {
+    iVar2 = (int)DAT_0001112f;
+    if (param_1 != 0) {
+      phy_printf("rx:%d,%d\n",(int)_DAT_000111c8,(int)_phy_param);
+    }
+    _DAT_600a981c = _DAT_600a981c & 0xfffffffd;
+    _DAT_000110b4 = _DAT_000110b4 & 0xfffffdff;
+    set_rx_gain_table(0x985,0);
+    mac_enable_bb();
+    _DAT_000111c8 = _phy_param;
+    chip_v7_set_chan(uVar1 & 0xff,iVar2);
+    return;
   }
   return;
 }
