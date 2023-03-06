@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libphy -> phy_rx_cal.o -> pbus_rx_dco_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,7 +42,7 @@ void pbus_rx_dco_cal(undefined4 param_1,short *param_2,int param_3)
   do {
     pbus_force_test(2,1,uVar8 & 0xffff);
     pbus_force_test(2,2,uVar2 & 0xffff);
-    ets_delay_us(2);
+    ets_delay_us(1);
     dc_iq_est(1,param_1,&iStack_5c);
     iVar10 = 0;
     iVar5 = abs_temp(iStack_5c);
@@ -53,20 +53,20 @@ void pbus_rx_dco_cal(undefined4 param_1,short *param_2,int param_3)
     if (iVar3 < iVar5) {
       iVar5 = (int)(short)((int)((uint)bVar1 * iStack_58) >> 5);
       if (iVar10 == 0) {
-_L66:
+_L60:
         iVar10 = 1;
         if (iStack_5c < 1) {
           iVar10 = -1;
         }
       }
-      if (iVar5 == 0) goto _L67;
+      if (iVar5 == 0) goto _L61;
     }
     else {
       if (iVar10 == 0) {
         iVar5 = 0;
-        goto _L66;
+        goto _L60;
       }
-_L67:
+_L61:
       iVar5 = 1;
       if (iStack_58 < 1) {
         iVar5 = -1;

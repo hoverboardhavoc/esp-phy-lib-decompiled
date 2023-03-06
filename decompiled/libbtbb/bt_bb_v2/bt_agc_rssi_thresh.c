@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_rssi_thresh
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void bt_agc_rssi_thresh(void)
 
 {
-  _DAT_600a28a0 = _DAT_600a28a0 & 0xff00ffff | 0x9c0000;
+  _DAT_600a28a0 = _DAT_600a28a0 & 0xff00ffff | 0x970000;
   _DAT_600a28ac = _DAT_600a28ac & 0x807fffff | 0x44000000;
   _DAT_600a28b8 = _DAT_600a28b8 & 0xfff00fff | 0x88000;
   return;

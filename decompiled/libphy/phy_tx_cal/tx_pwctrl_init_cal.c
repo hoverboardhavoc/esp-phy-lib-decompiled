@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libphy -> phy_tx_cal.o -> tx_pwctrl_init_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,67 +10,34 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void tx_pwctrl_init_cal(int param_1,char *param_2,char *param_3,char *param_4)
+void tx_pwctrl_init_cal(char *param_1,char *param_2,int param_3)
 
 {
-  undefined1 uVar1;
+  int iVar1;
   char cVar2;
-  char cVar3;
+  char *pcVar3;
   char *pcVar4;
-  undefined2 uVar5;
-  char cVar6;
-  char cVar7;
-  int iVar8;
-  char acStack_41 [13];
+  char acStack_31 [13];
   
-  acStack_41[0] = '\0';
-  if (param_1 == 0) {
-    cVar6 = '(';
-    uVar5 = 0xe0;
-    cVar3 = '\b';
-    cVar7 = '\x10';
-  }
-  else {
-    set_txcap_reg(&phy_param,6);
-    cVar6 = '\x06';
-    uVar5 = 0x80;
-    cVar3 = '\x14';
-    cVar7 = '(';
-  }
-  iVar8 = 0;
-  cVar2 = '(';
+  acStack_31[0] = ' ';
+  iVar1 = 0;
   do {
-    uVar1 = (&CSWTCH_93)[iVar8];
-    set_channel_rfpll_freq(uVar1,DAT_0001104f,0);
-    if (param_1 == 0) {
-      set_txcap_reg(&phy_param,uVar1);
-    }
-    if (DAT_00011045 < 2) {
-      rfcal_pwrctrl(uVar5,acStack_41,1,cVar6,param_4,0x20,(int)cVar2,0);
-    }
-    else {
-      *param_4 = '0';
-    }
-    cVar2 = *param_4;
-    pcVar4 = param_2 + iVar8;
-    iVar8 = iVar8 + 1;
-    *pcVar4 = cVar2;
-    cVar2 = cVar2 + cVar6;
-    param_4 = param_4 + 1;
-  } while (iVar8 != 3);
-  _txcal_work_mode = 0;
-  cVar6 = *param_2;
-  if ((cVar6 < '\x04') || (cVar7 < cVar6)) {
-    *param_3 = (acStack_41[0] + cVar6) - cVar3;
-    cVar3 = cVar3 - cVar6;
-    *param_2 = *param_2 + cVar3;
-    param_2[1] = param_2[1] + cVar3;
-    param_2[2] = cVar3 + param_2[2];
+    pcVar4 = (char *)(param_3 + iVar1);
+    set_channel_rfpll_freq((&CSWTCH_82)[iVar1],DAT_0001104f,0);
+    rfcal_pwrctrl(0x80,acStack_31,1,0,pcVar4,0x90,0xd,0);
+    pcVar3 = param_1 + iVar1;
+    iVar1 = iVar1 + 1;
+    *pcVar3 = *pcVar4;
+  } while (iVar1 != 3);
+  if ((byte)(*param_1 - 9U) < 0xb) {
+    *param_2 = acStack_31[0];
   }
   else {
-    *param_3 = acStack_41[0];
+    cVar2 = *param_1 + -0xd;
+    *param_2 = acStack_31[0] + cVar2;
+    *param_1 = *param_1 - cVar2;
+    param_1[1] = param_1[1] - cVar2;
+    param_1[2] = param_1[2] - cVar2;
   }
   return;
 }

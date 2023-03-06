@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libphy -> phy_pbus.o -> pbus_set_rxgain
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,10 @@
 void pbus_set_rxgain(uint param_1)
 
 {
-  pbus_force_test(1,2,param_1 >> 10 & 0xc0 | param_1 >> 3 & 0x100 | param_1 >> 10 & 0x3c);
+  pbus_force_test(0,1,param_1 >> 8 & 0x30 | 0x147);
   do {
   } while (_DAT_600a0910 < 0);
-  _DAT_600a0904 = (param_1 >> 0xe & 0x1f0 | 7) << 6 | 0x8000 | _DAT_600a0904 & 0xfffe0001;
+  _DAT_600a0904 = (param_1 & 0xff) << 8 | 0x10004 | _DAT_600a0904 & 0xfffe0001;
   return;
 }
 

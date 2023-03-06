@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libphy -> phy_pwdet.o -> get_sar_sig_ref
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,8 +22,8 @@ void get_sar_sig_ref(short param_1,short *param_2,short *param_3)
   uVar2 = _DAT_0001100a;
   uVar1 = ___clzsi2;
   sVar3 = 0;
-  if (___clzsi2 <= (ushort)(param_1 + 0x28U)) {
-    sVar3 = (param_1 + 0x28U) - ___clzsi2;
+  if (___clzsi2 <= (ushort)(param_1 + 0x25U)) {
+    sVar3 = (param_1 + 0x25U) - ___clzsi2;
   }
   *param_2 = sVar3;
   sVar3 = 0;

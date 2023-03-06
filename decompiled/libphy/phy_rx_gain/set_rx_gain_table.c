@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libphy -> phy_rx_gain.o -> set_rx_gain_table
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,27 +22,30 @@ void set_rx_gain_table(void)
   undefined1 uStack_e4;
   undefined4 uStack_e0;
   undefined1 uStack_dc;
-  undefined1 auStack_d8 [208];
+  undefined1 auStack_d8 [204];
   
   local_f0 = 0xe7d7c7c7;
   uStack_ec = 0xf7;
-  uStack_e8 = 0x11100a12;
+  uStack_e8 = 0x100f0a12;
   uStack_e4 = 10;
   uStack_e0 = 0xc0c0c00;
   uStack_dc = 0x16;
-  if ((_DAT_00011034 & 0x200) == 0) {
+  if ((_DAT_00011028 & 0x200) == 0) {
     uVar1 = gen_rx_gain_table(auStack_d8,0x20,&local_f0,&uStack_e8,&uStack_e0,5,0);
     if (uVar1 < 0x50) {
-      DAT_00011059 = (char)uVar1;
+      DAT_00011050 = (char)uVar1;
     }
     else {
-      DAT_00011059 = 'O';
+      DAT_00011050 = 'O';
     }
-    _DAT_00011034 = _DAT_00011034 | 0x200;
+    _DAT_00011028 = _DAT_00011028 | 0x200;
   }
-  if ((_DAT_00011034 & 0x40) == 0) {
-    wr_rx_gain_mem(DAT_00011059 + '\x01',auStack_d8,1);
-    _DAT_00011034 = _DAT_00011034 | 0x40;
+  _DAT_00011030 = 0;
+  _DAT_00011034 = 0;
+  if ((_DAT_00011028 & 0x40) == 0) {
+    set_rx_gain_cal_dc(&phy_param);
+    wr_rx_gain_mem(DAT_00011050 + '\x01',auStack_d8,&phy_param);
+    _DAT_00011028 = _DAT_00011028 | 0x40;
   }
   _DAT_600a0450 = _DAT_600a0450 | 0x60000000;
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libphy -> phy_rx_cal.o -> rxiq_get_mis
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void rxiq_get_mis(int param_1,undefined1 *param_2,int param_3)
+void rxiq_get_mis(uint param_1,undefined1 *param_2,int param_3)
 
 {
   char cVar1;
@@ -27,6 +27,7 @@ void rxiq_get_mis(int param_1,undefined1 *param_2,int param_3)
   int iVar10;
   uint uVar11;
   
+  iq_est_enable(1,1 << (param_1 & 0x1f) & 0xffff);
   uVar4 = param_1 - 2;
   iVar6 = _DAT_600a0484 >> (uVar4 & 0x1f);
   iVar8 = _DAT_600a0478 >> (uVar4 & 0x1f);
@@ -51,19 +52,21 @@ void rxiq_get_mis(int param_1,undefined1 *param_2,int param_3)
                    (((int)((ulonglong)((longlong)iVar8 * (longlong)iVar10) >> 0x20) -
                     (int)((ulonglong)((longlong)iVar9 * (longlong)iVar5) >> 0x20)) -
                    (uint)((uint)(iVar8 * iVar10) < uVar3)) * 0x200,uVar4,iVar6);
-  cVar2 = __divdi3(uVar11 * 0x200,
-                   uVar11 >> 0x17 |
+  cVar2 = __divdi3(uVar11 * 0x400,
+                   uVar11 >> 0x16 |
                    ((uint)(uVar11 < (uint)(iVar9 * iVar10)) +
                    (int)((ulonglong)((longlong)iVar9 * (longlong)iVar10) >> 0x20) +
-                   (int)((ulonglong)((longlong)iVar8 * (longlong)iVar5) >> 0x20)) * 0x200,uVar4,
+                   (int)((ulonglong)((longlong)iVar8 * (longlong)iVar5) >> 0x20)) * 0x400,uVar4,
                    iVar6);
   iVar6 = cVar1 + 1 >> 1;
   *param_2 = (char)iVar6;
   param_2[1] = (char)(cVar2 + 1 >> 1);
   if (param_3 != 0) {
-    phy_printf("%d, %d-%d, ",_DAT_600a0490 >> (param_1 - 3U & 0x1f),iVar6);
-    return;
+    phy_printf("%d, %d-%d, ",_DAT_600a0490 >> (param_1 - 3 & 0x1f),iVar6);
   }
+  _DAT_600a0474 = _DAT_600a0474 & 0xfffffffd;
+  ets_delay_us(1);
+  _DAT_600a0474 = _DAT_600a0474 & 0xfffffffe;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libphy -> phy_tx_cal.o -> rfcal_pwrctrl
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,105 +10,59 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rfcal_pwrctrl(undefined4 param_1,int param_2,int param_3,int param_4,int param_5,
-                  undefined4 param_6,int param_7,int param_8)
+void rfcal_pwrctrl(byte *param_1,undefined1 *param_2,undefined4 param_3,int param_4,int param_5)
 
 {
-  short sVar1;
-  uint uVar2;
+  byte bVar1;
+  short sVar2;
   int iVar3;
-  int iVar4;
-  char cVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
+  short sVar4;
+  int iVar5;
+  int iVar6;
+  uint uVar7;
+  uint uVar8;
   int iVar9;
   int iVar10;
-  int iVar11;
-  uint uVar12;
   
-  iVar10 = (param_3 + -1) * 0x1000000 >> 0x18;
-  iVar9 = 0;
+  bVar1 = *param_1;
+  iVar10 = 0;
+  iVar3 = 0;
+  iVar9 = 2;
   do {
-    if ((char)iVar10 < '\0') {
-      stop_tx_tone(1);
-      return;
+    uVar7 = param_4 - iVar3 / 4;
+    uVar8 = uVar7 & 0xff;
+    pbus_force_test(3,1,uVar8 << 3 | 7);
+    ets_delay_us(2);
+    iVar5 = get_power_db(param_3);
+    iVar6 = get_power_db(param_3);
+    iVar5 = ((iVar5 + iVar6) * 0x10000 >> 0x10) + 4 >> 3;
+    sVar4 = get_data_sat(iVar5 - (uint)bVar1,0x10,0xfffffff0);
+    iVar6 = (int)sVar4;
+    if (param_5 != 0) {
+      phy_printf("i=%02d  acc=%03d  tgt=%03d  err=%03d  ser=%03d att=0x%x\n",iVar10,iVar5,
+                 (uint)bVar1,iVar6,iVar3,uVar8);
     }
-    uVar2 = (uint)*(byte *)(param_2 + iVar10);
-    if (iVar10 < param_3 + -1) {
-      iVar9 = (int)(((iVar9 + (uint)((byte *)(param_2 + iVar10))[1]) - uVar2) * 0x10000) >> 0x10;
-    }
-    iVar11 = 0;
-    uVar6 = 2;
-    do {
-      iVar7 = (iVar9 + param_7) * 0x1000000;
-      iVar8 = iVar7 >> 0x18;
-      cVar5 = (char)((uint)iVar7 >> 0x18);
-      if (iVar8 < 0) {
-        cVar5 = '\0';
-      }
-      if ('d' < cVar5) {
-        cVar5 = 'd';
-      }
-      start_tx_tone_step(1,param_1,0,0,0);
-      ets_delay_us(2);
-      iVar3 = get_power_db(param_6);
-      iVar4 = get_power_db(param_6);
-      iVar7 = (int)cVar5;
-      iVar3 = ((iVar3 + iVar4) * 0x10000 >> 0x10) + 4 >> 3;
-      if (iVar3 < 0) {
-        iVar3 = 0;
-      }
-      uVar12 = iVar3 - uVar2;
-      if ((int)uVar12 < 0x19) {
-        if ((int)uVar12 < -0x18) {
-          uVar12 = 0xffffffe8;
-          goto _L123;
-        }
-        if (param_8 != 0) goto _L136;
-_L124:
-        if (uVar12 == 0) {
-          if (iVar11 != 0) break;
-        }
-        else if ((uVar12 == 0xffffffff) && (uVar6 == 1)) break;
-      }
-      else {
-        uVar12 = 0x18;
+    if (iVar6 == 0) {
+      if (iVar10 != 0) break;
 _L123:
-        if (param_8 != 0) {
-_L136:
-          phy_printf("i=%02d  acc=%03d  tgt=%03d  err=%03d  ser=%03d att=%03d\n",iVar11,uVar2,uVar12
-                     ,iVar9,iVar7);
-          goto _L124;
-        }
-      }
-      if (uVar6 == 0) break;
-      if (iVar8 < 1) {
-        if ((int)uVar12 < 0) {
-          iVar7 = 0;
-          break;
-        }
-      }
-      else if ((99 < iVar8) && (0 < (int)uVar12)) {
-        iVar7 = 100;
-        break;
-      }
-      sVar1 = (short)uVar12 + (short)iVar9;
-      if (4 < ((uVar12 & 0xffff) + 2 & 0xffff)) {
-        sVar1 = sVar1 - (short)((int)uVar12 >> 2);
-      }
-      iVar11 = iVar11 + 1;
-      iVar9 = (int)sVar1;
-      uVar6 = uVar12;
-    } while (iVar11 != 10);
-    iVar11 = (iVar7 - param_4) * 0x1000000;
-    if (iVar11 >> 0x18 < -0x18) {
-      *(undefined1 *)(param_5 + iVar10) = 0xe8;
+      if (iVar9 == 0) break;
     }
     else {
-      *(undefined1 *)(param_5 + iVar10) = (char)((uint)iVar11 >> 0x18);
+      if (iVar6 == -1) {
+        if (iVar9 != 1) goto _L123;
+        break;
+      }
+      if ((iVar9 == 0) || ((iVar6 == 1 && (iVar9 == 1)))) break;
     }
-    iVar10 = iVar10 + -1;
-  } while( true );
+    sVar2 = (short)iVar3 + sVar4;
+    if (4 < (ushort)(sVar4 + 2U)) {
+      sVar2 = sVar2 - (short)(iVar6 >> 2);
+    }
+    iVar10 = iVar10 + 1;
+    iVar3 = (int)sVar2;
+    iVar9 = iVar6;
+  } while (iVar10 != 10);
+  *param_2 = (char)uVar7;
+  return;
 }
 

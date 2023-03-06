@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
+ * Upstream date: 2023-03-06 18:57:45 +0800
+ * Upstream subject: esp32h2: update libphy for h2 eco1
  * Source: libphy -> phy_init.o -> register_chipv7_phy
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,42 +14,30 @@ undefined4 register_chipv7_phy(int param_1)
 
 {
   undefined1 uVar1;
-  uint uVar2;
   
-  DAT_000104d3 = 3;
+  DAT_00010537 = 3;
   phy_dis_hw_set_freq();
-  if (DAT_000104c6 == '\0') {
-    uVar2 = 0x200000;
-    if (param_1 != 0) {
-      if (param_1 == 1) {
-        uVar2 = DAT_000104d8;
-        if (DAT_000104d8 != 0) {
-          uVar2 = 0x11ed900;
-        }
-      }
-      else {
-        DAT_000104d8 = 0;
-        uVar2 = DAT_000104d8;
-      }
+  if (DAT_0001052a == '\0') {
+    if (param_1 == 0) {
+      DAT_0001053c = 0x200000;
     }
-    DAT_000104d8 = uVar2;
-    DAT_000104d8 = DAT_000104d8 | 0x10;
+    else if ((param_1 != 1) || (DAT_0001053c != 0)) {
+      DAT_0001053c = 0;
+    }
   }
-  phy_printf("%s, %d\n","register_chipv7_phy",0xab);
-  rf_init();
+  rf_init(1);
   bb_init();
-  if (((DAT_000104c6 == '\0') && (get_temp_init(), DAT_000104c6 == '\0')) && (DAT_000104d4 != '\0'))
+  if (((DAT_0001052a == '\0') && (get_temp_init(), DAT_0001052a == '\0')) && (DAT_00010538 != '\0'))
   {
     chip_v7_set_chan_offset(0);
   }
-  phy_bbpll_cal(0);
   uVar1 = DAT_60012454;
   DAT_60012451 = 0x17;
   DAT_60012452 = 1;
   DAT_60012453 = 0;
   DAT_60012454 = 0;
   i2c_readReg(99,1,0,uVar1);
-  DAT_000104c6 = 1;
+  DAT_0001052a = 1;
   phy_en_hw_set_freq();
   return 0;
 }
