@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
+ * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
+ * Upstream date: 2023-03-08 11:00:03 +0800
+ * Upstream subject: Update esp32c3/s3 phy lib and add test lib
  * Source: libphy -> phy_rx_cal.o -> rfrx_sat_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -115,11 +115,11 @@ void rfrx_sat_check(int param_1)
       phy_printf("dac=%d, atten=%d, sat=%d, %d, %d %d, num=%d\n",uVar16,(int)sVar2,uVar18,
                  local_58 >> 8 & 0xff,local_58 >> 0x10 & 0xff,local_58 >> 0x18,bVar1);
     }
-    if (bVar1 < 3) goto _L262;
+    if (bVar1 < 3) goto _L237;
     uVar16 = uVar16 - 1;
   } while (uVar16 != 0);
   uVar17 = 0;
-_L262:
+_L237:
   (**(code **)(_g_phyFuns + 0x1bc))(100,1,8,7,3,uVar17,*(code **)(_g_phyFuns + 0x1bc));
   _DAT_6001c05c = _DAT_6001c05c | 0x1080000;
   (**(code **)(_g_phyFuns + 0x24))(0,*(code **)(_g_phyFuns + 0x24));

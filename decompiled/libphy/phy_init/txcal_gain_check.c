@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
+ * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
+ * Upstream date: 2023-03-08 11:00:03 +0800
+ * Upstream subject: Update esp32c3/s3 phy lib and add test lib
  * Source: libphy -> phy_init.o -> txcal_gain_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,23 +14,23 @@ void txcal_gain_check(void)
 
 {
   short sVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  undefined1 *puVar2;
+  undefined1 *puVar3;
   
-  sVar1 = *(short *)((DAT_00010ddb + 0x20) * 2 + 0x10d3c);
+  sVar1 = *(short *)((DAT_00010dbf + 0x20) * 2 + 0x10d20);
   puVar2 = &phy_param;
   do {
-    puVar3 = (undefined4 *)((int)puVar2 + 2);
-    *(short *)(puVar2 + 0x11) = *(short *)(puVar2 + 0x11) - sVar1;
+    puVar3 = puVar2 + 2;
+    *(short *)(puVar2 + 0x44) = *(short *)(puVar2 + 0x44) - sVar1;
     puVar2 = puVar3;
-  } while (puVar3 != (undefined4 *)0x10d5c);
-  sVar1 = *(short *)((DAT_00010ddc + 0x38) * 2 + 0x10d3e);
+  } while (puVar3 != (undefined1 *)0x10d40);
+  sVar1 = *(short *)((DAT_00010dc0 + 0x38) * 2 + 0x10d22);
   puVar2 = &phy_param;
   do {
-    puVar3 = (undefined4 *)((int)puVar2 + 2);
-    *(short *)((int)puVar2 + 0x76) = *(short *)((int)puVar2 + 0x76) - sVar1;
+    puVar3 = puVar2 + 2;
+    *(short *)(puVar2 + 0x76) = *(short *)(puVar2 + 0x76) - sVar1;
     puVar2 = puVar3;
-  } while (puVar3 != (undefined4 *)0x10d54);
+  } while (puVar3 != (undefined1 *)0x10d38);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
+ * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
+ * Upstream date: 2023-03-08 11:00:03 +0800
+ * Upstream subject: Update esp32c3/s3 phy lib and add test lib
  * Source: libphy -> phy_track.o -> ram_tx_pwctrl_background
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ void ram_tx_pwctrl_background(undefined4 param_1,undefined4 param_2)
   if (DAT_0001121a != '\0') {
     rfcal_track(DAT_0001109f);
   }
-                    /* WARNING: Could not recover jumptable at 0x0001041e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010426. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x188))(uVar1);
   return;

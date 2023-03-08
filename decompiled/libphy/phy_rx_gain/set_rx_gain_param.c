@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
+ * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
+ * Upstream date: 2023-03-08 11:00:03 +0800
+ * Upstream subject: Update esp32c3/s3 phy lib and add test lib
  * Source: libphy -> phy_rx_gain.o -> set_rx_gain_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,9 @@
 void set_rx_gain_param(int param_1,undefined4 param_2,undefined4 param_3)
 
 {
-  bool bVar1;
-  code *pcVar2;
-  ushort uVar3;
-  undefined4 uVar4;
+  code *pcVar1;
+  ushort uVar2;
+  undefined4 uVar3;
   
   _DAT_60006110 = _DAT_60006110 | 0xc000;
   (**(code **)(_g_phyFuns + 0x1d4))(*(code **)(_g_phyFuns + 0x1d4));
@@ -30,30 +29,29 @@ void set_rx_gain_param(int param_1,undefined4 param_2,undefined4 param_3)
     }
   }
   else {
-    pcVar2 = *(code **)(_g_phyFuns + 0x1cc);
-    uVar3 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
-    (*pcVar2)(1,1,uVar3 | 2);
+    pcVar1 = *(code **)(_g_phyFuns + 0x1cc);
+    uVar2 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
+    (*pcVar1)(1,1,uVar2 | 2);
   }
   _DAT_6000607c = _DAT_6000607c & 0xf7ffffff;
   (**(code **)(_g_phyFuns + 0x1e4))(0,*(code **)(_g_phyFuns + 0x1e4));
-  bVar1 = param_1 == 0;
-  if (bVar1) {
-    uVar4 = 3;
+  if (param_1 == 0) {
+    uVar3 = 3;
   }
   else {
-    pcVar2 = *(code **)(_g_phyFuns + 0x1cc);
-    uVar3 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
-    (*pcVar2)(1,1,uVar3 | 2);
+    pcVar1 = *(code **)(_g_phyFuns + 0x1cc);
+    uVar2 = (**(code **)(_g_phyFuns + 0x1d0))(1,1,*(code **)(_g_phyFuns + 0x1d0));
+    (*pcVar1)(1,1,uVar2 | 2);
     (**(code **)(_g_phyFuns + 0x1cc))(4,2,0,*(code **)(_g_phyFuns + 0x1cc));
-    uVar4 = 2;
+    uVar3 = 1;
   }
-  set_rx_gain_cal_dc(!bVar1,!bVar1,uVar4,param_2,&phy_rxrf_dc,&phy_rxbb_dc,&phy_chan_dc,param_3);
+  set_rx_gain_cal_dc(param_1 != 0,0,uVar3,param_2,&phy_rxrf_dc,&phy_rxbb_dc,&phy_chan_dc,param_3);
   _DAT_60006110 = _DAT_60006110 & 0xffff7fff;
   if (param_1 != 0) {
     (**(code **)(_g_phyFuns + 0x1cc))(4,2,0,*(code **)(_g_phyFuns + 0x1cc));
   }
   (**(code **)(_g_phyFuns + 0x1e4))(0,*(code **)(_g_phyFuns + 0x1e4));
-                    /* WARNING: Could not recover jumptable at 0x000104d8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000104d6. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x1d8))();
   return;

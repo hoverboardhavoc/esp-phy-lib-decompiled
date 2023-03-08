@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
+ * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
+ * Upstream date: 2023-03-08 11:00:03 +0800
+ * Upstream subject: Update esp32c3/s3 phy lib and add test lib
  * Source: libphy -> phy_init.o -> rom_phy_reg_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,8 +14,8 @@ void rom_phy_reg_init(void)
 
 {
   (**(code **)(g_phyFuns + 0xb0))(*(code **)(g_phyFuns + 0xb0));
-  (**(code **)(g_phyFuns + 0xb8))(DAT_00010f2e,DAT_00010f2d,*(code **)(g_phyFuns + 0xb8));
-  rom_wifi_agc_sat_gain(s_<<<<P_00010e0c._0_4_);
+  (**(code **)(g_phyFuns + 0xb8))(DAT_00010f12,DAT_00010f11,*(code **)(g_phyFuns + 0xb8));
+  rom_wifi_agc_sat_gain(s_<<<<P_00010df0._0_4_);
   (**(code **)(g_phyFuns + 0xbc))(*(code **)(g_phyFuns + 0xbc));
   (**(code **)(g_phyFuns + 0xc4))(*(code **)(g_phyFuns + 0xc4));
   (**(code **)(g_phyFuns + 0xa8))(*(code **)(g_phyFuns + 0xa8));

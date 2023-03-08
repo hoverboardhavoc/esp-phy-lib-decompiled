@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
+ * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
+ * Upstream date: 2023-03-08 11:00:03 +0800
+ * Upstream subject: Update esp32c3/s3 phy lib and add test lib
  * Source: libphy -> phy_track.o -> ram_bt_track_pll_cap
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ void ram_bt_track_pll_cap(void)
   if (DAT_000110a1 != '\0') {
     rom_bt_track_tx_power(1,DAT_0001109f);
   }
-                    /* WARNING: Could not recover jumptable at 0x00010390. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000103a6. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x188))(uVar1);
   return;
