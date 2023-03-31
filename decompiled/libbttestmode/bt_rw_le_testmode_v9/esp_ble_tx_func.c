@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> esp_ble_tx_func
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,9 +17,15 @@ void esp_ble_tx_func(undefined4 param_1,undefined4 param_2,int param_3,uint para
 
 {
   int iVar1;
+  char *pcVar2;
   
-  phy_printf("fcc_le_tx_syncw: txpwr=%d,chan=%d,len=%d,data_type=%d,syncw=0x%x,rate=%d,tx_num=%d\n",
-             param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  if (short_log_en == '\0') {
+    pcVar2 = "fcc_le_tx_syncw: txpwr=%d,chan=%d,len=%d,data_type=%d,syncw=0x%x,rate=%d,tx_num=%d\n";
+  }
+  else {
+    pcVar2 = "ble_tx:pwr=%d,chan=%d,len=%d,type=%d,syncw=0x%x,rate=%d,txnum=%d\n";
+  }
+  phy_printf(pcVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   bt_tx_num = 0;
   prbs9_gen(&PRBS9);
   rw_le_v9_em_clean(0x3fcd0000,0x400);

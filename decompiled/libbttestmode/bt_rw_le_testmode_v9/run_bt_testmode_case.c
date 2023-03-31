@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> run_bt_testmode_case
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ undefined4 run_bt_testmode_case(char *param_1,int *param_2)
     bt_bb_tx_cca_set(*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
                      param_2[7]);
     pcVar3 = "TX CCA!\n";
-    goto _L394;
+    goto _L404;
   }
   iVar2 = strcmp(param_1,"sw_cca_test");
   if (iVar2 == 0) {
@@ -50,6 +50,7 @@ undefined4 run_bt_testmode_case(char *param_1,int *param_2)
   }
   iVar2 = strcmp(param_1,"rw_le_rx_per");
   if (iVar2 == 0) {
+    phy_printf("ble_rx, chan=%d, syncw=0x%x, rate=%d\n",*param_2,param_2[1],param_2[2]);
     iVar6 = param_2[2];
     iVar5 = param_2[1];
     iVar2 = *param_2;
@@ -137,7 +138,7 @@ undefined4 run_bt_testmode_case(char *param_1,int *param_2)
                         if (iVar2 != 0) {
                           iVar2 = strcmp(param_1,"wifi_pti_toggle_polling");
                           if (iVar2 == 0) {
-                            phy_printf(&_LC62,wifi_pti_toggle_polling_pti_period);
+                            phy_printf(&_LC65,wifi_pti_toggle_polling_pti_period);
                             wifi_pti_toggle_polling_pti_period = *param_2;
                             uVar4 = cmd_polling_attach(0,0,wifi_pti_toggle_service_polling,0);
                             pcVar3 = "wifi pti toggle %d\n";
@@ -210,13 +211,13 @@ undefined4 run_bt_testmode_case(char *param_1,int *param_2)
                                                 phy_printf("0x%x ",*puVar1);
                                               }
                                               pcVar3 = "\n";
-                                              goto _L394;
+                                              goto _L404;
                                             }
                                             *(int *)*param_2 = param_2[1];
                                           }
                                           pcVar3 = "0x%x\n";
                                           uVar4 = *(undefined4 *)*param_2;
-                                          goto _L398;
+                                          goto _L408;
                                         }
                                         rw_le_pq_conmst_evt(*param_2,param_2[1],param_2[2],
                                                             param_2[3]);
@@ -226,20 +227,20 @@ undefined4 run_bt_testmode_case(char *param_1,int *param_2)
                                   }
                                 }
                               }
-                              goto _L394;
+                              goto _L404;
                             }
                             uVar4 = cmd_polling_dettach(0,wifi_pti_toggle_service_polling);
                             force_coex_timer0_wifi_pti_v2(0);
                             pcVar3 = "wifi pti toggle stop %d\n";
                           }
-_L398:
+_L408:
                           phy_printf(pcVar3,uVar4);
                           return 1;
                         }
                         rw_le_v9_adv_polling_stop();
                         pcVar3 = "le adv stop\n";
                       }
-                      goto _L394;
+                      goto _L404;
                     }
                     cmd_polling_start(100);
                   }
@@ -250,7 +251,7 @@ _L398:
           }
         }
       }
-_L394:
+_L404:
       phy_printf(pcVar3);
       return 1;
     }

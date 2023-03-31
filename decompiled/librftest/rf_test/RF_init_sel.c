@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> rf_test.o -> RF_init_sel
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,8 +42,8 @@ void RF_init_sel(int param_1,int param_2)
   else {
     read_flash_init_para(param_2 + 8,&init_param_default);
     uVar1 = esp_crc8(&init_param_default,0x7f);
-    phy_printf("crc8_init:0x%x,0x%x\n",DAT_000120df,(int)(char)uVar1);
-    if (DAT_000120df != uVar1) {
+    phy_printf("crc8_init:0x%x,0x%x\n",DAT_000120e3,(int)(char)uVar1);
+    if (DAT_000120e3 != uVar1) {
       phy_printf("esp init data is from flash,init bin crc error! err_code=%d\n",1);
       return;
     }
@@ -51,8 +51,8 @@ void RF_init_sel(int param_1,int param_2)
   }
   phy_init();
   phy_printf("v=%d,c=%d, p=%d,%d,%d,%d,%d,%d, %d,%d,%d,%d,%d,%d,%d,%d,fcc=%d freq=%d,%d,crc=%d\n",
-             init_param_default,DAT_00012061,DAT_00012062,DAT_00012063,read_flash_init_para,
-             DAT_00012065,DAT_00012066);
+             init_param_default,DAT_00012065,DAT_00012066,DAT_00012067,read_flash_init_para,
+             DAT_00012069,DAT_0001206a);
   return;
 }
 

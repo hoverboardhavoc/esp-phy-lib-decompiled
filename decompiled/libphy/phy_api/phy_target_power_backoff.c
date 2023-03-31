@@ -3,27 +3,17 @@
  * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
  * Upstream date: 2023-03-31 17:07:27 +0800
  * Upstream subject: update_for_rftest_20230331
- * Source: libphy -> phy_init.o -> get_txcap_data
+ * Source: libphy -> phy_api.o -> phy_target_power_backoff
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void get_txcap_data(void)
+void phy_target_power_backoff(undefined1 param_1)
 
 {
-  uint uVar1;
-  int iVar2;
-  
-  uVar1 = (uint)(DAT_00010f7a >> 2);
-  if (2 < uVar1) {
-    uVar1 = 2;
-  }
-  iVar2 = uVar1 * 3;
-  DAT_00010e45 = DAT_00010e45 & 0xf0 | *(byte *)((int)&DAT_00010ee0 + iVar2);
-  DAT_00010e46 = *(char *)((int)&DAT_00010ee0 + iVar2 + 2) << 4 |
-                 *(byte *)((int)&DAT_00010ee0 + iVar2 + 1);
+  phy_param = param_1;
   return;
 }
 

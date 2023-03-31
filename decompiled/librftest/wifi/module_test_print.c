@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> wifi.o -> module_test_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -103,7 +103,7 @@ void module_test_print(void)
     pcVar6 = pcVar6 + 4;
     get_dc_value(&uStack_38,uVar5);
     phy_printf("%d, %d; ",uStack_38,uStack_36);
-  } while (pcVar6 != ram_wifi_set_tx_gain);
+  } while (pcVar6 != tx_pwctrl_background);
   phy_printf(&_LC12);
   return;
 }

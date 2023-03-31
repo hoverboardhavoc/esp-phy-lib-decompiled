@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> wifi.o -> run_rftest_case
  *
  * (C) Espressif, Apache License 2.0.
@@ -432,7 +432,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                     iVar2 = strcmp(param_1,"set_tx_gain");
                                                     if (iVar2 == 0) {
                                                       tx_pa_bb_gain = (short)*param_2;
-                                                      DAT_0001635a = (short)param_2[1];
+                                                      DAT_0001635e = (short)param_2[1];
                                                       force_tx_gain((int)(char)param_2[2],
                                                                     (char)param_2[3]);
                                                       phy_printf("%s,0x%x,0x%x,%d,%d\n",param_1,
@@ -443,7 +443,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                       iVar2 = strcmp(param_1,"set_ble_tx_gain");
                                                       if (iVar2 == 0) {
                                                         tx_pa_bb_gain = (short)*param_2;
-                                                        DAT_0001635a = (short)param_2[1];
+                                                        DAT_0001635e = (short)param_2[1];
                                                         force_ble_tx_gain((int)(char)param_2[2],
                                                                           (char)param_2[3]);
                                                         phy_printf("%s, 0x%x,0x%x,%d,%d\n",param_1,
@@ -515,7 +515,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                     iVar2 = strcmp(param_1,"print_ver");
                                                     if (iVar2 == 0) {
                                                       phy_printf("phy_version: %d.%d, %s, %s\n",9,
-                                                                 0x32,"Feb 15 2023","18:57:24");
+                                                                 0x3c,"Mar 31 2023","16:27:27");
                                                     }
                                                     else {
                                                       iVar2 = strcmp(param_1,"init_print");
@@ -1248,10 +1248,10 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                   }
                                                   iVar2 = strcmp(param_1,"noise_check_loop");
                                                   if (iVar2 != 0) {
-                                                    iVar2 = strcmp(param_1,"rom_flag");
+                                                    iVar2 = strcmp(param_1,"rom_num");
                                                     if (iVar2 == 0) {
-                                                      iVar2 = rom_temp_to_power(0x10,0);
-                                                      phy_printf("%s=%d\n",param_1,iVar2 == 4);
+                                                      uVar3 = chip726_phyrom_version_num();
+                                                      phy_printf("%s=%d\n",param_1,uVar3);
                                                       return 1;
                                                     }
                                                     iVar2 = strcmp(param_1,"erase_flash");

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_gain_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,6 +28,7 @@ void bt_bb_gain_set(void)
   _DAT_60011850 =
        _DAT_6001c0a4 >> 1 & 0xfe00000 |
        uVar1 | _DAT_60011850 & 0xf0000000 | uVar1 << 0xe | uVar1 << 7;
+  _DAT_60011848 = _DAT_60011848 & 0xff00ffff | 0x500000;
   _DAT_60011858 = 0x2c2c2c2c;
   _DAT_6001185c = 0x2c2c2c2c;
   _DAT_6001184c = _DAT_6001184c & 0xfff80000 | 0x4002710;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> wifi.o -> idf_enable
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,9 +10,10 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void idf_enable(void)
+void idf_enable(undefined1 param_1)
 
 {
+  short_log_en = param_1;
   return;
 }
 

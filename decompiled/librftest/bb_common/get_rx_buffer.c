@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> bb_common.o -> get_rx_buffer
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,7 +42,7 @@ void get_rx_buffer(int param_1,uint param_2)
       iVar9 = GetStopCmd();
       if (iVar9 == 0) {
         bVar1 = true;
-        goto _L294;
+        goto _L296;
       }
       if (1000000 < (uint)(_DAT_60035000 - iVar13)) {
         phy_printf("rx_num=%d\n",iVar6);
@@ -51,7 +51,7 @@ void get_rx_buffer(int param_1,uint param_2)
     }
     iVar6 = iVar6 + 1;
     bVar1 = false;
-_L294:
+_L296:
     puVar7 = (uint *)get_rxctrl_addr();
     uVar2 = *puVar7;
     uVar5 = *puVar7;
@@ -72,16 +72,16 @@ _L294:
     if (param_1 == 1) {
       uVar12 = uVar10 << 0x18 | uVar10 >> 0x18 | (uVar10 & 0xff00) << 8;
       uVar11 = (uVar10 >> 0x10 & 0xff) << 8;
-_L320:
-      if ((uVar12 | uVar11) == param_2) goto _L304;
+_L322:
+      if ((uVar12 | uVar11) == param_2) goto _L306;
     }
     else {
       if (param_1 == 2) {
         uVar11 = (puVar7[0xe] >> 0x18) << 0x10 | (puVar7[0xe] >> 0x10) << 0x18;
         uVar12 = (uVar10 & 0xff) << 8;
-        goto _L320;
+        goto _L322;
       }
-_L304:
+_L306:
       phy_printf("SA:%02x:%02x:%02x:%02x:%02x:%02x, ",puVar7[0xe] >> 0x10 & 0xff,puVar7[0xe] >> 0x18
                  ,uVar10 & 0xff,uVar10 >> 8 & 0xff,uVar10 >> 0x10 & 0xff,uVar10 >> 0x18);
       uVar10 = puVar7[0xd];

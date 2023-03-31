@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> wifi.o -> esp_tester_cali_en
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,8 +45,8 @@ void esp_tester_cali_en(int param_1)
       } while (iVar3 != 0xe);
       wifi_cal_power_bkup = DAT_000181c1;
       wifi_pwctrl_atten_bkup = DAT_000181bb;
-      DAT_00016369 = txdc_cal_init;
-      DAT_0001636a = DAT_000181bd;
+      DAT_0001636d = txdc_cal_init;
+      DAT_0001636e = DAT_000181bd;
       tester_cali_flag = '\x01';
     }
     pcVar2 = "Tester calibrate start!\n";
@@ -68,8 +68,8 @@ void esp_tester_cali_en(int param_1)
     DAT_000181c1 = wifi_cal_power_bkup;
     pcVar2 = "Tester calibrate exit!\n";
     DAT_000181bb = wifi_pwctrl_atten_bkup;
-    txdc_cal_init = DAT_00016369;
-    DAT_000181bd = DAT_0001636a;
+    txdc_cal_init = DAT_0001636d;
+    DAT_000181bd = DAT_0001636e;
     tester_cali_flag = '\0';
   }
   phy_printf(pcVar2);

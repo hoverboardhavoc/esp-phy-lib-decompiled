@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> rf_test.o -> ESP_TEST_GPIO
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,7 +60,7 @@ void ESP_TEST_GPIO(int *param_1,int param_2)
               else {
                 phy_printf("gpio setting error!\n");
               }
-              goto _L149;
+              goto _L152;
             }
             uVar5 = 3;
             uVar4 = 1;
@@ -68,7 +68,7 @@ void ESP_TEST_GPIO(int *param_1,int param_2)
           dig_gpio_out(uVar4,uVar5);
         }
       }
-_L149:
+_L152:
       uVar2 = uVar2 + 1;
     } while (uVar2 != 0x10);
     uVar10 = uVar10 + 0x10;

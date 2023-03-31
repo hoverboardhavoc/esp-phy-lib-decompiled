@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> rf_test.o -> rfpll_cal_time
  *
  * (C) Espressif, Apache License 2.0.
@@ -44,12 +44,12 @@ void rfpll_cal_time(uint param_1,int param_2)
       do {
         puVar7 = local_a4 + iVar8;
         iVar8 = iVar8 + 1;
-        phy_printf(&_LC27,*puVar7);
+        phy_printf(&_LC28,*puVar7);
       } while (iVar8 != 0x32);
       uVar3 = uVar3 + 1 & 0xff;
-      phy_printf(&_LC28,iVar1 - iVar2);
+      phy_printf(&_LC29,iVar1 - iVar2);
     } while (uVar3 != (iVar5 + 5U & 0xff));
-                    /* WARNING: Could not recover jumptable at 0x00011086. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001109a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_g_phyFuns + 0x1bc))(0x62,1,1,7,0,iVar5);
     return;
@@ -73,9 +73,9 @@ void rfpll_cal_time(uint param_1,int param_2)
   do {
     puVar7 = local_a4 + iVar2;
     iVar2 = iVar2 + 1;
-    phy_printf(&_LC27,*puVar7);
+    phy_printf(&_LC28,*puVar7);
   } while (iVar2 != 0x32);
-  phy_printf(&_LC28,iVar8 - iVar5);
+  phy_printf(&_LC29,iVar8 - iVar5);
   return;
 }
 

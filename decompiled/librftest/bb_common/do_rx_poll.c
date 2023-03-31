@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> bb_common.o -> do_rx_poll
  *
  * (C) Espressif, Apache License 2.0.
@@ -95,7 +95,7 @@ void do_rx_poll(uint param_1)
   local_48[0] = 0;
   _DAT_60033800 = 0;
   _DAT_60035004 = 0;
-  iVar14 = 0;
+  iVar2 = 0;
   iVar19 = 0;
   _DAT_60033c40 = _DAT_60033c40 | 0xc;
   local_9c = 0;
@@ -113,11 +113,11 @@ void do_rx_poll(uint param_1)
   uVar21 = 0xfffffb00;
   local_60 = 0;
   iVar11 = 0;
-  iVar15 = 0;
+  iVar14 = 0;
   iVar18 = 0;
   iVar17 = 0;
+  iVar15 = 0;
   iVar16 = 0;
-  iVar2 = 0;
   local_5c = 0;
   local_58 = 0;
   local_54 = 0;
@@ -140,16 +140,16 @@ void do_rx_poll(uint param_1)
     }
     else {
       uVar12 = _DAT_600330a8 & 0xff;
-      if (iVar15 < 500) {
-        local_78[iVar15] = uVar12;
-        local_84[iVar15] = _DAT_60035000;
-        local_98[iVar15] = local_5c;
-        local_90[iVar15] = _DAT_60035000 - iVar11;
+      if (iVar14 < 500) {
+        local_78[iVar14] = uVar12;
+        local_84[iVar14] = _DAT_60035000;
+        local_98[iVar14] = local_5c;
+        local_90[iVar14] = _DAT_60035000 - iVar11;
         iVar5 = _DAT_60035000;
         if ((uVar12 != 0) && (uVar12 != 0x41)) {
           iVar5 = iVar11;
         }
-        iVar15 = iVar15 + 1;
+        iVar14 = iVar14 + 1;
         iVar11 = iVar5;
       }
       if (uVar12 == 0) {
@@ -170,10 +170,10 @@ void do_rx_poll(uint param_1)
         else {
           uVar6 = local_cc & 0xf | 0x10;
         }
-        iVar16 = iVar16 + 1;
+        iVar15 = iVar15 + 1;
         if ((uVar12 << 4 | uVar6) == local_a4) {
           local_cc = cVar1 * 10;
-          iVar2 = iVar2 + 1;
+          iVar16 = iVar16 + 1;
           local_54 = local_54 + local_5c;
           local_58 = local_58 + local_cc;
           if ((int)local_cc < (int)local_60) {
@@ -183,10 +183,10 @@ void do_rx_poll(uint param_1)
             uVar21 = local_cc;
           }
           uVar3 = get_rx_freq_local();
-          local_48[iVar14] = uVar3;
-          iVar14 = (iVar14 + 1) * 0x10000 >> 0x10;
-          if (iVar14 == 4) {
-            iVar14 = 0;
+          local_48[iVar2] = uVar3;
+          iVar2 = (iVar2 + 1) * 0x10000 >> 0x10;
+          if (iVar2 == 4) {
+            iVar2 = 0;
           }
           iVar11 = iVar5;
           if (((int)local_cc < local_ac) && (iVar20 + -0x37 <= (int)local_cc)) {
@@ -257,20 +257,25 @@ void do_rx_poll(uint param_1)
     iVar5 = GetStopCmd();
   } while (iVar5 != 0);
   _DAT_60033c40 = _DAT_60033c40 | 0xc;
-  if (iVar2 == 0) {
-    DAT_00012558 = 0;
+  if (iVar16 == 0) {
+    DAT_0001257c = 0;
     iVar11 = 0;
   }
   else {
-    iVar11 = (local_54 * 10) / iVar2;
-    DAT_00012558 = local_58 / iVar2;
+    iVar11 = (local_54 * 10) / iVar16;
+    DAT_0001257c = local_58 / iVar16;
   }
   *local_c4 = 1;
-  esp_rx_result = iVar2;
-  DAT_0001255c = iVar16;
+  esp_rx_result = iVar16;
+  DAT_00012580 = iVar15;
   if (local_c0 == 0) {
-    phy_printf("Correct: %d Desired: %d RSSI: %d noise: %d gain: %d para1: %d para2: %d freq: %d ",
-               iVar16,iVar2,local_a8,iVar11,iVar17,iVar18);
+    if (short_log_en == '\0') {
+      phy_printf("Correct: %d Desired: %d RSSI: %d noise: %d gain: %d para1: %d para2: %d freq: %d "
+                 ,iVar15,iVar16,local_a8,iVar11,iVar17,iVar18);
+    }
+    else {
+      phy_printf("rx_num: %d rx_rssi: %d\n",iVar16,DAT_0001257c);
+    }
     if (rssi_min_max_print != '\0') {
       phy_printf("rssi_min: %d rssi_max: %d",local_60,uVar21);
     }
@@ -282,9 +287,9 @@ void do_rx_poll(uint param_1)
   }
   else {
     phy_printf("Correct: %d Desired: %d RSSI: %d gain: %d noise: %d err: %d err_fcs: %d err_a1: %d gooddata: %d, freq: %d"
-               ,iVar16,iVar2,local_a8,iVar17,iVar18);
+               ,iVar15,iVar16,local_a8,iVar17,iVar18);
     iVar11 = 0;
-    for (iVar20 = 0; iVar20 != iVar15; iVar20 = iVar20 + 1) {
+    for (iVar20 = 0; iVar20 != iVar14; iVar20 = iVar20 + 1) {
       puVar10 = (undefined4 *)((int)local_90 + iVar11);
       puVar9 = (undefined4 *)((int)local_98 + iVar11);
       puVar8 = (undefined4 *)((int)local_84 + iVar11);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> sw_cca_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void sw_cca_test(uint param_1,uint param_2)
   _DAT_60031018 = _DAT_60031018 | 0x80000;
   uVar1 = _DAT_60031360 >> 0xc;
   _DAT_60031360 = (param_1 & 0x7f) << 4 | _DAT_60031360 & 0xfffff000 | param_2 & 0xf;
-  phy_printf(&_LC22,(int)(char)uVar1);
+  phy_printf(&_LC24,(int)(char)uVar1);
   return;
 }
 

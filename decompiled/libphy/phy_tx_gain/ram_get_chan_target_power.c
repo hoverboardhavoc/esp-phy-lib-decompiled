@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: libphy -> phy_tx_gain.o -> ram_get_chan_target_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,10 +30,17 @@ void ram_get_chan_target_power
   do {
     cVar1 = *(char *)(param_3 + uVar3);
     *param_2 = cVar1;
-    cVar5 = (char)auStack_24[0];
-    if (((1 < uVar3) && (cVar5 = (char)((uint)auStack_24[0] >> 8), 5 < (uVar3 & 0xff))) &&
-       (cVar5 = (char)((uint)auStack_24[0] >> 0x10), 9 < (uVar3 & 0xff))) {
-      cVar5 = (char)((uint)auStack_24[0] >> 0x18);
+    if (uVar3 < 2) {
+      cVar5 = (char)auStack_24[0] - DAT_0001121b;
+    }
+    else if ((uVar3 & 0xff) < 6) {
+      cVar5 = (char)((uint)auStack_24[0] >> 8) - DAT_0001121b;
+    }
+    else if ((uVar3 & 0xff) < 10) {
+      cVar5 = (char)((uint)auStack_24[0] >> 0x10) - DAT_0001121b;
+    }
+    else {
+      cVar5 = (char)((uint)auStack_24[0] >> 0x18) - DAT_0001121b;
     }
     iVar4 = param_1;
     if ((DAT_00011208 & 0xf) == 1) {

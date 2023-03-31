@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> bb_common.o -> fill_txdataframe
  *
  * (C) Espressif, Apache License 2.0.
@@ -44,7 +44,7 @@ fill_txdataframe(int param_1,int param_2,undefined4 param_3,uint param_4,undefin
     if (param_1 == 5) {
       *param_6 = 0xb;
       *param_7 = 0;
-_L161:
+_L163:
       iVar2 = 3;
     }
     else {
@@ -64,19 +64,19 @@ _L161:
               *param_7 = 1;
             }
             iVar2 = 1;
-            goto _L141;
+            goto _L143;
           }
           *param_6 = ate_rate;
           uVar5 = ate_gi_bit;
         }
         *param_7 = uVar5;
-        goto _L161;
+        goto _L163;
       }
       *param_6 = 8;
       *param_7 = 0;
       iVar2 = 0;
     }
-_L141:
+_L143:
     param_2 = param_2 + 0x28;
   }
   if (param_2 < 0x801) {
@@ -103,7 +103,7 @@ _L141:
           iVar9 = 0;
           iVar7 = 0;
           iVar6 = 0;
-          goto _L146;
+          goto _L148;
         }
         iVar12 = param_2 + -0xf00;
         iVar9 = 0x100;
@@ -111,7 +111,7 @@ _L141:
       iVar7 = 0x600;
     }
   }
-_L146:
+_L148:
   fill_tx_frame(10,*param_6,param_2,iVar6,iVar7,iVar9,iVar12,0);
   *puVar3 = iVar2 << 0x18 | *puVar3 & 0xf8ffffff;
   *puVar4 = *puVar4 & 0xffc00fff | 0x1000;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> bb_common.o -> test_txtone_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ int test_txtone_pwr(undefined1 param_1,int param_2,int param_3,undefined4 param_
       iVar1 = iVar2;
     }
   }
-  phy_printf(&_LC26,iVar1);
+  phy_printf(&_LC27,iVar1);
   return iVar1;
 }
 

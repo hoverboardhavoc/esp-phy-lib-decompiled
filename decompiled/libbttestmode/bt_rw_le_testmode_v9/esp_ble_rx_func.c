@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> esp_ble_rx_func
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,13 +26,16 @@ void esp_ble_rx_func(void)
   int iVar8;
   int iVar9;
   uint uVar10;
+  uint uVar11;
+  int iVar12;
+  int iStack_a4;
   uint uStack_a0;
   undefined4 uStack_78;
   int iStack_74;
   int iStack_70;
   int iStack_6c;
   int aiStack_68 [4];
-  undefined4 uStack_58;
+  uint uStack_58;
   undefined4 uStack_54;
   undefined4 uStack_50;
   undefined4 uStack_4c;
@@ -55,8 +58,8 @@ void esp_ble_rx_func(void)
   _DAT_3fcd0304 = 0x340;
   _DAT_3fcd0320 = 0xfa010300;
   _DAT_3fcd0324 = 0x340;
+  uVar10 = 0;
   _DAT_60031018 = _DAT_60031018 | 0x20;
-  uVar7 = 0;
   _DAT_600310f8 = _DAT_600310f8 | 0x800;
   iVar4 = rw_le_v9_get_clkn();
   rw_le_v9_set_rawstp_et(0x3fcd0100,iVar4 + 2U & 0xffffffe);
@@ -77,10 +80,11 @@ void esp_ble_rx_func(void)
   uStack_4c = 0;
   uStack_48 = 0;
   auStack_44[0] = 0;
-  iVar9 = 0;
-  iVar8 = 0;
   iVar3 = 0;
-  uVar10 = 0;
+  iVar8 = 0;
+  iStack_a4 = 0;
+  iVar9 = 0;
+  iVar12 = 0;
   iVar4 = 0;
   uStack_a0 = 0;
   do {
@@ -97,6 +101,7 @@ void esp_ble_rx_func(void)
       _DAT_60031018 = _DAT_60031018 | 0x20;
       bVar2 = true;
     }
+    uVar11 = uVar10;
     if (_DAT_3fcd02c0 << 0x10 < 0) {
       rw_le_v9_rxstat_unpack_adv
                 (&DAT_3fcd02c0,&uStack_78,&iStack_6c,aiStack_68,aiStack_68 + 1,&uStack_54,&iStack_74
@@ -104,40 +109,45 @@ void esp_ble_rx_func(void)
       rw_le_v9_set_rxundone(&DAT_3fcd02c0);
       rw_le_v9_rx_phyinfo(&DAT_3fcd02c0,0x3fcd0b00,&uStack_50,&uStack_4c,&uStack_48,auStack_44);
       if (iStack_70 == 0) {
-        bVar1 = false;
         if (aiStack_68[2] == 0) {
           if (aiStack_68[3] == 0) {
             if (iStack_74 == 0) {
-              if (aiStack_68[0] == 0) {
-                if (iStack_6c == 0) {
-                  uVar10 = uVar10 + 1;
-                  goto _L300;
-                }
-                bVar1 = false;
+              if (aiStack_68[0] != 0) goto _L310;
+              if (iStack_6c == 0) {
+                iVar12 = iVar12 + 1;
+                bVar1 = true;
               }
               else {
                 bVar1 = false;
               }
             }
             else {
-              iVar3 = iVar3 + 1;
-_L300:
-              bVar1 = true;
+              iVar9 = iVar9 + 1;
+              bVar1 = false;
             }
           }
           else {
-            iVar9 = iVar9 + 1;
+            iVar8 = iVar8 + 1;
+_L310:
+            bVar1 = false;
           }
         }
         else {
-          iVar8 = iVar8 + 1;
+          iStack_a4 = iStack_a4 + 1;
+          bVar1 = false;
         }
         iVar4 = iVar4 + 1;
         if (bVar1) {
-          uVar7 = uVar7 + (int)(char)uStack_58;
+          uVar7 = (uint)(char)uStack_58;
+          uVar11 = uVar7;
+          if ((iVar12 != 1) && (uStack_58 <= uVar10)) {
+            uVar11 = uVar10;
+          }
+          iVar3 = iVar3 + uVar7;
         }
       }
     }
+    uVar10 = uVar11;
     if (_DAT_3fcd02e0 << 0x10 < 0) {
       rw_le_v9_rxstat_unpack_adv
                 (&DAT_3fcd02e0,&uStack_78,&iStack_6c,aiStack_68,aiStack_68 + 1,&uStack_54,&iStack_74
@@ -145,53 +155,62 @@ _L300:
       rw_le_v9_set_rxundone(&DAT_3fcd02e0);
       rw_le_v9_rx_phyinfo(&DAT_3fcd02e0,0x3fcd0f00,&uStack_50,&uStack_4c,&uStack_48,auStack_44);
       if (iStack_70 == 0) {
-        bVar1 = false;
         if (aiStack_68[2] == 0) {
           if (aiStack_68[3] == 0) {
             if (iStack_74 == 0) {
-              if (aiStack_68[0] == 0) {
-                if (iStack_6c == 0) {
-                  uVar10 = uVar10 + 1;
-                  goto _L301;
-                }
-                bVar1 = false;
+              if (aiStack_68[0] != 0) goto _L311;
+              if (iStack_6c == 0) {
+                iVar12 = iVar12 + 1;
+                bVar1 = true;
               }
               else {
                 bVar1 = false;
               }
             }
             else {
-              iVar3 = iVar3 + 1;
-_L301:
-              bVar1 = true;
+              iVar9 = iVar9 + 1;
+              bVar1 = false;
             }
           }
           else {
-            iVar9 = iVar9 + 1;
+            iVar8 = iVar8 + 1;
+_L311:
+            bVar1 = false;
           }
         }
         else {
-          iVar8 = iVar8 + 1;
+          iStack_a4 = iStack_a4 + 1;
+          bVar1 = false;
         }
         iVar4 = iVar4 + 1;
         if (bVar1) {
-          uVar7 = uVar7 + (int)(char)uStack_58;
+          uVar7 = (uint)(char)uStack_58;
+          uVar10 = uVar7;
+          if ((iVar12 != 1) && (uStack_58 <= uVar11)) {
+            uVar10 = uVar11;
+          }
+          iVar3 = iVar3 + uVar7;
         }
       }
     }
     if (bVar2) {
       rf_rw_v9_le_disable();
+      _cmd_polling_attach = 0;
       _DAT_60031000 = _DAT_60031000 | 0x80000000;
       _DAT_600310f8 = _DAT_600310f8 & 0xfffff7ff;
-      esp_rx_valid = 2;
-      _cmd_polling_attach = uVar10;
-      if (uVar10 != 0) {
-        _cmd_polling_attach = uVar7 / (uVar10 + iVar3);
+      if (iVar12 != 0) {
+        _cmd_polling_attach = iVar3 / iVar12;
       }
-      _esp_rx_result = uVar10;
+      esp_rx_valid = 2;
+      _esp_rx_result = iVar12;
       _cmd_polling_dettach = iVar4;
-      phy_printf("%x %x %x %x %x %x %x %x %x %x p %d %d %d %x %d %d %d %d\n",iVar4,uVar10,iVar8,
-                 iVar9,iVar3,0,0);
+      if (short_log_en == '\0') {
+        phy_printf("%x %x %x %x %x %x %x %x %x %x p %d %d %d %x %d %d %d %d %d %d\n",iVar4,iVar12,
+                   iStack_a4,iVar8,iVar9,0,0);
+      }
+      else {
+        phy_printf("rx_num: %d rx_rssi: %d\n",iVar12);
+      }
       return;
     }
   } while( true );

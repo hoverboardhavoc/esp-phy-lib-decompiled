@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
+ * Upstream date: 2023-03-31 17:07:27 +0800
+ * Upstream subject: update_for_rftest_20230331
  * Source: librftest -> bb_common.o -> ate_txframe_dut
  *
  * (C) Espressif, Apache License 2.0.
@@ -112,27 +112,27 @@ void ate_txframe_dut(int param_1,undefined4 param_2,int param_3,int param_4)
     if (((uVar10 & 0xff000000) == 0) && (-1 < (int)(_DAT_60033084 << 1))) {
       iVar25 = (int)*pcVar9;
       iVar27 = *(int *)(pcVar9 + 0x54);
-      if (iVar27 != 2) goto _L190;
+      if (iVar27 != 2) goto _L192;
       iStack_f8 = *(int *)(pcVar9 + 0x58);
       if (param_4 == 0) {
         iStack_100 = 1;
-        goto _L191;
+        goto _L193;
       }
       iStack_100 = 1;
-_L228:
+_L230:
       uVar10 = phy_printf("txerr: 0x%x, %d, 0x%x\n",iVar25,iVar27);
-      if (iStack_100 == 1) goto _L191;
+      if (iStack_100 == 1) goto _L193;
     }
     else {
-_L190:
+_L192:
       if (param_4 != 0) {
         iStack_100 = 0;
-        goto _L228;
+        goto _L230;
       }
     }
     if (iStack_f4 == 0x15) {
       iStack_100 = 0;
-_L191:
+_L193:
       if (iStack_f8 == -1) {
         uVar10 = 0;
         uVar26 = 0;
@@ -323,41 +323,41 @@ _L191:
       if (param_4 != 0) {
         phy_printf("fb_rxrssi: ");
         do {
-          phy_printf(&_LC16,*piVar4);
+          phy_printf(&_LC17,*piVar4);
           piVar4 = piVar4 + 1;
         } while (aiStack_40 != piVar4);
-        phy_printf(&_LC10);
+        phy_printf(&_LC11);
         phy_printf("dut_rxrssi: ");
         do {
-          phy_printf(&_LC16,*piVar23);
+          phy_printf(&_LC17,*piVar23);
           piVar23 = piVar23 + 1;
         } while (local_60 != piVar23);
-        phy_printf(&_LC10);
+        phy_printf(&_LC11);
         phy_printf("fb_rx_num: ");
         iVar25 = 0;
         do {
           puVar17 = (undefined1 *)((int)&local_90 + iVar25);
           iVar25 = iVar25 + 1;
-          phy_printf(&_LC16,*puVar17);
+          phy_printf(&_LC17,*puVar17);
         } while (iVar25 != 8);
-        phy_printf(&_LC10);
+        phy_printf(&_LC11);
         phy_printf("dut_rx_num: ");
         iVar25 = 0;
         do {
           puVar17 = (undefined1 *)((int)&local_98 + iVar25);
           iVar25 = iVar25 + 1;
-          phy_printf(&_LC16,*puVar17);
+          phy_printf(&_LC17,*puVar17);
         } while (iVar25 != 8);
-        phy_printf(&_LC10);
+        phy_printf(&_LC11);
         phy_printf("FREQ_OFFSET, ");
         piVar15 = local_88;
         do {
           piVar16 = (int *)((int)piVar15 + 2);
           *(short *)piVar15 = (short)(((short)*piVar15 * -1000) / 0x9b4);
-          phy_printf(&_LC16);
+          phy_printf(&_LC17);
           piVar15 = piVar16;
         } while (local_88 + 2 != piVar16);
-        phy_printf(&_LC10);
+        phy_printf(&_LC11);
         phy_printf("txp_state: 0x%08x%08x%08x%08x, 0x%08x%08x%08x%08x;\n",uStack_10c,uStack_104,
                    uStack_108,uVar24,uVar10,uVar26,uStack_110);
         phy_printf("txp_result: %d, %d, %d, %d\n",uVar28,uVar11,
