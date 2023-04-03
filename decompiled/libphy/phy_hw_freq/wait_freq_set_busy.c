@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * Upstream date: 2023-02-17 16:30:31 +0800
- * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_hw_freq.o -> wait_freq_set_busy
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void wait_freq_set_busy(void)
 
 {
   do {
-  } while ((_DAT_600a00cc & 0x100) == 0);
+  } while (_DAT_600a00c4 << 0x10 < 0);
   return;
 }
 

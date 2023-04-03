@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_track.o -> txpwr_cal_track
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,12 +19,12 @@ void txpwr_cal_track(int param_1,int param_2)
   
   iVar1 = abs_temp((int)_phy_param - (int)_abs_temp);
   if (((3 < iVar1) && (iVar1 = temp_to_power((int)_phy_param,(int)_DAT_00011002), param_1 != 0)) &&
-     (DAT_00011051 != iVar1)) {
-    DAT_00011051 = (char)iVar1;
+     (DAT_00011057 != iVar1)) {
+    DAT_00011057 = (char)iVar1;
     _abs_temp = _phy_param;
     txpwr_correct(1,&phy_param,&phy_param,(int)_DAT_00011002);
     if (param_2 != 0) {
-      phy_printf("correct_power=%d,temp=%d %d\n",(int)DAT_00011051,(int)_phy_param,
+      phy_printf("correct_power=%d,temp=%d %d\n",(int)DAT_00011057,(int)_phy_param,
                  (int)_DAT_00011002);
       return;
     }

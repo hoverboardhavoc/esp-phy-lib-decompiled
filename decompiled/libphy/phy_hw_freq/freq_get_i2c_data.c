@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_hw_freq.o -> freq_get_i2c_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,7 +46,7 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,char *param_3,int
       param_2[2] = 4;
       param_3[2] = cVar5;
       *(uint *)(param_4 + 8) = uVar2 & 0xfe;
-      goto _L72;
+      goto _L75;
     case 3:
       param_1[3] = 99;
       param_2[3] = 2;
@@ -67,25 +67,25 @@ void freq_get_i2c_data(undefined1 *param_1,undefined1 *param_2,char *param_3,int
       param_2[6] = 4;
       param_3[6] = cVar5;
       *(uint *)(param_4 + 0x18) = uVar2 & 0xff | 1;
-      goto _L72;
+      goto _L75;
     case 7:
       param_1[7] = 0x62;
       param_2[7] = 0xb;
       param_3[7] = cVar5;
       *(undefined4 *)(param_4 + 0x1c) = uVar1;
-_L72:
+_L75:
       cVar5 = cVar5 + '\x01';
-      goto _L58;
+      goto _L61;
     case 8:
       param_1[8] = 99;
       param_2[8] = 3;
       param_3[8] = cVar3;
       break;
     default:
-      goto _L58;
+      goto _L61;
     }
     cVar3 = cVar3 + '\x01';
-_L58:
+_L61:
     uVar4 = uVar4 + 1 & 0xff;
   } while( true );
 }

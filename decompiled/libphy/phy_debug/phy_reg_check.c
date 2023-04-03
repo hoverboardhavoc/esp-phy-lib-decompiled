@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_debug.o -> phy_reg_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,6 +31,13 @@ void phy_reg_check(void)
     puVar1 = puVar1 + 1;
     phy_printf("bt_agc 0x%x: 0x%x\n",puVar2,uVar3);
   } while (puVar1 != (undefined4 *)0x600a2900);
+  puVar1 = (undefined4 *)&DAT_600a1000;
+  do {
+    uVar3 = *puVar1;
+    puVar2 = puVar1 + -0x18028400;
+    puVar1 = puVar1 + 1;
+    phy_printf("btmac 0x%x: 0x%x\n",puVar2,uVar3);
+  } while (puVar1 != (undefined4 *)0x600a1b14);
   puVar1 = (undefined4 *)&DAT_600a2c00;
   do {
     uVar3 = *puVar1;
@@ -38,6 +45,13 @@ void phy_reg_check(void)
     puVar1 = puVar1 + 1;
     phy_printf("zb_bb 0x%x: 0x%x\n",puVar2,uVar3);
   } while (puVar1 != (undefined4 *)0x600a2c48);
+  puVar1 = (undefined4 *)&DAT_600a3000;
+  do {
+    uVar3 = *puVar1;
+    puVar2 = puVar1 + -0x18028c00;
+    puVar1 = puVar1 + 1;
+    phy_printf("802154_reg 0x%x: 0x%x\n",puVar2,uVar3);
+  } while (puVar1 != (undefined4 *)0x600a318c);
   puVar1 = (undefined4 *)&DAT_60047000;
   do {
     uVar3 = *puVar1;

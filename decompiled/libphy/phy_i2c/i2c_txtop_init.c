@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_i2c.o -> i2c_txtop_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,8 @@ void i2c_txtop_init(void)
   i2c_writeReg_Mask(0x6b,1,3,3,0,2);
   i2c_writeReg_Mask(0x6b,1,1,7,4,2);
   uVar3 = chip_i2c_readReg();
-  iVar1 = get_i2c_hostid(1);
+  phy_i2c_enter_critical(1);
+  iVar1 = get_i2c_hostid(0x6b);
   puVar2 = (uint *)((iVar1 + 0x1802b600) * 4);
   do {
   } while ((int)(*puVar2 << 6) < 0);

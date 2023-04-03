@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_i2c.o -> chip_i2c_readReg
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,22 +10,17 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-uint chip_i2c_readReg(uint param_1,int param_2)
+undefined4 chip_i2c_readReg(undefined4 param_1,undefined4 param_2)
 
 {
-  uint uVar1;
-  int iVar2;
-  uint *puVar3;
+  undefined4 uVar1;
+  undefined4 uVar2;
   
-  uVar1 = get_i2c_read_mask();
-  iVar2 = get_i2c_hostid(param_1);
-  _DAT_600ad81c = ~uVar1;
-  puVar3 = (uint *)((iVar2 + 0x1802b600) * 4);
-  *puVar3 = param_2 << 8 | param_1 | 0x4000000;
-  do {
-  } while ((int)(*puVar3 << 6) < 0);
-  return *puVar3 >> 0x10 & 0xff;
+  phy_i2c_enter_critical();
+  uVar1 = get_i2c_read_mask(param_1);
+  uVar2 = get_i2c_hostid(param_1);
+  uVar1 = chip_i2c_readReg_org(param_1,uVar1,uVar2,param_2);
+  phy_i2c_exit_critical();
+  return uVar1;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_init.o -> phy_rfcal_data_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,7 +31,7 @@ bool phy_rfcal_data_check(int param_1,undefined1 *param_2,int param_3)
     iVar3 = phy_byte_to_word(puVar6);
     puVar6 = puVar6 + 4;
     uVar1 = uVar1 + iVar3;
-  } while (puVar6 != param_2 + 0x454);
+  } while (puVar6 != param_2 + 0x450);
   iVar3 = param_3 + 0x80;
   do {
     iVar4 = phy_byte_to_word(param_3);
@@ -39,12 +39,12 @@ bool phy_rfcal_data_check(int param_1,undefined1 *param_2,int param_3)
     uVar1 = uVar1 + iVar4;
   } while (iVar3 != param_3);
   uVar1 = ~uVar1;
-  uVar5 = phy_byte_to_word(param_2 + 0x454);
+  uVar5 = phy_byte_to_word(param_2 + 0x450);
   if (param_1 == 0) {
-    param_2[0x454] = (char)uVar1;
-    param_2[0x455] = (char)(uVar1 >> 8);
-    param_2[0x456] = (char)(uVar1 >> 0x10);
-    param_2[0x457] = (char)(uVar1 >> 0x18);
+    param_2[0x450] = (char)uVar1;
+    param_2[0x451] = (char)(uVar1 >> 8);
+    param_2[0x452] = (char)(uVar1 >> 0x10);
+    param_2[0x453] = (char)(uVar1 >> 0x18);
   }
   return param_1 != 0 && uVar1 != uVar5;
 }

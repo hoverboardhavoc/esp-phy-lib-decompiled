@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_debug.o -> rfpll_cap_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,17 +42,17 @@ void rfpll_cap_check(int param_1)
     do {
       uVar5 = *puVar1;
       puVar1 = puVar1 + 1;
-      phy_printf(&_LC23,uVar5);
+      phy_printf(&_LC25,uVar5);
     } while (puVar1 != (undefined2 *)&stack0xffffffe0);
-    phy_printf(&_LC24);
+    phy_printf(&_LC26);
     phy_printf("ir_dac_ext:");
     iVar3 = 0;
     do {
       puVar6 = local_4c + iVar3;
       iVar3 = iVar3 + 1;
-      phy_printf(&_LC23,*puVar6);
+      phy_printf(&_LC25,*puVar6);
     } while (iVar3 != 0xe);
-    phy_printf(&_LC24);
+    phy_printf(&_LC26);
     return;
   }
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_reg.o -> set_pbus_reg
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,9 +15,9 @@
 void set_pbus_reg(void)
 
 {
-  _DAT_600a08ec = 0x6040300;
-  _DAT_600a08f0 = 0xd0b0a07;
-  _DAT_600a08f4 = 0x1211100e;
+  _DAT_600a08ec = _DAT_0001202c;
+  _DAT_600a08f0 = _DAT_00012030;
+  _DAT_600a08f4 = _DAT_00012034;
   return;
 }
 

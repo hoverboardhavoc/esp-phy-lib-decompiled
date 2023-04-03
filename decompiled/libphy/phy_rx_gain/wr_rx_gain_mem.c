@@ -1,16 +1,14 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_rx_gain.o -> wr_rx_gain_mem
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void wr_rx_gain_mem(uint param_1,int param_2,int param_3)
 
@@ -35,7 +33,7 @@ void wr_rx_gain_mem(uint param_1,int param_2,int param_3)
     psVar3 = (short *)(uVar6 * 4 + param_3);
     iVar5 = (int)psVar3[1];
     write_gain_mem((int)*psVar3 << 2 | iVar5 >> 6 & 3U,
-                   (_DAT_00011030 & 0x1fff) +
+                   ((DAT_0001103c & 0x3f) << 7 | DAT_0001103d & 0x7f) +
                    iVar5 * 0x4000000 + 0x1400000 + (uVar4 >> 0x1c & 3) * 0x100000 +
                    (uVar4 >> 0x14 & 3) * 0x40000 + (uVar4 >> 0x10 & 0xf) * 0x4000 +
                    (uVar4 >> 0x16 & 1) * 0x2000,uVar1);

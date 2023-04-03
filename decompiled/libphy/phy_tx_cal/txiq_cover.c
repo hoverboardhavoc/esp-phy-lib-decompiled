@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_tx_cal.o -> txiq_cover
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,7 +60,7 @@ void txiq_cover(int param_1,undefined4 param_2,byte *param_3)
     param_3[1] = (byte)uVar6;
     uVar6 = uVar6 & 0xff;
     if (bVar7 < 3) {
-_L37:
+_L42:
       iVar1 = (int)((iVar1 - uVar4) * 0x1000000) >> 0x18;
       iVar5 = (int)((iVar5 - uVar6) * 0x1000000) >> 0x18;
     }
@@ -72,7 +72,7 @@ _L37:
       if (bVar7 == 6) {
         uVar4 = iVar9 + 2 >> 2;
         uVar6 = iVar10 + 2 >> 2;
-        goto _L37;
+        goto _L42;
       }
     }
     bVar7 = bVar7 + 1;

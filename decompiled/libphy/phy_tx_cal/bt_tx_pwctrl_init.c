@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_tx_cal.o -> bt_tx_pwctrl_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,12 +15,12 @@
 void bt_tx_pwctrl_init(void)
 
 {
-  if (-1 < (int)(_set_txcap_reg << 0x10)) {
+  if (-1 < (int)(_pkdet_vol_start << 0x10)) {
     txcal_debuge_mode();
     pwdet_ref_code(0);
     tx_pwctrl_init_cal(1,&phy_param,&phy_param,&phy_param);
     txcal_work_mode();
-    _set_txcap_reg = _set_txcap_reg | 0x8000;
+    _pkdet_vol_start = _pkdet_vol_start | 0x8000;
   }
   return;
 }

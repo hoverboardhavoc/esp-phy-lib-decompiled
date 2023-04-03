@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_rfpll.o -> chip_v7_set_chan_offset
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,12 +19,12 @@ void chip_v7_set_chan_offset(short param_1)
   
   uVar1 = enter_critical_phy();
   _DAT_00011026 = param_1 + 2U & 0xfffc;
-  if (DAT_0001103c != '\0') {
-    _DAT_00011026 = _DAT_00011026 + (short)((int)DAT_0001103d << 3);
+  if (DAT_0001104a != '\0') {
+    _DAT_00011026 = _DAT_00011026 + (short)((int)DAT_0001104b << 3);
   }
   phy_freq_correct(1,(int)(short)_DAT_00011026);
   disable_wifi_agc();
-  set_channel_rfpll_freq((short)DAT_00011067,DAT_0001103b,(int)(short)_DAT_00011026);
+  set_channel_rfpll_freq((short)DAT_0001106d,DAT_00011049,(int)(short)_DAT_00011026);
   enable_wifi_agc();
   exit_critical_phy(uVar1);
   return;

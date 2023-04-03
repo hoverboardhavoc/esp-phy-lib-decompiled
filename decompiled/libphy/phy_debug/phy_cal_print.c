@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_debug.o -> phy_cal_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,34 +16,39 @@ void phy_cal_print(void)
 
 {
   code *pcVar1;
-  char cStack_24;
-  char cStack_23;
+  code *pcVar2;
+  undefined4 uVar3;
+  code *pcVar4;
   
   phy_version_print();
-  pcVar1 = (code *)&phy_param;
+  uVar3 = phy_get_vdd33();
   tsens_temp_read();
-  phy_printf("param_flag: 0x%x\n",_DAT_0001102c);
-  phy_printf("temp_code=%d, temp_code_init=%d\n",(int)_phy_param,(int)_DAT_00011006);
-  phy_printf("rc_dout, %d;  bt: %d, %d, %d, %d\n",DAT_00011051,DAT_00011047,DAT_00011048,
-             DAT_00011049,DAT_0001104a);
-  phy_printf("bt_cal_power, %d\n",(int)DAT_00011052);
+  phy_printf("param_flag: 0x%x\n",_get_freq_mem_param);
+  phy_printf("vdd33=%d, temp_code=%d, offset=%d, temp_code_init=%d\n",uVar3,(int)_phy_param,0,
+             (int)_DAT_00011006);
+  phy_printf("rc_dout, %d;  bt: %d, %d, %d, %d\n",DAT_00011057,DAT_0001104d,DAT_0001104e,
+             DAT_0001104f,DAT_00011050);
+  phy_printf("bt_cal_power, %d\n",(int)DAT_00011058);
   phy_printf("bt_cal_atten, ");
-  phy_printf("0x%x, ",(int)DAT_0001104b);
-  phy_printf("0x%x, ",(int)DAT_0001104c);
-  phy_printf("0x%x, ",(int)DAT_0001104d);
-  phy_printf(&_LC24);
+  phy_printf("0x%x, ",(int)DAT_00011051);
+  phy_printf("0x%x, ",(int)DAT_00011052);
+  phy_printf("0x%x, ",(int)DAT_00011053);
+  phy_printf(&_LC26);
   phy_printf("bt_pwctrl_atten, ");
-  phy_printf("0x%x, ",(int)DAT_0001104e);
-  phy_printf("0x%x, ",(int)DAT_0001104f);
-  phy_printf("0x%x, ",(int)DAT_00011050);
-  phy_printf(&_LC24);
-  phy_printf("RXIQ, ");
+  phy_printf("0x%x, ",(int)DAT_00011054);
+  phy_printf("0x%x, ",(int)DAT_00011055);
+  pcVar4 = (code *)&phy_param;
+  phy_printf("0x%x, ",(int)DAT_00011056);
+  phy_printf(&_LC26);
+  phy_printf("RXDC_RFRX, ");
   do {
-    get_iq_value(&cStack_24,*(undefined2 *)(pcVar1 + 0x30),0);
-    pcVar1 = pcVar1 + 2;
-    phy_printf("%d, %d; ",(int)cStack_24,(int)cStack_23);
-  } while (pcVar1 != phy_printf);
-  phy_printf(&_LC24);
+    pcVar1 = pcVar4 + 0x5c;
+    pcVar2 = pcVar4 + 0x5a;
+    pcVar4 = pcVar4 + 4;
+    phy_printf("%d, %d; ",(int)*(short *)pcVar2,(int)*(short *)pcVar1);
+  } while (pcVar4 != i2c_writeReg_Mask);
+  phy_printf(&_LC26);
+  phy_printf("RXIQ, %d,%d\n",(int)(char)read_rf_freq_mem_new,(int)DAT_00011041);
   phy_printf("sar_dc_code=%d, sar_ref_code=%d\n",_phy_printf,_DAT_0001100e);
   return;
 }

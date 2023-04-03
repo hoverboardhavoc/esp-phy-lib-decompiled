@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_i2c.o -> phy_i2c_init1
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,20 +15,59 @@
 void phy_i2c_init1(void)
 
 {
-  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,2,0x72,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,3,0x4a,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,4,0xf8,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,5,2,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,6,200,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,7,0xb9,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x6b,1,8,0x81,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x62,1,0,0x68,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x62,1,4,0x28,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x62,1,0xf,phy_param,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x62,1,0xb,0x44,*(code **)(_g_phyFuns + 0x58));
-                    /* WARNING: Could not recover jumptable at 0x000103aa. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x58))(0x67,1,2,0x26);
+  uint uVar1;
+  undefined4 local_40;
+  undefined2 uStack_3c;
+  undefined1 uStack_3a;
+  undefined4 uStack_38;
+  undefined2 uStack_34;
+  undefined1 uStack_32;
+  undefined4 uStack_30;
+  undefined2 uStack_2c;
+  undefined1 uStack_2a;
+  undefined4 uStack_28;
+  undefined2 uStack_24;
+  undefined1 uStack_22;
+  undefined4 uStack_20;
+  undefined2 uStack_1c;
+  undefined1 uStack_1a;
+  undefined1 uStack_18;
+  undefined1 uStack_17;
+  undefined1 uStack_16;
+  undefined1 uStack_15;
+  undefined2 uStack_14;
+  undefined1 uStack_12;
+  
+  phy_i2c_enter_critical();
+  local_40 = 0x6b6b6b6b;
+  uStack_3c = 0x6b6b;
+  uStack_3a = 0x6b;
+  uStack_38 = 0x4030201;
+  uStack_34 = 0x404;
+  uStack_30 = 0x31223722;
+  uStack_2c = 0x3131;
+  uStack_2a = 0x31;
+  uStack_18 = DAT_00011049;
+  uStack_32 = 4;
+  uStack_1a = 4;
+  uStack_17 = DAT_0001104a;
+  uStack_16 = DAT_0001104b;
+  uStack_15 = DAT_0001104c;
+  uStack_28 = 0x67676767;
+  uStack_24 = 0x6262;
+  uStack_22 = 0x62;
+  uStack_20 = 0x3020100;
+  uStack_1c = 0xb;
+  uStack_12 = 0x2f;
+  uStack_14 = 0x6870;
+  _DAT_600ad820 = _DAT_600ad820 & 0xfffe000f | 0x20;
+  i2c_paral_write_num(&local_40,&uStack_38,&uStack_30,&uStack_28,&uStack_20,&uStack_18,7,0);
+  _DAT_600ad820 = _DAT_600ad820 & 0xfffe000f | 0x1f00;
+  uVar1 = chip_i2c_readReg(0x69,0,4);
+  if ((uVar1 & 0xf) == 0) {
+    i2c_sar2_init_code(0x578);
+  }
+  phy_i2c_exit_critical();
   return;
 }
 

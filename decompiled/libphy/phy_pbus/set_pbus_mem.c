@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
+ * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
+ * Upstream date: 2023-04-03 17:51:54 +0800
+ * Upstream subject: esp32h2: update phylib for fix rx long term
  * Source: libphy -> phy_pbus.o -> set_pbus_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,8 +23,8 @@ void set_pbus_mem(void)
   uint *puVar6;
   int iVar7;
   undefined4 *puVar8;
-  undefined4 *puVar9;
-  undefined4 auStack_68 [2];
+  undefined4 uStack_68;
+  undefined4 uStack_64;
   undefined4 auStack_60 [3];
   undefined4 auStack_54 [3];
   undefined4 auStack_48 [3];
@@ -39,67 +39,69 @@ void set_pbus_mem(void)
   uStack_28 = 0xf40000;
   uStack_24 = 0xf50000;
   memcpy(auStack_60,&_LANCHOR0,0xc);
-  memcpy(auStack_54,&DAT_00010560,0xc);
+  memcpy(auStack_54,&DAT_00010588,0xc);
   memcpy(auStack_48,&_LANCHOR0,0xc);
-  memcpy(auStack_3c,&DAT_0001056c,0xc);
+  memcpy(auStack_3c,&DAT_00010594,0xc);
+  uStack_68 = 0x3401ff;
+  uStack_64 = 0x3801ff;
   uVar3 = 0;
-  puVar9 = &local_30;
+  puVar8 = &local_30;
   iVar2 = 4;
   iVar7 = 0;
   uVar4 = 0;
   puVar6 = (uint *)&DAT_600a08ec;
-_L50:
+_L51:
   while( true ) {
     uVar1 = iVar2 + uVar4;
     *puVar6 = ~(0xffff << iVar7) & *puVar6 | (((uVar1 - 1) * 0x100 | uVar4) & 0xffff) << iVar7;
     uVar4 = (uVar4 + 0x200) * 0x800;
     iVar7 = 0;
     do {
-      puVar8 = puVar9 + iVar7;
+      _DAT_600a08cc = puVar8[iVar7];
       uVar5 = uVar4 & 0x1ff800;
       iVar7 = iVar7 + 1;
-      _DAT_600a08cc = *puVar8;
       uVar4 = uVar4 + 0x800;
       _DAT_600a08c8 = _DAT_600a08c8 & 0xffe007ff | uVar5;
     } while (iVar2 != iVar7);
     uVar3 = uVar3 + 1;
     if (uVar3 == 6) {
+      save_pbus_reg();
       return;
     }
     uVar4 = uVar1;
     if (uVar3 != 2) break;
-    puVar9 = auStack_54;
+    puVar8 = auStack_54;
     iVar7 = 0;
-_L62:
+_L63:
     iVar2 = 3;
-    puVar6 = (uint *)0x600a08f0;
+    puVar6 = (uint *)&DAT_600a08f0;
   }
   puVar6 = (uint *)&DAT_600a08f4;
   if (uVar3 < 3) {
     if (uVar3 == 1) {
-      puVar9 = auStack_60;
+      puVar8 = auStack_60;
       iVar2 = 3;
       iVar7 = 0x10;
       puVar6 = (uint *)&DAT_600a08ec;
-      goto _L50;
+      goto _L51;
     }
   }
   else {
     if (uVar3 == 3) {
-      puVar9 = auStack_48;
+      puVar8 = auStack_48;
       iVar7 = 0x10;
-      goto _L62;
+      goto _L63;
     }
     if (uVar3 == 4) {
-      puVar9 = auStack_3c;
+      puVar8 = auStack_3c;
       iVar2 = 3;
       iVar7 = 0;
-      goto _L50;
+      goto _L51;
     }
   }
-  puVar9 = auStack_68;
+  puVar8 = &uStack_68;
   iVar2 = 2;
   iVar7 = 0x10;
-  goto _L50;
+  goto _L51;
 }
 
