@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3c715e60c63d59b1d8240de147d46d78d84a97bf
- * https://github.com/espressif/esp-phy-lib/commit/3c715e60c63d59b1d8240de147d46d78d84a97bf
- * Upstream date: 2023-01-16 19:19:06 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_pbus.o -> ram_txcal_debuge_mode
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void ram_txcal_debuge_mode(void)
   iVar2 = txbbgain_to_index(0);
   pbus_set_dco(iVar2 * 8 + 0x110ac);
   set_txclk_en(1);
-                    /* WARNING: Could not recover jumptable at 0x000102e8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000102e6. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x1c))();
   return;

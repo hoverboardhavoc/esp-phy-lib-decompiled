@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 83dad4e0020def3591c18b880bf9676c4b291ee1
- * https://github.com/espressif/esp-phy-lib/commit/83dad4e0020def3591c18b880bf9676c4b291ee1
- * Upstream date: 2023-01-03 13:49:44 +0800
- * Upstream subject: esp32c6: phy update
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_tx_cal.o -> txdc_cal_init_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -47,7 +47,7 @@ void txdc_cal_init_new(undefined2 *param_1,undefined4 param_2,undefined4 param_3
   (**(code **)(_g_phyFuns + 0x84))(0,*(code **)(_g_phyFuns + 0x84));
   pbus_workmode();
   if ((uVar1 & 1) != 0) {
-    phy_printf(&_LC4);
+    phy_printf(&_LC5);
     return;
   }
   return;

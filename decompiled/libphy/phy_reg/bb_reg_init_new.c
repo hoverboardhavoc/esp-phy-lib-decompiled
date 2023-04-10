@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * Upstream date: 2023-02-17 16:30:31 +0800
- * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_reg.o -> bb_reg_init_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,6 +30,7 @@ void bb_reg_init_new(void)
   _DAT_600a7cd0 = _DAT_600a7cd0 | 0xf000f;
   _DAT_600a7c00 = _DAT_600a7c00 | 0x200;
   _DAT_600a981c = _DAT_600a981c | 0x800;
+  _DAT_600a7438 = _DAT_600a7438 & 0xfffffe3f;
   return;
 }
 

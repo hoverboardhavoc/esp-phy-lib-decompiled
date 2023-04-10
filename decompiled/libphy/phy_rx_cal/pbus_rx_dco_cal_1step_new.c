@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * Upstream date: 2023-02-17 16:30:31 +0800
- * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_rx_cal.o -> pbus_rx_dco_cal_1step_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,222 +13,215 @@
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void pbus_rx_dco_cal_1step_new
-               (int param_1,int param_2,undefined4 param_3,short *param_4,int *param_5)
+               (int param_1,int param_2,undefined4 param_3,short *param_4,undefined1 *param_5)
 
 {
-  short sVar1;
+  ushort uVar1;
   short sVar2;
-  ushort uVar3;
-  short sVar4;
-  short sVar5;
-  uint uVar6;
-  int iVar7;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
   undefined4 uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
-  int iVar13;
+  int iVar11;
+  uint uVar12;
+  code *pcVar13;
   uint uVar14;
-  char cVar15;
-  int iVar16;
-  code *pcVar17;
-  uint uVar18;
-  int iVar19;
-  uint uVar20;
-  int iVar21;
-  uint uVar22;
-  uint uVar23;
-  int iStack_94;
-  undefined1 uStack_5a;
-  undefined1 uStack_59;
+  int iVar15;
+  uint uVar16;
+  uint uVar17;
+  char cVar18;
+  int iStack_a0;
+  int iStack_64;
+  int iStack_60;
   int iStack_58;
   int iStack_54;
-  undefined4 uStack_50;
+  int iStack_50;
   int iStack_4c;
   int iStack_48;
-  undefined4 uStack_44;
+  int iStack_44;
   
-  uVar3 = _phy_param >> 3;
-  sVar1 = param_4[1];
-  iVar16 = (int)sVar1;
+  uVar1 = _phy_param >> 3;
   iStack_58 = 0;
   iStack_54 = 0;
-  uStack_50 = 0;
+  iStack_50 = 0;
   iStack_4c = 0;
   iStack_48 = 0;
-  uStack_44 = 0;
-  sVar2 = *param_4;
-  uVar23 = (uint)sVar2;
-  uVar6 = (**(code **)(_g_phyFuns + 0x78))(1,2,*(code **)(_g_phyFuns + 0x78));
-  uVar14 = 0;
-  uVar22 = 0;
+  iStack_44 = 0;
+  uVar16 = (uint)*param_4;
+  iVar15 = (int)param_4[1];
+  uVar4 = (**(code **)(_g_phyFuns + 0x78))(1,2,*(code **)(_g_phyFuns + 0x78));
+  uVar12 = 0;
+  uVar17 = 0;
   do {
-    uVar20 = uVar14 & 0x1f;
-    uVar14 = uVar14 + 1;
-    uVar22 = uVar22 + ((int)(uVar6 & 0xff) >> uVar20 & 1U) & 0xff;
-  } while (uVar14 != 6);
+    uVar14 = uVar12 & 0x1f;
+    uVar12 = uVar12 + 1;
+    uVar17 = uVar17 + ((int)(uVar4 & 0xff) >> uVar14 & 1U) & 0xff;
+  } while (uVar12 != 6);
   if (param_2 == 0) {
-    uVar14 = uVar22;
-    if (uVar22 < 2) {
-      uVar14 = 2;
+    uVar12 = uVar17;
+    if (uVar17 < 2) {
+      uVar12 = 2;
     }
-    uVar14 = uVar14 - 1 & 0xff;
+    uVar12 = uVar12 - 1 & 0xff;
   }
   else {
-    uVar14 = 6;
+    uVar12 = 6;
     if (param_1 == 0) {
-      uVar14 = 2;
+      uVar12 = 2;
     }
   }
-  cVar15 = (param_2 == 0) + '\x01';
-  iStack_94 = 0;
-  uVar20 = uVar23;
-  iVar21 = iVar16;
+  iStack_a0 = 0;
+  *param_5 = 0;
+  cVar18 = (param_2 == 0) + '\x01';
   do {
-    pcVar17 = *(code **)(_g_phyFuns + 0x74);
-    *param_4 = (short)uVar20;
-    param_4[1] = (short)iVar21;
-    (*pcVar17)(2,cVar15,uVar20 & 0xffff,pcVar17);
-    (**(code **)(_g_phyFuns + 0x74))(3,cVar15,param_4[1],*(code **)(_g_phyFuns + 0x74));
+    pcVar13 = *(code **)(_g_phyFuns + 0x74);
+    *param_4 = (short)uVar16;
+    param_4[1] = (short)iVar15;
+    (*pcVar13)(2,cVar18,uVar16 & 0xffff,pcVar13);
+    (**(code **)(_g_phyFuns + 0x74))(3,cVar18,param_4[1],*(code **)(_g_phyFuns + 0x74));
     if (param_2 == 0) {
       ets_delay_us(10);
-      if ((uVar6 & 0x3f) < 0x38) {
-        rxdc_est_min(param_3,1,param_5,&uStack_5a);
-        uStack_59 = 0;
+      if ((uVar4 & 0x3f) < 0x30) {
+        rxdc_est_min_new(param_3,1,&iStack_64);
+        uVar14 = uVar17;
+        if (uVar17 < 2) {
+          uVar14 = 2;
+        }
+        uVar14 = uVar14 - 2 & 0xff;
       }
       else {
-        (**(code **)(_g_phyFuns + 0x74))(1,2,uVar6 & 0x30,*(code **)(_g_phyFuns + 0x74));
+        uVar14 = 1;
+        (**(code **)(_g_phyFuns + 0x74))(1,2,0x30,*(code **)(_g_phyFuns + 0x74));
         ets_delay_us(10);
-        rxdc_est_min(param_3,1,&iStack_58,&uStack_5a);
-        (**(code **)(_g_phyFuns + 0x74))(1,2,uVar6 & 0xff | 0x38,*(code **)(_g_phyFuns + 0x74));
+        rxdc_est_min_new(param_3,1,&iStack_58);
+        (**(code **)(_g_phyFuns + 0x74))(1,2,0x38,*(code **)(_g_phyFuns + 0x74));
         ets_delay_us(10);
-        rxdc_est_min(param_3,1,&iStack_4c,&uStack_59);
-        *param_5 = iStack_4c - iStack_58;
-        param_5[1] = iStack_48 - iStack_54;
+        rxdc_est_min_new(param_3,1,&iStack_4c);
+        iStack_64 = iStack_4c - iStack_58;
+        iStack_60 = iStack_48 - iStack_54;
       }
-      uVar18 = uVar22;
-      if (uVar22 < 2) {
-        uVar18 = 2;
-      }
-      uVar18 = uVar18 - 2 & 0xff;
     }
     else {
-      uVar18 = 3;
+      uVar14 = 3;
       (**(code **)(_g_phyFuns + 0x74))(1,2,0,*(code **)(_g_phyFuns + 0x74));
       ets_delay_us(10);
-      rxdc_est_min(param_3,1,&iStack_58,&uStack_5a);
+      rxdc_est_min_new(param_3,1,&iStack_58);
       (**(code **)(_g_phyFuns + 0x74))(1,2,0x20,*(code **)(_g_phyFuns + 0x74));
       ets_delay_us(10);
-      rxdc_est_min(param_3,1,&iStack_4c,&uStack_59);
-      *param_5 = iStack_4c - iStack_58;
-      param_5[1] = iStack_48 - iStack_54;
-      abs_temp();
-      abs_temp(param_5[1]);
+      rxdc_est_min_new(param_3,1,&iStack_4c);
+      iStack_64 = iStack_4c - iStack_58;
+      iStack_60 = iStack_48 - iStack_54;
       if (param_1 == 0) {
-        uVar18 = 0;
+        uVar14 = 0;
       }
     }
-    iVar19 = 0;
-    iVar7 = abs_temp(*param_5);
-    if ((int)uVar14 <= iVar7) {
-      iVar19 = (int)(short)(*param_5 >> (uVar18 & 0x1f));
+    iVar3 = 0;
+    iVar5 = abs_temp(iStack_64);
+    if ((int)uVar12 <= iVar5) {
+      iVar3 = (int)(short)(iStack_64 >> (uVar14 & 0x1f));
     }
-    iVar7 = abs_temp(param_5[1]);
-    if (iVar7 < (int)uVar14) {
-      if (iVar19 == 0) {
-        iVar7 = 0;
-        goto _L106;
+    iVar5 = abs_temp(iStack_60);
+    if (iVar5 < (int)uVar12) {
+      if (iVar3 == 0) {
+        iVar5 = 0;
+        goto _L103;
       }
-_L107:
-      iVar7 = 1;
-      if (param_5[1] < 1) {
-        iVar7 = -1;
+_L104:
+      iVar5 = abs_temp(iStack_54);
+      if (iVar5 < 0x32) {
+        iVar5 = 1;
+        if (0 < iStack_60) goto _L87;
+        sVar2 = -(ushort)(iStack_60 != 0);
       }
+      else {
+        sVar2 = (short)(iStack_54 >> (uVar14 & 0x1f));
+      }
+      iVar5 = (int)sVar2;
     }
     else {
-      iVar7 = (int)(short)(param_5[1] >> (uVar18 & 0x1f));
-      if (iVar19 == 0) {
-_L106:
-        iVar19 = 1;
-        if (*param_5 < 1) {
-          iVar19 = -1;
+      iVar5 = (int)(short)(iStack_60 >> (uVar14 & 0x1f));
+      if (iVar3 == 0) {
+_L103:
+        iVar3 = abs_temp(iStack_58);
+        if (iVar3 < 0x32) {
+          iVar3 = 1;
+          if (0 < iStack_64) goto _L85;
+          sVar2 = -(ushort)(iStack_64 != 0);
         }
+        else {
+          sVar2 = (short)(iStack_58 >> (uVar14 & 0x1f));
+        }
+        iVar3 = (int)sVar2;
       }
-      if (iVar7 == 0) goto _L107;
+_L85:
+      if (iVar5 == 0) goto _L104;
     }
-    if (param_2 == 2) {
-      sVar4 = get_data_sat(iVar19,5,0xfffffffb);
-      sVar5 = get_data_sat(iVar7,5,0xfffffffb);
-      iVar19 = (int)sVar4;
-      iVar7 = (int)sVar5;
+_L87:
+    if ((param_2 != 0) && ((0x33 < iStack_50 || (0x33 < iStack_44)))) {
+      iVar5 = 0;
+      iVar3 = 0;
     }
-    if ((uVar3 & 1) != 0) {
-      uVar8 = (**(code **)(_g_phyFuns + 0x78))(0,1,*(code **)(_g_phyFuns + 0x78));
-      uVar9 = (**(code **)(_g_phyFuns + 0x78))(1,2,*(code **)(_g_phyFuns + 0x78));
-      uVar10 = (**(code **)(_g_phyFuns + 0x78))(2,1,*(code **)(_g_phyFuns + 0x78));
-      uVar11 = (**(code **)(_g_phyFuns + 0x78))(3,1,*(code **)(_g_phyFuns + 0x78));
-      uVar12 = (**(code **)(_g_phyFuns + 0x78))(2,2,*(code **)(_g_phyFuns + 0x78));
+    if ((uVar1 & 1) != 0) {
+      uVar6 = (**(code **)(_g_phyFuns + 0x78))(0,1,*(code **)(_g_phyFuns + 0x78));
+      uVar7 = (**(code **)(_g_phyFuns + 0x78))(1,2,*(code **)(_g_phyFuns + 0x78));
+      uVar8 = (**(code **)(_g_phyFuns + 0x78))(2,1,*(code **)(_g_phyFuns + 0x78));
+      uVar9 = (**(code **)(_g_phyFuns + 0x78))(3,1,*(code **)(_g_phyFuns + 0x78));
+      uVar10 = (**(code **)(_g_phyFuns + 0x78))(2,2,*(code **)(_g_phyFuns + 0x78));
       (**(code **)(_g_phyFuns + 0x78))(3,2,*(code **)(_g_phyFuns + 0x78));
-      phy_printf("stage=%d,rfrx=0x%x,bb2=0x%x; i=%d, dco: %d,%d,%d,%d; res dc: %d,%d; %d,%d; %d,%d;,scale=%d,%d,num=%d,%d\n"
-                 ,param_2 == 0,uVar8,uVar9,iStack_94,uVar10,uVar11,uVar12);
+      phy_printf("stage=%d,rfrx=0x%x,bb2=0x%x; i=%d, dco: %d,%d,%d,%d; res dc: %d,%d,%d; %d,%d,%d; %d,%d;,scale=%d,%d\n"
+                 ,param_2 == 0,uVar6,uVar7,iStack_a0,uVar8,uVar9,uVar10);
     }
-    iVar13 = abs_temp(*param_5);
-    if ((iVar13 <= (int)uVar14) && (iVar13 = abs_temp(param_5[1]), iVar13 <= (int)uVar14)) break;
-    iVar13 = abs_temp(*param_5);
-    if ((int)uVar14 < iVar13) {
-      uVar20 = (int)(((uVar20 & 0xffff) - iVar19) * 0x10000) >> 0x10;
+    iVar11 = abs_temp(iStack_64);
+    if ((((iVar11 <= (int)uVar12) && (iVar11 = abs_temp(iStack_60), iVar11 <= (int)uVar12)) &&
+        (iVar11 = abs_temp(iStack_58), iVar11 < 0x32)) &&
+       ((iVar11 = abs_temp(iStack_54), iVar11 < 0x32 && ((iStack_50 < 0x30 || (iStack_44 < 0x30)))))
+       ) {
+      *param_5 = 1;
+      goto _L93;
     }
-    iVar19 = abs_temp(param_5[1]);
-    if ((int)uVar14 < iVar19) {
-      iVar21 = (iVar21 - iVar7) * 0x10000 >> 0x10;
+    iVar3 = (uVar16 & 0xffff) - iVar3;
+    uVar14 = iVar15 - iVar5 & 0xffff;
+    if (0x1ff < iVar3 * 0x10000 >> 0x10) {
+      iVar3 = 0x1ff;
     }
-    if (0x1ff < (int)uVar20) {
-      uVar20 = 0x1ff;
+    sVar2 = (short)iVar3;
+    if (iVar3 << 0x10 < 0) {
+      sVar2 = 0;
     }
-    sVar4 = (short)uVar20;
-    if ((int)(uVar20 << 0x10) < 0) {
-      sVar4 = 0;
+    uVar16 = (uint)sVar2;
+    if (0x1ff < (short)(iVar15 - iVar5)) {
+      uVar14 = 0x1ff;
     }
-    uVar20 = (uint)sVar4;
-    if (0x1ff < iVar21) {
-      iVar21 = 0x1ff;
+    sVar2 = (short)uVar14;
+    if ((int)(uVar14 << 0x10) < 0) {
+      sVar2 = 0;
     }
-    sVar4 = (short)iVar21;
-    if (iVar21 << 0x10 < 0) {
-      sVar4 = 0;
+    iVar15 = (int)sVar2;
+    iStack_a0 = iStack_a0 + 1;
+    if (iStack_a0 == 8) {
+_L93:
+      *param_4 = (short)uVar16;
+      param_4[1] = (short)iVar15;
+      if ((int)uVar16 < 0) {
+        *param_4 = 0;
+      }
+      else if (0x1ff < (int)uVar16) {
+        *param_4 = 0x1ff;
+      }
+      if (iVar15 < 0) {
+        param_4[1] = 0;
+      }
+      else if (0x1ff < iVar15) {
+        param_4[1] = 0x1ff;
+      }
+      (**(code **)(_g_phyFuns + 0x74))(2,cVar18,*param_4,*(code **)(_g_phyFuns + 0x74));
+      (**(code **)(_g_phyFuns + 0x74))(3,cVar18,param_4[1],*(code **)(_g_phyFuns + 0x74));
+      return;
     }
-    iVar21 = (int)sVar4;
-    iStack_94 = iStack_94 + 1;
-  } while (iStack_94 != 8);
-  if (((param_1 == 0) && (param_2 != 0)) && ((uVar23 != 0x100 || (iVar16 != 0x100)))) {
-    iVar21 = abs_temp(iStack_58);
-    if ((((0x14 < iVar21) || (iVar21 = abs_temp(iStack_4c), 0x14 < iVar21)) ||
-        (iVar21 = abs_temp(*param_5), 5 < iVar21)) ||
-       (iVar21 = abs_temp((int)*param_4 - uVar23), 0x28 < iVar21)) {
-      *param_4 = sVar2;
-    }
-    iVar21 = abs_temp(iStack_54);
-    if (((0x14 < iVar21) || (iVar21 = abs_temp(iStack_48), 0x14 < iVar21)) ||
-       ((iVar21 = abs_temp(param_5[1]), 5 < iVar21 ||
-        (iVar16 = abs_temp(param_4[1] - iVar16), 0x28 < iVar16)))) {
-      param_4[1] = sVar1;
-    }
-  }
-  if (*param_4 < 0) {
-    *param_4 = 0;
-  }
-  else if (0x1ff < *param_4) {
-    *param_4 = 0x1ff;
-  }
-  if (param_4[1] < 0) {
-    param_4[1] = 0;
-  }
-  else if (0x1ff < param_4[1]) {
-    param_4[1] = 0x1ff;
-  }
-  (**(code **)(_g_phyFuns + 0x74))(2,cVar15,*param_4,*(code **)(_g_phyFuns + 0x74));
-  (**(code **)(_g_phyFuns + 0x74))(3,cVar15,param_4[1],*(code **)(_g_phyFuns + 0x74));
-  return;
+  } while( true );
 }
 

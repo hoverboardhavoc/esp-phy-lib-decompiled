@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * Upstream date: 2023-02-17 16:30:31 +0800
- * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_tx_cal.o -> bt_txdc_cal_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ void bt_txdc_cal_new(void)
   ushort uVar1;
   code *pcVar2;
   
-  if (-1 < (int)(_DAT_000120b4 << 0x13)) {
+  if (-1 < (int)(_DAT_000120b8 << 0x13)) {
     pbus_debugmode();
     (**(code **)(_g_phyFuns + 0x8c))(0xf,0,*(code **)(_g_phyFuns + 0x8c));
     pcVar2 = *(code **)(_g_phyFuns + 0x74);
@@ -29,7 +29,7 @@ void bt_txdc_cal_new(void)
     txdc_cal_new(&phy_param);
     (**(code **)(_g_phyFuns + 0x84))(0,*(code **)(_g_phyFuns + 0x84));
     pbus_workmode();
-    _DAT_000120b4 = _DAT_000120b4 | 0x1000;
+    _DAT_000120b8 = _DAT_000120b8 | 0x1000;
   }
   return;
 }

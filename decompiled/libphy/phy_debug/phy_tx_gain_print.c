@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_debug.o -> phy_tx_gain_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,8 +37,8 @@ void phy_tx_gain_print(void)
   do {
     pcVar6 = puVar3 + 0x50;
     puVar3 = puVar3 + 1;
-    phy_printf(&_LC28,(int)*pcVar6);
-  } while (puVar3 != (undefined *)0x12022);
+    phy_printf(&_LC33,(int)*pcVar6);
+  } while (puVar3 != (undefined *)0x1201e);
   phy_printf("\nwifi_pagain:");
   puVar4 = local_70;
   do {
@@ -58,7 +58,7 @@ void phy_tx_gain_print(void)
   do {
     pcVar6 = local_d0 + iVar5;
     iVar5 = iVar5 + 1;
-    phy_printf(&_LC28,(int)*pcVar6);
+    phy_printf(&_LC33,(int)*pcVar6);
   } while (iVar5 != 0x20);
   phy_printf("\nwifi_correct_power:%d\n",(int)DAT_00012133);
   phy_printf("bt_pagain:");
@@ -79,7 +79,7 @@ void phy_tx_gain_print(void)
   do {
     pcVar2 = local_120 + iVar5;
     iVar5 = iVar5 + 1;
-    phy_printf(&_LC28,(int)*pcVar2);
+    phy_printf(&_LC33,(int)*pcVar2);
   } while (iVar5 != 0x10);
   phy_printf("\nbt_correct_power:%d\n",(int)DAT_00012134);
   return;

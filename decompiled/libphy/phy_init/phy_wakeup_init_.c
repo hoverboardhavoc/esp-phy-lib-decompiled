@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * Upstream date: 2023-02-17 16:30:31 +0800
- * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_init.o -> phy_wakeup_init_
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,15 +26,12 @@ void phy_wakeup_init_(void)
   freq_reg_init(2,4);
   fe_reg_init();
   pwdet_reg_init_new();
-  reg_set_new();
-  phy_i2c_init1();
+  phy_i2c_init2();
   freq_i2c_data_write_new();
   filter_dcap_set();
-  write_chan_freq(DAT_00010b88);
-  tx_pwctrl_bg_init();
+  write_chan_freq(DAT_00010b80);
   set_pbus_reg();
   phy_reg_init();
-  mac_enable_bb(1);
   set_chan_reg(1);
   set_rx_comp_new();
   phy_set_tsens_power(1);
@@ -42,8 +39,8 @@ void phy_wakeup_init_(void)
   wait_freq_set_busy();
   phy_en_hw_set_freq();
   phy_bbpll_cal(0);
-  DAT_00010a83 = 0;
-                    /* WARNING: Could not recover jumptable at 0x00010658. Too many branches */
+  DAT_00010a7b = 0;
+                    /* WARNING: Could not recover jumptable at 0x00010216. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*(code *)g_phyFuns[1])(uVar1);
   return;

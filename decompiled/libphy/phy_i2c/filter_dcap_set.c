@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_i2c.o -> filter_dcap_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void filter_dcap_set(void)
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,0x19,DAT_000110f1,*(code **)(_g_phyFuns + 0x58));
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,0x1c,DAT_000110f3,*(code **)(_g_phyFuns + 0x58));
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,0x1d,DAT_000110f3,*(code **)(_g_phyFuns + 0x58));
-  (**(code **)(_g_phyFuns + 0x58))(0x67,1,0x1e,DAT_000110f4,*(code **)(_g_phyFuns + 0x58));
+  (**(code **)(_g_phyFuns + 0x58))(0x67,1,0x1e,DAT_000110f4 | 0x80,*(code **)(_g_phyFuns + 0x58));
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,0x1f,DAT_000110f4,*(code **)(_g_phyFuns + 0x58));
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,4,DAT_000110ed,*(code **)(_g_phyFuns + 0x58));
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,5,DAT_000110ed,*(code **)(_g_phyFuns + 0x58));
@@ -32,7 +32,7 @@ void filter_dcap_set(void)
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xc,DAT_000110ed,*(code **)(_g_phyFuns + 0x58));
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xd,DAT_000110ed,*(code **)(_g_phyFuns + 0x58));
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xe,DAT_000110ee,*(code **)(_g_phyFuns + 0x58));
-                    /* WARNING: Could not recover jumptable at 0x000102a6. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000101f0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xf,DAT_000110ee);
   return;

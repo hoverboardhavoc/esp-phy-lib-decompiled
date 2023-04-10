@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * Upstream date: 2023-02-17 16:30:31 +0800
- * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_rx_cal.o -> set_rx_gain_cal_iq_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ void set_rx_gain_cal_iq_new(int param_1,undefined4 param_2,undefined2 *param_3,i
   uStack_48 = 0x1000100;
   uStack_44 = 0x1000100;
   uStack_50 = 0x10307;
-  uVar6 = _memcpy >> 3 & 1;
+  uVar6 = _chip_v7_set_chan_ana >> 3 & 1;
   uStack_4c = 0;
   uVar11 = 0;
   if (param_1 != 0) {
@@ -68,7 +68,7 @@ void set_rx_gain_cal_iq_new(int param_1,undefined4 param_2,undefined2 *param_3,i
     (**(code **)(_g_phyFuns + 0x9c))(1,*(code **)(_g_phyFuns + 0x9c));
     if (iVar9 < 0x20001) {
       if (0xfff < iVar9) {
-_L138:
+_L139:
         if (param_4 != 0) {
           phy_printf("rxiq: rftx=0x%x, rfrx=x%x, att=%d, bb=0x%x, %d, %d\n",uVar10,0x104,uVar1,0xa0,
                      0,2);
@@ -97,7 +97,7 @@ _L138:
       sVar7 = 0;
     }
     uVar1 = (uint)sVar7;
-    if (iVar12 == 1) goto _L138;
+    if (iVar12 == 1) goto _L139;
     iVar12 = 1;
   } while( true );
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
+ * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
+ * Upstream date: 2023-04-10 17:47:15 +0800
+ * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
  * Source: libphy -> phy_i2c.o -> phy_i2c_init2
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,54 +15,48 @@
 void phy_i2c_init2(void)
 
 {
-  char cVar1;
-  ushort uVar2;
-  uint uVar3;
+  uint uVar1;
+  undefined4 uStack_58;
+  undefined2 uStack_54;
+  undefined1 uStack_52;
+  undefined4 uStack_4c;
+  undefined2 uStack_48;
+  undefined1 uStack_46;
+  undefined4 uStack_40;
+  undefined2 uStack_3c;
+  undefined1 uStack_3a;
+  undefined4 uStack_34;
+  undefined1 uStack_30;
+  undefined4 uStack_28;
+  undefined1 uStack_24;
+  undefined2 uStack_1c;
+  undefined1 uStack_1a;
+  undefined1 uStack_19;
+  undefined1 uStack_18;
   
-  cVar1 = DAT_00011170;
-  uVar3 = 0x3c;
-  if (DAT_00011171 + 10 < 0x3d) {
-    uVar3 = DAT_00011171 + 10;
-  }
-  uVar2 = DAT_00011172 + 3;
-  if (0x3c < uVar2) {
-    uVar2 = 0x3c;
-  }
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x24,0x50,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x28,0x50,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x25,0x10,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x29,0x10,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x2c,0x88,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x30,0x88,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x2d,0x88,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x31,0x88,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x34,0x11,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x35,0x11,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x36,0,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x37,0x55,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,4,DAT_0001116b,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,5,DAT_0001116b,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xc,DAT_0001116b,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xd,DAT_0001116b,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,6,DAT_0001116c,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,7,DAT_0001116c,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xe,DAT_0001116c,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xf,DAT_0001116c,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x14,DAT_0001116f,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x15,DAT_0001116f,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1c,DAT_00011171,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1d,uVar3 & 0xff,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x16,cVar1 + '\x04',*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x17,cVar1 + '\x04',*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1e,DAT_00011172,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x1f,uVar2 & 0xff,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0x38,0xff,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1bc))(0x67,1,2,3,2,1,*(code **)(_g_phyFuns + 0x1bc));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x62,1,0,0xa8,*(code **)(_g_phyFuns + 0x1b4));
-  (**(code **)(_g_phyFuns + 0x1b4))(0x62,1,0xb,0x68,*(code **)(_g_phyFuns + 0x1b4));
-                    /* WARNING: Could not recover jumptable at 0x00010716. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x1b4))(0x62,1,2,0x88);
+  (**(code **)(_g_phyFuns + 0x34))(*(code **)(_g_phyFuns + 0x34));
+  uStack_58 = 0x6b6b6b6b;
+  uStack_54 = 0x6b6b;
+  uStack_52 = 0x6b;
+  uStack_4c = 0x5040302;
+  uStack_48 = 0x706;
+  uStack_46 = 8;
+  uStack_40 = 0x2f44c72;
+  uStack_3c = 0xb988;
+  uStack_3a = 0x81;
+  uStack_1c = 0x2868;
+  uStack_1a = phy_param;
+  uStack_19 = 0x44;
+  uStack_34 = 0x62626262;
+  uStack_30 = 0x67;
+  uStack_28 = 0xb0f0400;
+  uStack_24 = 2;
+  uStack_18 = 0x26;
+  uVar1 = (**(code **)(_g_phyFuns + 0x40))(0x6b,*(code **)(_g_phyFuns + 0x40));
+  _DAT_600af820 = uVar1 & 0x1fff0 | _DAT_600af820 & 0xfffe000f;
+  i2c_paral_write_num(&uStack_58,&uStack_4c,&uStack_40,&uStack_34,&uStack_28,&uStack_1c,10,0);
+  _DAT_600af820 = _DAT_600af820 & 0xfffe000f | 0x1f00;
+  (**(code **)(_g_phyFuns + 0x38))(*(code **)(_g_phyFuns + 0x38));
   return;
 }
 
