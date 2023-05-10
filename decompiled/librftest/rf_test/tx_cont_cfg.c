@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * Upstream date: 2023-05-10 18:09:34 +0800
+ * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
  * Source: librftest -> rf_test.o -> tx_cont_cfg
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,8 +23,8 @@ void tx_cont_cfg(int param_1)
   pcVar3 = *(code **)(_g_phyFuns + 0x1b4);
   uVar2 = (uint)DAT_00012173;
   if (param_1 == 1) {
-    uVar4 = (int)((DAT_00012174 + 8) * 0x1000000) >> 0x18;
-    uVar2 = (int)((uVar2 + 0xc) * 0x1000000) >> 0x18;
+    uVar4 = (int)((DAT_00012174 + 3) * 0x1000000) >> 0x18;
+    uVar2 = (int)((uVar2 + 9) * 0x1000000) >> 0x18;
     uVar1 = uVar4 & 0xff;
     if (0x3f < (int)uVar4) {
       uVar1 = 0x3f;
@@ -36,7 +36,7 @@ void tx_cont_cfg(int param_1)
     }
     (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xc,uVar2 & 0xff,*(code **)(_g_phyFuns + 0x1b4));
     (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xd,uVar2 & 0xff,*(code **)(_g_phyFuns + 0x1b4));
-    uVar2 = 0xec;
+    uVar2 = 200;
   }
   else {
     if (param_1 == 2) {

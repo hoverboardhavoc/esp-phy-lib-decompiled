@@ -3,30 +3,24 @@
  * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
  * Upstream date: 2023-05-10 18:09:34 +0800
  * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
- * Source: librftest -> wifi.o -> esp_set_wifi_index
+ * Source: librftest -> wifi.o -> run_para_array_clear
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void esp_set_wifi_index(undefined4 param_1)
+void run_para_array_clear(int param_1,uint param_2)
 
 {
-  undefined *puVar1;
+  undefined4 *puVar1;
   
-  puVar1 = &phy_param;
-  do {
-    puVar1[0xf4] = (char)param_1;
+  param_2 = param_2 & 0xffff;
+  puVar1 = (undefined4 *)(param_1 + param_2 * 4);
+  for (; param_2 < 0x14; param_2 = param_2 + 1 & 0xffff) {
+    *puVar1 = 0;
     puVar1 = puVar1 + 1;
-  } while (puVar1 != &DAT_0001805a);
-  DAT_000181c1 = 0x30;
-  DAT_000181bb = 8;
-  _txdc_cal_init = 0x808;
-  ram_wifi_set_tx_gain(DAT_0001823e,0);
-  phy_printf("0x%x,0x%x,%d,%d\n",esp_en_reboot,_phy_bt_power_track,(int)DAT_00018206,param_1);
+  }
   return;
 }
 

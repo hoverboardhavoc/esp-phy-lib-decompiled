@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * Upstream date: 2023-05-10 18:09:34 +0800
+ * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
  * Source: libphy -> phy_init.o -> rom_phy_reg_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,8 +14,8 @@ void rom_phy_reg_init(void)
 
 {
   (**(code **)(g_phyFuns + 0xb0))(*(code **)(g_phyFuns + 0xb0));
-  (**(code **)(g_phyFuns + 0xb8))(DAT_00010f7e,DAT_00010f7d,*(code **)(g_phyFuns + 0xb8));
-  rom_wifi_agc_sat_gain(s_<<<<P_00010e5c._0_4_);
+  (**(code **)(g_phyFuns + 0xb8))(DAT_00010fbe,DAT_00010fbd,*(code **)(g_phyFuns + 0xb8));
+  rom_wifi_agc_sat_gain(s_<<<<P_00010e9c._0_4_);
   (**(code **)(g_phyFuns + 0xbc))(*(code **)(g_phyFuns + 0xbc));
   (**(code **)(g_phyFuns + 0xc4))(*(code **)(g_phyFuns + 0xc4));
   (**(code **)(g_phyFuns + 0xa8))(*(code **)(g_phyFuns + 0xa8));

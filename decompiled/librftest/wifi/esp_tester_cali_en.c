@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * Upstream date: 2023-05-10 18:09:34 +0800
+ * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
  * Source: librftest -> wifi.o -> esp_tester_cali_en
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void esp_tester_cali_en(int param_1)
   undefined1 *puVar5;
   
   uVar1 = phy_tx_pwr_track_en;
-  dig_gpio_in = (code)0x0;
+  ESP_TEST_GPIO = (code)0x0;
   wifi_cali_offset = 0;
   DAT_0001807d = 0;
   if (param_1 == 1) {
@@ -33,8 +33,8 @@ void esp_tester_cali_en(int param_1)
       DAT_000180e9 = 0;
       wifi_correct_power_bk = DAT_00018247;
       DAT_00018247 = 0;
-      bt_correct_power_bk = dig_gpio_out;
-      dig_gpio_out = (code)0x0;
+      bt_correct_power_bk = gpio_output_set;
+      gpio_output_set = (code)0x0;
       puVar4 = &phy_param;
       iVar3 = 0;
       do {
@@ -45,8 +45,8 @@ void esp_tester_cali_en(int param_1)
       } while (iVar3 != 0xe);
       wifi_cal_power_bkup = DAT_000181c1;
       wifi_pwctrl_atten_bkup = DAT_000181bb;
-      DAT_0001636d = txdc_cal_init;
-      DAT_0001636e = DAT_000181bd;
+      DAT_000163b5 = txdc_cal_init;
+      DAT_000163b6 = DAT_000181bd;
       tester_cali_flag = '\x01';
     }
     pcVar2 = "Tester calibrate start!\n";
@@ -56,7 +56,7 @@ void esp_tester_cali_en(int param_1)
     phy_tx_pwr_correct_en = txpwr_correct_en_bk;
     DAT_000180e9 = btpwr_track_en_bk;
     DAT_00018247 = wifi_correct_power_bk;
-    dig_gpio_out = bt_correct_power_bk;
+    gpio_output_set = bt_correct_power_bk;
     iVar3 = 0;
     puVar4 = &phy_param;
     do {
@@ -68,8 +68,8 @@ void esp_tester_cali_en(int param_1)
     DAT_000181c1 = wifi_cal_power_bkup;
     pcVar2 = "Tester calibrate exit!\n";
     DAT_000181bb = wifi_pwctrl_atten_bkup;
-    txdc_cal_init = DAT_0001636d;
-    DAT_000181bd = DAT_0001636e;
+    txdc_cal_init = DAT_000163b5;
+    DAT_000181bd = DAT_000163b6;
     tester_cali_flag = '\0';
   }
   phy_printf(pcVar2);

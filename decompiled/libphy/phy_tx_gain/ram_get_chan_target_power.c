@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * Upstream date: 2023-05-10 18:09:34 +0800
+ * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
  * Source: libphy -> phy_tx_gain.o -> ram_get_chan_target_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,10 +19,11 @@ void ram_get_chan_target_power
   byte bVar2;
   uint uVar3;
   int iVar4;
-  char cVar5;
-  undefined4 auStack_24 [4];
+  uint uVar5;
+  int iVar6;
+  uint auStack_24 [4];
   
-  auStack_24[0] = 0x64646464;
+  auStack_24[0] = 0x52525252;
   if (param_4 == 1) {
     ram_get_rate_fcc_index(auStack_24,param_5,param_6);
   }
@@ -30,17 +31,10 @@ void ram_get_chan_target_power
   do {
     cVar1 = *(char *)(param_3 + uVar3);
     *param_2 = cVar1;
-    if (uVar3 < 2) {
-      cVar5 = (char)auStack_24[0] - DAT_0001121b;
-    }
-    else if ((uVar3 & 0xff) < 6) {
-      cVar5 = (char)((uint)auStack_24[0] >> 8) - DAT_0001121b;
-    }
-    else if ((uVar3 & 0xff) < 10) {
-      cVar5 = (char)((uint)auStack_24[0] >> 0x10) - DAT_0001121b;
-    }
-    else {
-      cVar5 = (char)((uint)auStack_24[0] >> 0x18) - DAT_0001121b;
+    uVar5 = auStack_24[0] & 0xff;
+    if (((1 < uVar3) && (uVar5 = auStack_24[0] >> 8 & 0xff, 5 < (uVar3 & 0xff))) &&
+       (uVar5 = auStack_24[0] >> 0x10 & 0xff, 9 < (uVar3 & 0xff))) {
+      uVar5 = auStack_24[0] >> 0x18;
     }
     iVar4 = param_1;
     if ((DAT_00011208 & 0xf) == 1) {
@@ -48,11 +42,12 @@ void ram_get_chan_target_power
       if (uVar3 < 2) {
         bVar2 = DAT_00011009;
       }
-      cVar5 = cVar5 - bVar2;
+      uVar5 = uVar5 - bVar2 & 0xff;
       iVar4 = (int)((param_1 - (uint)bVar2) * 0x1000000) >> 0x18;
     }
-    if (cVar5 < cVar1) {
-      *param_2 = cVar5;
+    iVar6 = (uVar5 - DAT_0001121b) * 0x1000000;
+    if (iVar6 >> 0x18 < (int)cVar1) {
+      *param_2 = (char)((uint)iVar6 >> 0x18);
     }
     if (iVar4 < *param_2) {
       *param_2 = (char)iVar4;

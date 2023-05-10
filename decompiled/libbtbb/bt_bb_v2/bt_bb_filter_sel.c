@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
  * Upstream date: 2023-05-10 18:09:34 +0800
  * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
- * Source: librftest -> wifi.o -> set_tx_power
+ * Source: libbtbb -> bt_bb_v2.o -> bt_bb_filter_sel
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,23 +12,10 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void set_tx_power(undefined4 param_1,int param_2)
+void bt_bb_filter_sel(void)
 
 {
-  undefined *puVar1;
-  
-  if (param_2 == 0) {
-    puVar1 = &phy_param;
-    do {
-      puVar1[0xf4] = (char)param_1;
-      puVar1 = puVar1 + 1;
-    } while (puVar1 != &DAT_0001805a);
-  }
-  else {
-    register_chipv7_phy_init_param(init_param_default);
-  }
-  ram_wifi_set_tx_gain(DAT_0001823e,0);
-  phy_printf("0x%x,0x%x,%d,%d\n",esp_en_reboot,_phy_bt_power_track,(int)DAT_00018206,param_1);
+  _DAT_6001104c = _DAT_6001104c | 0x10;
   return;
 }
 

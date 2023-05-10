@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * Upstream date: 2023-05-10 18:09:34 +0800
+ * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> rw_le_v9_testmode_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,7 +60,7 @@ void rw_le_v9_testmode_tx(int param_1,uint param_2,uint param_3)
   do {
   } while ((_DAT_60031014 & 0x20) == 0);
   _DAT_60031018 = _DAT_60031018 | 0x20;
-  phy_printf("rw done! %x\n",_DAT_600310d4);
+  phy_printf("TX done! %x\n",_DAT_600310d4);
   rf_rw_v9_le_disable();
   return;
 }

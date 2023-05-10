@@ -3,27 +3,18 @@
  * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
  * Upstream date: 2023-05-10 18:09:34 +0800
  * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
- * Source: libphy -> phy_init.o -> get_txcap_data
+ * Source: libphy -> phy_feature.o -> phy_chan_pwr_backoff
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void get_txcap_data(void)
+void phy_chan_pwr_backoff(undefined1 param_1)
 
 {
-  uint uVar1;
-  int iVar2;
-  
-  uVar1 = (uint)(DAT_00010fba >> 2);
-  if (2 < uVar1) {
-    uVar1 = 2;
-  }
-  iVar2 = uVar1 * 3;
-  DAT_00010e85 = DAT_00010e85 & 0xf0 | *(byte *)((int)&DAT_00010f20 + iVar2);
-  DAT_00010e86 = *(char *)((int)&DAT_00010f20 + iVar2 + 2) << 4 |
-                 *(byte *)((int)&DAT_00010f20 + iVar2 + 1);
+  DAT_00011223 = param_1;
+  ram_wifi_set_tx_gain(DAT_000111fe,0);
   return;
 }
 

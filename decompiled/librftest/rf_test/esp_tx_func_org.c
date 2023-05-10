@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * Upstream date: 2023-05-10 18:09:34 +0800
+ * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
  * Source: librftest -> rf_test.o -> esp_tx_func_org
  *
  * (C) Espressif, Apache License 2.0.
@@ -64,12 +64,14 @@ void esp_tx_func_org(uint *param_1,int param_2)
   }
 _L30:
   rftest_set_chan(uVar10 & 0xff,(uint)(tx_cbw40m_en != '\0') << 1);
+  tx_cont_cfg(1);
   target_power_backoff(iVar9);
   phy_printf("Wifi tx out: chan=%d, rate=0x%x, BK=%d, len=%d, delay=%d, tx_num=%d\n",uVar10,uVar7,
              iVar9,uVar3,uVar4,uVar8);
   FillTxPacket(uVar3 + 0xa0000,uVar3,0,uVar7,0,iVar1 << 0x1c,3,2);
   WifiTxStart(uVar7 + 0xa0000,uVar8,uVar4,tx_cbw40m_en,0,1);
   phy_printf("Tx Over 0x%x\n",_DAT_60033c68 & 0xff);
+  tx_cont_cfg(1);
   remove_11b_4p8G_spur(0,0,0);
   return;
 }

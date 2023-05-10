@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * Upstream date: 2023-05-10 18:09:34 +0800
+ * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
  * Source: librftest -> wifi.o -> run_rftest_case
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,6 +27,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
   undefined4 uStack_28;
   undefined4 uStack_24;
   
+  run_para_array_clear(param_2,param_3);
   iVar2 = strcmp(param_1,"temp_read");
   if (iVar2 != 0) {
     rftest_pll_track();
@@ -432,7 +433,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                     iVar2 = strcmp(param_1,"set_tx_gain");
                                                     if (iVar2 == 0) {
                                                       tx_pa_bb_gain = (short)*param_2;
-                                                      DAT_0001635e = (short)param_2[1];
+                                                      DAT_000163a6 = (short)param_2[1];
                                                       force_tx_gain((int)(char)param_2[2],
                                                                     (char)param_2[3]);
                                                       phy_printf("%s,0x%x,0x%x,%d,%d\n",param_1,
@@ -443,7 +444,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                       iVar2 = strcmp(param_1,"set_ble_tx_gain");
                                                       if (iVar2 == 0) {
                                                         tx_pa_bb_gain = (short)*param_2;
-                                                        DAT_0001635e = (short)param_2[1];
+                                                        DAT_000163a6 = (short)param_2[1];
                                                         force_ble_tx_gain((int)(char)param_2[2],
                                                                           (char)param_2[3]);
                                                         phy_printf("%s, 0x%x,0x%x,%d,%d\n",param_1,
@@ -515,7 +516,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                     iVar2 = strcmp(param_1,"print_ver");
                                                     if (iVar2 == 0) {
                                                       phy_printf("phy_version: %d.%d, %s, %s\n",9,
-                                                                 0x3c,"Mar 31 2023","16:27:27");
+                                                                 0x46,"May 10 2023","17:44:25");
                                                     }
                                                     else {
                                                       iVar2 = strcmp(param_1,"init_print");
@@ -971,46 +972,43 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                         phy_printf(&_LC98,param_1);
                                                       }
                                                       else {
-                                                        iVar2 = strcmp(param_1,"esp_en_retest");
+                                                        iVar2 = strcmp(param_1,"temp_read");
                                                         if (iVar2 == 0) {
-                                                          esp_en_retest();
+                                                          uVar3 = ram_tsens_temp_read();
+                                                          phy_printf("temp=%d, init_temp=%d\n",uVar3
+                                                                     ,(int)_phy_param);
                                                         }
                                                         else {
-                                                          iVar2 = strcmp(param_1,"temp_read");
-                                                          if (iVar2 == 0) {
-                                                            uVar3 = ram_tsens_temp_read();
-                                                            phy_printf("temp=%d, init_temp=%d\n",
-                                                                       uVar3,(int)_phy_param);
-                                                          }
-                                                          else {
-                                                            iVar2 = strcmp(param_1,"uart1_sel");
-                                                            if (iVar2 != 0) {
-                                                              iVar2 = strcmp(param_1,
-                                                  "btpwr_track_en");
-                                                  if (iVar2 == 0) {
-                                                    phy_bt_power_track((char)*param_2);
-                                                    phy_printf("%s,%d\n",param_1,_phy_param & 0xff);
-                                                    return 1;
-                                                  }
-                                                  iVar2 = strcmp(param_1,"rx_gain_comp");
-                                                  if (iVar2 == 0) {
-                                                    rx_gain_comp();
-                                                    phy_printf(&_LC12);
-                                                    return 1;
-                                                  }
-                                                  iVar2 = strcmp(param_1,"tx_chan_atten");
-                                                  if (iVar2 == 0) {
-                                                    tx_chan_atten();
-                                                    phy_printf(&_LC12);
-                                                    return 1;
-                                                  }
-                                                  iVar2 = strcmp(param_1,"rx_chan_noise");
-                                                  if (iVar2 == 0) {
-                                                    rx_chan_noise((char)*param_2);
-                                                    phy_printf(&_LC12);
-                                                    return 1;
-                                                  }
-                                                  iVar2 = strcmp(param_1,"rx_chan_noise_all");
+                                                          iVar2 = strcmp(param_1,"uart1_sel");
+                                                          if (iVar2 != 0) {
+                                                            iVar2 = strcmp(param_1,"btpwr_track_en")
+                                                            ;
+                                                            if (iVar2 == 0) {
+                                                              phy_bt_power_track((char)*param_2);
+                                                              phy_printf("%s,%d\n",param_1,
+                                                                         _phy_param & 0xff);
+                                                              return 1;
+                                                            }
+                                                            iVar2 = strcmp(param_1,"rx_gain_comp");
+                                                            if (iVar2 == 0) {
+                                                              rx_gain_comp();
+                                                              phy_printf(&_LC12);
+                                                              return 1;
+                                                            }
+                                                            iVar2 = strcmp(param_1,"tx_chan_atten");
+                                                            if (iVar2 == 0) {
+                                                              tx_chan_atten();
+                                                              phy_printf(&_LC12);
+                                                              return 1;
+                                                            }
+                                                            iVar2 = strcmp(param_1,"rx_chan_noise");
+                                                            if (iVar2 == 0) {
+                                                              rx_chan_noise((char)*param_2);
+                                                              phy_printf(&_LC12);
+                                                              return 1;
+                                                            }
+                                                            iVar2 = strcmp(param_1,
+                                                  "rx_chan_noise_all");
                                                   if (iVar2 == 0) {
                                                     rx_chan_noise_all();
                                                     phy_printf(&_LC12);
@@ -1027,7 +1025,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                   iVar2 = strcmp(param_1,"get_iq_est_pwr");
                                                   if (iVar2 == 0) {
                                                     uVar3 = get_iq_est_pwr();
-                                                    phy_printf(&_LC254,uVar3);
+                                                    phy_printf(&_LC253,uVar3);
                                                     return 1;
                                                   }
                                                   iVar2 = strcmp(param_1,"dc_iq_est");
@@ -1367,24 +1365,30 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                       return 1;
                                                     }
                                                     iVar2 = strcmp(param_1,"esp_get_rx_result");
+                                                    if (iVar2 == 0) {
+                                                      uVar3 = esp_get_rx_result(&local_34);
+                                                      phy_printf("%s: %d, %d, %d, flag=%d\n",param_1
+                                                                 ,local_34,uStack_30,uStack_2c,uVar3
+                                                                );
+                                                      return 1;
+                                                    }
+                                                    iVar2 = strcmp(param_1,"phy_chan_pwr_backoff");
                                                     if (iVar2 != 0) {
                                                       return 0;
                                                     }
-                                                    uVar3 = esp_get_rx_result(&local_34);
-                                                    phy_printf("%s: %d, %d, %d, flag=%d\n",param_1,
-                                                               local_34,uStack_30,uStack_2c,uVar3);
+                                                    phy_chan_pwr_backoff((int)(char)*param_2);
+                                                    phy_printf("%s, %d dBm\n",param_1,*param_2);
                                                     return 1;
                                                   }
                                                   iVar2 = 0;
                                                   do {
-                                                    phy_printf(&_LC297,iVar2);
+                                                    phy_printf(&_LC296,iVar2);
                                                     noise_check_loop(0xff,1);
                                                     iVar2 = iVar2 + 1;
                                                     ets_delay_us(1000);
                                                   } while (iVar2 != 10);
                                                   }
                                                   phy_printf(&_LC98,param_1);
-                                                  }
                                                   }
                                                   }
                                                   }

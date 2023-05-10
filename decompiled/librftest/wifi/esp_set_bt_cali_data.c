@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
+ * Upstream date: 2023-05-10 18:09:34 +0800
+ * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
  * Source: librftest -> wifi.o -> esp_set_bt_cali_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 undefined4 esp_set_bt_cali_data(int *param_1)
 
 {
-  dig_gpio_in = (code)((byte)dig_gpio_in & 0xf | (byte)(*param_1 << 4));
+  ESP_TEST_GPIO = (code)((byte)ESP_TEST_GPIO & 0xf | (byte)(*param_1 << 4));
   tx_pwctrl_init = SUB41(param_1[1],0);
   DAT_000181c5 = (byte)param_1[2];
   DAT_000181c6 = (byte)param_1[3];
