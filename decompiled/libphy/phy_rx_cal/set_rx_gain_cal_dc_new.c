@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
- * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
- * Upstream date: 2023-04-10 17:47:15 +0800
- * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
+ * Last changed at upstream commit d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * https://github.com/espressif/esp-phy-lib/commit/d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * Upstream date: 2023-05-18 20:57:26 +0800
+ * Upstream subject: esp32c6: enable wifi_apb_clk before phy_init and restore after phy_init, C6_libphy_20230517_b4b3263
  * Source: libphy -> phy_rx_cal.o -> set_rx_gain_cal_dc_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,8 +38,8 @@ void set_rx_gain_cal_dc_new(int param_1,int param_2,undefined2 *param_3,int para
   local_6c[3] = 0x204;
   local_6c[4] = 0x300;
   local_6c[5] = 0x304;
-  memcpy(local_50,&_LANCHOR0,0x10);
-  memcpy(local_6c + 6,&DAT_00011190,0xe);
+  memcpy(local_50,&DAT_00011118,0x10);
+  memcpy(local_6c + 6,&DAT_00011128,0xe);
   uVar7 = 7;
   if ((param_1 == 0) && (uVar7 = 6, param_2 == 0)) {
     uVar7 = 8;
@@ -67,13 +67,13 @@ void set_rx_gain_cal_dc_new(int param_1,int param_2,undefined2 *param_3,int para
       puVar3 = (undefined2 *)(iVar9 * 4 + param_4);
       (**(code **)(_g_phyFuns + 0x74))(2,1,*puVar3);
       (**(code **)(_g_phyFuns + 0x74))(3,1,puVar3[1],*(code **)(_g_phyFuns + 0x74));
-_L165:
+_L167:
       uVar2 = (uint)local_50[iVar9] << 0xc | (uint)uVar1;
     }
     else {
       (**(code **)(_g_phyFuns + 0x74))(2,1,0x100);
       (**(code **)(_g_phyFuns + 0x74))(3,1,0x100,*(code **)(_g_phyFuns + 0x74));
-      if (param_2 != 0) goto _L165;
+      if (param_2 != 0) goto _L167;
       puVar4 = local_6c + 6;
       if (param_1 == 0) {
         puVar4 = local_50;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
- * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
- * Upstream date: 2023-04-10 17:47:15 +0800
- * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
+ * Last changed at upstream commit d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * https://github.com/espressif/esp-phy-lib/commit/d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * Upstream date: 2023-05-18 20:57:26 +0800
+ * Upstream subject: esp32c6: enable wifi_apb_clk before phy_init and restore after phy_init, C6_libphy_20230517_b4b3263
  * Source: libphy -> phy_tx_cal.o -> rfcal_txiq_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,10 +37,10 @@ void rfcal_txiq_new(undefined4 param_1,ushort *param_2,short param_3,undefined4 
   else if (param_5 == 2) {
     (**(code **)(_g_phyFuns + 0xc))(1,*(code **)(_g_phyFuns + 0xc));
     txdc_cal_new(param_1);
-    goto _L125;
+    goto _L124;
   }
   pbus_set_dco(param_1);
-_L125:
+_L124:
   uVar2 = _DAT_600a0420;
   uVar4 = get_power_atten((int)param_3,param_4,cVar3,uVar1,0);
   txiq_cover_new(uVar4,(int)param_3,&bStack_34,0,0);

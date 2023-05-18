@@ -3,29 +3,29 @@
  * https://github.com/espressif/esp-phy-lib/commit/d39766d34edf7bf22dddc91d5f45f2b91576a407
  * Upstream date: 2023-05-18 20:57:26 +0800
  * Upstream subject: esp32c6: enable wifi_apb_clk before phy_init and restore after phy_init, C6_libphy_20230517_b4b3263
- * Source: libphy -> phy_init.o -> phy_close_rf_
+ * Source: libphy -> phy_reg.o -> force_txrx_off
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void phy_close_rf_(void)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void force_txrx_off(int param_1)
 
 {
-  undefined4 uVar1;
-  
-  if (DAT_00010a6d != '\0') {
-    uVar1 = (*(code *)*g_phyFuns)((code *)*g_phyFuns);
-    phy_dis_hw_set_freq();
-    phy_xpd_rf();
-    phy_bbpll_cal(1);
-    DAT_00010a5f = 1;
-                    /* WARNING: Could not recover jumptable at 0x000106ca. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*(code *)g_phyFuns[1])(uVar1);
-    return;
+  if (param_1 == 0) {
+    _DAT_600a0910 = _DAT_600a0910 & 0xfffff0ff | 0x200;
+    ets_delay_us(1);
+    _DAT_600a0910 = _DAT_600a0910 & 0xfffff0ff;
   }
+  else {
+    _DAT_600a0910 = _DAT_600a0910 & 0xfffff0ff | 0x800;
+    ets_delay_us(1);
+    _DAT_600a0910 = _DAT_600a0910 & 0xfffff0ff | 0xa00;
+  }
+  ets_delay_us(1);
   return;
 }
 

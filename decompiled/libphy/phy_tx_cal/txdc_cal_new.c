@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
- * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
- * Upstream date: 2023-04-10 17:47:15 +0800
- * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
+ * Last changed at upstream commit d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * https://github.com/espressif/esp-phy-lib/commit/d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * Upstream date: 2023-05-18 20:57:26 +0800
+ * Upstream subject: esp32c6: enable wifi_apb_clk before phy_init and restore after phy_init, C6_libphy_20230517_b4b3263
  * Source: libphy -> phy_tx_cal.o -> txdc_cal_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -91,7 +91,7 @@ void txdc_cal_new(undefined2 *param_1)
   *param_1 = (short)uVar3;
   param_1[1] = (short)uVar2;
   _DAT_600a0418 = _DAT_600a0418 & 0xfffffffc;
-                    /* WARNING: Could not recover jumptable at 0x000108da. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001074a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x98))(0,600,0x78,0,0,0);
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * https://github.com/espressif/esp-phy-lib/commit/d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * Upstream date: 2023-05-18 20:57:26 +0800
+ * Upstream subject: esp32c6: enable wifi_apb_clk before phy_init and restore after phy_init, C6_libphy_20230517_b4b3263
  * Source: libphy -> phy_reg.o -> open_i2c_xpd_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,11 +12,16 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void open_i2c_xpd_new(void)
+void open_i2c_xpd_new(int param_1)
 
 {
   uint uVar1;
   
+  if (param_1 != 0) {
+    _DAT_600b0154 = _DAT_600b0154 & 0xfffffff;
+    _DAT_600b00cc = _DAT_600b00cc & 0xefffffff;
+    ets_delay_us(100);
+  }
   _DAT_600b00cc = _DAT_600b00cc | 0x10000000;
   uVar1 = _DAT_600b0154 | 0xf0000000;
   if (-1 < (int)(_DAT_600b0154 << 4)) {

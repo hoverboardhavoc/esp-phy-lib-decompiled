@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
- * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
- * Upstream date: 2023-04-10 17:47:15 +0800
- * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
+ * Last changed at upstream commit d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * https://github.com/espressif/esp-phy-lib/commit/d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * Upstream date: 2023-05-18 20:57:26 +0800
+ * Upstream subject: esp32c6: enable wifi_apb_clk before phy_init and restore after phy_init, C6_libphy_20230517_b4b3263
  * Source: libphy -> phy_tx_cal.o -> txiq_cover_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -78,7 +78,7 @@ void txiq_cover_new(int param_1,undefined4 param_2,byte *param_3,int param_4,int
     uVar7 = (uint)*param_3;
     uVar8 = (uint)bVar1;
     if (bVar10 < 3) {
-_L121:
+_L120:
       iVar14 = (int)((iVar14 - uVar7) * 0x1000000) >> 0x18;
       iVar2 = (int)((iVar2 - uVar8) * 0x1000000) >> 0x18;
     }
@@ -88,7 +88,7 @@ _L121:
       if (bVar10 == 6) {
         uVar7 = iVar12 + 2 >> 2;
         uVar8 = iVar13 + 2 >> 2;
-        goto _L121;
+        goto _L120;
       }
     }
     bVar10 = bVar10 + 1;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * https://github.com/espressif/esp-phy-lib/commit/1ab8c85ff11a8e0f85d430726b2ff2d3c40dbf1b
- * Upstream date: 2023-02-17 16:30:31 +0800
- * Upstream subject: esp32c6: update libphy to fix bb_cfg_2, protect bb_cfg_2 from reset, correct random channel register, allow to execute txpwrctrl after a while from phy_wake_up_init (phy_version 102,e0e553c,Feb 16 2023,16:20:06)
+ * Last changed at upstream commit d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * https://github.com/espressif/esp-phy-lib/commit/d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * Upstream date: 2023-05-18 20:57:26 +0800
+ * Upstream subject: esp32c6: enable wifi_apb_clk before phy_init and restore after phy_init, C6_libphy_20230517_b4b3263
  * Source: libphy -> phy_rx_cal.o -> pbus_rx_dco_cal_new
  *
  * (C) Espressif, Apache License 2.0.
@@ -120,11 +120,11 @@ _L48:
     *psVar14 = (short)iVar10;
     if (param_5 != 0) {
       phy_printf("stage %d: bb=0x%x (%d,%d) %d; ",uVar12 + 1,uVar5,uStack_4c,uStack_48,cVar13);
-      phy_printf(&_LC12);
+      phy_printf(&_LC10);
     }
     if (param_6 < uVar9) {
       if (param_5 != 0) {
-        phy_printf(&_LC12);
+        phy_printf(&_LC10);
       }
       return;
     }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 03c270c901c1106931ea6299523928c64d457b91
- * https://github.com/espressif/esp-phy-lib/commit/03c270c901c1106931ea6299523928c64d457b91
- * Upstream date: 2023-04-10 17:47:15 +0800
- * Upstream subject: update c6 libphy for mcs8/9 and eco1 * phy_version: 200, d1caf30, Apr 10 2023, 17:19:2
+ * Last changed at upstream commit d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * https://github.com/espressif/esp-phy-lib/commit/d39766d34edf7bf22dddc91d5f45f2b91576a407
+ * Upstream date: 2023-05-18 20:57:26 +0800
+ * Upstream subject: esp32c6: enable wifi_apb_clk before phy_init and restore after phy_init, C6_libphy_20230517_b4b3263
  * Source: libphy -> phy_pbus.o -> write_pbus_mem
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,7 +33,7 @@ void write_pbus_mem(int param_1,int param_2,int param_3,int param_4,int param_5,
   puVar5 = (uint *)&DAT_600a08e0;
   iVar6 = 8;
   uVar7 = 0;
-_L36:
+_L48:
   uVar4 = iVar6 + uVar7;
   *puVar5 = (((uVar4 - 1) * 0x100 | uVar7) & 0xffff) << iVar1 | ~(0xffff << iVar1) & *puVar5;
   uVar7 = (uVar7 + 0x200) * 0x800;
@@ -58,7 +58,7 @@ _L36:
     param_1 = param_2;
     puVar5 = (uint *)&DAT_600a08e0;
     iVar6 = 5;
-    goto _L36;
+    goto _L48;
   case 1:
     iVar6 = 8;
     iVar1 = 0;
@@ -73,60 +73,60 @@ _L36:
     iVar6 = 3;
     iVar1 = 0;
     param_1 = param_5;
-    goto _L57;
+    goto _L69;
   case 4:
     iVar6 = 1;
     iVar1 = 0x10;
     param_1 = param_6;
-_L57:
+_L69:
     iVar3 = iVar2;
     puVar5 = (uint *)&DAT_600a08e8;
-    goto _L36;
+    goto _L48;
   case 5:
     iVar6 = 8;
     iVar1 = 0;
     iVar3 = iVar2;
     param_1 = param_7;
     puVar5 = (uint *)&DAT_600a08ec;
-    goto _L36;
+    goto _L48;
   case 6:
     iVar6 = 5;
     iVar1 = 0x10;
     iVar3 = iVar2;
     param_1 = param_8;
     puVar5 = (uint *)&DAT_600a08ec;
-    goto _L36;
+    goto _L48;
   case 7:
     iVar1 = 0;
     iVar3 = iVar2;
     param_1 = in_stack_00000000;
     puVar5 = (uint *)&DAT_600a08f0;
     iVar6 = iVar2;
-    goto _L36;
+    goto _L48;
   case 8:
     iVar1 = 0x10;
     iVar3 = iVar2;
     param_1 = in_stack_00000004;
     puVar5 = (uint *)&DAT_600a08f0;
     iVar6 = 5;
-    goto _L36;
+    goto _L48;
   case 9:
     iVar1 = 0;
     iVar3 = iVar2;
     param_1 = in_stack_00000008;
     iVar6 = 3;
-    goto _L36;
+    goto _L48;
   default:
-    goto _L37;
+    goto _L49;
   }
   iVar3 = iVar2;
   puVar5 = (uint *)&DAT_600a08e4;
-  goto _L36;
-_L37:
+  goto _L48;
+_L49:
   iVar1 = 0x10;
   iVar3 = iVar2;
   param_1 = in_stack_0000000c;
   iVar6 = 1;
-  goto _L36;
+  goto _L48;
 }
 
