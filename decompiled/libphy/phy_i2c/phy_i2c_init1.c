@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
- * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
- * Upstream date: 2023-04-03 17:51:54 +0800
- * Upstream subject: esp32h2: update phylib for fix rx long term
+ * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
+ * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
+ * Upstream date: 2023-05-22 12:26:13 +0800
+ * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
  * Source: libphy -> phy_i2c.o -> phy_i2c_init1
  *
  * (C) Espressif, Apache License 2.0.
@@ -40,12 +40,12 @@ void phy_i2c_init1(void)
   
   phy_i2c_enter_critical();
   local_40 = 0x6b6b6b6b;
-  uStack_3c = 0x6b6b;
+  uStack_3c = 0x6b6a;
   uStack_3a = 0x6b;
   uStack_38 = 0x4030201;
-  uStack_34 = 0x404;
+  uStack_34 = 0x400;
   uStack_30 = 0x31223722;
-  uStack_2c = 0x3131;
+  uStack_2c = 0x3188;
   uStack_2a = 0x31;
   uStack_18 = DAT_00011049;
   uStack_32 = 4;
@@ -60,7 +60,7 @@ void phy_i2c_init1(void)
   uStack_1c = 0xb;
   uStack_12 = 0x2f;
   uStack_14 = 0x6870;
-  _DAT_600ad820 = _DAT_600ad820 & 0xfffe000f | 0x20;
+  _DAT_600ad820 = _DAT_600ad820 & 0xfffe000f | 0x120;
   i2c_paral_write_num(&local_40,&uStack_38,&uStack_30,&uStack_28,&uStack_20,&uStack_18,7,0);
   _DAT_600ad820 = _DAT_600ad820 & 0xfffe000f | 0x1f00;
   uVar1 = chip_i2c_readReg(0x69,0,4);

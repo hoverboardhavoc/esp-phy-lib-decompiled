@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
- * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
- * Upstream date: 2023-04-03 17:51:54 +0800
- * Upstream subject: esp32h2: update phylib for fix rx long term
+ * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
+ * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
+ * Upstream date: 2023-05-22 12:26:13 +0800
+ * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
  * Source: libphy -> phy_init.o -> register_chipv7_phy_init_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,10 +13,10 @@
 void register_chipv7_phy_init_param(undefined1 *param_1)
 
 {
-  DAT_00010580 = *param_1;
-  DAT_00010581 = param_1[1];
-  DAT_00010582 = param_1[2];
-  DAT_00010583 = param_1[3];
+  DAT_00010608 = *param_1;
+  DAT_00010609 = param_1[1];
+  DAT_0001060a = param_1[2];
+  DAT_0001060b = param_1[3];
   return;
 }
 

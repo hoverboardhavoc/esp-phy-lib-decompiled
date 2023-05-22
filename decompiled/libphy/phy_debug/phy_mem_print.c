@@ -1,14 +1,17 @@
 /*
- * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
- * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
- * Upstream date: 2023-04-03 17:51:54 +0800
- * Upstream subject: esp32h2: update phylib for fix rx long term
+ * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
+ * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
+ * Upstream date: 2023-05-22 12:26:13 +0800
+ * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
  * Source: libphy -> phy_debug.o -> phy_mem_print
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
+
+/* WARNING: Removing unreachable block (ram,0x00010a62) */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void phy_mem_print(void)
 
@@ -33,7 +36,16 @@ void phy_mem_print(void)
     uVar2 = uVar3 + 1;
     phy_printf("%d, addr=%d, rd_data=0x%x\n",uVar3,uVar4,uVar5);
     uVar3 = uVar2;
-  } while (uVar2 != 0x55);
+  } while (uVar2 != 10);
+  force_rx_gain(1,0x32,1);
+  pbus_print();
+  _DAT_600a2840 = _DAT_600a2840 & 0x7fffff | 0x33000000;
+  _DAT_600a0010 = _DAT_600a0010 & 0xffff3fff;
+  _DAT_600a0910 = _DAT_600a0910 & 0xffffcfff;
+  _DAT_600a28a0 = _DAT_600a28a0 & 0x3fffffff;
+  bt_rx_force();
+  ets_delay_us(1);
+  _DAT_600a2840 = _DAT_600a2840 & 0xffffff | 0x32000000;
   return;
 }
 

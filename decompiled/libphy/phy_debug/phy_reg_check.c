@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
- * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
- * Upstream date: 2023-04-03 17:51:54 +0800
- * Upstream subject: esp32h2: update phylib for fix rx long term
+ * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
+ * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
+ * Upstream date: 2023-05-22 12:26:13 +0800
+ * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
  * Source: libphy -> phy_debug.o -> phy_reg_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -65,7 +65,7 @@ void phy_reg_check(void)
     puVar2 = puVar1 + -0x1802b600;
     puVar1 = puVar1 + 1;
     phy_printf("i2c_mst 0x%x: 0x%x\n",puVar2,uVar3);
-  } while (puVar1 != (undefined4 *)0x600ad978);
+  } while (puVar1 != (undefined4 *)0x600ad838);
   puVar1 = (undefined4 *)&DAT_600a0800;
   do {
     uVar3 = *puVar1;
@@ -87,6 +87,34 @@ void phy_reg_check(void)
     puVar1 = puVar1 + 1;
     phy_printf("FEDATA 0x%x: 0x%x\n",puVar2,uVar3);
   } while (puVar1 != (undefined4 *)0x600a04a4);
+  puVar1 = (undefined4 *)&DAT_600b0000;
+  do {
+    uVar3 = *puVar1;
+    puVar2 = puVar1 + -0x1802c000;
+    puVar1 = puVar1 + 1;
+    phy_printf("pmu 0x%x: 0x%x\n",puVar2,uVar3);
+  } while (puVar1 != (undefined4 *)0x600b01a4);
+  puVar1 = (undefined4 *)&DAT_60096000;
+  do {
+    uVar3 = *puVar1;
+    puVar2 = puVar1 + -0x18025800;
+    puVar1 = puVar1 + 1;
+    phy_printf("PCR 0x%x: 0x%x\n",puVar2,uVar3);
+  } while (puVar1 != (undefined4 *)0x60096154);
+  puVar1 = (undefined4 *)&DAT_600a5400;
+  do {
+    uVar3 = *puVar1;
+    puVar2 = puVar1 + -0x18029500;
+    puVar1 = puVar1 + 1;
+    phy_printf("MODEM_SYSCON 0x%x: 0x%x\n",puVar2,uVar3);
+  } while (puVar1 != (undefined4 *)0x600a5420);
+  puVar1 = (undefined4 *)&DAT_600ad000;
+  do {
+    uVar3 = *puVar1;
+    puVar2 = puVar1 + -0x1802b400;
+    puVar1 = puVar1 + 1;
+    phy_printf("MODEM_LPCON 0x%x: 0x%x\n",puVar2,uVar3);
+  } while (puVar1 != (undefined4 *)0x600ad020);
   return;
 }
 

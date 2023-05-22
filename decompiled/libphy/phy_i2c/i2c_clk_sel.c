@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
+ * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
+ * Upstream date: 2023-05-22 12:26:13 +0800
+ * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
  * Source: libphy -> phy_i2c.o -> i2c_clk_sel
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,14 +15,9 @@
 void i2c_clk_sel(uint param_1)
 
 {
-  uint uVar1;
-  uint uVar2;
-  
-  uVar2 = (param_1 & 0x7c) << 4;
-  uVar1 = param_1 >> 1 & 0x3f;
-  _DAT_600ad824 = _DAT_600ad824 & 0xfffff800 | uVar2 | uVar1;
-  _DAT_600ad828 = _DAT_600ad828 & 0xfffff800 | uVar2 | uVar1;
-  _DAT_600ad82c = uVar1 | _DAT_600ad82c & 0xfffff800 | uVar2;
+  _DAT_600ad824 = param_1 >> 1 | (param_1 >> 2) << 6;
+  _DAT_600ad828 = _DAT_600ad824;
+  _DAT_600ad82c = _DAT_600ad824;
   return;
 }
 

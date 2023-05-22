@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
- * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
- * Upstream date: 2023-04-03 17:51:54 +0800
- * Upstream subject: esp32h2: update phylib for fix rx long term
+ * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
+ * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
+ * Upstream date: 2023-05-22 12:26:13 +0800
+ * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
  * Source: libphy -> phy_init.o -> phy_rfcal_data_sub
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ void phy_rfcal_data_sub(int param_1,int param_2)
   undefined1 *puVar3;
   uint uVar4;
   
-  puVar1 = &phy_param;
+  puVar1 = (uint *)&phy_param;
   iVar2 = 0xc;
   do {
     if (param_2 == 0) {
@@ -36,7 +36,7 @@ void phy_rfcal_data_sub(int param_1,int param_2)
     }
     iVar2 = iVar2 + 4;
     puVar1 = puVar1 + 1;
-  } while (iVar2 != 0x7c);
+  } while (iVar2 != 0x80);
   return;
 }
 

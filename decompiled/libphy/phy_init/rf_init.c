@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
- * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
- * Upstream date: 2023-04-03 17:51:54 +0800
- * Upstream subject: esp32h2: update phylib for fix rx long term
+ * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
+ * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
+ * Upstream date: 2023-05-22 12:26:13 +0800
+ * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
  * Source: libphy -> phy_init.o -> rf_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,10 +20,11 @@ void rf_init(int param_1)
   open_i2c_xpd(1);
   i2c_clk_sel(2);
   i2cmst_reg_init();
+  set_sdm_inv_phase(1,1);
   pwdet_reg_init();
   fe_reg_init();
   if (param_1 != 0) {
-    tsens_read_init(1,(undefined1)phy_param);
+    tsens_read_init(1,phy_param);
   }
   tx_pwctrl_bg_init();
   rc_cal();
