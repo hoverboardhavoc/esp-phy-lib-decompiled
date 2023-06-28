@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
- * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
- * Upstream date: 2023-04-03 17:51:54 +0800
- * Upstream subject: esp32h2: update phylib for fix rx long term
+ * Last changed at upstream commit 97a141a563a4b752f5943d0049aa691038d08613
+ * https://github.com/espressif/esp-phy-lib/commit/97a141a563a4b752f5943d0049aa691038d08613
+ * Upstream date: 2023-06-28 11:18:04 +0800
+ * Upstream subject: h2: optimize track pll when temperature changes. fix ramp up and ramp down timing.
  * Source: libphy -> phy_tsens.o -> temp_to_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,20 +19,20 @@ int temp_to_power(int param_1,int param_2)
   int iVar2;
   uint uVar3;
   
-  iVar1 = (param_1 - param_2) * 0x10000 >> 0x10;
+  iVar2 = (param_1 - param_2) * 0x10000 >> 0x10;
   uVar3 = _DAT_600a150c & 0xff;
-  if (iVar1 < 1) {
-    iVar2 = 4;
-    if (0xe < uVar3) {
-      iVar2 = 10;
+  if (iVar2 < 1) {
+    iVar1 = 4;
+    if ((5 < uVar3) && (iVar1 = 3, 10 < uVar3)) {
+      iVar1 = (0xd < uVar3) + 2;
     }
   }
   else {
-    iVar2 = 4;
-    if ((4 < uVar3) && (iVar2 = 6, uVar3 < 0xf)) {
-      iVar2 = 3;
+    iVar1 = 5;
+    if ((4 < uVar3) && (iVar1 = 3, 7 < uVar3)) {
+      iVar1 = 2;
     }
   }
-  return (int)(char)(iVar1 / iVar2);
+  return (int)(char)(iVar2 / iVar1);
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b2f06a44d311d84700c55df60354a634239cb32
- * https://github.com/espressif/esp-phy-lib/commit/6b2f06a44d311d84700c55df60354a634239cb32
- * Upstream date: 2023-04-03 17:51:54 +0800
- * Upstream subject: esp32h2: update phylib for fix rx long term
+ * Last changed at upstream commit 97a141a563a4b752f5943d0049aa691038d08613
+ * https://github.com/espressif/esp-phy-lib/commit/97a141a563a4b752f5943d0049aa691038d08613
+ * Upstream date: 2023-06-28 11:18:04 +0800
+ * Upstream subject: h2: optimize track pll when temperature changes. fix ramp up and ramp down timing.
  * Source: libphy -> phy_hw_freq.o -> phy_get_rf_freq_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,10 +28,10 @@ void phy_get_rf_freq_init(uint param_1)
   uint uStack_3c;
   uint uStack_38;
   
-  uVar2 = (uint)_DAT_0001107a;
-  uVar7 = (uint)_DAT_00011078;
-  uVar1 = _DAT_0001107a >> 8;
-  uVar8 = _DAT_00011078 >> 8 & 0xf;
+  uVar2 = (uint)_DAT_0001107c;
+  uVar7 = (uint)_DAT_0001107a;
+  uVar1 = _DAT_0001107c >> 8;
+  uVar8 = _DAT_0001107a >> 8 & 0xf;
   uVar10 = 0;
   uVar9 = 0;
   for (uVar3 = 0; uVar3 < param_1; uVar3 = uVar3 + 1) {

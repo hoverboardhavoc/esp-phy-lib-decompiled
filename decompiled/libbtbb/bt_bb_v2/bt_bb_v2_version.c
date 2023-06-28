@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 30e464c44ca5f7291bdf88b4396ebd8c1a055388
- * https://github.com/espressif/esp-phy-lib/commit/30e464c44ca5f7291bdf88b4396ebd8c1a055388
- * Upstream date: 2023-06-21 14:25:38 +0800
- * Upstream subject: btbb: fix btbb version print using phy_printf
+ * Last changed at upstream commit 97a141a563a4b752f5943d0049aa691038d08613
+ * https://github.com/espressif/esp-phy-lib/commit/97a141a563a4b752f5943d0049aa691038d08613
+ * Upstream date: 2023-06-28 11:18:04 +0800
+ * Upstream subject: h2: optimize track pll when temperature changes. fix ramp up and ramp down timing.
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  phy_printf("libbtbb version: %s, %s, %s\n","89556a1","May 22 2023","11:57:29");
+  phy_printf("libbtbb version: %s, %s, %s\n","98b760f","Jun  6 2023","20:13:22");
   return;
 }
 

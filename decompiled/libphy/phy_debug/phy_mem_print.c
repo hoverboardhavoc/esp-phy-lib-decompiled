@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
- * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
- * Upstream date: 2023-05-22 12:26:13 +0800
- * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
+ * Last changed at upstream commit 97a141a563a4b752f5943d0049aa691038d08613
+ * https://github.com/espressif/esp-phy-lib/commit/97a141a563a4b752f5943d0049aa691038d08613
+ * Upstream date: 2023-06-28 11:18:04 +0800
+ * Upstream subject: h2: optimize track pll when temperature changes. fix ramp up and ramp down timing.
  * Source: libphy -> phy_debug.o -> phy_mem_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x00010a62) */
+/* WARNING: Removing unreachable block (ram,0x000108ac) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void phy_mem_print(void)

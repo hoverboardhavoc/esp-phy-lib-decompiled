@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
- * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
- * Upstream date: 2023-05-22 12:26:13 +0800
- * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
+ * Last changed at upstream commit 97a141a563a4b752f5943d0049aa691038d08613
+ * https://github.com/espressif/esp-phy-lib/commit/97a141a563a4b752f5943d0049aa691038d08613
+ * Upstream date: 2023-06-28 11:18:04 +0800
+ * Upstream subject: h2: optimize track pll when temperature changes. fix ramp up and ramp down timing.
  * Source: libphy -> phy_init.o -> phy_close_rf
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,8 +27,8 @@ void phy_close_rf(void)
     uVar4 = get_freq_mem_addr(uVar2,uVar1,0x40,0);
     uVar5 = enter_critical_phy();
     phy_dis_hw_set_freq();
-    DAT_00010644 = read_rf_freq_mem_new(uVar3,2);
-    DAT_00010646 = read_rf_freq_mem_new(uVar4,2);
+    DAT_00010646 = read_rf_freq_mem_new(uVar3,2);
+    DAT_00010648 = read_rf_freq_mem_new(uVar4,2);
     phy_xpd_rf();
     phy_xpd_tsens();
     phy_bbpll_cal(1);
