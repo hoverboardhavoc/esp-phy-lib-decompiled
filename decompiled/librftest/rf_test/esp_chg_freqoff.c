@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> rf_test.o -> esp_chg_freqoff
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,11 +30,11 @@ void esp_chg_freqoff(int param_1,undefined4 param_2)
     pcVar3 = pcVar3 + 1;
   } while (iVar4 != 0x80);
   uVar1 = esp_crc8(&init_param_default,0x7f);
-  if (DAT_000120e3 == uVar1) {
+  if (DAT_000120e7 == uVar1) {
     uVar1 = (param_1 * -0x9b4) / 1000 + 4 >> 3;
-    DAT_000120b0 = (undefined1)uVar1;
-    DAT_000120af = (uVar1 & 0xff) != 0;
-    DAT_000120e3 = esp_crc8(&init_param_default,0x7f);
+    DAT_000120b4 = (undefined1)uVar1;
+    DAT_000120b3 = (uVar1 & 0xff) != 0;
+    DAT_000120e7 = esp_crc8(&init_param_default,0x7f);
     register_chipv7_phy_init_param(&init_param_default);
     chip_v7_set_chan_offset(0);
     iVar4 = 0;
@@ -55,7 +55,7 @@ void esp_chg_freqoff(int param_1,undefined4 param_2)
       }
       iVar4 = iVar4 + 1;
     } while (iVar4 != 0x90);
-    phy_printf("esp_chg_freqoff ok, %dppm, %d, %d, 0x%x\n",param_1,DAT_000120af,DAT_000120b0,param_2
+    phy_printf("esp_chg_freqoff ok, %dppm, %d, %d, 0x%x\n",param_1,DAT_000120b3,DAT_000120b4,param_2
               );
   }
   else {

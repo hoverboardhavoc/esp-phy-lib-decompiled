@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> bb_common.o -> auto_ack_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,12 +39,12 @@ void auto_ack_test(undefined4 param_1,int param_2)
     do {
       if (-1 < (int)(_DAT_60033084 << 1)) {
         bVar7 = false;
-        goto _L333;
+        goto _L370;
       }
       iVar4 = GetStopCmd();
     } while (iVar4 != 0);
     bVar7 = true;
-_L333:
+_L370:
     puVar3 = (uint *)((_DAT_60033080 & 0xff) + *(int *)(_DAT_60033094 + 4));
     uVar6 = puVar3[0xf];
     uVar9 = (uVar6 >> 8 & 0xff) << 0x10 | uVar6 << 0x18 | uVar6 >> 0x18 |

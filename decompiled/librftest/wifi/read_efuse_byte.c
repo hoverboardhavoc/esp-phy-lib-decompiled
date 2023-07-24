@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> wifi.o -> read_efuse_byte
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,12 +49,12 @@ uint read_efuse_byte(int param_1,uint param_2,int param_3,uint param_4)
   else {
     if (uVar3 != 0x46) {
       uVar3 = 0;
-      goto _L520;
+      goto _L516;
     }
     puVar4 = (undefined1 *)0x6000881c;
   }
   uVar3 = *(uint *)(puVar4 + iVar1);
-_L520:
+_L516:
   uVar2 = 0;
   iVar1 = 1;
   do {

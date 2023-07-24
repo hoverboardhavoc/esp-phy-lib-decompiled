@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> wifi.o -> module_test_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,11 +28,11 @@ void module_test_print(void)
   undefined2 uStack_36;
   
   phy_version_print();
-  phy_printf("vdd33=%d;\n",_DAT_0001824e);
+  phy_printf("vdd33=%d;\n",_DAT_00018252);
   phy_printf("TXIQ, ");
-  get_iq_value(&cStack_3c,_test_txtone_pwr,0);
+  get_iq_value(&cStack_3c,_get_rx_buffer1,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
-  get_iq_value(&cStack_3c,_DAT_0001819a,0);
+  get_iq_value(&cStack_3c,_DAT_0001819e,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   phy_printf(&_LC12);
   pcVar6 = (code *)&phy_param;
@@ -49,7 +49,7 @@ void module_test_print(void)
   } while (pcVar7 != phy_get_rf_cal_version);
   phy_printf(&_LC12);
   phy_printf("BT_TXIQ, ");
-  get_iq_value(&cStack_3c,_txiq_cal_init,0);
+  get_iq_value(&cStack_3c,_txpwr_offset,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   phy_printf(&_LC12);
   phy_printf("BT_TXDC, ");
@@ -64,9 +64,9 @@ void module_test_print(void)
   } while (pcVar6 != esp_rom_spiflash_write);
   phy_printf(&_LC12);
   phy_printf("RXIQ, ");
-  get_iq_value(&cStack_3c,_phy_tx_pwr_print_en,1);
+  get_iq_value(&cStack_3c,_test_txtone_pwr,1);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
-  get_iq_value(&cStack_3c,_DAT_0001819e,1);
+  get_iq_value(&cStack_3c,_DAT_000181a2,1);
   pcVar7 = (code *)&phy_rxrf_dc;
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   phy_printf(&_LC12);

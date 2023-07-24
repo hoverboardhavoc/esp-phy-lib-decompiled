@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
- * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
- * Upstream date: 2023-05-10 18:09:34 +0800
- * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> rw_le_v9_testmode_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,6 +21,7 @@ void rw_le_v9_testmode_tx(int param_1,uint param_2,uint param_3)
   prbs9_gen(&PRBS9);
   rw_le_v9_em_clean(0x3fcd0000,0x400);
   rw_v9_init_em_radio_table();
+  (**(code **)(_g_phyFuns + 0x114))(&phy_param,6,*(code **)(_g_phyFuns + 0x114));
   rw_le_v9_prep_et(0x3fcd0100,0xf,0,0,0,0,0,0);
   rw_le_v9_set_etptr(0x3fcd0100);
   rw_le_v9_set_currentrxdescptr(&DAT_3fcd02c0);

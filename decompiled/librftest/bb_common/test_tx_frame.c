@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> bb_common.o -> test_tx_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -54,13 +54,13 @@ void test_tx_frame(undefined4 param_1,uint param_2,int param_3,undefined2 param_
     }
     if (phy_tx_pwr_print_en != '\0') {
       if (999999 < (uint)(_DAT_60035000 - tx_temp_time)) {
-        uVar4 = ram_tsens_temp_read();
+        uVar4 = rom1_tsens_temp_read();
         phy_printf(&_LC3,uVar4);
         tx_temp_time = _DAT_60035000;
       }
     }
     if (DAT_000130c8 != '\0') {
-      rfpll_cap_track(DAT_000130c7);
+      ram2_rfpll_cap_track(DAT_000130c7);
     }
     ets_delay_us(param_4);
   }

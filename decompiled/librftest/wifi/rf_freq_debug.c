@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> wifi.o -> rf_freq_debug
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000133a4) */
+/* WARNING: Removing unreachable block (ram,0x00013378) */
 /* WARNING: Removing unreachable block (ram,0x00010000) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -27,16 +27,16 @@ void rf_freq_debug(undefined4 param_1,undefined4 param_2,undefined4 param_3,uint
              param_3,param_4,param_5,param_6,param_7);
   start_tx_tone_step(1,0x20,0x3c,0,0,0);
   if ((param_6 & 1) != 0) {
-    txon_set_part_8();
+    txon_set_part_9();
   }
   for (uVar1 = 0; uVar1 != param_4; uVar1 = uVar1 + 1 & 0xffff) {
     if ((param_6 & 2) != 0) {
-      txon_set_part_8();
+      txon_set_part_9();
     }
     if ((param_5 & 1) != 0) {
       set_chan_freq_sub(param_1);
       if ((param_6 & 4) != 0) {
-        txon_set_part_8();
+        txon_set_part_9();
       }
       ets_delay_us(param_3);
     }

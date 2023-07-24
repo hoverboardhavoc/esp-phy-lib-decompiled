@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> wifi.o -> force_tx_gain
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void force_tx_gain(undefined4 param_1,undefined4 param_2,undefined4 param_3,int 
   
   if (param_4 == 0) {
     phy_tx_pwr_track_en = 0;
-    DAT_000180e5 = 1;
+    DAT_000180e9 = 1;
     iVar2 = 0;
     puVar1 = local_3c;
     do {
@@ -32,12 +32,12 @@ void force_tx_gain(undefined4 param_1,undefined4 param_2,undefined4 param_3,int 
       puVar1 = puVar1 + 1;
     } while (iVar2 != 0xe);
     rom_set_tx_gain_mem(0,0xe,local_5c,local_3c,&phy_param,&phy_param);
-    ram_wifi_tx_dig_gain(local_4c);
+    rom1_wifi_tx_dig_gain(local_4c);
   }
   else {
-    DAT_000180e5 = 0;
+    DAT_000180e9 = 0;
     phy_tx_pwr_track_en = 1;
-    ram_wifi_set_tx_gain(DAT_0001823e,1);
+    rom1_wifi_set_tx_gain(DAT_00018242,1);
   }
   force_ble_tx_gain(param_1,param_2,param_3,param_4);
   return;

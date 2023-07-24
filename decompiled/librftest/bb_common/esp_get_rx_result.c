@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> bb_common.o -> esp_get_rx_result
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,8 +14,8 @@ undefined1 esp_get_rx_result(undefined4 *param_1)
 
 {
   *param_1 = esp_rx_result;
-  param_1[1] = DAT_0001257c;
-  param_1[2] = DAT_00012580;
+  param_1[1] = DAT_00012950;
+  param_1[2] = DAT_00012954;
   return esp_rx_valid;
 }
 

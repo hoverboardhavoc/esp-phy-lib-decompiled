@@ -1,16 +1,14 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> wifi.o -> rx_chan_noise_all
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void rx_chan_noise_all(void)
 
@@ -26,7 +24,7 @@ void rx_chan_noise_all(void)
   int iVar9;
   short *psVar10;
   short local_4c [14];
-  short asStack_30 [2];
+  short asStack_30 [4];
   
   psVar3 = local_4c;
   cVar5 = '\0';
@@ -41,7 +39,7 @@ void rx_chan_noise_all(void)
       cVar6 = '\x04';
       iVar9 = 0;
       do {
-        iVar4 = (**(code **)(_g_phyFuns + 0x84))(*(code **)(_g_phyFuns + 0x84));
+        iVar4 = check_noise_floor1();
         if (iVar9 < iVar4) {
           iVar4 = iVar9;
         }

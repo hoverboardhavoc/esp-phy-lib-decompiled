@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> bb_common.o -> do_rx_poll
  *
  * (C) Espressif, Apache License 2.0.
@@ -258,23 +258,23 @@ void do_rx_poll(uint param_1)
   } while (iVar5 != 0);
   _DAT_60033c40 = _DAT_60033c40 | 0xc;
   if (iVar16 == 0) {
-    DAT_0001257c = 0;
+    DAT_00012950 = 0;
     iVar11 = 0;
   }
   else {
     iVar11 = (local_54 * 10) / iVar16;
-    DAT_0001257c = local_58 / iVar16;
+    DAT_00012950 = local_58 / iVar16;
   }
   *local_c4 = 1;
   esp_rx_result = iVar16;
-  DAT_00012580 = iVar15;
+  DAT_00012954 = iVar15;
   if (local_c0 == 0) {
     if (short_log_en == '\0') {
       phy_printf("Correct: %d Desired: %d RSSI: %d noise: %d gain: %d para1: %d para2: %d freq: %d "
                  ,iVar15,iVar16,local_a8,iVar11,iVar17,iVar18);
     }
     else {
-      phy_printf("rx_num: %d rx_rssi: %d\n",iVar16,DAT_0001257c);
+      phy_printf("rx_num: %d rx_rssi: %d\n",iVar16,DAT_00012950);
     }
     if (rssi_min_max_print != '\0') {
       phy_printf("rssi_min: %d rssi_max: %d",local_60,uVar21);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
- * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
- * Upstream date: 2023-05-10 18:09:34 +0800
- * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> wifi.o -> esp_wr_efuse_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,9 +41,9 @@ void esp_wr_efuse_data(int param_1)
   
   memset(&local_60,0,0x20);
   memset(local_40,0,0x20);
-  local_60 = ESP_TEST_GPIO;
-  if (((byte)ESP_TEST_GPIO & 0xf) == 1) {
-    abStack_5f[0] = DAT_00018251;
+  local_60 = gpio_output_set;
+  if (((byte)gpio_output_set & 0xf) == 1) {
+    abStack_5f[0] = DAT_00018255;
     puVar6 = &phy_param;
     puVar11 = &phy_param;
     puVar4 = &local_60;
@@ -52,21 +52,21 @@ void esp_wr_efuse_data(int param_1)
       puVar11 = puVar11 + 1;
       puVar4[2] = *puVar1;
       puVar4 = puVar4 + 1;
-    } while (puVar11 != &DAT_00018052);
-    uStack_54 = _ate_adc_for_module;
+    } while (puVar11 != &DAT_00018056);
+    uStack_54 = _ESP_TEST_GPIO;
     puVar4 = &local_60;
     do {
       puVar11 = puVar6 + 0x158;
       puVar6 = puVar6 + 1;
       puVar4[0x10] = *puVar11;
       puVar4 = puVar4 + 1;
-    } while (puVar6 != (undefined *)0x18055);
+    } while (puVar6 != (undefined *)0x18059);
   }
-  if (((byte)ESP_TEST_GPIO & 0xf0) == 0x10) {
-    uStack_58 = tx_pwctrl_init;
-    uStack_57 = DAT_000181c5;
-    uStack_56 = _DAT_000181c6;
-    uStack_52 = _DAT_0001825a;
+  if (((byte)gpio_output_set & 0xf0) == 0x10) {
+    uStack_58 = tx_cap_init;
+    uStack_57 = DAT_000181c9;
+    uStack_56 = _DAT_000181ca;
+    uStack_52 = _DAT_0001825e;
   }
   pbVar7 = &local_60;
   puVar8 = (uint *)&DAT_60008800;

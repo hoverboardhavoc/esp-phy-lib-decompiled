@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a83c216dd2de6418cb26ee42d80433b0badd4aea
- * https://github.com/espressif/esp-phy-lib/commit/a83c216dd2de6418cb26ee42d80433b0badd4aea
- * Upstream date: 2023-05-10 18:09:34 +0800
- * Upstream subject: esp32c3: update libphy for ble 1M/2M switch
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> wifi.o -> rf_cal_data_clear
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void rf_cal_data_clear(void)
   do {
     *(undefined4 *)pcVar1 = 0;
     pcVar1 = pcVar1 + 4;
-  } while (pcVar1 != ate_rxdc_remain_check);
+  } while (pcVar1 != phy_current_level_set);
   pcVar1 = (code *)&phy_chan_dc;
   do {
     *(undefined4 *)pcVar1 = 0;

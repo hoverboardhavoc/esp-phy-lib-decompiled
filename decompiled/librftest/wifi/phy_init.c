@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
+ * Upstream date: 2023-07-24 22:19:06 +0800
+ * Upstream subject: Protection of tracking
  * Source: librftest -> wifi.o -> phy_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void phy_init(void)
   undefined1 auStack_778 [1904];
   
   _flash_test_enable = 0;
-  DAT_00018131 = 0;
+  DAT_00018135 = 0;
   uVar1 = 0;
   if (_DAT_60004038 == 0xc) {
     uVar1 = init_param_read();
