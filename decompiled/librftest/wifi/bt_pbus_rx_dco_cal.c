@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
+ * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
+ * Upstream date: 2023-07-27 11:33:55 +0800
+ * Upstream subject: fix c3 ble tx bug
  * Source: librftest -> wifi.o -> bt_pbus_rx_dco_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -128,13 +128,13 @@ void bt_pbus_rx_dco_cal(undefined4 param_1,ushort *param_2,undefined4 param_3,in
   }
   else {
     phy_printf("stage %d: CGAIN=%d FGAIN=%d, (%d,%d) %d; ",1,uVar9,uVar2,iStack_4c,iStack_48,cVar1);
-    if (param_5 == 0) goto _L422;
+    if (param_5 == 0) goto _L424;
   }
   phy_printf(&_LC12);
   if (param_4 == 0) {
     return;
   }
-_L422:
+_L424:
   phy_printf(&_LC12);
   return;
 }

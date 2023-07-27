@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
+ * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
+ * Upstream date: 2023-07-27 11:33:55 +0800
+ * Upstream subject: fix c3 ble tx bug
  * Source: librftest -> rf_test.o -> wifitxout_func
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ void wifitxout_func(uint *param_1,int param_2)
     _DAT_6001c400 = _DAT_6001c400 & 0xffff9fff | 0x2000;
     uVar2 = uVar2 & 3;
   }
-  else {
+  else if (rc_cal_en == '\0') {
     tx_cont_cfg(1);
   }
   remove_11b_4p8G_spur(1,2,0x1e);

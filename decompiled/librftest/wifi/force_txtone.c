@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
+ * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
+ * Upstream date: 2023-07-27 11:33:55 +0800
+ * Upstream subject: fix c3 ble tx bug
  * Source: librftest -> wifi.o -> force_txtone
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void force_txtone(undefined4 param_1,undefined2 param_2)
   start_tx_tone(1,0,param_1,0,0,0);
   ets_delay_us(param_2);
   stop_tx_tone(1);
-                    /* WARNING: Could not recover jumptable at 0x00011f5c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011f70. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 200))(0);
   return;

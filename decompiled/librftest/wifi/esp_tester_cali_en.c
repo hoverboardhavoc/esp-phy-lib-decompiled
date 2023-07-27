@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
+ * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
+ * Upstream date: 2023-07-27 11:33:55 +0800
+ * Upstream subject: fix c3 ble tx bug
  * Source: librftest -> wifi.o -> esp_tester_cali_en
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,8 +45,8 @@ void esp_tester_cali_en(int param_1)
       } while (iVar3 != 0xe);
       wifi_cal_power_bkup = DAT_000181c5;
       wifi_pwctrl_atten_bkup = DAT_000181bf;
-      DAT_00016485 = force_iq_set;
-      DAT_00016486 = DAT_000181c1;
+      DAT_0001650d = force_iq_set;
+      DAT_0001650e = DAT_000181c1;
       tester_cali_flag = '\x01';
     }
     pcVar2 = "Tester calibrate start!\n";
@@ -68,8 +68,8 @@ void esp_tester_cali_en(int param_1)
     DAT_000181c5 = wifi_cal_power_bkup;
     pcVar2 = "Tester calibrate exit!\n";
     DAT_000181bf = wifi_pwctrl_atten_bkup;
-    force_iq_set = DAT_00016485;
-    DAT_000181c1 = DAT_00016486;
+    force_iq_set = DAT_0001650d;
+    DAT_000181c1 = DAT_0001650e;
     tester_cali_flag = '\0';
   }
   phy_printf(pcVar2);

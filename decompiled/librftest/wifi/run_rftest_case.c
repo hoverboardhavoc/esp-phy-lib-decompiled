@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
+ * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
+ * Upstream date: 2023-07-27 11:33:55 +0800
+ * Upstream subject: fix c3 ble tx bug
  * Source: librftest -> wifi.o -> run_rftest_case
  *
  * (C) Espressif, Apache License 2.0.
@@ -435,7 +435,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                     iVar4 = strcmp(param_1,"set_tx_gain");
                                                     if (iVar4 == 0) {
                                                       tx_pa_bb_gain = (short)*param_2;
-                                                      DAT_00016476 = (short)param_2[1];
+                                                      DAT_000164fe = (short)param_2[1];
                                                       force_tx_gain((int)(char)param_2[2],
                                                                     (char)param_2[3]);
                                                       phy_printf("%s,0x%x,0x%x,%d,%d\n",param_1,
@@ -446,7 +446,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                       iVar4 = strcmp(param_1,"set_ble_tx_gain");
                                                       if (iVar4 == 0) {
                                                         tx_pa_bb_gain = (short)*param_2;
-                                                        DAT_00016476 = (short)param_2[1];
+                                                        DAT_000164fe = (short)param_2[1];
                                                         force_ble_tx_gain((int)(char)param_2[2],
                                                                           (char)param_2[3]);
                                                         phy_printf("%s, 0x%x,0x%x,%d,%d\n",param_1,
@@ -517,7 +517,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                     iVar4 = strcmp(param_1,"print_ver");
                                                     if (iVar4 == 0) {
                                                       phy_printf("phy_version: %d.%d, %s, %s\n",0xb,
-                                                                 10,"Jul 24 2023","21:38:31");
+                                                                 10,"Jul 27 2023","10:43:28");
                                                     }
                                                     else {
                                                       iVar4 = strcmp(param_1,"init_print");
@@ -1394,11 +1394,27 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                       return 1;
                                                     }
                                                     iVar4 = strcmp(param_1,"rx_11b_opt");
+                                                    if (iVar4 == 0) {
+                                                      rx_11b_opt((char)*param_2);
+                                                      phy_printf("%s %d\n",param_1,*param_2);
+                                                      return 1;
+                                                    }
+                                                    iVar4 = strcmp(param_1,"phy_param_set");
                                                     if (iVar4 != 0) {
                                                       return 0;
                                                     }
-                                                    rx_11b_opt((char)*param_2);
-                                                    phy_printf("%s %d\n",param_1,*param_2);
+                                                    rc_cal_en = (char)*param_2;
+                                                    if (rc_cal_en == '\0') {
+                                                      _wifi_txband = 0xbe;
+                                                      _wifi_txband_ht40 = 0x19a;
+                                                    }
+                                                    else {
+                                                      _wifi_txband = (undefined2)param_2[1];
+                                                      _wifi_txband_ht40 = (undefined2)param_2[2];
+                                                    }
+                                                    phy_init();
+                                                    phy_printf("%s, %d %d %d\n",param_1,*param_2,
+                                                               set_rf_freq_offset,DAT_000181ba);
                                                     return 1;
                                                   }
                                                   iVar4 = 0;

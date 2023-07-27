@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
+ * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
+ * Upstream date: 2023-07-27 11:33:55 +0800
+ * Upstream subject: fix c3 ble tx bug
  * Source: librftest -> rf_test.o -> rfpll_cal_time
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,7 +49,7 @@ void rfpll_cal_time(uint param_1,int param_2)
       uVar3 = uVar3 + 1 & 0xff;
       phy_printf(&_LC29,iVar1 - iVar2);
     } while (uVar3 != (iVar5 + 5U & 0xff));
-                    /* WARNING: Could not recover jumptable at 0x000110c8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000110ca. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_g_phyFuns + 0x1bc))(0x62,1,1,7,0,iVar5);
     return;

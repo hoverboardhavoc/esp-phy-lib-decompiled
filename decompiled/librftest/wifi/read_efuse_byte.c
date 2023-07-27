@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
+ * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
+ * Upstream date: 2023-07-27 11:33:55 +0800
+ * Upstream subject: fix c3 ble tx bug
  * Source: librftest -> wifi.o -> read_efuse_byte
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,12 +49,12 @@ uint read_efuse_byte(int param_1,uint param_2,int param_3,uint param_4)
   else {
     if (uVar3 != 0x46) {
       uVar3 = 0;
-      goto _L516;
+      goto _L518;
     }
     puVar4 = (undefined1 *)0x6000881c;
   }
   uVar3 = *(uint *)(puVar4 + iVar1);
-_L516:
+_L518:
   uVar2 = 0;
   iVar1 = 1;
   do {
