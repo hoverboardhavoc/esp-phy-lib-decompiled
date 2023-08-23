@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit f4c28b6d72f6cdfcc377f56b2095c061e811e740
+ * https://github.com/espressif/esp-phy-lib/commit/f4c28b6d72f6cdfcc377f56b2095c061e811e740
+ * Upstream date: 2023-08-23 15:27:04 +0800
+ * Upstream subject: update h2 libphy for wakeup tx memory
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_gain_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,6 +16,10 @@ void bt_agc_gain_set(void)
 
 {
   _DAT_600a2854 = _DAT_600a2854 & 0xfffffe03 | 0xc9;
+  _DAT_600a2848 = _DAT_600a2848 & 0xffff;
+  _DAT_600a2868 = _DAT_600a2868 & 0xffff;
+  _DAT_600a2850 = _DAT_600a2850 & 0xffe03fff | 0x168000;
+  _DAT_600a2840 = _DAT_600a2840 & 0xffffff80 | 0x5a;
   return;
 }
 
