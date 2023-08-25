@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f4c28b6d72f6cdfcc377f56b2095c061e811e740
- * https://github.com/espressif/esp-phy-lib/commit/f4c28b6d72f6cdfcc377f56b2095c061e811e740
- * Upstream date: 2023-08-23 15:27:04 +0800
- * Upstream subject: update h2 libphy for wakeup tx memory
+ * Last changed at upstream commit 95c370089907f74805eac72975b0e85c62e175ed
+ * https://github.com/espressif/esp-phy-lib/commit/95c370089907f74805eac72975b0e85c62e175ed
+ * Upstream date: 2023-08-25 17:58:43 +0800
+ * Upstream subject: fix h2 wakeup rx_freq_offset
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  phy_printf("libbtbb version: %s, %s, %s\n","b821802","Aug 23 2023","10:32:46");
+  phy_printf("libbtbb version: %s, %s, %s\n","b821802","Aug 25 2023","18:47:24");
   return;
 }
 
