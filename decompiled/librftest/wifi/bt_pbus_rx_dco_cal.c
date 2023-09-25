@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> bt_pbus_rx_dco_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -81,7 +81,7 @@ void bt_pbus_rx_dco_cal(undefined4 param_1,ushort *param_2,undefined4 param_3,in
       if (iVar4 < iVar11) {
         uVar8 = uVar9 + 8 & 0xff;
       }
-      iVar11 = (int)(short)((int)((uint)(byte)(&_LANCHOR16)[uVar2] * iStack_4c * 6) >>
+      iVar11 = (int)(short)((int)((uint)(byte)(&_LANCHOR7)[uVar2] * iStack_4c * 6) >>
                            (uVar8 + 2 & 0x1f));
       if ((iVar11 == 0) && (iVar11 = 1, iStack_4c < 1)) {
         iVar11 = -1;
@@ -96,7 +96,7 @@ void bt_pbus_rx_dco_cal(undefined4 param_1,ushort *param_2,undefined4 param_3,in
       if (iVar4 < iVar10) {
         uVar8 = uVar8 + 1 & 0xff;
       }
-      iVar10 = (int)(short)((int)((uint)(byte)(&_LANCHOR16)[uVar2] * iStack_48 * 6) >>
+      iVar10 = (int)(short)((int)((uint)(byte)(&_LANCHOR7)[uVar2] * iStack_48 * 6) >>
                            (uVar8 + 2 & 0x1f));
       if ((iVar10 == 0) && (iVar10 = 1, iStack_48 < 1)) {
         iVar10 = -1;
@@ -128,13 +128,13 @@ void bt_pbus_rx_dco_cal(undefined4 param_1,ushort *param_2,undefined4 param_3,in
   }
   else {
     phy_printf("stage %d: CGAIN=%d FGAIN=%d, (%d,%d) %d; ",1,uVar9,uVar2,iStack_4c,iStack_48,cVar1);
-    if (param_5 == 0) goto _L424;
+    if (param_5 == 0) goto _L437;
   }
   phy_printf(&_LC12);
   if (param_4 == 0) {
     return;
   }
-_L424:
+_L437:
   phy_printf(&_LC12);
   return;
 }

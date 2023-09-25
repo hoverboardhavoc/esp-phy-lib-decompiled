@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
  * Upstream date: 2023-09-25 15:20:47 +0800
  * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
- * Source: librftest -> wifi.o -> rf_cal_data_clear
+ * Source: librftest -> wifi.o -> txon_set.part.7
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,19 +12,10 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void rf_cal_data_clear(void)
+void txon_set_part_7(void)
 
 {
-  undefined4 *puVar1;
-  
-  puVar1 = (undefined4 *)&phy_param;
-  do {
-    *puVar1 = 0;
-    puVar1 = puVar1 + 1;
-  } while (puVar1 != (undefined4 *)0x18378);
-  _DAT_60008034 = _DAT_60008034 & 0x7ffffff;
-  _DAT_60008000 = _DAT_60008000 & 0xffffff7f;
-  _DAT_6002609c = 0;
+  _DAT_60006110 = _DAT_60006110 & 0xfffffcff | 0x3e00;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librfate -> ate_test.o -> get_inernal_vol
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ void get_inernal_vol(undefined4 param_1,undefined4 param_2,undefined4 param_3,un
   } while (uVar4 != 4);
   (**(code **)(_g_phyFuns + 0x1bc))
             (param_1,1,param_2,param_3,param_4,0,*(code **)(_g_phyFuns + 0x1bc));
-                    /* WARNING: Could not recover jumptable at 0x00010fea. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010f38. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_g_phyFuns + 0x1bc))(param_1,1,param_6,param_7,param_8,0);
   return;

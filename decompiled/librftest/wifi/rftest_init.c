@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> rftest_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void rftest_init(void)
 
 {
   phy_printf("rftest_init  start\n");
-  phy_param = 1;
+  DAT_00018266 = 1;
   open_pwr_domain();
   phy_get_romfunc_addr();
   _DAT_60026014 = 0xffffffff;
@@ -29,7 +29,7 @@ void rftest_init(void)
   rftest_optimize();
   esp_origin_mac();
   (**(code **)(_g_phyFuns + 0x170))(1,*(code **)(_g_phyFuns + 0x170));
-  phy_printf("*RFTestBIN %d, Ver.%d\n",0x73,chip_eco_ver);
+  phy_printf("*RFTestBIN %d, Ver.%d\n",0x74,DAT_0001836c);
   return;
 }
 

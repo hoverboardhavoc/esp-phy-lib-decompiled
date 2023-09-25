@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> esp_set_bt_correct
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ void esp_set_bt_correct(int param_1,undefined4 param_2)
   rom1_bt_set_tx_gain(0);
   bt_txpwr_freq(&phy_param);
   phy_printf("offset:%d,atten:%d,cal_power:%d\n",param_2,(int)(&DAT_000181c9)[param_1],
-             (int)(char)tx_cap_init);
+             (int)(char)set_rx_gain_table);
   DAT_000181c9 = local_18[0];
   DAT_000181ca = local_18[1];
   DAT_000181cb = local_18[2];

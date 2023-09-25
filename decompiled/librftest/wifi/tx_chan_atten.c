@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> tx_chan_atten
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ void tx_chan_atten(void)
   do {
     pbVar3 = local_30 + iVar4;
     iVar4 = iVar4 + 1;
-    phy_printf(&_LC49,(int)(char)*pbVar3);
+    phy_printf(&_LC47,(int)(char)*pbVar3);
   } while (iVar4 != 0xe);
   return;
 }

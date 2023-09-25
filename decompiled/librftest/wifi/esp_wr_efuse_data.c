@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> esp_wr_efuse_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,8 +41,8 @@ void esp_wr_efuse_data(int param_1)
   
   memset(&local_60,0,0x20);
   memset(local_40,0,0x20);
-  local_60 = gpio_output_set;
-  if (((byte)gpio_output_set & 0xf) == 1) {
+  local_60 = bt_bb_tx_cca_set;
+  if (((byte)bt_bb_tx_cca_set & 0xf) == 1) {
     abStack_5f[0] = DAT_00018255;
     puVar6 = &phy_param;
     puVar11 = &phy_param;
@@ -53,7 +53,7 @@ void esp_wr_efuse_data(int param_1)
       puVar4[2] = *puVar1;
       puVar4 = puVar4 + 1;
     } while (puVar11 != &DAT_00018056);
-    uStack_54 = _ESP_TEST_GPIO;
+    uStack_54 = _bt_tx_tone;
     puVar4 = &local_60;
     do {
       puVar11 = puVar6 + 0x158;
@@ -62,8 +62,8 @@ void esp_wr_efuse_data(int param_1)
       puVar4 = puVar4 + 1;
     } while (puVar6 != (undefined *)0x18059);
   }
-  if (((byte)gpio_output_set & 0xf0) == 0x10) {
-    uStack_58 = tx_cap_init;
+  if (((byte)bt_bb_tx_cca_set & 0xf0) == 0x10) {
+    uStack_58 = set_rx_gain_table;
     uStack_57 = DAT_000181c9;
     uStack_56 = _DAT_000181ca;
     uStack_52 = _DAT_0001825e;

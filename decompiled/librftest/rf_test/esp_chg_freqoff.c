@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> rf_test.o -> esp_chg_freqoff
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,11 +30,11 @@ void esp_chg_freqoff(int param_1,undefined4 param_2)
     pcVar3 = pcVar3 + 1;
   } while (iVar4 != 0x80);
   uVar1 = esp_crc8(&init_param_default,0x7f);
-  if (DAT_000120eb == uVar1) {
+  if (DAT_000120e3 == uVar1) {
     uVar1 = (param_1 * -0x9b4) / 1000 + 4 >> 3;
-    DAT_000120b8 = (undefined1)uVar1;
-    DAT_000120b7 = (uVar1 & 0xff) != 0;
-    DAT_000120eb = esp_crc8(&init_param_default,0x7f);
+    DAT_000120b0 = (undefined1)uVar1;
+    DAT_000120af = (uVar1 & 0xff) != 0;
+    DAT_000120e3 = esp_crc8(&init_param_default,0x7f);
     register_chipv7_phy_init_param(&init_param_default);
     chip_v7_set_chan_offset(0);
     iVar4 = 0;
@@ -55,7 +55,7 @@ void esp_chg_freqoff(int param_1,undefined4 param_2)
       }
       iVar4 = iVar4 + 1;
     } while (iVar4 != 0x90);
-    phy_printf("esp_chg_freqoff ok, %dppm, %d, %d, 0x%x\n",param_1,DAT_000120b7,DAT_000120b8,param_2
+    phy_printf("esp_chg_freqoff ok, %dppm, %d, %d, 0x%x\n",param_1,DAT_000120af,DAT_000120b0,param_2
               );
   }
   else {

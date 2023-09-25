@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> burnin_test_func
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,11 +60,11 @@ void burnin_test_func(void)
     _DAT_60033c40 = _DAT_60033c40 | 0x81;
     *puVar4 = *puVar4 | 0xc0000000;
     do {
-      if ((_DAT_60033c3c & 0x80) != 0) goto _L199;
+      if ((_DAT_60033c3c & 0x80) != 0) goto _L187;
     } while ((uint)(_DAT_60035000 - iVar1) < 400000);
     iVar5 = 1;
     bStack_43 = bStack_43 + 1;
-_L199:
+_L187:
     if (_DAT_60033c68 >> 0x1c != 0) {
       phy_printf("0x%x\n",_DAT_60033c68);
     }

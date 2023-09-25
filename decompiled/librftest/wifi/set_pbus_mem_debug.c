@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> set_pbus_mem_debug
  *
  * (C) Espressif, Apache License 2.0.
@@ -79,7 +79,7 @@ void set_pbus_mem_debug(int param_1,int param_2,int param_3,int param_4,int para
   iVar1 = 0;
   uVar4 = 0;
   puVar6 = (uint *)&DAT_600060e0;
-_L281:
+_L294:
   uVar5 = uVar4 + iVar7;
   *puVar6 = (((uVar5 - 1) * 0x100 | uVar4) & 0xffff) << iVar3 | ~(0xffff << iVar3) & *puVar6;
   iVar3 = 0;
@@ -109,7 +109,7 @@ _L281:
     iVar3 = 0x10;
     iVar1 = iVar2;
     puVar6 = (uint *)&DAT_600060e0;
-    goto _L281;
+    goto _L294;
   case 1:
     puVar8 = auStack_90 + 4;
     iVar7 = 8;
@@ -124,60 +124,60 @@ _L281:
     puVar8 = auStack_ac;
     iVar7 = 3;
     iVar3 = 0;
-    goto _L303;
+    goto _L316;
   case 4:
     puVar8 = auStack_c4;
     iVar7 = 2;
     iVar3 = 0x10;
-_L303:
+_L316:
     iVar1 = iVar2;
     puVar6 = (uint *)&DAT_600060e8;
-    goto _L281;
+    goto _L294;
   case 5:
     puVar8 = auStack_90;
     iVar7 = 4;
     iVar3 = 0;
     iVar1 = iVar2;
     puVar6 = (uint *)0x600060ec;
-    goto _L281;
+    goto _L294;
   case 6:
     puVar8 = auStack_c4 + 2;
     iVar7 = 2;
     iVar3 = 0x10;
     iVar1 = iVar2;
     puVar6 = (uint *)0x600060ec;
-    goto _L281;
+    goto _L294;
   case 7:
     puVar8 = auStack_90 + 0xc;
     iVar7 = 8;
     iVar3 = 0;
     iVar1 = iVar2;
     puVar6 = (uint *)0x600060f0;
-    goto _L281;
+    goto _L294;
   case 8:
     puVar8 = &uStack_b4;
     iVar7 = 2;
     iVar3 = 0x10;
     iVar1 = iVar2;
     puVar6 = (uint *)0x600060f0;
-    goto _L281;
+    goto _L294;
   case 9:
     puVar8 = auStack_ac;
     iVar7 = 3;
     iVar3 = 0;
     iVar1 = iVar2;
-    goto _L281;
+    goto _L294;
   default:
-    goto _L282;
+    goto _L295;
   }
   iVar1 = iVar2;
   puVar6 = (uint *)&DAT_600060e4;
-  goto _L281;
-_L282:
+  goto _L294;
+_L295:
   puVar8 = auStack_c4;
   iVar7 = 2;
   iVar3 = 0x10;
   iVar1 = iVar2;
-  goto _L281;
+  goto _L294;
 }
 

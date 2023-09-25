@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> bt_testmode_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void bt_testmode_init(void)
   bt_bb_v2_init_cmplx(1);
   bt_bb_tx_cca_set(0,0xd8,1,3,0,0,0,0);
   rf_rw_v9_le_init();
-  phy_printf("LE autotest version: %s, %s, %s\n","9138a4c","Jul 27 2023","10:43:42");
+  phy_printf("LE autotest version: %s, %s, %s\n","9138a4c","Sep  5 2023","11:09:53");
   return;
 }
 

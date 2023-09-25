@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> rf_test.o -> wifitxout_func
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,8 +41,8 @@ void wifitxout_func(uint *param_1,int param_2)
     _DAT_6001c400 = _DAT_6001c400 & 0xffff9fff | 0x2000;
     uVar2 = uVar2 & 3;
   }
-  else if (rc_cal_en == '\0') {
-    tx_cont_cfg(1);
+  else {
+    tx_cont_cfg(phy_param == '\0');
   }
   remove_11b_4p8G_spur(1,2,0x1e);
   target_power_backoff(iVar5);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> force_tx_gain
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,7 +37,7 @@ void force_tx_gain(undefined4 param_1,undefined4 param_2,undefined4 param_3,int 
   else {
     DAT_000180e9 = 0;
     phy_tx_pwr_track_en = 1;
-    rom1_wifi_set_tx_gain(DAT_00018242,1);
+    ram1_wifi_set_tx_gain(DAT_00018242,1);
   }
   force_ble_tx_gain(param_1,param_2,param_3,param_4);
   return;

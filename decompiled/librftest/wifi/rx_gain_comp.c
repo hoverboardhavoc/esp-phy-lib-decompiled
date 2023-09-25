@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> rx_gain_comp
  *
  * (C) Espressif, Apache License 2.0.
@@ -52,7 +52,7 @@ void rx_gain_comp(void)
   do {
     uVar2 = *puVar3;
     puVar3 = puVar3 + 1;
-    phy_printf(&_LC49,uVar2);
+    phy_printf(&_LC47,uVar2);
   } while ((undefined4 *)&stack0xffffffe0 != puVar3);
   return;
 }

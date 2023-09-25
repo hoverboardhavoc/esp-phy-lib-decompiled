@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> dc_iq_est_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,7 +46,7 @@ void dc_iq_est_test(int param_1,int *param_2,int *param_3)
   iVar2 = (**(code **)(_g_phyFuns + 0x118))(iVar4,0,*(code **)(_g_phyFuns + 0x118));
   iVar1 = _g_phyFuns;
   param_3[2] = iVar2;
-                    /* WARNING: Could not recover jumptable at 0x00012910. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00012aa0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(iVar1 + 0x108))();
   return;

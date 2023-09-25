@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> rf_test.o -> ESP_TEST_GPIO
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,7 +60,7 @@ void ESP_TEST_GPIO(int *param_1,int param_2)
               else {
                 phy_printf("gpio setting error!\n");
               }
-              goto _L156;
+              goto _L159;
             }
             uVar5 = 3;
             uVar4 = 1;
@@ -68,7 +68,7 @@ void ESP_TEST_GPIO(int *param_1,int param_2)
           dig_gpio_out(uVar4,uVar5);
         }
       }
-_L156:
+_L159:
       uVar2 = uVar2 + 1;
     } while (uVar2 != 0x10);
     uVar10 = uVar10 + 0x10;

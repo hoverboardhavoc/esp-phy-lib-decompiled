@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> txpwr_backoff_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,10 +27,10 @@ void txpwr_backoff_test(void)
     chip_v7_set_chan((int)cVar2,0);
     txcal_debuge_mode();
     iVar3 = tx_pwr_backoff(&phy_param,&cStack_35,
-                           (int)(((byte)force_iq_set + 0x28) * 0x1000000) >> 0x18,0);
+                           (int)(((byte)txiq_cal_init + 0x28) * 0x1000000) >> 0x18,0);
     if ((iVar3 != 0) || (uVar1 = 0, cStack_35 != '\x01')) {
       iVar4 = tx_pwr_backoff(&phy_param,&cStack_35,
-                             (int)(((byte)force_iq_set + 0x28) * 0x1000000) >> 0x18,0);
+                             (int)(((byte)txiq_cal_init + 0x28) * 0x1000000) >> 0x18,0);
       if ((iVar4 == 0) && (cStack_35 == '\x01')) {
         uVar1 = 0;
       }

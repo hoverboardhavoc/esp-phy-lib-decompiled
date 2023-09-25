@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> rx_chan_noise_all
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,11 +57,11 @@ void rx_chan_noise_all(void)
     iVar8 = (int)(short)iVar2;
     psVar10 = psVar10 + 1;
   } while (cVar5 != '\x0e');
-  phy_printf(&_LC49,iVar8);
+  phy_printf(&_LC47,iVar8);
   do {
     sVar1 = *psVar3;
     psVar3 = psVar3 + 1;
-    phy_printf(&_LC49,(int)sVar1);
+    phy_printf(&_LC47,(int)sVar1);
   } while (psVar3 != asStack_30);
   return;
 }

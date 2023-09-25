@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> rf_test.o -> RF_init_ram_sel
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,8 +42,8 @@ void RF_init_ram_sel(int param_1,undefined4 param_2)
   else {
     read_ram_init_para(param_2,&init_param_default);
     uVar1 = esp_crc8(&init_param_default,0x7f);
-    phy_printf("crc8_init:0x%x,0x%x\n",DAT_000120eb,(int)(char)uVar1);
-    if (DAT_000120eb != uVar1) {
+    phy_printf("crc8_init:0x%x,0x%x\n",DAT_000120e3,(int)(char)uVar1);
+    if (DAT_000120e3 != uVar1) {
       phy_printf("esp init data is from flash,init bin crc error! err_code=%d\n",1);
       return;
     }
@@ -52,8 +52,8 @@ void RF_init_ram_sel(int param_1,undefined4 param_2)
   register_chipv7_phy_init_param(&init_param_default);
   phy_init();
   phy_printf("v=%d,c=%d, p=%d,%d,%d,%d,%d,%d, %d,%d,%d,%d,%d,%d,%d,%d,fcc=%d freq=%d,%d,crc=%d\n",
-             init_param_default,DAT_0001206d,DAT_0001206e,DAT_0001206f,read_flash_init_para,
-             DAT_00012071,DAT_00012072);
+             init_param_default,DAT_00012065,DAT_00012066,DAT_00012067,read_flash_init_para,
+             DAT_00012069,DAT_0001206a);
   return;
 }
 

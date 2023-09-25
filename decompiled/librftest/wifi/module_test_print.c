@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> module_test_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,91 +19,90 @@ void module_test_print(void)
   code *pcVar2;
   code *pcVar3;
   code *pcVar4;
-  undefined4 uVar5;
+  code *pcVar5;
   code *pcVar6;
-  code *pcVar7;
   char cStack_3c;
   char cStack_3b;
   undefined2 uStack_38;
   undefined2 uStack_36;
   
+  pcVar5 = (code *)&phy_param;
   phy_version_print();
   phy_printf("vdd33=%d;\n",_DAT_00018252);
   phy_printf("TXIQ, ");
-  get_iq_value(&cStack_3c,_get_rx_buffer1,0);
+  get_iq_value(&cStack_3c,_phy_get_vdd33,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   get_iq_value(&cStack_3c,_DAT_0001819e,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   phy_printf(&_LC12);
   pcVar6 = (code *)&phy_param;
-  pcVar7 = (code *)&phy_param;
   phy_printf("TXDC, ");
   do {
-    pcVar1 = pcVar7 + 0x12a;
-    pcVar2 = pcVar7 + 0x128;
-    pcVar3 = pcVar7 + 0x126;
-    pcVar4 = pcVar7 + 0x124;
-    pcVar7 = pcVar7 + 8;
+    pcVar1 = pcVar6 + 0x12a;
+    pcVar2 = pcVar6 + 0x128;
+    pcVar3 = pcVar6 + 0x126;
+    pcVar4 = pcVar6 + 0x124;
+    pcVar6 = pcVar6 + 8;
     phy_printf("%d, %d, %d, %d; ",*(undefined2 *)pcVar4,*(undefined2 *)pcVar3,*(undefined2 *)pcVar2,
                *(undefined2 *)pcVar1);
-  } while (pcVar7 != phy_get_rf_cal_version);
+  } while (pcVar6 != bt_txpwr_freq);
   phy_printf(&_LC12);
   phy_printf("BT_TXIQ, ");
-  get_iq_value(&cStack_3c,_txpwr_offset,0);
+  get_iq_value(&cStack_3c,_meas_tone_pwr_db,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   phy_printf(&_LC12);
   phy_printf("BT_TXDC, ");
+  pcVar6 = pcVar5;
   do {
-    pcVar7 = pcVar6 + 0x188;
-    pcVar1 = pcVar6 + 0x186;
-    pcVar2 = pcVar6 + 0x184;
-    pcVar3 = pcVar6 + 0x182;
+    pcVar1 = pcVar6 + 0x188;
+    pcVar2 = pcVar6 + 0x186;
+    pcVar3 = pcVar6 + 0x184;
+    pcVar4 = pcVar6 + 0x182;
     pcVar6 = pcVar6 + 8;
-    phy_printf("%d, %d, %d, %d; ",*(undefined2 *)pcVar3,*(undefined2 *)pcVar2,*(undefined2 *)pcVar1,
-               *(undefined2 *)pcVar7);
-  } while (pcVar6 != esp_rom_spiflash_write);
+    phy_printf("%d, %d, %d, %d; ",*(undefined2 *)pcVar4,*(undefined2 *)pcVar3,*(undefined2 *)pcVar2,
+               *(undefined2 *)pcVar1);
+  } while (pcVar6 != rf_cal_data_backup);
   phy_printf(&_LC12);
   phy_printf("RXIQ, ");
-  get_iq_value(&cStack_3c,_test_txtone_pwr,1);
+  get_iq_value(&cStack_3c,_set_rf_freq_offset,1);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   get_iq_value(&cStack_3c,_DAT_000181a2,1);
-  pcVar7 = (code *)&phy_rxrf_dc;
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   phy_printf(&_LC12);
   phy_printf("RXDC_RFRX_BT, ");
-  pcVar6 = (code *)&phy_rxrf_dc;
+  pcVar6 = pcVar5;
   do {
-    uVar5 = *(undefined4 *)pcVar6;
+    pcVar1 = pcVar6 + 0x2c4;
     pcVar6 = pcVar6 + 4;
-    get_dc_value(&uStack_38,uVar5);
+    get_dc_value(&uStack_38,*(undefined4 *)pcVar1);
     phy_printf("%d, %d; ",uStack_38,uStack_36);
-  } while (pcVar6 != phy_rfcal_data_check);
+  } while (pcVar6 != rom1_bt_set_tx_gain);
   phy_printf(&_LC12);
   phy_printf("RXDC_RFRX_WIFI, ");
+  pcVar6 = pcVar5;
   do {
-    pcVar6 = pcVar7 + 0x24;
-    pcVar7 = pcVar7 + 4;
-    get_dc_value(&uStack_38,*(undefined4 *)pcVar6);
-    phy_printf("%d, %d; ",uStack_38,uStack_36);
-  } while (pcVar7 != phy_rfcal_data_check);
-  phy_printf(&_LC12);
-  pcVar6 = (code *)&phy_rxbb_dc;
-  phy_printf("RXDC_RXBB_WIFI, ");
-  do {
-    uVar5 = *(undefined4 *)pcVar6;
+    pcVar1 = pcVar6 + 0x2e8;
     pcVar6 = pcVar6 + 4;
-    get_dc_value(&uStack_38,uVar5);
+    get_dc_value(&uStack_38,*(undefined4 *)pcVar1);
+    phy_printf("%d, %d; ",uStack_38,uStack_36);
+  } while (pcVar6 != rom1_bt_set_tx_gain);
+  phy_printf(&_LC12);
+  phy_printf("RXDC_RXBB_WIFI, ");
+  pcVar6 = pcVar5;
+  do {
+    pcVar1 = pcVar6 + 0x30c;
+    pcVar6 = pcVar6 + 4;
+    get_dc_value(&uStack_38,*(undefined4 *)pcVar1);
     phy_printf("%d, %d; ",uStack_38,uStack_36);
   } while (pcVar6 != register_chipv7_phy);
   phy_printf(&_LC12);
-  pcVar6 = (code *)&phy_chan_dc;
   phy_printf("RXDC_CHAN_WIFI, ");
   do {
-    uVar5 = *(undefined4 *)pcVar6;
-    pcVar6 = pcVar6 + 4;
-    get_dc_value(&uStack_38,uVar5);
+    pcVar6 = pcVar5 + 0x21c;
+    pcVar5 = pcVar5 + 4;
+    get_dc_value(&uStack_38,*(undefined4 *)pcVar6);
     phy_printf("%d, %d; ",uStack_38,uStack_36);
-  } while (pcVar6 != tx_pwctrl_background);
+  } while (pcVar5 != phy_set_freq);
   phy_printf(&_LC12);
   return;
 }

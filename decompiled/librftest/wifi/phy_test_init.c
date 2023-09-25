@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> phy_test_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void phy_test_init(void)
   phy_get_romfunc_addr();
   _DAT_60026014 = 0xffffffff;
   phy_init();
-  phy_printf("phy_test_init done: %d, %s, %s, %s\n",0xb,"9c20f0a","Jul 27 2023","10:43:28");
+  phy_printf("phy_test_init done: %d, %s, %s, %s\n",0xb,"b4e4b80","Sep  5 2023","11:09:46");
   return;
 }
 

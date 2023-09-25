@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> phy_test.o -> phy_2480m_opt
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,12 +50,12 @@ void phy_2480m_opt(int param_1)
     uVar3 = 3;
   }
   (**(code **)(_g_phyFuns + 0x1bc))(0x66,0,4,3,2,uVar3,*(code **)(_g_phyFuns + 0x1bc));
-  phy_bbpll_i2c = (**(code **)(_g_phyFuns + 0x1ac))(0x66,0,4,*(code **)(_g_phyFuns + 0x1ac));
+  DAT_00011335 = (**(code **)(_g_phyFuns + 0x1ac))(0x66,0,4,*(code **)(_g_phyFuns + 0x1ac));
   if (param_1 != 0) {
     phy_printf("%d,%d,%d\n",uVar3,uVar4,uVar1);
   }
   _DAT_6001c02c = _DAT_6001c02c & 0xff7fffff;
-  chip_v7_set_chan((int)DAT_0001120e,(int)DAT_00011210);
+  chip_v7_set_chan((int)DAT_0001120a,(int)DAT_0001120c);
   return;
 }
 

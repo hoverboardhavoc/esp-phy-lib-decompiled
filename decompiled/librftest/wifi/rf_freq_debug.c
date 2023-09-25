@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7bdaf7da843d762451b59947318cd2c6cf733855
- * https://github.com/espressif/esp-phy-lib/commit/7bdaf7da843d762451b59947318cd2c6cf733855
- * Upstream date: 2023-07-27 11:33:55 +0800
- * Upstream subject: fix c3 ble tx bug
+ * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
+ * Upstream date: 2023-09-25 15:20:47 +0800
+ * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
  * Source: librftest -> wifi.o -> rf_freq_debug
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x0001338c) */
+/* WARNING: Removing unreachable block (ram,0x00013520) */
 /* WARNING: Removing unreachable block (ram,0x00010000) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -27,16 +27,16 @@ void rf_freq_debug(undefined4 param_1,undefined4 param_2,undefined4 param_3,uint
              param_3,param_4,param_5,param_6,param_7);
   start_tx_tone_step(1,0x20,0x3c,0,0,0);
   if ((param_6 & 1) != 0) {
-    txon_set_part_9();
+    txon_set_part_7();
   }
   for (uVar1 = 0; uVar1 != param_4; uVar1 = uVar1 + 1 & 0xffff) {
     if ((param_6 & 2) != 0) {
-      txon_set_part_9();
+      txon_set_part_7();
     }
     if ((param_5 & 1) != 0) {
       set_chan_freq_sub(param_1);
       if ((param_6 & 4) != 0) {
-        txon_set_part_9();
+        txon_set_part_7();
       }
       ets_delay_us(param_3);
     }
