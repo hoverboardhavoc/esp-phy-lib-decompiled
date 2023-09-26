@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode.o -> rw_le_init_cs
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,52 +10,41 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
 
-void rw_le_init_cs(uint param_1,uint param_2,uint param_3,uint param_4,uint param_5,uint param_6,
-                  int param_7,uint param_8)
+void rw_le_init_cs(undefined8 *param_1,int param_2,undefined4 param_3)
 
 {
-  uint in_stack_00000000;
-  uint in_stack_00000004;
-  uint in_stack_00000008;
-  uint in_stack_0000000c;
-  uint in_stack_00000010;
-  uint in_stack_00000014;
-  int in_stack_00000018;
+  undefined4 in_t0;
+  undefined4 in_t1;
+  undefined4 unaff_s0;
+  undefined4 unaff_s8;
+  undefined8 unaff_fs0;
+  int in_stack_0000004c;
   
-  _DAT_3ffb021c = 0xffffffff;
-  _DAT_3ffb0224 = 0;
-  _DAT_3ffb0228 = 0;
-  _DAT_3ffb022c = 0;
-  _DAT_3ffb0230 = 0;
-  _DAT_3ffb0234 = 0;
-  _DAT_3ffb0238 = 0;
-  _DAT_3ffb023c = 0;
-  _DAT_3ffb0240 = 0;
-  _DAT_3ffb0244 = 0;
-  _DAT_3ffb0248 = 0;
-  _DAT_3ffb024c = 0;
-  _DAT_3ffb0250 = 0;
-  _DAT_3ffb0254 = 0;
-  _DAT_3ffb0258 = 0;
-  _DAT_3ffb025c = 0;
-  _DAT_3ffb0260 = 0;
-  _DAT_3ffb026c = 0;
-  _DAT_3ffb0200 = param_1 & 0x1f;
-  _DAT_3ffb0204 = param_2 << 0x10;
-  _DAT_3ffb0208 = param_2 >> 0x10 | param_3 << 0x10;
-  _DAT_3ffb020c =
-       (param_6 & 1) << 0x12 |
-       (param_5 & 1) << 0x11 | (param_4 & 1) << 0x10 | param_3 >> 0x10 & 0xff | param_7 << 0x18;
-  _DAT_3ffb0210 =
-       (in_stack_00000008 & 0xff) << 0x10 |
-       (in_stack_00000004 & 1) << 0xf | (in_stack_00000000 & 0x1f) << 8 | param_8 & 0x3f;
-  _DAT_3ffb0214 =
-       (in_stack_00000014 & 0x7fff) << 0x10 |
-       (in_stack_0000000c & 1) << 0xf | in_stack_00000010 & 0x3fff;
-  _DAT_3ffb0218 = in_stack_00000018 << 0x10;
-  _DAT_3ffb0220 = 0xc8251f;
-  return;
+  *param_1 = unaff_fs0;
+  if (param_2 != 0) {
+    custom3.rs1.rs2(param_3,gp);
+    custom3.rs1.rs2(unaff_s8,gp);
+    custom3.rs1.rs2(0,tp);
+    custom3.rs1.rs2(unaff_s0,tp);
+    custom3.rs1.rs2(param_3,tp);
+    custom3.rs1.rs2(unaff_s8,tp);
+    custom3.rs1.rs2(0,in_t0);
+    custom3.rs1.rs2(unaff_s0,in_t0);
+    custom3.rs1.rs2(param_3,in_t0);
+    custom3.rs1.rs2(unaff_s8,in_t0);
+    custom3.rs1.rs2(0,in_t1);
+    custom3.rs1.rs2(unaff_s8,in_t1);
+    custom3.rs1.rs2(0,0);
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  if (in_stack_0000004c != -0x10) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> phy_test.o -> force_txon_mode
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,25 +12,37 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void force_txon_mode(int param_1,int param_2,int param_3)
+void force_txon_mode(uint param_1,uint param_2,uint param_3)
 
 {
-  uint uVar1;
+  int iVar1;
+  uint uVar2;
   
-  uVar1 = 0x3000;
-  if (param_2 == 0) {
-    uVar1 = 0;
-  }
-  _DAT_60006110 = _DAT_60006110 & 0xffffcfff | uVar1;
+  iVar1 = _DAT_600a00c0;
   if (param_2 != 0) {
-    param_3 = param_3 + 0x10;
+    param_3 = param_3 + 0x20 & 0xff;
+    phy_dis_hw_set_freq();
+    _DAT_600af4b4 = param_2 & param_1 & 1 | _DAT_600af4b4 & 0xfffffffe;
+    uVar2 = 0x3000;
+    if (param_1 == 0) {
+      uVar2 = 0;
+    }
+    _DAT_600a0910 = _DAT_600a0910 & 0xffffcfff | uVar2;
+    ets_delay_us(1);
+    uVar2 = 0xc0000000;
+    if (param_1 == 0) {
+      uVar2 = 0;
+    }
+    _DAT_600a28a0 = _DAT_600a28a0 & 0x3fffffff | uVar2;
+    ets_delay_us(100);
+    if (-1 < iVar1 << 5) {
+      phy_en_hw_set_freq();
+    }
   }
-  _DAT_60006000 =
-       ((_DAT_60006000 >> 0x12 & 0xff) + param_3) * 0x400 & 0x3fc00 |
-       _DAT_60006000 & 0xfffc03fd | (uint)(param_1 != 0) << 1;
-                    /* WARNING: Could not recover jumptable at 0x000104f6. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 200))();
+  phy_force_pwr_index(param_1 != 0,param_3);
+  force_txon(0);
+  force_txon(param_1);
+  phy_param = (char)param_1;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> ble_chan_trans
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,24 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-uint ble_chan_trans(uint param_1)
+/* WARNING: Control flow encountered bad instruction data */
+
+void ble_chan_trans(void)
 
 {
-  if (param_1 == 0) {
-    return 0x25;
-  }
-  if (param_1 == 0xc) {
-    return 0x26;
-  }
-  if (param_1 != 0x27) {
-    if (param_1 < 0xc) {
-      return param_1 - 1;
-    }
-    if (param_1 < 0x27) {
-      return param_1 - 2;
-    }
-    param_1 = 0;
-  }
-  return param_1;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

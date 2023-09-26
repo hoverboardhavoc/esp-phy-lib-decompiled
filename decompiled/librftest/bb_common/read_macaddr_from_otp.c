@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> bb_common.o -> read_macaddr_from_otp
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,9 +18,9 @@ void read_macaddr_from_otp(undefined1 *param_1)
   undefined4 uVar1;
   undefined4 uVar2;
   
-  uVar2 = _DAT_60008848;
-  uVar1 = _DAT_60008844;
-  param_1[5] = (char)_DAT_60008844;
+  uVar2 = _DAT_600b0848;
+  uVar1 = _DAT_600b0844;
+  param_1[5] = (char)_DAT_600b0844;
   param_1[1] = (char)uVar2;
   param_1[2] = (char)((uint)uVar1 >> 0x18);
   param_1[3] = (char)((uint)uVar1 >> 0x10);

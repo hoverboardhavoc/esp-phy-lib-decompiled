@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> rx_chan_noise
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rx_chan_noise(char param_1)
+void rx_chan_noise(void)
 
 {
   char cVar1;
@@ -18,13 +18,13 @@ void rx_chan_noise(char param_1)
   int iVar3;
   int iVar4;
   
-  chip_v7_set_chan((int)param_1,0);
+  chip_v7_set_chan(0);
   cVar2 = '\b';
   do {
     cVar1 = '\b';
     iVar4 = 0;
     do {
-      iVar3 = check_noise_floor1();
+      iVar3 = check_noise_floor();
       if (iVar4 < iVar3) {
         iVar3 = iVar4;
       }
@@ -33,7 +33,7 @@ void rx_chan_noise(char param_1)
     } while (cVar1 != '\0');
     cVar2 = cVar2 + -1;
   } while (cVar2 != '\0');
-  phy_printf(&_LC47);
+  phy_printf(&_LC28);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode.o -> rw_fill_scanrsp_buf
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,20 +10,22 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rw_fill_scanrsp_buf(int param_1)
+/* WARNING: Control flow encountered unimplemented instructions */
+
+void rw_fill_scanrsp_buf(undefined4 *param_1,int param_2,undefined4 param_3,undefined8 param_4)
 
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  undefined4 unaff_s0;
+  int unaff_s1;
+  undefined4 in_ft11;
+  int in_stack_0000004c;
   
-  iVar3 = 0;
-  do {
-    puVar1 = (undefined4 *)((int)&SCAN_RSP_payload + iVar3);
-    puVar2 = (undefined4 *)(param_1 + iVar3);
-    iVar3 = iVar3 + 4;
-    *puVar2 = *puVar1;
-  } while (iVar3 != 0x14);
-  return;
+  *param_1 = unaff_s0;
+  *(undefined4 *)(in_stack_0000004c + 0xfc) = in_ft11;
+  *(undefined4 *)(param_2 + 0x10) = param_1[0xc];
+  *(undefined8 *)(unaff_s1 + 0x70) = param_4;
+  custom0.rs1(param_3);
+                    /* WARNING: Unimplemented instruction - Truncating control flow here */
+  halt_unimplemented();
 }
 

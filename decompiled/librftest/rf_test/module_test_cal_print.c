@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> rf_test.o -> module_test_cal_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,20 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void module_test_cal_print(void)
 
 {
+  undefined1 uStack_18;
+  undefined1 uStack_17;
+  undefined1 uStack_16;
+  undefined1 uStack_15;
+  undefined1 uStack_14;
+  undefined1 uStack_13;
+  
   phy_cal_print();
-  phy_printf("mac_addr:%02x:%02x:%02x:%02x:%02x:%02x\n",_DAT_60008848 >> 8 & 0xff,
-             _DAT_60008848 & 0xff,_DAT_60008844 >> 0x18,_DAT_60008844 >> 0x10 & 0xff,
-             _DAT_60008844 >> 8 & 0xff,_DAT_60008844 & 0xff);
+  phy_get_mac_addr(&uStack_18);
+  phy_printf("mac_addr:%02x:%02x:%02x:%02x:%02x:%02x\n",uStack_18,uStack_17,uStack_16,uStack_15,
+             uStack_14,uStack_13);
   return;
 }
 

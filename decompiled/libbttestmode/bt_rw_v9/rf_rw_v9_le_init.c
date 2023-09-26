@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_v9.o -> rf_rw_v9_le_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,28 +10,25 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
 
-void rf_rw_v9_le_init(void)
+void rf_rw_v9_le_init(undefined8 *param_1,int param_2,int param_3,undefined8 param_4)
 
 {
-  _DAT_60011050 = _DAT_60011050 & 0xfffff800 | 0x2d0;
-  _DAT_60031080 = _DAT_60031080 & 0xff00 | 0xa640064;
-  _DAT_60031084 = _DAT_60031084 & 0xff00ff00 | 0x640064;
-  _DAT_60031088 = _DAT_60031088 & 0xff00ff00 | 0x640064;
-  _DAT_6003108c = _DAT_6003108c & 0xff00ff00 | 0x640064;
-  _DAT_60031000 = _DAT_60031000 | 0x400f;
-  _DAT_600310e0 = _DAT_600310e0 & 0xfc00fe00 | 0x19000fa;
-  _DAT_60031070 = 0;
-  _DAT_60031074 = _DAT_60031074 & 0xffffdfff | 0x1020;
-  _DAT_60031078 = 0xc8c10100;
-  _DAT_60031090 = 0x20202;
-  _DAT_60031094 = 0x20202;
-  _DAT_60031098 = 0xf320202;
-  _DAT_6003109c = 0xf320202;
-  _DAT_600312c4 = _DAT_600312c4 | 1;
-  _DAT_60031204 = 0x34000;
-  _DAT_60031208 = _DAT_60031208 | 0xfffc0000;
-  return;
+  undefined4 unaff_s0;
+  undefined8 in_ft0;
+  undefined8 unaff_fs0;
+  int in_stack_0000004c;
+  
+  *param_1 = unaff_fs0;
+  *(undefined8 *)(param_3 + 0x3c) = param_4;
+  *(undefined8 *)(in_stack_0000004c + 0x50) = in_ft0;
+  *(undefined4 *)unaff_s0 = unaff_s0;
+  if (param_2 != 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

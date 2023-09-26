@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> set_tx_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,23 +12,21 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void set_tx_power(undefined4 param_1,int param_2)
+void set_tx_power(undefined4 param_1)
 
 {
-  undefined *puVar1;
+  char local_b0 [32];
+  undefined2 auStack_90 [32];
+  undefined2 auStack_50 [34];
   
-  if (param_2 == 0) {
-    puVar1 = &phy_param;
-    do {
-      puVar1[0xf4] = (char)param_1;
-      puVar1 = puVar1 + 1;
-    } while (puVar1 != &DAT_0001805e);
-  }
-  else {
-    register_chipv7_phy_init_param(init_param_default);
-  }
-  ram1_wifi_set_tx_gain(DAT_00018242,0);
-  phy_printf("0x%x,0x%x,%d,%d\n",gpio_output_set,_esp_txrx_test,(int)DAT_0001820a,param_1);
+  DAT_0001701b = 1;
+  DAT_00017137 = (char)param_1 + -0x50;
+  wifi_get_tx_tab(_esp_rx_func,local_b0,auStack_90,auStack_50,0);
+  wifi_set_tx_gain(_esp_rx_func,0);
+  force_tx_gain(auStack_50[0],auStack_90[0],(int)local_b0[0]);
+  DAT_00017137 = 0;
+  DAT_0001701b = 0;
+  phy_printf("%d,0x%x,0x%x,%d\n",param_1,auStack_50[0],auStack_90[0],(int)local_b0[0]);
   return;
 }
 

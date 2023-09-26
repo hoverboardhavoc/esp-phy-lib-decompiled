@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> phy_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,17 +15,12 @@
 void phy_init(void)
 
 {
-  undefined4 uVar1;
-  undefined1 auStack_778 [1904];
+  undefined1 auStack_778 [1908];
   
-  _phy_get_most_tpw = 0;
-  DAT_00018135 = 0;
-  uVar1 = 0;
-  if (_DAT_60004038 == 0xc) {
-    uVar1 = init_param_read();
-  }
+  _set_mac_filter = 0;
+  DAT_00017039 = 0;
   register_chipv7_phy(init_param_default,auStack_778,2);
-  flash_init_param_print(uVar1);
+  phy_wifi_enable_set(1);
   return;
 }
 

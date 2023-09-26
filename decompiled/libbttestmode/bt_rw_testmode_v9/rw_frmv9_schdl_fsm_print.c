@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_testmode_v9.o -> rw_frmv9_schdl_fsm_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,62 +10,21 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
 
 void rw_frmv9_schdl_fsm_print(void)
 
 {
-  uint uVar1;
-  char *pcVar2;
+  undefined4 unaff_s0;
+  undefined4 *unaff_s1;
+  undefined8 in_ft0;
+  undefined4 unaff_fs11;
+  int in_stack_0000004c;
   
-  _DAT_60031450 = _DAT_60031450 & 0xffffffc0 | 0x80;
-  uVar1 = _DAT_60031454 & 0xf;
-  if (frmschdl_fsm_print_start_v9 == 0) {
-    frmschdl_fsm_print_start_v9 = 1;
-  }
-  else if (frmschdl_fsm_data_last_v9 == uVar1) {
-    frmschdl_fsm_data_last_v9 = uVar1;
-    return;
-  }
-  switch(uVar1) {
-  case 0:
-    pcVar2 = "FS_IDLE\n";
-    break;
-  case 1:
-    pcVar2 = "FS_FETCH\n";
-    break;
-  case 2:
-    pcVar2 = "FS_FETCH_D\n";
-    break;
-  case 3:
-    pcVar2 = "FS_UPST_W4S\n";
-    break;
-  case 4:
-    pcVar2 = "FS_UPST_W4S_D\n";
-    break;
-  case 5:
-    pcVar2 = "FS_RDCMP\n";
-    break;
-  case 6:
-    pcVar2 = "FS_RDCMP_D\n";
-    break;
-  case 7:
-    pcVar2 = "FS_W4TS\n";
-    break;
-  case 8:
-    pcVar2 = "FS_W4TS_D\n";
-    break;
-  case 9:
-    pcVar2 = "FS_UPST_SKP\n";
-    break;
-  default:
-    goto _L145;
-  case 0xf:
-    pcVar2 = "FS_DEAD\n";
-  }
-  phy_printf(pcVar2);
-_L145:
-  frmschdl_fsm_data_last_v9 = uVar1;
-  return;
+  *(undefined4 *)(in_stack_0000004c + 0xfc) = unaff_fs11;
+  *(undefined8 *)(in_stack_0000004c + 0x40) = in_ft0;
+  *unaff_s1 = unaff_s0;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

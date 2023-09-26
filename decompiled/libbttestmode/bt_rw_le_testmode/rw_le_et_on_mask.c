@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode.o -> rw_le_et_on_mask
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,25 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
 
-void rw_le_et_on_mask(uint param_1)
+void rw_le_et_on_mask(void)
 
 {
-  undefined4 *puVar1;
-  
-  _DAT_6003122c = _DAT_6003122c & 0xffff;
-  puVar1 = (undefined4 *)&DAT_3ffb0000;
-  do {
-    if ((param_1 & 1) == 0) {
-      *puVar1 = 0;
-    }
-    else {
-      *puVar1 = 0x2000302;
-    }
-    puVar1 = puVar1 + 1;
-    param_1 = param_1 >> 1;
-  } while (puVar1 != (undefined4 *)0x3ffb0040);
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

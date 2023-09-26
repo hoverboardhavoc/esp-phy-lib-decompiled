@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> force_txtone
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,14 +15,12 @@
 void force_txtone(undefined4 param_1,undefined2 param_2)
 
 {
-  (**(code **)(_g_phyFuns + 200))(1,*(code **)(_g_phyFuns + 200));
+  force_txon(1);
   ets_delay_us(3);
   start_tx_tone(1,0,param_1,0,0,0);
   ets_delay_us(param_2);
-  stop_tx_tone(1);
-                    /* WARNING: Could not recover jumptable at 0x00012100. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 200))(0);
+  (**(code **)(_g_phyFuns + 0x9c))(1,*(code **)(_g_phyFuns + 0x9c));
+  force_txon(0);
   return;
 }
 

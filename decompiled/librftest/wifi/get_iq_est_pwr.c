@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> get_iq_est_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,8 @@
 int get_iq_est_pwr(void)
 
 {
-  (**(code **)(_g_phyFuns + 0x108))(*(code **)(_g_phyFuns + 0x108));
-  (**(code **)(_g_phyFuns + 0x104))(1,0x1fff,*(code **)(_g_phyFuns + 0x104));
-  return _DAT_60006164 >> 10;
+  (**(code **)(_g_phyFuns + 0xa4))(*(code **)(_g_phyFuns + 0xa4));
+  (**(code **)(_g_phyFuns + 0xa0))(1,0x1fff,*(code **)(_g_phyFuns + 0xa0));
+  return _DAT_600a0490 >> 10;
 }
 

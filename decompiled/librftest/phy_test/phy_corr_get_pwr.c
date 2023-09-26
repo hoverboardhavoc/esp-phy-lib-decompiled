@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> phy_test.o -> phy_corr_get_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,30 +12,27 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-uint phy_corr_get_pwr(void)
+int phy_corr_get_pwr(void)
 
 {
-  int iVar1;
-  uint uVar2;
+  uint uVar1;
+  int iVar2;
   int iVar3;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
+  uint uVar4;
+  int iVar5;
+  int iVar6;
   
-  iVar1 = _DAT_6000614c - _DAT_60006150;
-  iVar4 = _DAT_60006148 + _DAT_60006154;
-  iVar7 = _DAT_60006148 - _DAT_60006154;
-  iVar3 = _DAT_6000614c + _DAT_60006150;
-  uVar5 = iVar1 * iVar1 + iVar4 * iVar4;
-  uVar2 = iVar3 * iVar3 + iVar7 * iVar7;
-  uVar6 = uVar5 + uVar2;
-  return ((uint)(uVar6 < uVar2) +
-         (int)((ulonglong)((longlong)iVar7 * (longlong)iVar7) >> 0x20) +
+  iVar2 = (_DAT_600a0478 >> 0xc) + (_DAT_600a0484 >> 0xc);
+  iVar3 = (_DAT_600a047c >> 0xc) - (_DAT_600a0480 >> 0xc);
+  iVar6 = (_DAT_600a0478 >> 0xc) - (_DAT_600a0484 >> 0xc);
+  iVar5 = (_DAT_600a047c >> 0xc) + (_DAT_600a0480 >> 0xc);
+  uVar1 = iVar3 * iVar3 + iVar2 * iVar2;
+  uVar4 = iVar5 * iVar5 + iVar6 * iVar6;
+  return (int)((ulonglong)((longlong)iVar2 * (longlong)iVar2) >> 0x20) +
          (int)((ulonglong)((longlong)iVar3 * (longlong)iVar3) >> 0x20) +
-         (uint)(uVar2 < (uint)(iVar7 * iVar7)) +
-         (uint)(uVar5 < (uint)(iVar4 * iVar4)) +
-         (int)((ulonglong)((longlong)iVar1 * (longlong)iVar1) >> 0x20) +
-         (int)((ulonglong)((longlong)iVar4 * (longlong)iVar4) >> 0x20)) * 0x4000 | uVar6 >> 0x12;
+         (uint)(uVar1 < (uint)(iVar2 * iVar2)) +
+         (int)((ulonglong)((longlong)iVar6 * (longlong)iVar6) >> 0x20) +
+         (int)((ulonglong)((longlong)iVar5 * (longlong)iVar5) >> 0x20) +
+         (uint)(uVar4 < (uint)(iVar6 * iVar6)) + (uint)(uVar1 + uVar4 < uVar4);
 }
 

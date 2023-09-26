@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> rftest_optimize
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,13 +15,7 @@
 void rftest_optimize(void)
 
 {
-  _DAT_6001cd04 = 0x51510556;
-  _DAT_6001cd08 = 0x51510556;
-  phy_2480m_opt(0);
-  if (phy_param == '\0') {
-    rom2_ulp_ext_code_set(1,0x80);
-    return;
-  }
+  _DAT_600a7904 = _DAT_600a7904 & 0xfffffff8 | 0x400006;
   return;
 }
 

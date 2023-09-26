@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_pq.o -> rw_le_pq_scan_evt
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,35 +10,21 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
 
-void rw_le_pq_scan_evt(void)
+void rw_le_pq_scan_evt(undefined8 *param_1,int param_2,int param_3)
 
 {
-  int iVar1;
-  undefined4 uStack_18;
-  undefined2 uStack_14;
+  undefined8 unaff_fs0;
+  undefined8 in_fa0;
   
-  phy_printf("RW pq BLE SCAN\n");
-  rw_le_pq_ET_init();
-  read_macaddr_from_otp(&uStack_18);
-  rw_ble_CS_init(1,2000,9,0,0,uStack_18,uStack_14,0x27);
-  rw_ble_scan_txptr_init(3,3);
-  rw_ble_rxptr_init();
-  _DAT_60031018 = _DAT_60031018 | 0x20;
-  _DAT_60031364 = _DAT_60031364 & 0xfffffe00 | 1;
-  iVar1 = rw_le_v9_get_clkn();
-  rw_le_v9_set_rawstp_et(0x3fcd0100,iVar1 + 2U & 0xffffffe);
-  rw_le_v9_kick_start(0);
-  rw_le_v9_wait_4_kick_start();
-  phy_printf("scan start!\n");
-  do {
-    rw_le_v9_error_print();
-    rw_le_pq_scan_evt_refresh(0x3fcd0100,1,0);
-    iVar1 = GetStopCmd();
-  } while (iVar1 != 0);
-  phy_printf("rw done!\n");
-  rf_rw_v9_le_disable();
-  return;
+  *param_1 = unaff_fs0;
+  *(undefined8 *)(param_3 + 0x7c) = in_fa0;
+  if (param_2 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

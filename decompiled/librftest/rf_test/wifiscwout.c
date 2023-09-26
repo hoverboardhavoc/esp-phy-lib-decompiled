@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> rf_test.o -> wifiscwout
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,19 +16,20 @@ void wifiscwout(int *param_1)
 
 {
   char *pcVar1;
-  uint uVar2;
+  int iVar2;
   uint uVar3;
+  undefined4 uVar4;
+  uint uVar5;
   
-  uVar2 = param_1[2] & 3;
-  if (uVar2 != 0) {
-    if (uVar2 == 1) {
-      uVar2 = 0x19;
-    }
-    else if (uVar2 == 2) {
-      uVar2 = 0x32;
-    }
-    else {
-      uVar2 = 0x4b;
+  uVar5 = param_1[2] & 3;
+  uVar4 = 0x19;
+  if (uVar5 != 1) {
+    uVar4 = 0x32;
+    if (uVar5 != 2) {
+      uVar4 = 0x4b;
+      if (uVar5 != 3) {
+        uVar4 = 0;
+      }
     }
   }
   if (*param_1 != 0) {
@@ -41,18 +42,21 @@ void wifiscwout(int *param_1)
       pcVar1 = "wifi single carrier tx start: chan=%d, pwr=20-%d.%d\n";
     }
     phy_printf(pcVar1,param_1[1],param_1[2] >> 2);
-    rftest_set_chan((char)param_1[1],0);
-    txcal_debuge_mode();
-    uVar3 = ((param_1[2] - _DAT_60006004) + 0x28) * 0x1000000 >> 0x18;
-    uVar2 = uVar3 & 0xff;
-    if ((int)uVar3 < 0) {
-      uVar2 = 0;
+    rftest_set_chan((short)param_1[1],0);
+    (**(code **)(_g_phyFuns + 0x94))(*(code **)(_g_phyFuns + 0x94));
+    iVar2 = (**(code **)(_g_phyFuns + 8))(&phy_param,(short)param_1[1],*(code **)(_g_phyFuns + 8));
+    uVar5 = (iVar2 + param_1[2] + 0xc) * 0x1000000 >> 0x18;
+    uVar3 = uVar5 & 0xff;
+    if ((int)uVar5 < 0) {
+      uVar3 = 0;
     }
-    start_tx_tone_step(1,0,uVar2,0,0,0);
+                    /* WARNING: Could not recover jumptable at 0x00010680. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (**(code **)(_g_phyFuns + 0x98))(1,0,uVar3,0,0,0);
     return;
   }
-  phy_printf(" wifi single carrier tx stop\n",uVar2);
-  start_tx_tone_step(0,0,0,0,0,0);
+  phy_printf(" wifi single carrier tx stop\n",uVar4);
+  (**(code **)(_g_phyFuns + 0x98))(0,0,0,0,0,0,*(code **)(_g_phyFuns + 0x98));
   txcal_work_mode();
   return;
 }

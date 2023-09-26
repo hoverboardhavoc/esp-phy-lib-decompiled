@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librfate -> ate_test.o -> internal_vol_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ void internal_vol_test(int param_1)
   
   memset(local_180,0,0xa0);
   memcpy(local_e0,&_LANCHOR0,0xa0);
-  (**(code **)(_g_phyFuns + 0x4c))(1,0x46,*(code **)(_g_phyFuns + 0x4c));
+  rx_gain_force(1,0x46);
   get_inernal_vol(100,0,2,2,1,1,2,1);
   get_inernal_vol(100,0,3,3,1,1,2,1);
   get_inernal_vol(100,0,4,4,1,1,2,1);
@@ -37,22 +37,20 @@ void internal_vol_test(int param_1)
   get_inernal_vol(0x66,10,3,3,1,10,5,4);
   get_inernal_vol(0x62,8,2,2,1,8,1,0);
   get_inernal_vol(0x62,8,3,3,1,8,1,0);
-  get_inernal_vol(0x6a,4,1,1,1,7,3,2);
-  get_inernal_vol(0x6a,2,0,0,1,7,3,2);
-  get_inernal_vol(0x6a,2,1,1,1,7,3,2);
+  get_inernal_vol(0x6a,2,2,2,1,2,7,6);
+  get_inernal_vol(0x6a,2,0,0,1,2,7,6);
   get_inernal_vol(0x67,0,2,2,1,0,1,0);
   get_inernal_vol(0x67,0,3,3,1,0,1,0);
   get_inernal_vol(0x67,0,4,4,1,0,1,0);
   get_inernal_vol(0x67,0,5,5,1,0,1,0);
   get_inernal_vol(0x69,7,2,2,1,7,1,0);
-  get_inernal_vol(0x69,7,3,3,1,7,1,0);
   uVar3 = 0;
   do {
     if (param_1 != 0) {
       puVar5 = local_180 + uVar3;
       uVar1 = local_e0[uVar3];
       uVar2 = *puVar5;
-      uVar6 = (uint)_DAT_00012116;
+      uVar6 = (uint)_DAT_0001206a;
       pcVar4 = "remain,";
       switch((uVar3 & 0xffff) >> 2) {
       case 0:
@@ -68,22 +66,22 @@ void internal_vol_test(int param_1)
         pcVar4 = "ckgen_ent_pk,";
         break;
       case 4:
-        pcVar4 = "bbpll_ent_ad1,";
+        pcVar4 = "bpll_ent_ad1,";
         break;
       case 5:
-        pcVar4 = "bbpll_ent_ad2,";
+        pcVar4 = "bpll_ent_ad2,";
         break;
       case 6:
-        pcVar4 = "bbpll_ent_ad3,";
+        pcVar4 = "bpll_ent_ad3,";
         break;
       case 7:
-        pcVar4 = "bbpll_ent_pll,";
+        pcVar4 = "bpll_ent_pll,";
         break;
       case 8:
-        pcVar4 = "rfpll_ent_vco,";
+        pcVar4 = "fpll_ent_vco,";
         break;
       case 9:
-        pcVar4 = "rfpll_ent_bia,";
+        pcVar4 = "fpll_ent_bia,";
         break;
       case 10:
         pcVar4 = "bias_ent_con,";
@@ -95,16 +93,16 @@ void internal_vol_test(int param_1)
         pcVar4 = "bias_ent_cgm,";
         break;
       case 0xd:
-        pcVar4 = "bbtop_ent_fi ,";
+        pcVar4 = "btop_ent_fi ,";
         break;
       case 0xe:
-        pcVar4 = "bbtop_ent_fq ,";
+        pcVar4 = "btop_ent_fq ,";
         break;
       case 0xf:
-        pcVar4 = "bbtop_ent_bi ,";
+        pcVar4 = "btop_ent_bi ,";
         break;
       case 0x10:
-        pcVar4 = "bbtop_ent_bq ,";
+        pcVar4 = "btop_ent_bq ,";
         break;
       case 0x11:
         pcVar4 = "sar_ent_tsen,";
@@ -119,7 +117,7 @@ void internal_vol_test(int param_1)
     }
     uVar3 = uVar3 + 1;
   } while (uVar3 != 0x50);
-  (**(code **)(_g_phyFuns + 0x4c))(0,0x46,*(code **)(_g_phyFuns + 0x4c));
+  rx_gain_force(0,0x46);
   return;
 }
 

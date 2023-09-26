@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode.o -> rw_le_error_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,23 +10,23 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Removing unreachable block (ram,0x00010eb4) */
 
-void rw_le_error_print(void)
+void rw_le_error_print(int param_1,int param_2,int param_3)
 
 {
-  uint uVar1;
-  
-  uVar1 = _DAT_60031260 & 0x3fffff;
-  if (le_error_print_start == 0) {
-    le_error_print_start = 1;
+  if (param_3 != 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  else if (le_error_data_last == uVar1) {
-    le_error_data_last = uVar1;
-    return;
+  if (param_2 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  phy_printf("error%x\n",uVar1);
-  le_error_data_last = uVar1;
-  return;
+  do {
+  } while (param_1 != 0);
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

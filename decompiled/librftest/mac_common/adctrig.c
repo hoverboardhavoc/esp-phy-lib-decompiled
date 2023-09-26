@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> mac_common.o -> adctrig
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,87 +12,153 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void adctrig(int param_1,int param_2,int param_3,uint param_4,uint param_5,int param_6,uint param_7,
-            uint param_8)
+void adctrig(int param_1,int param_2,uint param_3,int param_4,uint param_5,uint param_6)
 
 {
   uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
   undefined2 in_stack_00000000;
   
-  _DAT_60033d5c =
-       (param_5 & 1) * 0x20000 + param_2 * 0x10000000 + (uint)((param_4 & 1) == 0) * 0x10000 +
-       param_3 * 0x100000 + param_1 + 1;
-  _DAT_600c1020 = _DAT_600c1020 & 0xfffffff8 | 10;
-  uVar1 = param_8 << 0x18;
-  if (param_6 == 4) {
-    _DAT_6001c02c = _DAT_6001c02c & 0xffffff | uVar1 | 0x800000;
-_L132:
-    ets_delay_us(1);
-  }
-  else if (param_6 == 5) {
-    (**(code **)(_g_phyFuns + 0x1cc))(0,1,param_8 & 0xffff,*(code **)(_g_phyFuns + 0x1cc));
-    goto _L132;
-  }
-  _DAT_60033d5c = _DAT_60033d5c | 0x80000000;
-  if (param_6 == 1) {
-    _DAT_6001c02c = _DAT_6001c02c & 0xffffff | param_7 << 0x18 | 0x800000;
-    if (param_2 != 0) goto _L112;
-_L116:
-    _DAT_60033d5c = _DAT_60033d5c & 0xfff7ffff;
-_L118:
-    if (1 < param_6 - 2U) goto _L112;
+  _DAT_600a9004 = param_1 + 1U & 0x7fff | _DAT_600a9004 & 0xfffd8000;
+  if (param_2 == 8) {
+    _DAT_600a9014 = _DAT_600a9014 & 0xfe000000 | 0x4503ce;
   }
   else {
-    if (param_6 != 3) {
-      if (param_2 == 0) {
-        if (param_6 == 10) {
-          tx_a_frame_trig();
-          ets_delay_us(in_stack_00000000);
-        }
-        goto _L116;
-      }
-      goto _L118;
-    }
-    _DAT_6001c02c = _DAT_6001c02c & 0xffffff | uVar1 | 0x800000;
-    ets_delay_us(in_stack_00000000);
-    if (param_2 == 0) goto _L116;
+    _DAT_600a9014 = _DAT_600a9014 & 0xfe000000 | 0xc2040;
   }
-  _DAT_6001c02c = _DAT_6001c02c & 0xffffff | param_7 << 0x18 | 0x800000;
-_L112:
+  _DAT_60095004 = _DAT_60095004 & 0xfffff0ff | 0x400;
+  uVar3 = param_5 << 0x18;
+  uVar4 = param_6 << 0x18;
+  if (param_4 == 1) {
+    _DAT_600a702c = _DAT_600a702c & 0xffffff | uVar3 | 0x800000;
+  }
+  else {
+    if (param_4 == 3) {
+      _DAT_600a702c = _DAT_600a702c & 0xffffff | uVar4 | 0x800000;
+      ets_delay_us(in_stack_00000000);
+_L132:
+      if (param_4 != 6) goto _L130;
+      set_dump_pbus(0);
+    }
+    else if (param_4 == 4) {
+      _DAT_600a702c = _DAT_600a702c & 0xffffff | uVar4 | 0x800000;
+    }
+    else {
+      if (param_4 != 5) goto _L132;
+      (**(code **)(_g_phyFuns + 0x74))(0,1,param_6 & 0xffff,*(code **)(_g_phyFuns + 0x74));
+    }
+    ets_delay_us(1);
+  }
+_L130:
+  if (param_2 == 0) {
+    _DAT_600a9004 = _DAT_600a9004 & 0xfffdffff;
+  }
+  else {
+    _DAT_600a9004 = _DAT_600a9004 | 0x20000;
+  }
+  uVar2 = _DAT_600a9004 | 0x80000000;
+  switch(param_2) {
+  case 0:
+    _DAT_600a20b4 = _DAT_600a20b4 & 0xfffffffe;
+    _DAT_600a9008 = _DAT_600a9008 | 0x78000;
+    goto _L136;
+  case 1:
+  case 3:
+    uVar1 = 0x8000;
+    break;
+  case 2:
+    _DAT_600a9008 = _DAT_600a9008 & 0xfff87fff;
+    goto _L163;
+  case 4:
+    uVar1 = 0x10000;
+    break;
+  case 5:
+    uVar1 = 0x18000;
+    break;
+  case 6:
+    uVar1 = 0x20000;
+    break;
+  case 7:
+    _DAT_600a4e30 = _DAT_600a4e30 & 0xffffff00 | 0x100 | param_3 & 0xff;
+    uVar1 = 0x28000;
+    break;
+  case 8:
+    _DAT_600a20b4 = _DAT_600a20b4 | 1;
+    _DAT_600a210c = _DAT_600a210c & 0xfff307f | 0x40000000;
+    _DAT_600a9008 = _DAT_600a9008 & 0xfff87fff;
+    _DAT_600a9004 = _DAT_600a9004 & 0xfffdffff | 0x80000000;
+    ble_rx_start(0,0);
+    ets_delay_us(200);
+    _DAT_600a210c = _DAT_600a210c | 0x80;
+    uVar2 = _DAT_600a9004;
+  default:
+    goto _L136;
+  }
+  _DAT_600a9008 = _DAT_600a9008 & 0xfff87fff | uVar1;
+_L163:
+  _DAT_600a20b4 = _DAT_600a20b4 & 0xfffffffe;
+_L136:
+  _DAT_600a9004 = uVar2;
+  if (param_4 - 2U < 2) {
+    _DAT_600a702c = _DAT_600a702c & 0xffffff | uVar3 | 0x800000;
+  }
+  else if (param_4 == 0x14) {
+    trig_tx_frame();
+  }
+  if (param_2 == 0) {
+    _DAT_600a9004 = _DAT_600a9004 & 0xfff7ffff;
+  }
   do {
-    do {
-      if ((int)(_DAT_60033d5c << 0xd) < 0) {
-        _DAT_600c1020 = _DAT_600c1020 & 0xfffffff8;
-        ets_delay_us(1000);
-        if ((param_1 + 1U != ((_DAT_60033d60 >> 0xe & 1) << 0xe | _DAT_60033d60 & 0x3fff)) &&
-           (param_5 == 0)) {
-          phy_printf("fail: 0x%x,0x%x,0x%x,0x%x,0x%x\n",param_1,param_2,param_3,param_4,0);
-          return;
+    uVar2 = _DAT_600a9004 & 0x40000;
+    if (param_4 == 4) {
+      _DAT_600a702c = _DAT_600a702c & 0xffffff | uVar3;
+      ets_delay_us(in_stack_00000000);
+      _DAT_600a702c = _DAT_600a702c & 0xffffff | uVar4;
+_L164:
+      ets_delay_us(in_stack_00000000);
+    }
+    else {
+      if (param_4 == 10) {
+        _DAT_600a2840 = _DAT_600a2840 & 0x7fffff | uVar3 | 0x800000;
+        ets_delay_us(in_stack_00000000);
+        _DAT_600a2840 = _DAT_600a2840 & 0x7fffff | uVar4 | 0x800000;
+        goto _L164;
+      }
+      if (param_4 == 5) {
+        (**(code **)(_g_phyFuns + 0x74))(0,1,param_5 & 0xff,*(code **)(_g_phyFuns + 0x74));
+        if (0 < (int)param_5 >> 8) {
+          (**(code **)(_g_phyFuns + 0x74))
+                    (0,2,(int)param_5 >> 8 & 0xffff,*(code **)(_g_phyFuns + 0x74));
         }
-        _DAT_60033d5c = _DAT_60033d5c & 0x7fffffff;
-        phy_printf("0x%x,0x%x,0x%x,0x%x\n",_DAT_60033d60 & 0x3fff,0x3fcb0000,0x10000);
-        phy_printf("%d,%d,%d,%d,%d,%d,%d,%d,%d\n",param_1,param_2,param_3,param_4,param_5,param_6,
-                   param_7);
-        return;
-      }
-      if (param_6 == 4) {
-        _DAT_6001c02c = _DAT_6001c02c & 0xffffff | param_7 << 0x18;
         ets_delay_us(in_stack_00000000);
-        _DAT_6001c02c = _DAT_6001c02c & 0xffffff | uVar1;
-_L133:
-        ets_delay_us(in_stack_00000000);
+        (**(code **)(_g_phyFuns + 0x74))(0,1,param_6 & 0xff,*(code **)(_g_phyFuns + 0x74));
+        if (0 < (int)param_6 >> 8) {
+          (**(code **)(_g_phyFuns + 0x74))
+                    (0,2,(int)param_6 >> 8 & 0xffff,*(code **)(_g_phyFuns + 0x74));
+        }
+        goto _L164;
       }
-      else if (param_6 == 5) {
-        (**(code **)(_g_phyFuns + 0x1cc))(0,1,param_7 & 0xffff,*(code **)(_g_phyFuns + 0x1cc));
-        ets_delay_us(in_stack_00000000);
-        (**(code **)(_g_phyFuns + 0x1cc))(0,1,param_8 & 0xffff,*(code **)(_g_phyFuns + 0x1cc));
-        goto _L133;
+      if (param_4 == 6) {
+        set_dump_pbus(1);
+        ets_delay_us(5);
+        set_dump_pbus(0);
+        goto _L164;
       }
-    } while (1 < param_2 - 5U);
-    (**(code **)(_g_phyFuns + 0x10))(*(code **)(_g_phyFuns + 0x10));
-    ets_delay_us(1000);
-    tx_a_frame(10);
-    (**(code **)(_g_phyFuns + 0x14))(*(code **)(_g_phyFuns + 0x14));
+    }
+    if (param_2 - 5U < 2) {
+      phy_disable_cca();
+      ets_delay_us(1000);
+      tx_a_frame(10);
+      phy_enable_cca();
+    }
+    if (uVar2 != 0) {
+      _DAT_600a9004 = _DAT_600a9004 & 0x7fffffff;
+      _DAT_60095004 = _DAT_60095004 & 0xfffff0ff;
+      phy_printf("0x%x,0x%x,0x%x,0x%x\n",_DAT_600a9008 & 0x3fff,1,0x40840000,0x10000);
+      return;
+    }
   } while( true );
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> rw_le_v9_evt_refresh_only
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,26 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
 
-void rw_le_v9_evt_refresh_only(int param_1)
+void rw_le_v9_evt_refresh_only(void)
 
 {
-  int iVar1;
-  
-  if ((_DAT_60031014 & 0x20) == 0) {
-    return;
-  }
-  _DAT_60031018 = _DAT_60031018 | 0x20;
-  rw_le_v9_set_status_et(0);
-  if (param_1 != 0) {
-    _DAT_3fcd0300 = _DAT_3fcd0300 & 0xffff7fff;
-    _DAT_3fcd0320 = _DAT_3fcd0320 & 0xffff7fff;
-  }
-  evt_refresh_ind_v9 = 1;
-  iVar1 = rw_le_v9_get_clkn();
-  rw_le_v9_set_rawstp_et(0x3fcd0100,iVar1 + 2);
-  _DAT_60031100 = _DAT_60031100 & 0xfffffff0 | 0x80000000;
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

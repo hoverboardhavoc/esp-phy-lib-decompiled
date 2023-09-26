@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_v9.o -> prbs9_gen
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,33 +10,27 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void prbs9_gen(uint *param_1)
+/* WARNING: Control flow encountered bad instruction data */
+
+void prbs9_gen(int param_1,int param_2)
 
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint *puVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  undefined4 in_t0;
+  undefined4 unaff_s0;
+  undefined4 unaff_s6;
+  undefined8 uVar1;
+  int in_stack_0000004c;
   
-  puVar4 = param_1 + 0x101;
-  uVar5 = 0;
-  uVar7 = 0xffff;
-  do {
-    uVar6 = 0;
-    do {
-      uVar3 = uVar7 << 1;
-      uVar1 = uVar6 & 0x1f;
-      uVar7 = (uVar7 ^ uVar7 << 4) >> 8 & 1 | uVar3;
-      uVar2 = uVar6 & 0x1f;
-      uVar6 = uVar6 + 1;
-      uVar5 = uVar5 & ~(1 << uVar1) | ((uVar3 & 0x200) >> 9) << uVar2;
-    } while (uVar6 != 0x20);
-    *param_1 = uVar5;
-    param_1 = param_1 + 1;
-  } while (puVar4 != param_1);
-  return;
+  *(undefined4 *)(param_1 + 0x20) = unaff_s0;
+  *(undefined4 *)(in_stack_0000004c + 100) = unaff_s6;
+  if (in_stack_0000004c == -0x248) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  uVar1 = *(undefined8 *)(param_2 + 0x80);
+  *(undefined4 *)(in_stack_0000004c + 4) = in_t0;
+  func_0x000109d6(in_stack_0000004c + 0x90,in_stack_0000004c + 8,uVar1);
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

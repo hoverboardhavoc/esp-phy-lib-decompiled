@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> cmd_polling.o -> cmd_polling_dettach
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,24 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined1 cmd_polling_dettach(int param_1,int param_2,int param_3)
+/* WARNING: Control flow encountered bad instruction data */
+
+void cmd_polling_dettach(void)
 
 {
-  char *pcVar1;
-  int iVar2;
-  
-  pcVar1 = &cmd_queue;
-  iVar2 = 0;
-  while (((*pcVar1 != '\x01' || (*(int *)(pcVar1 + 8) != param_3)) ||
-         ((param_1 == 1 && ((pcVar1[1] != '\x01' || (*(int *)(pcVar1 + 4) != param_2))))))) {
-    iVar2 = iVar2 + 1;
-    pcVar1 = pcVar1 + 0x10;
-    if (iVar2 == 0x20) {
-      return 0;
-    }
-  }
-  (&cmd_queue)[iVar2 * 0x10] = 0;
-  (&DAT_00010158)[iVar2 * 4] = 0;
-  return 1;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

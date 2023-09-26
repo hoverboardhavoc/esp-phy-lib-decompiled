@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> phy_test.o -> rxiq_get_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,8 +29,8 @@ void rxiq_get_pwr(uint param_1,uint *param_2)
   int iVar12;
   char cVar13;
   
-  (**(code **)(_g_phyFuns + 0x50))(1,*(code **)(_g_phyFuns + 0x50));
-  (**(code **)(_g_phyFuns + 0x54))(1,*(code **)(_g_phyFuns + 0x54));
+  set_txclk_en(1);
+  set_rxclk_en(1);
   cVar13 = ' ';
   iVar12 = 0;
   iVar11 = 0;
@@ -39,14 +39,15 @@ void rxiq_get_pwr(uint param_1,uint *param_2)
   uVar9 = 0;
   do {
     cVar13 = cVar13 + -1;
-    (**(code **)(_g_phyFuns + 0x104))
-              (1,1 << (param_1 & 0x1f) & 0xffff,*(code **)(_g_phyFuns + 0x104));
-    iVar8 = _DAT_60006148 >> (uVar10 & 0x1f);
-    iVar2 = _DAT_60006154 >> (uVar10 & 0x1f);
-    iVar4 = _DAT_60006150 >> (uVar10 & 0x1f);
+    (**(code **)(_g_phyFuns + 0xa4))(*(code **)(_g_phyFuns + 0xa4));
+    (**(code **)(_g_phyFuns + 0xa0))(1,1 << (param_1 & 0x1f) & 0xffff,*(code **)(_g_phyFuns + 0xa0))
+    ;
+    iVar8 = _DAT_600a0478 >> (uVar10 & 0x1f);
+    iVar2 = _DAT_600a0484 >> (uVar10 & 0x1f);
+    iVar4 = _DAT_600a0480 >> (uVar10 & 0x1f);
     iVar6 = iVar8 - iVar2;
     iVar8 = iVar8 + iVar2;
-    iVar7 = _DAT_6000614c >> (uVar10 & 0x1f);
+    iVar7 = _DAT_600a047c >> (uVar10 & 0x1f);
     iVar2 = iVar4 + iVar7;
     iVar7 = iVar7 - iVar4;
     uVar3 = iVar7 * iVar7 + iVar8 * iVar8;
@@ -60,7 +61,6 @@ void rxiq_get_pwr(uint param_1,uint *param_2)
              (uint)(uVar9 < (uint)(iVar6 * iVar6)) +
              (int)((ulonglong)((longlong)iVar6 * (longlong)iVar6) >> 0x20) +
              (int)((ulonglong)((longlong)iVar2 * (longlong)iVar2) >> 0x20) + iVar11;
-    (**(code **)(_g_phyFuns + 0x108))(*(code **)(_g_phyFuns + 0x108));
     uVar1 = uVar3;
     uVar9 = uVar5;
   } while (cVar13 != '\0');

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> get_rx_tone_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,12 +23,12 @@ void get_rx_tone_pwr(void)
   uVar1 = __fixsfsi();
   start_tx_tone(1,uVar1,0,0,0,0);
   ets_delay_us(5);
-  (**(code **)(_g_phyFuns + 0x104))(1,0x200,*(code **)(_g_phyFuns + 0x104));
+  (**(code **)(_g_phyFuns + 0xa0))(1,0x200,*(code **)(_g_phyFuns + 0xa0));
   ram_get_corr_power(&uStack_1c,9);
-  uVar1 = (**(code **)(_g_phyFuns + 0x118))(uStack_1c,0,*(code **)(_g_phyFuns + 0x118));
-  uVar2 = (**(code **)(_g_phyFuns + 0x118))(uStack_18,0,*(code **)(_g_phyFuns + 0x118));
-  (**(code **)(_g_phyFuns + 0x108))(*(code **)(_g_phyFuns + 0x108));
-  stop_tx_tone(1);
+  uVar1 = linear_to_db(uStack_1c,0);
+  uVar2 = linear_to_db(uStack_18,0);
+  (**(code **)(_g_phyFuns + 0xa4))(*(code **)(_g_phyFuns + 0xa4));
+  (**(code **)(_g_phyFuns + 0x9c))(1,*(code **)(_g_phyFuns + 0x9c));
   phy_printf("%d,%d\n",uVar1,uVar2);
   return;
 }

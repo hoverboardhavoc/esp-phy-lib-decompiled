@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> noise_init_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,23 +13,23 @@
 void noise_init_check(int param_1)
 
 {
-  char cVar1;
+  short sVar1;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   
-  cVar1 = '\x01';
+  sVar1 = 1;
   do {
     if (param_1 != 0) {
-      chip_v7_set_chan((int)cVar1,0);
+      chip_v7_set_chan(sVar1,0);
     }
-    uVar2 = check_noise_floor1();
-    uVar3 = check_noise_floor1();
-    uVar4 = check_noise_floor1();
-    cVar1 = cVar1 + '\x05';
+    uVar2 = check_noise_floor();
+    uVar3 = check_noise_floor();
+    uVar4 = check_noise_floor();
+    sVar1 = sVar1 + 5;
     phy_printf("%d,%d,%d;;;",uVar2,uVar3,uVar4);
-  } while (cVar1 != '\x10');
-  phy_printf(&_LC12);
+  } while (sVar1 != 0x10);
+  phy_printf(&_LC11);
   return;
 }
 

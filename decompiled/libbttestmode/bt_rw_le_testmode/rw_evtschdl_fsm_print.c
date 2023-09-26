@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode.o -> rw_evtschdl_fsm_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,50 +10,23 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
 
-void rw_evtschdl_fsm_print(void)
+void rw_evtschdl_fsm_print(undefined1 *param_1)
 
 {
-  uint uVar1;
-  char *pcVar2;
+  undefined4 unaff_s0;
+  undefined4 *unaff_s1;
+  undefined8 in_ft0;
   
-  _DAT_60031250 = _DAT_60031250 & 0xffffffc0 | 0x80;
-  uVar1 = _DAT_60031254 & 7;
-  if (evtschdl_fsm_print_start == 0) {
-    evtschdl_fsm_print_start = 1;
+  while (register0x00002008 = *(BADSPACEBASE **)((int)register0x00002008 + 0x4c),
+        param_1 != (undefined1 *)0x0) {
+    unaff_s1 = (undefined4 *)((int)register0x00002008 + 0x3cc);
+    param_1 = (undefined1 *)((int)register0x00002008 + 0x3cc);
   }
-  else if (evtschdl_fsm_data_last == uVar1) {
-    evtschdl_fsm_data_last = uVar1;
-    return;
-  }
-  switch(uVar1) {
-  case 1:
-    pcVar2 = "ES_FETCH_MOD_ENTRY\n";
-    break;
-  case 2:
-    pcVar2 = "ES_FETCH_PTR_ENTRY\n";
-    break;
-  case 3:
-    pcVar2 = "ES_CHECK_ENTRY\n";
-    break;
-  case 4:
-    pcVar2 = "ES_UPDATE_ET\n";
-    break;
-  case 5:
-    pcVar2 = "ES_FETCH_CS_FORMAT\n";
-    break;
-  case 6:
-    pcVar2 = "ES_FETCH_CS_FCNTOFFSET\n";
-    break;
-  case 7:
-    pcVar2 = "ES_DEAD\n";
-    break;
-  default:
-    pcVar2 = "ES_IDLE\n";
-  }
-  phy_printf(pcVar2);
-  evtschdl_fsm_data_last = uVar1;
-  return;
+  *(undefined8 *)((int)register0x00002008 + 0x40) = in_ft0;
+  *unaff_s1 = unaff_s0;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

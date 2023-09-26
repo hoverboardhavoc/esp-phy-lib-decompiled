@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> rw_tx_itf_fsm_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* WARNING: Control flow encountered bad instruction data */
 
 void rw_tx_itf_fsm_print(void)
 
 {
-  if (tx_itf_print_start_v9 == 0) {
-    tx_itf_print_start_v9 = 1;
-  }
-  tx_itf_data_last_v9 = _DAT_6001107c >> 0x1c;
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

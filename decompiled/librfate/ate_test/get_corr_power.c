@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librfate -> ate_test.o -> get_corr_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,11 +21,11 @@ void get_corr_power(int *param_1,int param_2,int param_3)
   int iVar4;
   int iVar5;
   
-  iVar4 = (_DAT_60006148 >> 9) + (_DAT_60006154 >> 9);
-  iVar5 = (_DAT_6000614c >> 9) - (_DAT_60006150 >> 9);
-  iVar2 = _DAT_6000615c >> (param_2 + 6U & 0x1f);
-  iVar3 = _DAT_60006160 >> (param_2 + 6U & 0x1f);
-  iVar1 = _DAT_60006164 >> (param_2 - 3U & 0x1f);
+  iVar4 = (_DAT_600a0478 >> 9) + (_DAT_600a0484 >> 9);
+  iVar5 = (_DAT_600a047c >> 9) - (_DAT_600a0480 >> 9);
+  iVar2 = _DAT_600a0488 >> (param_2 + 6U & 0x1f);
+  iVar3 = _DAT_600a048c >> (param_2 + 6U & 0x1f);
+  iVar1 = _DAT_600a0490 >> (param_2 - 3U & 0x1f);
   *param_1 = iVar1;
   iVar4 = __ashrdi3((uint)((uint)(iVar5 * iVar5 + iVar4 * iVar4) < (uint)(iVar4 * iVar4)) +
                     (int)((ulonglong)((longlong)iVar4 * (longlong)iVar4) >> 0x20) +

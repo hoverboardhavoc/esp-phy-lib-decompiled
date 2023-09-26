@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> bb_common.o -> fill_txdataframe
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,20 +21,20 @@ fill_txdataframe(int param_1,int param_2,undefined4 param_3,uint param_4,undefin
   int iVar2;
   uint *puVar3;
   uint *puVar4;
-  undefined4 uVar5;
-  int iVar6;
+  int iVar5;
+  undefined4 uVar6;
   int iVar7;
-  uint uVar8;
-  int iVar9;
-  uint uVar10;
+  int iVar8;
+  uint uVar9;
+  int iVar10;
   uint uVar11;
-  int iVar12;
+  uint uVar12;
   uint uVar13;
   
   puVar3 = (uint *)Plcp0AddrGet(10);
   puVar4 = (uint *)ConfAddrGet(10);
-  uVar1 = _DAT_60033044;
-  uVar13 = _DAT_60033040;
+  uVar1 = _DAT_600a4060;
+  uVar13 = _DAT_600a405c;
   if (param_1 == 6) {
     *param_6 = 0xb;
     *param_7 = 0;
@@ -44,14 +44,14 @@ fill_txdataframe(int param_1,int param_2,undefined4 param_3,uint param_4,undefin
     if (param_1 == 5) {
       *param_6 = 0xb;
       *param_7 = 0;
-_L163:
+_L206:
       iVar2 = 3;
     }
     else {
       if (param_1 != 4) {
         if (param_1 == 3) {
           *param_6 = 0x16;
-          uVar5 = 1;
+          uVar6 = 1;
         }
         else {
           if (param_1 != 2) {
@@ -64,83 +64,82 @@ _L163:
               *param_7 = 1;
             }
             iVar2 = 1;
-            goto _L143;
+            goto _L186;
           }
-          *param_6 = ate_rate;
-          uVar5 = ate_gi_bit;
+          *param_6 = _ate_rate;
+          uVar6 = ate_gi_bit;
         }
-        *param_7 = uVar5;
-        goto _L163;
+        *param_7 = uVar6;
+        goto _L206;
       }
       *param_6 = 8;
       *param_7 = 0;
       iVar2 = 0;
     }
-_L143:
+_L186:
     param_2 = param_2 + 0x28;
   }
-  if (param_2 < 0x801) {
-    iVar12 = 0;
-    iVar9 = 0;
-    iVar7 = 0;
-    iVar6 = param_2;
+  if (param_2 < 0xff9) {
+    iVar5 = 0;
+    iVar10 = 0;
+    iVar8 = 0;
+    iVar7 = param_2;
   }
   else {
-    iVar6 = 0x800;
-    if (param_2 < 0xe01) {
-      iVar7 = param_2 + -0x800;
-      iVar12 = 0;
-      iVar9 = 0;
+    iVar7 = 0xff8;
+    if (param_2 < 0x10f9) {
+      iVar8 = param_2 + -0xff8;
+      iVar5 = 0;
+      iVar10 = 0;
     }
     else {
-      if (param_2 < 0xf01) {
-        iVar9 = param_2 + -0xe00;
-        iVar12 = 0;
+      if (param_2 < 0x1201) {
+        iVar10 = param_2 + -0x10f8;
+        iVar5 = 0;
       }
       else {
-        if (0x1000 < param_2) {
-          iVar12 = 0;
-          iVar9 = 0;
+        if (0x12f8 < param_2) {
+          iVar5 = 0;
+          iVar10 = 0;
+          iVar8 = 0;
           iVar7 = 0;
-          iVar6 = 0;
-          goto _L148;
+          goto _L191;
         }
-        iVar12 = param_2 + -0xf00;
-        iVar9 = 0x100;
+        iVar5 = param_2 + -0x11f8;
+        iVar10 = 0x100;
       }
-      iVar7 = 0x600;
+      iVar8 = 0x100;
     }
   }
-_L148:
-  fill_tx_frame(10,*param_6,param_2,iVar6,iVar7,iVar9,iVar12,0);
+_L191:
+  fill_tx_frame(10,*param_6,param_2,iVar7,iVar8,iVar10,iVar5,0);
   *puVar3 = iVar2 << 0x18 | *puVar3 & 0xf8ffffff;
   *puVar4 = *puVar4 & 0xffc00fff | 0x1000;
-  uVar5 = 0x80;
+  uVar6 = 0x80;
   if (param_1 != 6) {
-    uVar5 = 0xfa0008;
+    uVar6 = 0xfa0008;
   }
-  uVar10 = uVar13 << 0x10;
-  uVar11 = uVar13 >> 0x10;
+  uVar11 = uVar13 << 0x10;
+  uVar12 = uVar13 >> 0x10;
   if (param_1 == 6) {
-    uVar8 = uVar1 & 0xffff | 0x5d800000;
+    uVar9 = uVar1 & 0xffff | 0x5d800000;
   }
   else {
-    uVar8 = 0;
+    uVar9 = 0;
     uVar13 = 0;
   }
-  *_PSDU0_OFFSET = uVar5;
+  *_PSDU0_OFFSET = uVar6;
   _PSDU0_OFFSET[1] = param_3;
-  _PSDU0_OFFSET[2] = param_4 & 0xffff | uVar10;
-  _PSDU0_OFFSET[3] = uVar1 << 0x10 | uVar11;
+  _PSDU0_OFFSET[2] = param_4 & 0xffff | uVar11;
+  _PSDU0_OFFSET[3] = uVar1 << 0x10 | uVar12;
   _PSDU0_OFFSET[4] = uVar13;
-  _PSDU0_OFFSET[5] = uVar8;
+  _PSDU0_OFFSET[5] = uVar9;
   _PSDU0_OFFSET[6] = 0xa0431;
   _PSDU0_OFFSET[7] = 0;
   _PSDU0_OFFSET[8] = param_5;
-  uVar13 = _DAT_6003507c;
   if (param_1 == 6) {
     *puVar4 = *puVar4 & 0xf0ffffff | 0x1000000;
-    *puVar4 = ((uVar13 & 0x3f) + 10) * 0x1000 | *puVar4 & 0xffc00fff;
+    *puVar4 = *puVar4 & 0xffc00fff | 0xa000;
   }
   return _PSDU0_OFFSET + 9;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> rf_test.o -> tx_cont_cfg
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,64 +15,52 @@
 void tx_cont_cfg(int param_1)
 
 {
-  undefined4 uVar1;
-  byte bVar2;
+  uint uVar1;
+  undefined4 uVar2;
   uint uVar3;
-  code *pcVar4;
-  int iVar5;
+  code *UNRECOVERED_JUMPTABLE;
+  uint uVar4;
   
-  pcVar4 = *(code **)(_g_phyFuns + 0x1b4);
-  uVar3 = (uint)DAT_00012174;
+  UNRECOVERED_JUMPTABLE = *(code **)(_g_phyFuns + 0x58);
+  uVar3 = (uint)DAT_000120f5;
   if (param_1 == 1) {
-    if (DAT_00012328 < 6) {
-      iVar5 = (DAT_00012176 + 3) * 0x1000000;
+    uVar4 = (int)((DAT_000120f6 + 7) * 0x1000000) >> 0x18;
+    uVar3 = (int)((uVar3 + 10) * 0x1000000) >> 0x18;
+    uVar1 = uVar4 & 0xff;
+    if (0x3f < (int)uVar4) {
+      uVar1 = 0x3f;
     }
-    else {
-      iVar5 = uVar3 << 0x18;
-    }
-    uVar3 = iVar5 >> 0x18;
+    (*UNRECOVERED_JUMPTABLE)(0x67,1,0xe,uVar1);
+    (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xf,uVar1,*(code **)(_g_phyFuns + 0x58));
     if (0x3f < (int)uVar3) {
       uVar3 = 0x3f;
     }
-    bVar2 = DAT_00012174;
-    if (DAT_00012328 < 6) {
-      bVar2 = DAT_00012174 + 9;
-    }
-    (*pcVar4)(0x67,1,0xe,uVar3 & 0xff);
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xf,uVar3 & 0xff,*(code **)(_g_phyFuns + 0x1b4));
-    uVar3 = (uint)(char)bVar2;
-    if (0x3f < (int)uVar3) {
-      uVar3 = 0x3f;
-    }
-    uVar3 = uVar3 & 0xff;
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xc,uVar3,*(code **)(_g_phyFuns + 0x1b4));
-    uVar1 = 0xd;
-    pcVar4 = *(code **)(_g_phyFuns + 0x1b4);
   }
   else {
-    if (param_1 == 2) {
-      (*pcVar4)(0x67,1,0xe,DAT_00012176);
-      uVar3 = (int)((uVar3 - 10) * 0x1000000) >> 0x18;
-      (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xf,DAT_00012176,*(code **)(_g_phyFuns + 0x1b4));
-      if ((int)uVar3 < 0) {
-        uVar3 = 0;
-      }
-      (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xc,uVar3 & 0xff,*(code **)(_g_phyFuns + 0x1b4));
-                    /* WARNING: Could not recover jumptable at 0x000101e2. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-      (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xd,uVar3 & 0xff);
-      return;
+    if (param_1 != 2) {
+      (*UNRECOVERED_JUMPTABLE)(0x67,1,0xc);
+      (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xd,DAT_000120f5,*(code **)(_g_phyFuns + 0x58));
+      (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xe,DAT_000120f6,*(code **)(_g_phyFuns + 0x58));
+      uVar3 = (uint)DAT_000120f6;
+      uVar2 = 0xf;
+      UNRECOVERED_JUMPTABLE = *(code **)(_g_phyFuns + 0x58);
+      goto _L10;
     }
-    (*pcVar4)(0x67,1,0xc);
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xd,DAT_00012174,*(code **)(_g_phyFuns + 0x1b4));
-    (**(code **)(_g_phyFuns + 0x1b4))(0x67,1,0xe,DAT_00012176,*(code **)(_g_phyFuns + 0x1b4));
-    uVar3 = (uint)DAT_00012176;
-    uVar1 = 0xf;
-    pcVar4 = *(code **)(_g_phyFuns + 0x1b4);
+    (*UNRECOVERED_JUMPTABLE)(0x67,1,0xe,DAT_000120f6);
+    uVar3 = (int)((uVar3 - 10) * 0x1000000) >> 0x18;
+    (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xf,DAT_000120f6,*(code **)(_g_phyFuns + 0x58));
+    if ((int)uVar3 < 0) {
+      uVar3 = 0;
+    }
   }
-  (*pcVar4)(0x67,1,uVar1,uVar3,pcVar4);
-  _DAT_600061d8 = _DAT_600061d8 & 0xfffffc00 | 0x13c;
-  _DAT_600061dc = _DAT_600061dc & 0xfff003ff | 0x4f000;
+  uVar3 = uVar3 & 0xff;
+  (**(code **)(_g_phyFuns + 0x58))(0x67,1,0xc,uVar3,*(code **)(_g_phyFuns + 0x58));
+  uVar2 = 0xd;
+  UNRECOVERED_JUMPTABLE = *(code **)(_g_phyFuns + 0x58);
+_L10:
+                    /* WARNING: Could not recover jumptable at 0x000100c4. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*UNRECOVERED_JUMPTABLE)(0x67,1,uVar2,uVar3);
   return;
 }
 

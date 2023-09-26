@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> force_tx_gain
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,36 +10,31 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void force_tx_gain(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4)
+void force_tx_gain(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   undefined2 *puVar1;
-  int iVar2;
-  undefined1 local_5c [16];
-  undefined1 local_4c [16];
-  undefined2 local_3c [20];
+  undefined2 *puVar2;
+  int iVar3;
+  undefined1 local_b0 [32];
+  undefined2 local_90 [32];
+  undefined2 local_50 [32];
   
-  if (param_4 == 0) {
-    phy_tx_pwr_track_en = 0;
-    DAT_000180e9 = 1;
-    iVar2 = 0;
-    puVar1 = local_3c;
-    do {
-      local_5c[iVar2] = (char)param_1;
-      *puVar1 = (short)param_2;
-      local_4c[iVar2] = (char)param_3;
-      iVar2 = iVar2 + 1;
-      puVar1 = puVar1 + 1;
-    } while (iVar2 != 0xe);
-    rom_set_tx_gain_mem(0,0xe,local_5c,local_3c,&phy_param,&phy_param);
-    rom1_wifi_tx_dig_gain(local_4c);
+  iVar3 = 0;
+  puVar1 = local_90;
+  puVar2 = local_50;
+  do {
+    *puVar1 = (short)param_2;
+    *puVar2 = (short)param_1;
+    local_b0[iVar3] = (char)param_3;
+    iVar3 = iVar3 + 1;
+    puVar1 = puVar1 + 1;
+    puVar2 = puVar2 + 1;
+  } while (iVar3 != 0x20);
+  if (phy_param != '\0') {
+    set_tx_gain_mem(0,0x20,local_50,local_90,local_b0,&phy_param,&phy_param);
   }
-  else {
-    DAT_000180e9 = 0;
-    phy_tx_pwr_track_en = 1;
-    ram1_wifi_set_tx_gain(DAT_00018242,1);
-  }
-  force_ble_tx_gain(param_1,param_2,param_3,param_4);
+  force_ble_tx_gain(param_1,param_2,param_3);
   return;
 }
 

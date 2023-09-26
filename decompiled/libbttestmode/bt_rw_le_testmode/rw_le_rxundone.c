@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_le_testmode.o -> rw_le_rxundone
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,10 +10,22 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rw_le_rxundone(uint *param_1)
+/* WARNING: Control flow encountered bad instruction data */
+
+void rw_le_rxundone(int param_1)
 
 {
-  *param_1 = *param_1 & 0xffff7fff;
+  undefined4 unaff_s0;
+  code *UNRECOVERED_JUMPTABLE;
+  
+  *(undefined4 *)unaff_s0 = unaff_s0;
+  if (param_1 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Could not recover jumptable at 0x000105b8. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*UNRECOVERED_JUMPTABLE)(UNRECOVERED_JUMPTABLE + 0x140);
   return;
 }
 

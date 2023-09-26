@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> bt_rw_testmode_v9.o -> rw_bt_v9_init_tx_descriptor_dh3or3dh3_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,10 +10,31 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void rw_bt_v9_init_tx_descriptor_dh3or3dh3_test(void)
+/* WARNING: Control flow encountered bad instruction data */
+
+void rw_bt_v9_init_tx_descriptor_dh3or3dh3_test(int param_1,int param_2,int param_3)
 
 {
-  rw_init_tx_descriptor(0,0,1,0xb,2,500);
-  return;
+  int in_t2;
+  int unaff_s1;
+  undefined8 uVar1;
+  
+  tp = tp + in_t2;
+  if (unaff_s1 != 0) {
+    tp = tp + 0xe;
+    *(int *)(param_1 + 600) = param_2;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  FUN_0001060e(param_1 + 0x290);
+  uVar1 = FUN_00010e98();
+  gp = gp + -0x18;
+  *(undefined8 *)(param_2 + 0x38) = uVar1;
+  if (param_3 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

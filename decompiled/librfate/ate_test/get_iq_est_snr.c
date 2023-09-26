@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librfate -> ate_test.o -> get_iq_est_snr
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,13 +38,13 @@ int get_iq_est_snr(uint *param_1,int param_2,int param_3,int param_4)
   int iVar13;
   int iVar14;
   
-  uVar1 = _DAT_60006148 + _DAT_60006154;
+  uVar1 = _DAT_600a0478 + _DAT_600a0484;
   iVar14 = param_4 >> 0x1f;
   uVar2 = __divdi3(uVar1 * 0x4000,uVar1 >> 0x12 | ((int)uVar1 >> 0x1f) << 0xe,param_4,iVar14);
-  uVar1 = _DAT_6000614c - _DAT_60006150;
+  uVar1 = _DAT_600a047c - _DAT_600a0480;
   uVar3 = __divdi3(uVar1 * 0x4000,uVar1 >> 0x12 | ((int)uVar1 >> 0x1f) << 0xe,param_4,iVar14);
-  iVar10 = _DAT_60006154;
-  iVar13 = _DAT_60006148;
+  iVar10 = _DAT_600a0484;
+  iVar13 = _DAT_600a0478;
   uVar12 = uVar3 * uVar3 + uVar2 * uVar2;
   uVar1 = (uint)(uVar12 < uVar2 * uVar2) +
           extraout_a1 * uVar2 * 2 + (int)((ulonglong)uVar2 * (ulonglong)uVar2 >> 0x20) +
@@ -53,7 +53,7 @@ int get_iq_est_snr(uint *param_1,int param_2,int param_3,int param_4)
   param_1[9] = uVar1;
   uVar4 = iVar13 - iVar10;
   uVar4 = __divdi3(uVar4 * 0x4000,uVar4 >> 0x12 | ((int)uVar4 >> 0x1f) << 0xe,param_4,iVar14);
-  uVar5 = _DAT_6000614c + _DAT_60006150;
+  uVar5 = _DAT_600a047c + _DAT_600a0480;
   uVar5 = __divdi3(uVar5 * 0x4000,uVar5 >> 0x12 | ((int)uVar5 >> 0x1f) << 0xe,param_4,iVar14);
   uVar9 = uVar5 * uVar5 + uVar4 * uVar4;
   uVar11 = extraout_a1_01 * uVar4 * 2 + (int)((ulonglong)uVar4 * (ulonglong)uVar4 >> 0x20) +
@@ -72,9 +72,9 @@ int get_iq_est_snr(uint *param_1,int param_2,int param_3,int param_4)
   param_1[10] = uVar9;
   uVar9 = uVar5 * uVar2 + uVar4 * uVar3;
   param_1[0xc] = uVar9;
-  iVar13 = _DAT_60006164;
-  iVar14 = _DAT_6000615c >> 4;
-  iVar10 = _DAT_60006160 >> 4;
+  iVar13 = _DAT_600a0490;
+  iVar14 = _DAT_600a0488 >> 4;
+  iVar10 = _DAT_600a048c >> 4;
   uVar11 = param_2 + 7U & 0xff;
   param_1[0xd] = (int)((ulonglong)uVar3 * (ulonglong)uVar4 >> 0x20) +
                  uVar4 * extraout_a1_00 + extraout_a1_01 * uVar3 +

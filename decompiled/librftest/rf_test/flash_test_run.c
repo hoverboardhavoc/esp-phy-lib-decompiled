@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> rf_test.o -> flash_test_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,14 +10,9 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void flash_test_run(undefined4 param_1)
+void flash_test_run(void)
 
 {
-  if ((flash_test_enable != '\0') && (flash_mode_sel == 1)) {
-    spi_flash_op(0,0x130000,param_1,flash_clk,flash_clk_drv,flash_data_drv);
-    spi_flash_op(1,0x130000,param_1,flash_clk,flash_clk_drv,flash_data_drv);
-    return;
-  }
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: libbttestmode -> timers.o -> t1_toggle_service
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,38 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void t1_toggle_service(void)
+/* WARNING: Control flow encountered bad instruction data */
+
+void t1_toggle_service(int param_1,undefined8 *param_2)
 
 {
-  bool bVar1;
-  uint *puVar2;
-  undefined1 *puVar3;
+  undefined8 unaff_fs0;
   
-  bVar1 = true;
-  while (bVar1) {
-    if (bVar1) {
-      puVar2 = (uint *)&DAT_60020000;
-      goto _L34;
-    }
-    ebreak();
-    bVar1 = false;
+  *param_2 = unaff_fs0;
+  if (param_1 == 0) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
   }
-  puVar2 = (uint *)&DAT_6001f000;
-_L34:
-  *puVar2 = *puVar2 | 0x400;
-  if (bVar1) {
-    if (!bVar1) {
-      puVar2 = (uint *)&DAT_0000007c;
-      goto _L36;
-    }
-    puVar3 = &DAT_60020000;
-  }
-  else {
-    puVar3 = &DAT_6001f000;
-  }
-  puVar2 = (uint *)(puVar3 + 0x7c);
-_L36:
-  *puVar2 = *puVar2 | 1;
-  return;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

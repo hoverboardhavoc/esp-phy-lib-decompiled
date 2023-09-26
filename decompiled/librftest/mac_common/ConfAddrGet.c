@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> mac_common.o -> ConfAddrGet
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,8 +14,8 @@ undefined1 * ConfAddrGet(int param_1)
 
 {
   if (param_1 - 0xbU < 7) {
-    return *(undefined1 **)(&_LANCHOR22 + (param_1 - 0xbU) * 4);
+    return *(undefined1 **)(&_LANCHOR29 + (param_1 - 0xbU) * 4);
   }
-  return &DAT_60033d04;
+  return &DAT_600a4d68;
 }
 

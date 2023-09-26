@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> burnin_rtc_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,12 +15,14 @@
 void burnin_rtc_init(void)
 
 {
-  _DAT_60008018 = _DAT_60008018 & 0xdfffffff;
-  if ((_DAT_60008038 & 0x3f) - 7 < 3) {
-    _DAT_60008050 = _DAT_60008050 + 1;
+  int iVar1;
+  
+  _DAT_600a4d68 = 0;
+  lp_wdt_reset_sys(0x5ffff);
+  iVar1 = rtc_reset_cause();
+  if (iVar1 == 9) {
+    _DAT_600b1000 = _DAT_600b1000 + 1;
   }
-  timers_wdt_init(0,3,0x40000);
-  _DAT_60033d04 = 0;
   return;
 }
 

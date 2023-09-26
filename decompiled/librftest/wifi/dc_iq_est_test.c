@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librftest -> wifi.o -> dc_iq_est_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void dc_iq_est_test(int param_1,int *param_2,int *param_3)
+void dc_iq_est_test(undefined4 param_1,int param_2,int *param_3,int *param_4)
 
 {
   int iVar1;
@@ -20,35 +20,32 @@ void dc_iq_est_test(int param_1,int *param_2,int *param_3)
   int iVar3;
   int iVar4;
   
-  (**(code **)(_g_phyFuns + 0x104))(*(code **)(_g_phyFuns + 0x104));
-  param_1 = param_1 + 1;
-  iVar2 = (_DAT_6000615c >> 6) / param_1;
-  *param_2 = iVar2;
-  iVar3 = (_DAT_60006160 >> 6) / param_1;
-  param_2[1] = iVar3;
-  iVar1 = (_DAT_60006168 / param_1) * 4 - iVar2 * iVar2;
-  iVar4 = (_DAT_6000616c / param_1) * 4 - iVar3 * iVar3;
-  iVar2 = (_DAT_60006164 / param_1) * 8 - (iVar2 * iVar2 + iVar3 * iVar3);
-  if (iVar2 < 0) {
-    iVar2 = 0;
-  }
-  iVar2 = (**(code **)(_g_phyFuns + 0x118))(iVar2,0,*(code **)(_g_phyFuns + 0x118));
+  (**(code **)(_g_phyFuns + 0xa4))(*(code **)(_g_phyFuns + 0xa4));
+  (**(code **)(_g_phyFuns + 0xa0))(param_1,param_2,*(code **)(_g_phyFuns + 0xa0));
+  param_2 = param_2 + 1;
+  iVar2 = (_DAT_600a0488 >> 6) / param_2;
   *param_3 = iVar2;
-  param_2[2] = iVar2 + 8 >> 4;
+  iVar4 = (_DAT_600a048c >> 6) / param_2;
+  param_3[1] = iVar4;
+  iVar1 = (_DAT_600a0494 / param_2) * 4 - iVar2 * iVar2;
+  iVar3 = (_DAT_600a0490 / param_2) * 8 - (iVar2 * iVar2 + iVar4 * iVar4);
+  iVar2 = (_DAT_600a0498 / param_2) * 4 - iVar4 * iVar4;
+  if (iVar3 < 0) {
+    iVar3 = 0;
+  }
+  iVar3 = linear_to_db(iVar3,0);
+  *param_4 = iVar3;
+  param_3[2] = iVar3 + 8 >> 4;
   if (iVar1 < 0) {
     iVar1 = 0;
   }
-  iVar1 = (**(code **)(_g_phyFuns + 0x118))(iVar1,0,*(code **)(_g_phyFuns + 0x118));
-  param_3[1] = iVar1;
-  if (iVar4 < 0) {
-    iVar4 = 0;
+  iVar1 = linear_to_db(iVar1,0);
+  param_4[1] = iVar1;
+  if (iVar2 < 0) {
+    iVar2 = 0;
   }
-  iVar2 = (**(code **)(_g_phyFuns + 0x118))(iVar4,0,*(code **)(_g_phyFuns + 0x118));
-  iVar1 = _g_phyFuns;
-  param_3[2] = iVar2;
-                    /* WARNING: Could not recover jumptable at 0x00012aa0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(iVar1 + 0x108))();
+  iVar2 = linear_to_db(iVar2,0);
+  param_4[2] = iVar2;
   return;
 }
 

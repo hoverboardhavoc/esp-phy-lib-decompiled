@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 92801f9b6fe3658b31590dbb77b97261ecde93d0
- * https://github.com/espressif/esp-phy-lib/commit/92801f9b6fe3658b31590dbb77b97261ecde93d0
- * Upstream date: 2023-07-24 22:19:06 +0800
- * Upstream subject: Protection of tracking
+ * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
+ * Upstream date: 2023-09-26 12:19:54 +0800
+ * Upstream subject: add librftest.a
  * Source: librfate -> ate_test.o -> ate_rfpll_cap_sign
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,8 +23,8 @@ void ate_rfpll_cap_sign(int param_1)
   int iVar6;
   
   chip_v7_set_chan(1,0);
-  iVar3 = rom2_read_pll_cap();
-  (**(code **)(_g_phyFuns + 0x1bc))(0x62,1,0xb,6,6,1,*(code **)(_g_phyFuns + 0x1bc));
+  iVar3 = read_pll_cap();
+  (**(code **)(_g_phyFuns + 0x60))(0x62,1,0xb,6,6,1,*(code **)(_g_phyFuns + 0x60));
   iVar6 = 0;
   cVar2 = '\0';
   while( true ) {
@@ -34,9 +34,9 @@ void ate_rfpll_cap_sign(int param_1)
       if (iVar6 != 0) {
         uVar5 = iVar3 + 1 + iVar1;
       }
-      rom2_write_pll_cap(uVar5 & 0xffff);
+      write_pll_cap((int)(short)uVar5);
       ets_delay_us(5);
-      uVar4 = (**(code **)(_g_phyFuns + 0x1ac))(0x62,1,0xc,*(code **)(_g_phyFuns + 0x1ac));
+      uVar4 = (**(code **)(_g_phyFuns + 0x50))(0x62,1,0xc,*(code **)(_g_phyFuns + 0x50));
       if ((uVar4 >> 2 & 3) == 0) {
         cVar2 = cVar2 + '\x01';
       }
