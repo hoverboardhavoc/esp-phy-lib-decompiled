@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> phy_set_clk_conf
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,23 +15,23 @@
 void phy_set_clk_conf(int param_1)
 
 {
+  int iVar1;
+  
   if (param_1 == 1) {
-    _DAT_600a9804 = 0;
-    _DAT_600a9814 = 0x167ff;
-    return;
-  }
-  if (param_1 == 2) {
-    _DAT_600a9804 = 0;
+    iVar1 = 0x571000;
   }
   else {
-    if (param_1 != 3) {
-      _DAT_600a9804 = 0xffffffff;
-      _DAT_600a9814 = 0x7ffff;
+    if (param_1 != 2) {
+      _DAT_600b0414 = 0x7fffff;
+      _DAT_600b0420 = 0xf9c1e06f;
+      _DAT_600b0424 = 0x8405;
       return;
     }
-    _DAT_600a9804 = 0x1800000;
+    iVar1 = 0x504000;
   }
-  _DAT_600a9814 = 0x76000;
+  _DAT_600b0424 = 0;
+  _DAT_600b0420 = 0x1000004;
+  _DAT_600b0414 = iVar1 + -0x3f2;
   return;
 }
 

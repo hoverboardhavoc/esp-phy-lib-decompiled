@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> bb_common.o -> get_rx_freq_local
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,12 +17,11 @@ void get_rx_freq_local(void)
   uint uVar2;
   
   puVar1 = (uint *)get_rxctrl_addr();
-  uVar2 = *puVar1;
-  if ((uVar2 & 0xc000) == 0) {
-    uVar2 = uVar2 >> 8 & 0x1f;
+  if ((*puVar1 & 0xc000) == 0x4000) {
+    uVar2 = (puVar1[1] & 0xf) + 0x10;
   }
   else {
-    uVar2 = (uVar2 >> 10 & 0x30) + (puVar1[1] & 0x7f);
+    uVar2 = *puVar1 >> 8 & 0x1f;
   }
   phy_get_rx_freq(uVar2,puVar1[4]);
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> rf_test.o -> esp_tx_func
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,111 +17,91 @@ void esp_tx_func(uint *param_1,int param_2)
 {
   int iVar1;
   uint uVar2;
-  uint uVar3;
+  int iVar3;
   uint uVar4;
   int iVar5;
-  undefined4 uVar6;
-  int iVar7;
+  uint uVar6;
+  uint uVar7;
   uint uVar8;
-  undefined4 uVar9;
-  int iVar10;
+  int iVar9;
   
   iVar1 = _short_gi_enable;
   if (fcc_mode_sel == '\x01') {
-    uVar2 = 0;
+    uVar6 = 0;
     uVar8 = *param_1;
-    uVar3 = param_1[1];
-    iVar10 = 0;
+    uVar2 = param_1[1];
+    iVar9 = 0;
     if (2 < param_2) {
-      iVar10 = (int)(char)param_1[2];
+      iVar9 = (int)(char)param_1[2];
     }
-    phy_printf("Wifi tx out: channel=%d, rate=0x%x, BK=%d, length=%d, delay=%d\n",uVar8,uVar3,iVar10
-               ,0xfff,0);
+    fcc_mode_flag = 1;
+    phy_tx_pwr_track_en = 1;
+    phy_tx_pwr_correct_en = 1;
+    phy_printf("Wifi tx out: channel=%d, rate=0x%x, BK=%d, length=%d, delay=%d\n",uVar8,uVar2,iVar9,
+               0xfff,0);
     rftest_set_chan(uVar8 & 0xffff,(uint)(tx_cbw40m_en != '\0') << 1);
     if (uVar8 == 0xe) {
-      tx_cont_cfg(2);
-      uVar2 = _DAT_600a7400 >> 0xd;
-      _DAT_600a7400 = _DAT_600a7400 & 0xffff9fff | 0x2000;
-      uVar2 = uVar2 & 3;
-    }
-    else {
-      tx_cont_cfg(1);
+      uVar6 = DAT_60012346 >> 5 & 3;
+      uVar4 = CONCAT13(DAT_60012348,CONCAT12(DAT_60012347,CONCAT11(DAT_60012346,DAT_60012345))) &
+              0xffff9fff;
+      DAT_60012346 = (byte)(uVar4 >> 8) | 0x20;
+      DAT_60012345 = (undefined1)uVar4;
+      DAT_60012347 = (undefined1)(uVar4 >> 0x10);
+      DAT_60012348 = (undefined1)(uVar4 >> 0x18);
     }
     remove_11b_4p8G_spur(1,2,0x14);
-    target_power_backoff(iVar10);
-    FillTxPacket(0xa0fff,0xfff,0,uVar3,0,iVar1 << 0x1c,1,2);
-    WifiTxStart_org(uVar3 + 0xa0000,0,0,tx_cbw40m_en,0,1);
+    target_power_backoff(iVar9);
+    FillTxPacket(0xa0fff,0xfff,0,uVar2,0,iVar1 << 0x1c,1,2);
+    WifiTxStart(uVar2 + 0xa0000,0,0,tx_cbw40m_en,0,1);
     if (uVar8 == 0xe) {
-      _DAT_600a7400 = uVar2 << 0xd | _DAT_600a7400 & 0xffff9fff;
+      uVar8 = CONCAT13(DAT_60012348,CONCAT12(DAT_60012347,CONCAT11(DAT_60012346,DAT_60012345))) &
+              0xffff9fff;
+      DAT_60012346 = (byte)(uVar8 >> 8) | (byte)((uVar6 << 0xd) >> 8);
+      DAT_60012345 = (undefined1)uVar8;
+      DAT_60012347 = (undefined1)(uVar8 >> 0x10);
+      DAT_60012348 = (undefined1)(uVar8 >> 0x18);
     }
     remove_11b_4p8G_spur(0,0,0);
-    tx_cont_cfg(0);
-    phy_printf("Tx Over\n",_DAT_600a4c74 & 0xff,uVar3,0xfff,iVar1);
+    phy_printf("Tx Over\n",DAT_60012fb9,uVar2,0xfff,iVar1,DAT_60012fbc);
     return;
   }
+  uVar6 = *param_1;
   uVar2 = param_1[1];
-  uVar3 = *param_1;
-  iVar10 = 0;
+  iVar9 = 0;
   if (2 < param_2) {
-    iVar10 = (int)(char)param_1[2];
+    iVar9 = (int)(char)param_1[2];
   }
-  uVar8 = 0;
-  if (5 < param_2) {
-    uVar8 = param_1[5];
+  uVar8 = change_data_rate(uVar2);
+  iVar5 = 200;
+  if ((3 < uVar2) && (iVar5 = 100, 7 < uVar2)) {
+    iVar5 = 0x28;
   }
-  if (_phy_11ax_array == 0) {
-    uVar9 = 0x3f800000;
-  }
-  else {
-    uVar9 = 0x400ccccd;
-  }
-  seed_vs_rate(uVar2 & 0xff);
-  if (0x1f < uVar2) {
-    uVar2 = uVar2 & 0xf | 0x10;
-  }
-  uVar4 = change_data_rate(uVar2);
-  set_rate_power_index(uVar2 & 0xff);
-  iVar7 = 200;
-  if ((3 < uVar2) && (iVar7 = 100, 7 < uVar2)) {
-    iVar7 = 0x28;
-  }
-  iVar5 = 600;
-  if (0x13 < uVar4) {
-    iVar5 = 200;
+  iVar3 = 600;
+  if (0x13 < uVar8) {
+    iVar3 = 200;
   }
   if (param_2 < 4) {
-    __floatunsisf((iVar5 - iVar7) * uVar4 >> 3);
-    __mulsf3(uVar9);
-    iVar7 = __fixunssfsi();
+    uVar4 = (iVar3 - iVar5) * uVar8 >> 3;
   }
   else {
-    __floatsisf(param_1[3]);
-    iVar7 = __fixunssfsi();
+    uVar4 = param_1[3];
     if (param_2 != 4) {
-      __floatsisf(param_1[4]);
-      goto _L48;
+      uVar7 = param_1[4];
+      goto _L20;
     }
   }
-  if (uVar4 < 0x14) {
-    uVar6 = 0x44960000;
+  uVar7 = 0x4b0;
+  if (0x13 < uVar8) {
+    uVar7 = 400;
   }
-  else {
-    uVar6 = 0x43c80000;
-  }
-  __mulsf3(uVar9,uVar6);
-_L48:
-  uVar9 = __fixunssfsi();
-  rftest_set_chan(uVar3 & 0xffff,(uint)(tx_cbw40m_en != '\0') << 1);
-  target_power_backoff(iVar10);
-  phy_printf("Wifi tx out: channel=%d, rate=0x%x, BK=%d, length=%d, delay=%d\n",uVar3,param_1[1],
-             iVar10,iVar7,uVar9);
-  FillTxPacket(iVar7 + 0xa0000,iVar7,0,uVar2,0,iVar1 << 0x1c,1,2);
-  if (phy_tx_pwr_track_en != '\0') {
-    phy_cal_param_track(0,phy_tx_pwr_print_en);
-  }
-  WifiTxStart_org(uVar2 + 0xa0000,uVar8,uVar9,tx_cbw40m_en,0,1);
-  phy_printf("Tx Over 0x%x\n",_DAT_600a4c74 & 0xff);
-  _DAT_600a0410 = _DAT_600a0410 & 0xff7fffff;
+_L20:
+  rftest_set_chan(uVar6 & 0xffff,(uint)(tx_cbw40m_en != '\0') << 1);
+  target_power_backoff(iVar9);
+  phy_printf("Wifi tx out: channel=%d, rate=0x%x, BK=%d, length=%d, delay=%d\n",uVar6,uVar2,iVar9,
+             uVar4,uVar7);
+  FillTxPacket(uVar4 + 0xa0000,uVar4,0,uVar2,0,iVar1 << 0x1c,1,2);
+  WifiTxStart(uVar2 + 0xa0000,0,uVar7,tx_cbw40m_en,0,1);
+  phy_printf("Tx Over 0x%x\n",DAT_60012fb9,DAT_60012fbb,DAT_60012fbc);
   return;
 }
 

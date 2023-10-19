@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_receive_payloadcheck
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,13 +20,13 @@ void ieee802154_receive_payloadcheck(undefined4 param_1)
   memset(&rx_frame,0,0x82);
   _DAT_600a30e0 = &rx_frame;
   _DAT_600a3048 = param_1;
-_L10:
+_L18:
   do {
     _DAT_600a3000 = 0x42;
     while ((_DAT_600a3064 & 2) == 0) {
       if ((_DAT_600a3064 & 0x10) != 0) {
         _DAT_600a3064 = _DAT_600a3064 | 0x10;
-        goto _L10;
+        goto _L18;
       }
       iVar1 = GetStopCmd();
       if (iVar1 == 0) {

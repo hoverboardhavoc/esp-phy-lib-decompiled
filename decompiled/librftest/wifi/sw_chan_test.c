@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> sw_chan_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,28 +10,27 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void sw_chan_test(uint param_1,uint param_2,int param_3,undefined4 param_4)
 
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
   
-  uVar3 = param_1;
-  for (iVar5 = 0; uVar1 = _DAT_600ad000, iVar5 < param_3; iVar5 = iVar5 + 1) {
-    rftest_set_chan(uVar3 & 0xffff,0);
-    uVar2 = _DAT_600ad000;
+  uVar1 = param_1;
+  for (iVar3 = 0; iVar3 < param_3; iVar3 = iVar3 + 1) {
+    uVar4 = phy_time_now();
+    rftest_set_chan(uVar1 & 0xffff,0);
+    uVar5 = phy_time_now();
     beacon_print(param_4);
-    phy_printf("loop= %d, chan= %d, time: %d, %d\n",iVar5,uVar3,uVar1,uVar2);
-    uVar4 = param_1;
-    if (uVar3 != param_2) {
-      uVar4 = uVar3 + 1;
+    phy_printf("loop= %d, chan= %d, time: %d, %d\n",iVar3,uVar1,uVar4,uVar5);
+    uVar2 = param_1;
+    if (uVar1 != param_2) {
+      uVar2 = uVar1 + 1;
     }
-    uVar3 = uVar4;
+    uVar1 = uVar2;
   }
   return;
 }

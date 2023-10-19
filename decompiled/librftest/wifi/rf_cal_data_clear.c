@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> rf_cal_data_clear
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,16 +15,19 @@
 void rf_cal_data_clear(void)
 
 {
-  undefined4 *puVar1;
-  
-  puVar1 = (undefined4 *)&phy_param;
-  do {
-    *puVar1 = 0;
-    puVar1 = puVar1 + 1;
-  } while (puVar1 != (undefined4 *)0x18378);
-  _DAT_60008034 = _DAT_60008034 & 0x7ffffff;
-  _DAT_60008000 = _DAT_60008000 & 0xffffff7f;
-  _DAT_6002609c = 0;
+  _rtc_reset_cause = 0;
+  _lp_wdt_feed = 0;
+  _dig_gpio_out = 0;
+  _ble_tx = 0;
+  _set_mac_filter = 0;
+  _esp_origin_mac = 0;
+  _phy_get_romfunc_addr = 0;
+  _mac_init = 0;
+  _get_target_power_offset = 0;
+  _phy_set_freq = 0;
+  _target_power_backoff = 0;
+  _force_txon_mode = 0;
+  _force_txon = 0;
   return;
 }
 

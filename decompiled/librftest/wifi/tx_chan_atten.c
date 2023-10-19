@@ -1,16 +1,14 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> tx_chan_atten
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void tx_chan_atten(void)
 
@@ -20,16 +18,16 @@ void tx_chan_atten(void)
   uint uVar3;
   int iVar4;
   undefined1 uStack_31;
-  byte local_30 [24];
+  byte local_30 [28];
   
   uStack_31 = 0x38;
-  (**(code **)(_g_phyFuns + 0x94))(*(code **)(_g_phyFuns + 0x94));
+  txcal_debuge_mode();
   uVar3 = 1;
   iVar4 = 0x3c;
   pbVar2 = local_30;
   do {
     chip_v7_set_chan(uVar3 & 0xffff,0);
-    rfcal_pwrctrl(0x80,&uStack_31,1,0x28,pbVar2,_DAT_00017022,iVar4,0);
+    rfcal_pwrctrl(0xe0,&uStack_31,1,0x28,pbVar2,0x90,iVar4,0);
     bVar1 = *pbVar2;
     uVar3 = uVar3 + 1;
     pbVar2 = pbVar2 + 1;

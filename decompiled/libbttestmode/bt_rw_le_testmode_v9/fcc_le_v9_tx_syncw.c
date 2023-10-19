@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> fcc_le_v9_tx_syncw
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,13 +12,14 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void fcc_le_v9_tx_syncw(undefined4 param_1,undefined4 param_2,int param_3,uint param_4,uint param_5)
+void fcc_le_v9_tx_syncw(undefined4 param_1,undefined4 param_2,int param_3,uint param_4,
+                       undefined4 param_5,undefined4 param_6,uint param_7)
 
 {
   int iVar1;
   
   phy_printf("fcc_le_tx_syncw: txpwr=%d,chan=%d,len=%d,data_type=%d,syncw=0x%x,rate=%d,tx_num=%d\n",
-             param_1,param_2,param_3,param_4);
+             param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   bt_tx_num = 0;
   prbs9_gen(&PRBS9);
   rw_le_v9_em_clean(0x3ffd0000,0x400);
@@ -57,7 +58,7 @@ void fcc_le_v9_tx_syncw(undefined4 param_1,undefined4 param_2,int param_3,uint p
     rw_bb_tx_refesh();
     iVar1 = GetStopCmd();
     if (iVar1 == 0) break;
-  } while ((param_5 == 0) || (bt_tx_num < param_5));
+  } while ((param_7 == 0) || (bt_tx_num < param_7));
   _DAT_60031000 = _DAT_60031000 | 0x4000000;
   do {
   } while ((_DAT_60031014 & 0x20) == 0);

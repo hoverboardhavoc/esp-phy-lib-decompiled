@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> init_param_read
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ bool init_param_read(void)
   
   pcVar5 = local_90;
   spi_flash_attach(0,0);
-  spi_flash_read(0x60000,local_90,0x80);
+  esp_rom_spiflash_read(0x60000,local_90,0x80);
   iVar3 = 0;
   cVar4 = '\0';
   do {

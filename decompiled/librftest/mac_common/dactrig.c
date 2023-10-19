@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> mac_common.o -> dactrig
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,7 +17,7 @@ void dactrig(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4
   
   iVar1 = 0;
   do {
-    *(int *)(iVar1 + 0x40840000) = (iVar1 >> 3) + 0x100;
+    *(int *)(iVar1 + 0x40820000) = (iVar1 >> 3) + 0x100;
     iVar1 = iVar1 + 1;
   } while (iVar1 != 0x10000);
   ets_delay_us(10000);

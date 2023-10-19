@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> phy_test.o -> pbus_tx_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,33 +10,53 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void pbus_tx_test(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+void pbus_tx_test(int param_1,undefined2 param_2,int param_3)
 
 {
-  int iVar1;
+  ushort uVar1;
+  int iVar2;
+  ushort uVar3;
   
-  (**(code **)(_g_phyFuns + 0x78))(*(code **)(_g_phyFuns + 0x78));
-  (**(code **)(_g_phyFuns + 0x70))(0,1,0x80,*(code **)(_g_phyFuns + 0x70));
-  (**(code **)(_g_phyFuns + 0x70))(0,2,0,*(code **)(_g_phyFuns + 0x70));
-  (**(code **)(_g_phyFuns + 0x70))(4,2,0,*(code **)(_g_phyFuns + 0x70));
-  (**(code **)(_g_phyFuns + 0x70))(1,1,0x7c,*(code **)(_g_phyFuns + 0x70));
-  (**(code **)(_g_phyFuns + 0x70))(1,2,0,*(code **)(_g_phyFuns + 0x70));
-  (**(code **)(_g_phyFuns + 0x70))(4,1,0x83,*(code **)(_g_phyFuns + 0x70));
+  pbus_debugmode();
+  pbus_force_test(0,1,0xc);
+  pbus_force_test(1,1,0);
+  pbus_force_test(1,2,0);
   do {
-    (**(code **)(_g_phyFuns + 0x70))(4,1,param_1,*(code **)(_g_phyFuns + 0x70));
-    (**(code **)(_g_phyFuns + 0x70))(5,1,param_3,*(code **)(_g_phyFuns + 0x70));
-    ets_delay_us(2000);
-    (**(code **)(_g_phyFuns + 0x70))(4,1,param_2,*(code **)(_g_phyFuns + 0x70));
-    (**(code **)(_g_phyFuns + 0x70))(5,1,param_4,*(code **)(_g_phyFuns + 0x70));
-    ets_delay_us(100);
-    iVar1 = GetStopCmd();
-  } while (iVar1 != 0);
-  (**(code **)(_g_phyFuns + 0x70))(4,1,param_1,*(code **)(_g_phyFuns + 0x70));
-                    /* WARNING: Could not recover jumptable at 0x000114a8. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x70))(5,1,param_3);
+    pbus_force_test(0,1,0xc);
+    pbus_force_test(3,1,param_3 << 3 | 5);
+    pbus_force_test(3,2,0xf);
+    if (param_1 == 1) {
+      uVar1 = 0;
+      do {
+        uVar3 = uVar1 | 0xf;
+        uVar1 = uVar1 + 0x10;
+        pbus_force_test(3,2,uVar3);
+        ets_delay_us(param_2);
+      } while (uVar1 != 0x80);
+    }
+    else {
+      pbus_force_test(3,2,0x7f);
+    }
+    ets_delay_us(1000);
+    if (param_1 == 1) {
+      uVar1 = 0x70;
+      do {
+        uVar3 = uVar1 | 0xf;
+        uVar1 = uVar1 - 0x10;
+        pbus_force_test(3,2,uVar3);
+        ets_delay_us(param_2);
+      } while (uVar1 != 0xfff0);
+    }
+    else {
+      pbus_force_test(3,2,0xf);
+    }
+    pbus_force_test(3,2,0);
+    pbus_force_test(3,1,0);
+    pbus_force_test(0,1,0);
+    pbus_force_test(3,1,0);
+    ets_delay_us(200);
+    iVar2 = GetStopCmd();
+  } while (iVar2 != 0);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> phy_test.o -> start_tx_tone
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,9 +27,7 @@ void start_tx_tone(undefined1 param_1,int param_2,undefined1 param_3,undefined1 
     uVar1 = (ushort)((param_2 << 5) / 5) & 0x3ff;
     uVar2 = (ushort)((param_5 << 5) / 5) & 0x3ff;
   }
-                    /* WARNING: Could not recover jumptable at 0x0001008c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_g_phyFuns + 0x98))(param_1,uVar1,param_3,param_4,uVar2,param_6);
+  start_tx_tone_step(param_1,uVar1,param_3,param_4,uVar2,param_6);
   return;
 }
 

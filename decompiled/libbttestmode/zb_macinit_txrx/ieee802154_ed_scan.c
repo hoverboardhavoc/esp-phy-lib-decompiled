@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_ed_scan
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void ieee802154_ed_scan(uint param_1,uint param_2)
   _DAT_600a3000 = 0x44;
   do {
     if ((_DAT_600a3064 & 0x40) != 0) {
-      phy_printf(&_LC5,(int)(char)((uint)_DAT_600a3054 >> 0x10));
+      phy_printf(&_LC7,(int)(char)((uint)_DAT_600a3054 >> 0x10));
       _DAT_600a3064 = _DAT_600a3064 | 0x40;
       return;
     }

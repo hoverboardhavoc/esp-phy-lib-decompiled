@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> read_efuse_byte
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ uint read_efuse_byte(int param_1,uint param_2,int param_3,uint param_4)
   int iVar1;
   uint uVar2;
   uint uVar3;
-  undefined1 *puVar4;
+  int iVar4;
   
   iVar1 = 0x44;
   if ((param_1 != 1) && (iVar1 = 0, param_1 == 2)) {
@@ -24,37 +24,37 @@ uint read_efuse_byte(int param_1,uint param_2,int param_3,uint param_4)
   }
   uVar3 = param_2 >> 2;
   if (uVar3 == 3) {
-    puVar4 = (undefined1 *)0x6000880c;
+    iVar4 = 0x6000880c;
   }
   else if (uVar3 < 4) {
     if (uVar3 == 1) {
-      puVar4 = &DAT_60008804;
+      iVar4 = 0x60008804;
     }
     else if (uVar3 < 2) {
-      puVar4 = &DAT_60008800;
+      iVar4 = 0x60008800;
     }
     else {
-      puVar4 = (undefined1 *)0x60008808;
+      iVar4 = 0x60008808;
     }
   }
   else if (uVar3 == 5) {
-    puVar4 = (undefined1 *)0x60008814;
+    iVar4 = 0x60008814;
   }
   else if (uVar3 < 5) {
-    puVar4 = (undefined1 *)0x60008810;
+    iVar4 = 0x60008810;
   }
   else if (uVar3 == 6) {
-    puVar4 = (undefined1 *)0x60008818;
+    iVar4 = 0x60008818;
   }
   else {
     if (uVar3 != 0x46) {
       uVar3 = 0;
-      goto _L531;
+      goto _L279;
     }
-    puVar4 = (undefined1 *)0x6000881c;
+    iVar4 = 0x6000881c;
   }
-  uVar3 = *(uint *)(puVar4 + iVar1);
-_L531:
+  uVar3 = *(uint *)(iVar1 + iVar4);
+_L279:
   uVar2 = 0;
   iVar1 = 1;
   do {

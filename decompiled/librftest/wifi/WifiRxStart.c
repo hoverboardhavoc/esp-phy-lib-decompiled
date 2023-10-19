@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> WifiRxStart
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,16 +10,13 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void WifiRxStart(void)
+void WifiRxStart(undefined4 param_1)
 
 {
-  _DAT_600a9804 = 0;
-  _DAT_600a9814 = 0x167ff;
-  do_rx_poll();
-  _DAT_600a9804 = 0xffffffff;
-  _DAT_600a9814 = 0x7ffff;
+  noise_check_loop(1,1);
+  bb_wdt_rst_enable(1);
+  do_rx_poll(param_1);
+  noise_check_loop(1,1);
   return;
 }
 

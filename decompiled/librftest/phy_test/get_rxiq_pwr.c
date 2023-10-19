@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> phy_test.o -> get_rxiq_pwr
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,22 +12,33 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void get_rxiq_pwr(uint *param_1)
+uint get_rxiq_pwr(void)
 
 {
   int iVar1;
-  int iVar2;
-  int iVar3;
+  uint uVar2;
+  uint uVar3;
   int iVar4;
+  uint uVar5;
+  int iVar6;
+  char cVar7;
   
-  iq_est_enable(1,0x400);
-  iVar3 = (_DAT_60044148 >> 8) + (_DAT_60044154 >> 8);
-  iVar2 = (_DAT_6004414c >> 8) - (_DAT_60044150 >> 8);
-  iVar4 = (_DAT_60044148 >> 8) - (_DAT_60044154 >> 8);
-  iVar1 = (_DAT_60044150 >> 8) + (_DAT_6004414c >> 8);
-  iq_est_disable();
-  *param_1 = (uint)(iVar2 * iVar2 + iVar3 * iVar3) >> 5;
-  param_1[1] = (uint)(iVar1 * iVar1 + iVar4 * iVar4) >> 5;
-  return;
+  cVar7 = ' ';
+  iVar1 = 0;
+  uVar2 = 0;
+  do {
+    iq_est_disable();
+    iq_est_enable(1,0x400);
+    cVar7 = cVar7 + -1;
+    iVar6 = (_DAT_600a0478 >> 8) - (_DAT_600a0484 >> 8);
+    iVar4 = (_DAT_600a0480 >> 8) + (_DAT_600a047c >> 8);
+    uVar3 = iVar4 * iVar4 + iVar6 * iVar6;
+    uVar5 = uVar2 + uVar3;
+    iVar1 = iVar1 + (int)((ulonglong)((longlong)iVar6 * (longlong)iVar6) >> 0x20) +
+                    (int)((ulonglong)((longlong)iVar4 * (longlong)iVar4) >> 0x20) +
+                    (uint)(uVar3 < (uint)(iVar6 * iVar6)) + (uint)(uVar5 < uVar2);
+    uVar2 = uVar5;
+  } while (cVar7 != '\0');
+  return uVar5 >> 5 | iVar1 * 0x8000000;
 }
 

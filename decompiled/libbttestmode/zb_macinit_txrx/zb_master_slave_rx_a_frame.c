@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_master_slave_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,24 +19,25 @@ zb_master_slave_rx_a_frame
 
 {
   int iVar1;
-  uint uVar2;
-  int iVar3;
+  int iVar2;
+  uint uVar3;
   
-  iVar3 = _DAT_600ad000;
   _DAT_600a3000 = 0x42;
+  iVar1 = phy_time_now();
   while( true ) {
-    iVar1 = GetStopCmd();
-    if ((iVar1 == 0) || ((param_1 != 0 && (param_1 < (uint)(_DAT_600ad000 - iVar3))))) {
+    iVar2 = GetStopCmd();
+    if ((iVar2 == 0) ||
+       ((param_1 != 0 && (iVar2 = phy_time_now(), param_1 < (uint)(iVar2 - iVar1))))) {
       _DAT_600a3000 = 0x45;
       return 1;
     }
     if (param_7 == 0) {
-      uVar2 = _DAT_600a3064 & 2;
+      uVar3 = _DAT_600a3064 & 2;
     }
     else {
-      uVar2 = _DAT_600a3064 & 4;
+      uVar3 = _DAT_600a3064 & 4;
     }
-    if (uVar2 != 0) break;
+    if (uVar3 != 0) break;
     if ((_DAT_600a3064 & 0x10) != 0) {
       _DAT_600a3064 = _DAT_600a3064 | 0x10;
       *param_3 = *param_3 + 1;
@@ -45,18 +46,18 @@ zb_master_slave_rx_a_frame
   }
   _DAT_600a3064 = _DAT_600a3064 | 2;
   *param_2 = *param_2 + 1;
-  iVar3 = (int)*(char *)(rx_frame + 0x10b13);
-  *param_4 = *param_4 + iVar3;
+  iVar1 = (int)*(char *)(rx_frame + 0x10c8b);
+  *param_4 = *param_4 + iVar1;
   if (*param_2 == 1) {
-    *param_5 = iVar3;
-    *param_6 = iVar3;
+    *param_5 = iVar1;
+    *param_6 = iVar1;
     return 0;
   }
-  if (*param_5 < iVar3) {
-    *param_5 = iVar3;
+  if (*param_5 < iVar1) {
+    *param_5 = iVar1;
   }
-  if (iVar3 < *param_6) {
-    *param_6 = iVar3;
+  if (iVar1 < *param_6) {
+    *param_6 = iVar1;
     return 0;
   }
   return 0;

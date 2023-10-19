@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> rf_test.o -> ESP_TEST_GPIO
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,16 +19,15 @@ void ESP_TEST_GPIO(int *param_1,int param_2)
   byte bVar2;
   uint uVar3;
   undefined4 uVar4;
-  undefined4 uVar5;
+  undefined4 *puVar5;
   undefined4 *puVar6;
-  undefined4 *puVar7;
-  uint uVar8;
-  uint *puVar9;
-  int *piVar10;
-  uint uVar11;
-  uint *puVar12;
-  byte bVar13;
-  uint uVar14;
+  uint uVar7;
+  uint *puVar8;
+  int *piVar9;
+  uint uVar10;
+  uint *puVar11;
+  byte bVar12;
+  uint uVar13;
   uint local_48 [5];
   
   local_48[0] = 0;
@@ -36,70 +35,68 @@ void ESP_TEST_GPIO(int *param_1,int param_2)
   phy_printf("GPIO TEST MODE\n");
   _DAT_6000f018 = _DAT_6000f018 & 0xffffbdff;
   ets_delay_us(10000);
-  puVar6 = (undefined4 *)&DAT_60090004;
-  puVar7 = &ini_gpio_val;
+  puVar5 = (undefined4 *)&DAT_60090004;
+  puVar6 = &ini_gpio_val;
   do {
-    uVar5 = *puVar6;
+    uVar4 = *puVar5;
+    puVar5 = puVar5 + 1;
+    *puVar6 = uVar4;
     puVar6 = puVar6 + 1;
-    *puVar7 = uVar5;
-    puVar7 = puVar7 + 1;
-  } while (puVar6 != (undefined4 *)0x60090064);
+  } while (puVar5 != (undefined4 *)0x60090074);
   bVar2 = 0;
-  piVar10 = param_1;
+  piVar9 = param_1;
   do {
-    uVar14 = 0;
-    bVar13 = bVar2;
+    uVar13 = 0;
+    bVar12 = bVar2;
     do {
-      if ((bVar13 < 0x18) && (uVar8 = *piVar10 >> (uVar14 & 0x1f) & 3, uVar8 != 1)) {
-        if (uVar8 == 2) {
-          uVar5 = 2;
+      if ((bVar12 < 0x1c) && (uVar7 = *piVar9 >> (uVar13 & 0x1f) & 3, uVar7 != 1)) {
+        if (uVar7 == 2) {
           uVar4 = 0;
         }
         else {
-          if (uVar8 != 3) {
-            if (uVar8 != 0) {
+          if (uVar7 != 3) {
+            if (uVar7 != 0) {
               phy_printf("gpio setting error!\n");
             }
-            goto _L150;
+            goto _L96;
           }
-          uVar5 = 3;
           uVar4 = 1;
         }
-        dig_gpio_out(bVar13,uVar4,uVar5);
+        dig_gpio_out(bVar12,uVar4,2);
       }
-_L150:
-      bVar13 = bVar13 + 1;
-      uVar14 = uVar14 + 2;
-    } while (uVar14 != 0x20);
+_L96:
+      bVar12 = bVar12 + 1;
+      uVar13 = uVar13 + 2;
+    } while (uVar13 != 0x20);
     bVar2 = bVar2 + 0x10;
-    piVar10 = piVar10 + 1;
+    piVar9 = piVar9 + 1;
     if (bVar2 == 0x20) {
-      puVar12 = local_48;
-      uVar14 = 0;
+      puVar11 = local_48;
+      uVar13 = 0;
       do {
-        uVar8 = (uVar14 & 0x3f) << 2;
-        uVar11 = 0;
+        uVar7 = (uVar13 & 0x3f) << 2;
+        uVar10 = 0;
         do {
-          if (uVar8 < 0x18) {
-            bVar1 = (*param_1 >> (uVar11 & 0x1f) & 3U) != 1;
+          if (uVar7 < 0x1c) {
+            bVar1 = (*param_1 >> (uVar10 & 0x1f) & 3U) != 1;
             if (bVar1) {
               uVar3 = 0;
             }
             else {
-              uVar3 = dig_gpio_in(uVar8);
+              uVar3 = dig_gpio_in(uVar7);
               uVar3 = uVar3 & 0xff;
             }
-            *puVar12 = ((uint)!bVar1 << 1 | uVar3) << (uVar11 & 0x1f) | *puVar12;
+            *puVar11 = ((uint)!bVar1 << 1 | uVar3) << (uVar10 & 0x1f) | *puVar11;
           }
-          uVar11 = uVar11 + 2;
-          uVar8 = uVar8 + 1 & 0xff;
-        } while (uVar11 != 0x20);
-        puVar9 = (uint *)(param_2 + uVar14);
-        uVar14 = uVar14 + 4;
-        *puVar9 = *puVar12;
-        puVar12 = puVar12 + 1;
+          uVar10 = uVar10 + 2;
+          uVar7 = uVar7 + 1 & 0xff;
+        } while (uVar10 != 0x20);
+        puVar8 = (uint *)(param_2 + uVar13);
+        uVar13 = uVar13 + 4;
+        *puVar8 = *puVar11;
+        puVar11 = puVar11 + 1;
         param_1 = param_1 + 1;
-      } while (uVar14 != 8);
+      } while (uVar13 != 8);
       return;
     }
   } while( true );

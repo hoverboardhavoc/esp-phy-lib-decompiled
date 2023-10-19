@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> test_mem_time
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,43 +12,41 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void test_mem_time(int param_1,int param_2,undefined4 param_3)
+void test_mem_time(int param_1,int param_2)
 
 {
-  undefined4 uVar1;
-  char cVar2;
+  int iVar1;
+  int iVar2;
+  char cVar3;
   
-  cVar2 = 'd';
+  iVar1 = phy_time_now();
+  cVar3 = 'd';
   if (param_1 == 0) {
     if (param_2 == 0) {
       do {
-        cVar2 = cVar2 + -1;
+        cVar3 = cVar3 + -1;
         _DAT_600a0bfc = 0;
-        uVar1 = param_3;
-      } while (cVar2 != '\0');
+      } while (cVar3 != '\0');
     }
     else {
       do {
-        cVar2 = cVar2 + -1;
+        cVar3 = cVar3 + -1;
         _DAT_600a0bfc = 0;
-        uVar1 = param_3;
-      } while (cVar2 != '\0');
+      } while (cVar3 != '\0');
     }
+  }
+  else if (param_2 == 0) {
+    do {
+      cVar3 = cVar3 + -1;
+    } while (cVar3 != '\0');
   }
   else {
-    uVar1 = _DAT_600a0bfc;
-    if (param_2 == 0) {
-      do {
-        cVar2 = cVar2 + -1;
-      } while (cVar2 != '\0');
-    }
-    else {
-      do {
-        cVar2 = cVar2 + -1;
-      } while (cVar2 != '\0');
-    }
+    do {
+      cVar3 = cVar3 + -1;
+    } while (cVar3 != '\0');
   }
-  phy_printf("time=%dus\n",0,uVar1);
+  iVar2 = phy_time_now();
+  phy_printf("time=%dus\n",iVar2 - iVar1);
   return;
 }
 

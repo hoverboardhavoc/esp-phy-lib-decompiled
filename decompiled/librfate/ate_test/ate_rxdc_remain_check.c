@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librfate -> ate_test.o -> ate_rxdc_remain_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,46 +10,42 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void ate_rxdc_remain_check(int param_1)
 
 {
-  uint uVar1;
-  char cVar2;
-  short sVar3;
-  int *piVar4;
+  char cVar1;
+  short sVar2;
+  int *piVar3;
+  char cVar4;
   char cVar5;
   int iVar6;
   int *piVar7;
   int *piVar8;
   int *piVar9;
-  uint uVar10;
   char local_a8 [4];
   char cStack_a4;
   char cStack_a0;
   undefined1 auStack_9c [12];
   undefined1 auStack_90 [12];
-  int local_84 [21];
+  int local_84 [23];
   
+  set_rxclk_en(1);
+  piVar8 = local_84;
   set_txclk_en(1);
-  uVar1 = _DAT_600a702c;
-  piVar4 = local_84;
-  sVar3 = 1;
-  piVar8 = piVar4;
+  sVar2 = 1;
+  piVar3 = piVar8;
   do {
-    chip_v7_set_chan(sVar3,0);
-    _DAT_600a702c = _DAT_600a702c | 0x800000;
-    uVar10 = 0x48000000;
-    piVar9 = piVar8;
+    chip_v7_set_chan(sVar2,0);
+    cVar1 = '@';
+    piVar9 = piVar3;
     do {
-      _DAT_600a702c = _DAT_600a702c & 0xffffff | uVar10;
+      force_rx_gain(1,cVar1,1);
       dc_iq_est(1,4000,local_a8);
       dc_iq_est(1,4000,auStack_9c);
       dc_iq_est(1,4000,auStack_90);
       iVar6 = (int)cStack_a0;
       piVar7 = (int *)local_a8;
-      cVar2 = local_a8[0];
+      cVar4 = local_a8[0];
       cVar5 = cStack_a4;
       do {
         if (*piVar7 < 0x80) {
@@ -69,47 +65,47 @@ void ate_rxdc_remain_check(int param_1)
           piVar7[1] = 0x7f;
         }
         if (piVar7[2] < iVar6) {
-          cVar2 = (char)*piVar7;
+          cVar4 = (char)*piVar7;
           cVar5 = (char)piVar7[1];
           iVar6 = (int)(char)piVar7[2];
         }
         piVar7 = piVar7 + 3;
-      } while (piVar4 != piVar7);
-      *(char *)piVar9 = cVar2;
+      } while (piVar8 != piVar7);
+      cVar1 = cVar1 + -6;
+      *(char *)piVar9 = cVar4;
       *(char *)((int)piVar9 + 1) = cVar5;
       *(char *)((int)piVar9 + 2) = (char)iVar6;
-      uVar10 = uVar10 + 0xfa000000;
       piVar9 = (int *)((int)piVar9 + 3);
-    } while (uVar10 != 0x30000000);
-    sVar3 = sVar3 + 2;
-    piVar8 = piVar8 + 3;
-  } while (sVar3 != 0xf);
-  _DAT_600a702c = _DAT_600a702c & 0xff7fffff;
+    } while (cVar1 != '(');
+    sVar2 = sVar2 + 2;
+    piVar3 = piVar3 + 3;
+  } while (sVar2 != 0xf);
+  set_rxclk_en(0);
   set_txclk_en(0);
-  _DAT_600a702c = _DAT_600a702c & 0x7fffff | uVar1 & 0xff000000;
+  force_rx_gain(0,0x2e,0);
   if (param_1 != 0) {
-    phy_printf("wifi_rxdc_remain:\n");
+    phy_printf("rxdc_remain:\n");
   }
   iVar6 = 1;
   do {
     if (param_1 != 0) {
       phy_printf("chan=%02d, ",iVar6);
     }
-    cVar2 = '\x04';
-    piVar8 = piVar4;
+    cVar1 = '\x04';
+    piVar3 = piVar8;
     do {
       if (param_1 != 0) {
-        phy_printf("%d,%d,%d; ",(int)(char)*piVar8,(int)*(char *)((int)piVar8 + 1),
-                   (int)*(char *)((int)piVar8 + 2));
+        phy_printf("%d,%d,%d; ",(int)(char)*piVar3,(int)*(char *)((int)piVar3 + 1),
+                   (int)*(char *)((int)piVar3 + 2));
       }
-      cVar2 = cVar2 + -1;
-      piVar8 = (int *)((int)piVar8 + 3);
-    } while (cVar2 != '\0');
+      cVar1 = cVar1 + -1;
+      piVar3 = (int *)((int)piVar3 + 3);
+    } while (cVar1 != '\0');
     if (param_1 != 0) {
-      phy_printf(&_LC9);
+      phy_printf(&_LC11);
     }
     iVar6 = iVar6 + 2;
-    piVar4 = piVar4 + 3;
+    piVar8 = piVar8 + 3;
   } while (iVar6 != 0xf);
   return;
 }

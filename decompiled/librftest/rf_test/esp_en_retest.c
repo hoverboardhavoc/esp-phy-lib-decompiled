@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> rf_test.o -> esp_en_retest
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,7 @@ void esp_en_retest(void)
 {
   phy_init();
   phy_printf("\n\nMODULE_TEST START!!!\n\n");
-  module_test_print();
-  target_power_backoff(8);
+  module_test_cal_print();
   ate_rxdc_remain_check(1);
   phy_printf("\n\nMODULE_ANA TEST EDN!!!\n");
   ate_txframe_dut(100000,1,0x94c,0,1);

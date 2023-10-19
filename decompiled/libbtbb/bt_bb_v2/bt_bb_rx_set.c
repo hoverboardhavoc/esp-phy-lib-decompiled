@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
- * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
- * Upstream date: 2023-05-22 12:26:13 +0800
- * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,6 +38,7 @@ void bt_bb_rx_set(int param_1)
   _DAT_600a284c = _DAT_600a284c & 0xfbffffff;
   _DAT_600a288c = _DAT_600a288c & 0xdfffffff;
   _DAT_600a2054 = _DAT_600a2054 & 0xffffffe0 | 0x14;
+  _DAT_600a204c = _DAT_600a204c & 0x7ffffff | 0x60000000;
   _DAT_600a2000 = _DAT_600a2000 | 1;
   _DAT_600a2c0c = _DAT_600a2c0c & 0xfffffeff;
   _DAT_600a2c00 = _DAT_600a2c00 & 0xfff | 0x400000;

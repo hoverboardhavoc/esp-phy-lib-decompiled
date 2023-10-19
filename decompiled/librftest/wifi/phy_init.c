@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> wifi.o -> phy_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,10 +17,9 @@ void phy_init(void)
 {
   undefined1 auStack_778 [1908];
   
-  _set_mac_filter = 0;
-  DAT_00017039 = 0;
+  _rtc_reset_cause = 0;
+  DAT_0001508a = 0;
   register_chipv7_phy(init_param_default,auStack_778,2);
-  phy_wifi_enable_set(1);
   return;
 }
 

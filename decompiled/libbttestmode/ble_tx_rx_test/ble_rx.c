@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,55 +10,50 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Type propagation algorithm not settling */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ble_rx(undefined4 param_1,undefined4 param_2)
+void ble_rx(int param_1,undefined4 param_2)
 
 {
   int iVar1;
-  int iStack_40;
-  int aiStack_3c [10];
+  int iVar2;
+  int iVar3;
   
-  iStack_40 = 0;
-  aiStack_3c[0] = 0;
-  aiStack_3c[1] = 0;
-  aiStack_3c[2] = 0;
-  aiStack_3c[3] = 0;
-  aiStack_3c[4] = 0;
-  aiStack_3c[5] = 0;
-  aiStack_3c[6] = 0;
-  phy_set_clk_conf(2);
-  ble_rx_opt(1,param_1,0);
-  ble_rx_init(param_1,param_2);
+  chip_v7_set_chan(1,0);
+  bt_track_pll_cap();
+  xtal_freq_rx_cal(1,(byte)ch_map2[param_1] + 2,0);
+  ble_radio_init();
+  ble_whitening_enable(0);
+  iVar3 = 0;
+  iVar1 = 0;
   do {
-    iVar1 = ble_rx_a_frame(param_1,param_2,&iStack_40,aiStack_3c,aiStack_3c + 1,aiStack_3c + 2,
-                           aiStack_3c + 3,aiStack_3c + 4);
-  } while (iVar1 != 0);
-  if (iStack_40 == 0) {
-    if ((_DAT_60091004 & 0x100) == 0) {
-      _DAT_60091004 = _DAT_60091004 | 0x100;
+    ble_rx_start(param_1,param_2);
+    while (_DAT_600a1110 == 0) {
+      iVar2 = GetStopCmd();
+      if (iVar2 == 0) {
+        _DAT_600a1010 = 1;
+        _DAT_6004905c = 1;
+        if (iVar1 == 0) {
+          if ((_DAT_60091004 & 0x100) == 0) {
+            _DAT_60091004 = _DAT_60091004 | 0x100;
+          }
+          else {
+            _DAT_60091004 = _DAT_60091004 & 0xfffffeff;
+          }
+        }
+        phy_printf("%x %x %x %x %x %x %x %d %d %d p %d %d %d %d\n",iVar1 + iVar3,iVar1,0,0,iVar3,0,0
+                  );
+        xtal_freq_rx_cal(0,(byte)ch_map2[param_1] + 2,0);
+        return;
+      }
+    }
+    iVar2 = ble_rx_check_status();
+    if (iVar2 == 0) {
+      iVar1 = iVar1 + 1;
     }
     else {
-      _DAT_60091004 = _DAT_60091004 & 0xfffffeff;
+      iVar3 = iVar3 + 1;
     }
-  }
-  ble_rx_opt(0,param_1,0);
-  _short_log_en = 0;
-  if (iStack_40 != 0) {
-    _short_log_en = aiStack_3c[3] / iStack_40;
-  }
-  esp_rx_valid = 2;
-  _esp_rx_result = aiStack_3c[3];
-  ___floatunsidf = iStack_40;
-  if ((_short_log_en & 0xff) == 0) {
-    phy_printf("%x %x %x %x %x %x %x %d %d %d p %d %d %d %d\n",iStack_40 + aiStack_3c[0],iStack_40,0
-               ,0,0,0);
-  }
-  else {
-    phy_printf("rx_num: %d rx_rssi: %d\n");
-  }
-  phy_set_clk_conf(0);
-  return;
+  } while( true );
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,30 +12,37 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 zb_tx_a_frame(int *param_1,int *param_2,int param_3)
+undefined4 zb_tx_a_frame(int *param_1,int *param_2,int param_3,undefined1 param_4)
 
 {
-  int iVar1;
-  uint uVar2;
+  undefined4 uVar1;
+  int iVar2;
+  uint uVar3;
   
   _DAT_600a3000 = 0x41;
   do {
-    uVar2 = _DAT_600a3064 & 1;
+    uVar3 = _DAT_600a3064 & 1;
     if (param_3 != 0) {
-      uVar2 = _DAT_600a3064 & 8;
+      uVar3 = _DAT_600a3064 & 8;
     }
-    if (uVar2 != 0) {
+    if (uVar3 != 0) {
       *param_1 = *param_1 + 1;
       _DAT_600a3064 = _DAT_600a3064 | 1;
-      return 0;
+_L77:
+      uVar1 = 0;
+      goto _L67;
     }
     if ((_DAT_600a3064 & 0x20) != 0) {
       *param_2 = *param_2 + 1;
       _DAT_600a3084 = _DAT_600a3084 | 0x20;
-      return 0;
+      goto _L77;
     }
-    iVar1 = GetStopCmd();
-  } while (iVar1 != 0);
-  return 1;
+    iVar2 = GetStopCmd();
+  } while (iVar2 != 0);
+  uVar1 = 1;
+_L67:
+  bt_track_pll_cap();
+  bt_track_pbus_update(param_4);
+  return uVar1;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> bb_common.o -> tx_ack_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,92 +12,88 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void tx_ack_start(undefined4 param_1,uint param_2,char param_3,uint param_4,int param_5,
-                 uint *param_6,undefined4 param_7)
+void tx_ack_start(uint param_1,uint param_2,uint param_3,int param_4,uint *param_5)
 
 {
-  uint uVar1;
+  int iVar1;
   int iVar2;
   uint *puVar3;
-  uint *puVar4;
-  uint uVar5;
-  int iVar6;
+  uint uVar4;
+  int iVar5;
+  uint uVar6;
   uint uVar7;
   uint uVar8;
   uint uVar9;
   uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  int iVar13;
+  uint uStack_54;
+  uint uStack_50;
   
-  puVar3 = (uint *)Plcp0AddrGet(0);
-  puVar4 = (uint *)ConfAddrGet(0);
+  puVar3 = (uint *)ConfAddrGet(10);
   _tx_pocket_num = 0;
-  *puVar4 = (param_4 & 0xf) << 0x18 | *puVar4 & 0xf0ffffff;
-  *puVar3 = *puVar3 & 0xf8ffffff | 0x1000000;
-  target_power_backoff((int)param_3);
-  set_rate_power_index(param_1);
-  uVar10 = 0;
-  uVar12 = 0;
-  iVar13 = 0;
+  *puVar3 = (param_3 & 0xf) << 0x18 | *puVar3 & 0xf0ffffff;
+  uStack_50 = 0;
+  uVar6 = 0;
   iVar2 = 0;
-  uVar7 = 0xfffffb00;
-  uVar11 = 0;
-  uVar9 = 0xfffffb00;
-  uVar8 = 0;
-  for (uVar1 = 0; uVar1 < param_2; uVar1 = uVar1 + 1) {
-    *puVar4 = *puVar4 & 0xffc00fff | 0xa000;
-    set_tx_rate(0,param_1,param_7,0,0,0);
-    uVar5 = tx_data_frame(50000);
-    if ((uVar5 & 0xff00) == 0) {
-      uVar5 = (int)_DAT_600a40ac >> 0x18;
-      param_6[5] = _DAT_600a40ac >> 0x10 & 0xff;
-      if ((int)uVar5 < (int)uVar8) {
-        uVar8 = uVar5;
+  iVar1 = 0;
+  uVar8 = 0xfffffb00;
+  uStack_54 = 0;
+  uVar10 = 0xfffffb00;
+  uVar9 = 0;
+  for (uVar7 = 0; uVar7 < param_1; uVar7 = uVar7 + 1) {
+    tx_add_pocketnum();
+    if (param_2 == 0) {
+      param_2 = 10;
+    }
+    *puVar3 = (param_2 & 0x3ff) << 0xc | *puVar3 & 0xffc00fff;
+    uVar4 = tx_data_frame(50000);
+    if ((uVar4 & 0xff000000) == 0) {
+      uVar4 = (uint)DAT_600123f4;
+      if ((int)uVar4 < (int)uVar9) {
+        uVar9 = uVar4;
       }
-      if ((int)uVar9 < (int)uVar5) {
-        uVar9 = uVar5;
+      if ((int)uVar10 < (int)uVar4) {
+        uVar10 = uVar4;
       }
-      iVar2 = iVar2 + uVar5;
-      if (uVar1 < 0x20) {
-        uVar10 = uVar10 | 1 << (uVar1 & 0x1f);
+      iVar1 = (int)((iVar1 + (uVar4 & 0xffff)) * 0x10000) >> 0x10;
+      if (uVar7 < 0x20) {
+        uStack_50 = uStack_50 | 1 << (uVar7 & 0x1f);
       }
       rx_ack_num = rx_ack_num + 1;
-      uVar12 = uVar12 + 1 & 0xffff;
-      if (4 < uVar12) {
-        if ((int)uVar5 < (int)uVar11) {
-          uVar11 = uVar5;
+      uVar6 = uVar6 + 1 & 0xffff;
+      if (4 < uVar6) {
+        if ((int)uVar4 < (int)uStack_54) {
+          uStack_54 = uVar4;
         }
-        if ((int)uVar7 < (int)uVar5) {
-          uVar7 = uVar5;
+        if ((int)uVar8 < (int)uVar4) {
+          uVar8 = uVar4;
         }
-        iVar13 = iVar13 + uVar5;
+        iVar2 = (int)((iVar2 + (uVar4 & 0xffff)) * 0x10000) >> 0x10;
       }
     }
-    for (iVar6 = 0; iVar6 != param_5; iVar6 = iVar6 + 1) {
+    for (iVar5 = 0; iVar5 != param_4; iVar5 = iVar5 + 1) {
       ets_delay_us(1000);
     }
   }
-  if (uVar12 < 10) {
-    if (uVar12 == 0) {
-      uVar1 = 0;
-      uVar9 = 0xfffffb00;
-      uVar8 = 0;
+  if (uVar6 < 10) {
+    if (uVar6 == 0) {
+      uVar7 = 0;
+      uVar10 = 0xfffffb00;
+      uVar9 = 0;
     }
     else {
-      uVar1 = (iVar2 * 10) / (int)uVar12;
+      uVar7 = (uint)(short)((iVar1 * 10) / (int)uVar6);
     }
   }
   else {
-    uVar1 = (iVar13 * 10) / (int)(uVar12 - 4);
-    uVar8 = uVar11;
-    uVar9 = uVar7;
+    uVar7 = (uint)(short)((iVar2 * 10) / (int)(uVar6 - 4));
+    uVar9 = uStack_54;
+    uVar10 = uVar8;
   }
-  param_6[2] = uVar1;
-  *param_6 = uVar10;
-  param_6[1] = uVar12;
-  param_6[3] = uVar9;
-  param_6[4] = uVar8;
+  param_5[2] = uVar7;
+  param_5[1] = uVar6;
+  param_5[3] = uVar10;
+  param_5[4] = uVar9;
+  *param_5 = uStack_50;
   return;
 }
 

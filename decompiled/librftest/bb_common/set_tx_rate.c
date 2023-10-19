@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: librftest -> bb_common.o -> set_tx_rate
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ void set_tx_rate(undefined4 param_1,uint param_2,uint param_3,uint param_4,int p
         *puVar1 = *puVar1 & 0xf9ffffff | 0x4000000;
         *puVar2 = *puVar2 & 0xffffff7f;
       }
-      goto _L20;
+      goto _L225;
     }
     *puVar1 = *puVar1 & 0xfffe0fff | 0xb000;
     *puVar1 = *puVar1 & 0xf9ffffff | 0x2000000;
@@ -40,7 +40,7 @@ void set_tx_rate(undefined4 param_1,uint param_2,uint param_3,uint param_4,int p
     }
   }
   *puVar2 = (param_3 & 1) << 7 | *puVar2 & 0xffffff7f;
-_L20:
+_L225:
   *puVar1 = (param_4 & 1) << 0x1b | *puVar1 & 0xf7ffffff;
   return;
 }

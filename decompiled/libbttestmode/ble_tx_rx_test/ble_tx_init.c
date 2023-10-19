@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
+ * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
+ * Upstream date: 2023-10-19 05:57:11 +0000
+ * Upstream subject: update h2 btbb for ble slave connect
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,64 +12,64 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ble_tx_init(uint param_1,char *param_2,byte param_3)
+void ble_tx_init(int param_1,int param_2,uint param_3,int param_4,undefined1 param_5)
 
 {
-  int iVar1;
-  ushort uVar2;
-  ushort uVar3;
+  uint uVar1;
+  undefined4 uVar2;
+  undefined4 extraout_a1;
+  uint uVar3;
+  int iVar4;
+  int iVar5;
   
   ble_select_phy_speed();
-  iVar1 = 0x11000;
-  uVar3 = (ushort)param_3;
-  if (param_2 != (char *)0x2) goto _L11;
-  prbs9_gen_new(&ble_radio_tx_buffer);
-  ble_radio_tx_buffer = 0x30;
-  while( true ) {
-    DAT_000110e1 = param_3;
-    _DAT_600a1830 = &ble_radio_tx_buffer;
-    _DAT_600a150c = param_1 & 0xff;
-    if (0xf < param_1) {
-      _DAT_600a150c = 0xf;
-    }
-    if (_DAT_600a1550 == 0) break;
-    param_2 = "RADIO->STATE == RADIO_STATE_STATE_Disabled";
-    iVar1 = __assert_func("ble_tx_rx_test.c",0xb4,"ble_tx_init");
-_L11:
-    if (param_2 == (char *)0x0) {
-      ble_radio_tx_buffer = 0x70;
-      iVar1 = iVar1 + 0xe0;
-      for (uVar2 = 0; uVar2 < uVar3; uVar2 = uVar2 + 1) {
-        *(undefined1 *)(iVar1 + 2) = 0x55;
-        iVar1 = iVar1 + 1;
+  ble_radio_tx_data_init(param_5,param_4);
+  uVar3 = 0xf;
+  if (param_3 < 0x10) {
+    uVar3 = param_3 & 0xff;
+  }
+  _DAT_600a150c = _DAT_600a150c & 0xffffff00 | uVar3;
+  if (dis_tx_scale == '\0') {
+    iVar4 = 0x962;
+    uVar3 = (byte)ch_map2[param_1] + 0x962;
+    if (param_2 == 2) {
+      if ((0x97d < uVar3) && (iVar4 = 0x994, uVar3 < 0x993)) {
+        iVar4 = 0x97e;
       }
-    }
-    else if (param_2 == (char *)0x1) {
-      ble_radio_tx_buffer = 0x60;
-      iVar1 = iVar1 + 0xe0;
-      for (uVar2 = 0; uVar2 < uVar3; uVar2 = uVar2 + 1) {
-        *(undefined1 *)(iVar1 + 2) = 0xf;
-        iVar1 = iVar1 + 1;
+      if (param_4 == 1) {
+        iVar5 = 0x800;
       }
-    }
-    else if (param_2 == (char *)0x4) {
-      ble_radio_tx_buffer = 0x40;
-      iVar1 = iVar1 + 0xe0;
-      for (uVar2 = 0; uVar2 < uVar3; uVar2 = uVar2 + 1) {
-        *(undefined1 *)(iVar1 + 2) = 0xff;
-        iVar1 = iVar1 + 1;
+      else {
+        if (param_4 != 0) {
+          return;
+        }
+        iVar5 = 0x85f;
       }
+      _DAT_600a0c08 =
+           (iVar5 + (uVar3 - iVar4) * -3) * 0x1000 & 0xfff000 | _DAT_600a0c08 & 0xff000fff;
+      return;
+    }
+    if ((0x97d < uVar3) && (iVar4 = 0x994, uVar3 < 0x993)) {
+      iVar4 = 0x97e;
+    }
+    if ((param_4 == 1) || (param_4 == 4)) {
+      __floatunsidf((uVar3 - iVar4) * 4);
+      uVar3 = _DAT_600a0c08;
+      __muldf3(0x33333333,0x33333333);
+      __adddf3(0,0);
     }
     else {
-      ble_radio_tx_buffer = 0x11;
-      uVar2 = 0;
-      iVar1 = iVar1 + 0xe0;
-      while (uVar2 < uVar3) {
-        uVar2 = uVar2 + 1;
-        *(char *)(iVar1 + 2) = (char)uVar2;
-        iVar1 = iVar1 + 1;
+      if (param_4 != 0) {
+        return;
       }
+      __floatunsidf((uVar3 - iVar4) * 4);
+      uVar3 = _DAT_600a0c08;
+      uVar2 = __muldf3(0x33333333,0x33333333);
+      __subdf3(0,0,uVar2,extraout_a1);
     }
+    uVar1 = __fixunsdfsi();
+    _DAT_600a0c08 = uVar1 & 0xfff | uVar3 & 0xfffff000;
+    return;
   }
   return;
 }
