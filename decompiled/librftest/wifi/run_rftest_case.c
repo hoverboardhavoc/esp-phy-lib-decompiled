@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit a8e8b9532e2874ac167d4ade7808fda70fe05820
+ * https://github.com/espressif/esp-phy-lib/commit/a8e8b9532e2874ac167d4ade7808fda70fe05820
+ * Upstream date: 2023-11-01 14:13:34 +0800
+ * Upstream subject: h2 libphy fix ble track
  * Source: librftest -> wifi.o -> run_rftest_case
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,18 +22,18 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
   int iVar5;
   uint uVar6;
   uint uVar7;
+  undefined4 uStack_58;
+  undefined4 uStack_54;
   undefined4 uStack_50;
   undefined4 uStack_4c;
   undefined4 uStack_48;
   undefined4 uStack_44;
   undefined4 uStack_40;
   undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 local_30;
-  uint uStack_2c;
-  undefined4 uStack_28;
-  undefined4 uStack_24;
+  undefined4 local_38;
+  uint uStack_34;
+  undefined4 uStack_30;
+  undefined4 uStack_2c;
   
   run_para_array_clear(param_2,param_3);
   iVar3 = strcmp(param_1,"WifiTxStart");
@@ -235,11 +235,11 @@ _L432:
     }
     iVar3 = strcmp(param_1,"rxdc_cal");
     if (iVar3 == 0) {
-      local_30 = 0x800080;
+      local_38 = 0x800080;
       set_rxclk_en(1);
       set_txclk_en(1);
-      pbus_rx_dco_cal(0x1000,&local_30,1);
-      phy_printf("%d, %d, %d, %d\n",(int)(short)local_30,(int)local_30._2_2_);
+      pbus_rx_dco_cal(0x1000,&local_38,1);
+      phy_printf("%d, %d, %d, %d\n",(int)(short)local_38,(int)local_38._2_2_);
       return 1;
     }
     iVar3 = strcmp(param_1,"phy_set_freq");
@@ -276,7 +276,7 @@ _L432:
     if (iVar3 == 0) {
       _phy_param = CONCAT31(phy_param_1,1);
       tx_pa_bb_gain = (short)*param_2;
-      DAT_00013eba = (short)param_2[1];
+      DAT_00013f1e = (short)param_2[1];
       force_tx_gain((int)(char)param_2[2],(char)param_2[3]);
       phy_printf("%s, 0x%x,0x%x,%d\n",param_1,*param_2,param_2[1],(int)(char)param_2[2],param_2[3]);
       return 1;
@@ -285,7 +285,7 @@ _L432:
     if (iVar3 == 0) {
       _phy_param = CONCAT31(phy_param_1,1);
       tx_pa_bb_gain = (short)*param_2;
-      DAT_00013eba = (short)param_2[1];
+      DAT_00013f1e = (short)param_2[1];
       force_tx_gain((int)(char)param_2[2],(char)param_2[3]);
       phy_printf("%s, 0x%x,0x%x,%d\n",param_1,*param_2,param_2[1],(int)(char)param_2[2]);
       return 1;
@@ -334,7 +334,7 @@ _L432:
     }
     iVar3 = strcmp(param_1,"print_ver");
     if (iVar3 == 0) {
-      phy_printf("phy_version: %d.%d, %s, %s\n",2,0xb,"Oct 12 2023","11:16:25");
+      phy_printf("phy_version: %d.%d, %s, %s\n",2,0xb,"Nov  1 2023","11:31:18");
       return 1;
     }
     iVar3 = strcmp(param_1,"init_print");
@@ -370,8 +370,8 @@ _L432:
     }
     iVar3 = strcmp(param_1,"txpwr_track_en");
     if (iVar3 == 0) {
-      DAT_00015091 = (undefined1)*param_2;
-      DAT_0001508f = (undefined1)param_2[2];
+      DAT_00016091 = (undefined1)*param_2;
+      DAT_0001608f = (undefined1)param_2[2];
       phy_printf("%s: track_en=%d, correct_en=%d, print_en=%d\n",param_1,*param_2 & 0xff,
                  phy_tx_pwr_print_en);
       return 1;
@@ -580,9 +580,9 @@ _L432:
           }
           iVar3 = strcmp(param_1,"dc_iq_est");
           if (iVar3 == 0) {
-            dc_iq_est_test(1,(short)*param_2,&uStack_3c,&local_30);
-            phy_printf("%d,%d,%d,%d,%d,%d,%s\n",uStack_3c,uStack_38,uStack_34,local_30,uStack_2c,
-                       uStack_28,param_1);
+            dc_iq_est_test(1,(short)*param_2,&uStack_44,&local_38);
+            phy_printf("%d,%d,%d,%d,%d,%d,%s\n",uStack_44,uStack_40,uStack_3c,local_38,uStack_34,
+                       uStack_30,param_1);
             return 1;
           }
           iVar3 = strcmp(param_1,"bt_pll_track_en");
@@ -609,17 +609,17 @@ _L432:
               }
               iVar3 = strcmp(param_1,"le_master_test");
               if (iVar3 == 0) {
+                uStack_58 = 0;
+                uStack_54 = 0;
                 uStack_50 = 0;
                 uStack_4c = 0;
                 uStack_48 = 0;
                 uStack_44 = 0;
-                uStack_40 = 0;
-                uStack_3c = 0;
-                local_30 = 0;
+                local_38 = 0;
                 le_master_test((char)*param_2,param_2[1] + 1 & 0xff,(char)param_2[2],
-                               (short)param_2[3],param_2[4],&uStack_50,&uStack_4c,&uStack_48);
-                phy_printf("le_txrx_num: %d, %d, %d,",uStack_50,uStack_48,uStack_44);
-                phy_printf("le_rssi: avg=%d, max=%d, min=%d\n",uStack_40,uStack_3c,local_30);
+                               (short)param_2[3],param_2[4],&uStack_58,&uStack_54,&uStack_50);
+                phy_printf("le_txrx_num: %d, %d, %d,",uStack_58,uStack_50,uStack_4c);
+                phy_printf("le_rssi: avg=%d, max=%d, min=%d\n",uStack_48,uStack_44,local_38);
                 phy_printf("%s %d, %d, %d, %d, %d\n",param_1,*param_2,param_2[1],param_2[2],
                            param_2[3],param_2[4]);
                 return 1;
@@ -632,17 +632,17 @@ _L432:
               }
               iVar3 = strcmp(param_1,"zb_master_test");
               if (iVar3 == 0) {
+                uStack_58 = 0;
+                uStack_54 = 0;
                 uStack_50 = 0;
                 uStack_4c = 0;
                 uStack_48 = 0;
                 uStack_44 = 0;
-                uStack_40 = 0;
-                uStack_3c = 0;
-                local_30 = 0;
-                zb_master_test(*param_2,param_2[1],param_2[2],param_2[3],(char)param_2[4],&uStack_50
-                               ,&uStack_4c,&uStack_48);
-                phy_printf("zb_txrx_num: %d, %d, ",uStack_50,uStack_48);
-                phy_printf("zb_rssi: avg=%d, max=%d, min=%d\n",uStack_40,uStack_3c,local_30);
+                local_38 = 0;
+                zb_master_test(*param_2,param_2[1],param_2[2],param_2[3],(char)param_2[4],&uStack_58
+                               ,&uStack_54,&uStack_50);
+                phy_printf("zb_txrx_num: %d, %d, ",uStack_58,uStack_50);
+                phy_printf("zb_rssi: avg=%d, max=%d, min=%d\n",uStack_48,uStack_44,local_38);
                 phy_printf("%s chan=%d, pwr=%d, tx_num=%d, tx_len=%d, hw_ack_en=%d\n",param_1,
                            *param_2,param_2[1],param_2[2],param_2[3],param_2[4]);
                 return 1;
@@ -663,8 +663,8 @@ _L432:
               iVar3 = strcmp(param_1,"get_internal_vol");
               if (iVar3 == 0) {
                 get_inernal_vol(0x66,10,2,2,1,10,1,0);
-                phy_printf("%s %d,%d,%d,%d,%d\n",param_1,*param_2,local_30 & 0xffff,local_30 >> 0x10
-                           ,uStack_2c & 0xffff,uStack_2c >> 0x10);
+                phy_printf("%s %d,%d,%d,%d,%d\n",param_1,*param_2,local_38 & 0xffff,local_38 >> 0x10
+                           ,uStack_34 & 0xffff,uStack_34 >> 0x10);
                 return 1;
               }
               iVar3 = strcmp(param_1,"phy_i2c_check");
@@ -699,8 +699,8 @@ _L432:
               }
               iVar3 = strcmp(param_1,"ESP_TEST_GPIO");
               if (iVar3 == 0) {
-                ESP_TEST_GPIO(param_2,&local_30,3);
-                phy_printf("Input result:0x%x,0x%x\n",local_30,uStack_2c);
+                ESP_TEST_GPIO(param_2,&local_38,3);
+                phy_printf("Input result:0x%x,0x%x\n",local_38,uStack_34);
                 CMDSTOP_GPIO();
                 return 1;
               }
@@ -725,9 +725,9 @@ _L432:
               }
               iVar3 = strcmp(param_1,"rxiq_get_pwr");
               if (iVar3 == 0) {
-                rxiq_get_pwr((char)*param_2,&local_30);
-                phy_printf("%s, %d,%lld,%lld\n",param_1,*param_2,local_30,uStack_2c,uStack_28,
-                           uStack_24);
+                rxiq_get_pwr((char)*param_2,&local_38);
+                phy_printf("%s, %d,%lld,%lld\n",param_1,*param_2,local_38,uStack_34,uStack_30,
+                           uStack_2c);
                 return 1;
               }
               iVar3 = strcmp(param_1,"read_flash");
@@ -844,22 +844,33 @@ _L432:
                   ate_rxiq_cal((short)*param_2,0,1);
                 }
                 else {
-                  esp_phy_rxiq_cal(&local_30,0,1);
+                  esp_phy_rxiq_cal(&local_38,0,1);
                 }
                 phy_printf("%s %d %d %d\n",param_1,*param_2,param_2[1],param_2[2]);
                 return 1;
               }
               iVar3 = strcmp(param_1,"rxiq_cal_test");
               if (iVar3 == 0) {
-                rxiq_cal_test(&local_30,1);
+                rxiq_cal_test(&local_38,1);
                 phy_printf(&_LC60,param_1);
+                return 1;
+              }
+              iVar3 = strcmp(param_1,"get_rxiq_remain");
+              if (iVar3 == 0) {
+                uVar4 = get_rxiq_remain();
+                phy_printf("%s %d\n",param_1,uVar4);
                 return 1;
               }
               iVar3 = strcmp(param_1,"get_rxiq_pwr");
               if (iVar3 == 0) {
-                uVar6 = *param_2;
-                uVar4 = get_rxiq_pwr(uVar6 & 0xff);
-                phy_printf("%s %d %d\n",param_1,uVar6,uVar4);
+                uVar4 = get_rxiq_pwr();
+                phy_printf("%s %d\n",param_1,uVar4);
+                return 1;
+              }
+              iVar3 = strcmp(param_1,"phy_freq_cal");
+              if (iVar3 == 0) {
+                esp_phy_freq_cal((short)*param_2,1);
+                phy_printf(&_LC60,param_1);
                 return 1;
               }
               iVar3 = strcmp(param_1,"freq_rx_cal_en");

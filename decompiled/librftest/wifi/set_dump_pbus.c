@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit a8e8b9532e2874ac167d4ade7808fda70fe05820
+ * https://github.com/espressif/esp-phy-lib/commit/a8e8b9532e2874ac167d4ade7808fda70fe05820
+ * Upstream date: 2023-11-01 14:13:34 +0800
+ * Upstream subject: h2 libphy fix ble track
  * Source: librftest -> wifi.o -> set_dump_pbus
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,10 +17,10 @@ void set_dump_pbus(int param_1)
   
   if (param_1 == 0) {
     pbus_force_test(1,dump_pbus1);
-    pbus_force_test(1,1,DAT_00013e96);
-    pbus_force_test(1,2,DAT_00013e98);
-    pbus_force_test(3,1,DAT_00013e9a);
-    uVar1 = DAT_00013e9c;
+    pbus_force_test(1,1,DAT_00013efa);
+    pbus_force_test(1,2,DAT_00013efc);
+    pbus_force_test(3,1,DAT_00013efe);
+    uVar1 = DAT_00013f00;
   }
   else {
     pbus_force_test(0,1,0xc);

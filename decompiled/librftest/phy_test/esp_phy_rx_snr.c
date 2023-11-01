@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit a8e8b9532e2874ac167d4ade7808fda70fe05820
+ * https://github.com/espressif/esp-phy-lib/commit/a8e8b9532e2874ac167d4ade7808fda70fe05820
+ * Upstream date: 2023-11-01 14:13:34 +0800
+ * Upstream subject: h2 libphy fix ble track
  * Source: librftest -> phy_test.o -> esp_phy_rx_snr
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void esp_phy_rx_snr(undefined4 param_1,int param_2,int param_3)
   for (; iVar7 = param_2 + uVar3, iVar7 * 0x1000000 >> 0x18 < param_3; uVar3 = uVar3 + 1) {
     set_rf_freq_offset(0,param_1,iVar7 * 0x10000 >> 0x10);
     start_tx_tone_step(1,0x40,0,0,0,0);
-    uVar4 = get_rxiq_pwr(0x10);
+    uVar4 = get_rxiq_pwr();
     iq_est_disable();
     iq_est_enable(1,0x1000);
     uVar5 = get_iq_est_snr(auStack_60,0xc,0,0x7fe53,0x7fe53);

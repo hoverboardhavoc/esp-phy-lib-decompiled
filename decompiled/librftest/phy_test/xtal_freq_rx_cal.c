@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit a8e8b9532e2874ac167d4ade7808fda70fe05820
+ * https://github.com/espressif/esp-phy-lib/commit/a8e8b9532e2874ac167d4ade7808fda70fe05820
+ * Upstream date: 2023-11-01 14:13:34 +0800
+ * Upstream subject: h2 libphy fix ble track
  * Source: librftest -> phy_test.o -> xtal_freq_rx_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ void xtal_freq_rx_cal(int param_1,short param_2,int param_3)
     }
     i2c_writeReg_Mask(0x6a,0,1,7,4,uVar1 & 0xff);
     ets_delay_us(10);
-    uVar3 = get_rxiq_pwr(0x10);
+    uVar3 = get_rxiq_pwr();
     if ((uVar4 == 0) || (uVar3 < unaff_s2)) {
       uVar2 = uVar1 & 0xff;
       unaff_s2 = uVar3;
