@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3daf842446056002dcdb12866001c3d567f1abd9
- * https://github.com/espressif/esp-phy-lib/commit/3daf842446056002dcdb12866001c3d567f1abd9
- * Upstream date: 2022-10-21 09:45:04 +0800
- * Upstream subject: C3 S3 C2 fix temperature_sensor issue that have conflict with with idf
+ * Last changed at upstream commit e3222517e339e9301dd7f432fa3e052cf44d325f
+ * https://github.com/espressif/esp-phy-lib/commit/e3222517e339e9301dd7f432fa3e052cf44d325f
+ * Upstream date: 2023-11-22 19:43:16 +0800
+ * Upstream subject: fix c2 rx bug when phy_init_param_set(0)
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set_1
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,6 +28,7 @@ void bt_bb_v2_rx_set_1(void)
   bt_bb_rx_dpo_set();
   bt_bb_rx_filter_sel();
   _DAT_6004684c = _DAT_6004684c & 0xf7ffffff;
+  _DAT_60046020 = _DAT_60046020 & 0xffffc3ff | 0x1800;
   return;
 }
 
