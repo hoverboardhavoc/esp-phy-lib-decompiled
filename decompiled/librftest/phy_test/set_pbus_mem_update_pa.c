@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: librftest -> phy_test.o -> set_pbus_mem_update_pa
  *
  * (C) Espressif, Apache License 2.0.
@@ -44,7 +44,7 @@ void set_pbus_mem_update_pa(int param_1,uint param_2)
   uint uStack_18;
   undefined4 uStack_14;
   
-  memcpy(local_9c,&_LANCHOR2,0xd);
+  memcpy(local_9c,&_LANCHOR3,0xd);
   pbVar6 = local_9c;
   do {
     if (param_2 < *pbVar6) {
@@ -73,7 +73,7 @@ void set_pbus_mem_update_pa(int param_1,uint param_2)
   puVar9 = &local_50;
   iVar4 = 0x10;
   iVar5 = 0;
-  uVar3 = 9;
+  uVar3 = 0xe;
   while( true ) {
     uVar8 = uVar3 + iVar4;
     _DAT_600a08f4 =

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: librftest -> phy_test.o -> force_txon_mode
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,25 +12,37 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void force_txon_mode(uint param_1,uint param_2)
+void force_txon_mode(uint param_1,uint param_2,uint param_3)
 
 {
-  _DAT_600a0910 = _DAT_600a0910 | 0x3000;
-  _DAT_600a0410 = (param_2 & 0x3f) << 0x11 | (param_1 & 1) << 0x17 | _DAT_600a0410 & 0xff01ffff;
+  int iVar1;
+  uint uVar2;
+  
+  iVar1 = _DAT_600a00c0;
+  if (param_2 != 0) {
+    param_3 = param_3 + 0x20 & 0xff;
+    phy_dis_hw_set_freq();
+    _DAT_600af4b4 = param_2 & param_1 & 1 | _DAT_600af4b4 & 0xfffffffe;
+    uVar2 = 0x3000;
+    if (param_1 == 0) {
+      uVar2 = 0;
+    }
+    _DAT_600a0910 = _DAT_600a0910 & 0xffffcfff | uVar2;
+    ets_delay_us(1);
+    uVar2 = 0xc0000000;
+    if (param_1 == 0) {
+      uVar2 = 0;
+    }
+    _DAT_600a28a0 = _DAT_600a28a0 & 0x3fffffff | uVar2;
+    ets_delay_us(100);
+    if (-1 < iVar1 << 5) {
+      phy_en_hw_set_freq();
+    }
+  }
+  phy_force_pwr_index(param_1 != 0,param_3);
   force_txon(0);
-  if (param_1 == 0) {
-    _DAT_600a0910 = _DAT_600a0910 & 0xfffff3ff;
-    ets_delay_us(1);
-    _DAT_600a0910 = _DAT_600a0910 & 0xfffffcff;
-  }
-  else {
-    _DAT_600a0910 = _DAT_600a0910 & 0xfffffcff | 0x200;
-    ets_delay_us(1);
-    _DAT_600a0910 = _DAT_600a0910 & 0xfffff3ff | 0x800;
-    ets_delay_us(1);
-    _DAT_600a0910 = _DAT_600a0910 | 0xc00;
-  }
-  ets_delay_us(1);
+  force_txon(param_1);
+  phy_param = (char)param_1;
   return;
 }
 

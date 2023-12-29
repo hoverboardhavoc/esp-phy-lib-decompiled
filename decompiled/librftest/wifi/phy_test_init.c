@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a8e8b9532e2874ac167d4ade7808fda70fe05820
- * https://github.com/espressif/esp-phy-lib/commit/a8e8b9532e2874ac167d4ade7808fda70fe05820
- * Upstream date: 2023-11-01 14:13:34 +0800
- * Upstream subject: h2 libphy fix ble track
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: librftest -> wifi.o -> phy_test_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void phy_test_init(void)
   phy_printf("phy_test_init  start\n");
   phy_get_romfunc_addr();
   phy_init();
-  phy_printf("phy_test_init done: %d, %s, %s, %s\n",2,"5857fe5","Nov  1 2023","11:31:18");
+  phy_printf("phy_test_init done: %d, %s, %s, %s\n",2,"37a29de","Dec 29 2023","16:30:28");
   return;
 }
 

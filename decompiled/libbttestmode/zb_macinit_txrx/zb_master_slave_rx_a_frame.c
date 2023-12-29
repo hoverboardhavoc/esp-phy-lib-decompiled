@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_master_slave_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,7 +46,7 @@ zb_master_slave_rx_a_frame
   }
   _DAT_600a3064 = _DAT_600a3064 | 2;
   *param_2 = *param_2 + 1;
-  iVar1 = (int)*(char *)(rx_frame + 0x10c8b);
+  iVar1 = (int)*(char *)(rx_frame + 0x10ca7);
   *param_4 = *param_4 + iVar1;
   if (*param_2 == 1) {
     *param_5 = iVar1;

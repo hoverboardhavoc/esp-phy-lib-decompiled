@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * https://github.com/espressif/esp-phy-lib/commit/1b8e12d3e0e8b7bcd87c115f09ec0f385700579a
- * Upstream date: 2023-03-06 18:57:45 +0800
- * Upstream subject: esp32h2: update libphy for h2 eco1
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_rssi_thresh
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,9 +15,15 @@
 void bt_agc_rssi_thresh(void)
 
 {
-  _DAT_600a28a0 = _DAT_600a28a0 & 0xff00ffff | 0x970000;
-  _DAT_600a28ac = _DAT_600a28ac & 0x807fffff | 0x44000000;
-  _DAT_600a28b8 = _DAT_600a28b8 & 0xfff00fff | 0x88000;
+  uint uVar1;
+  
+  _DAT_600a28a0 = (0x97 - ((int)phy_param >> 1)) * 0x10000 | _DAT_600a28a0 & 0xff00ffff;
+  uVar1 = 0x88 - ((int)phy_param >> 1);
+  if ((uVar1 & 0xffff) < 0x80) {
+    uVar1 = 0x80;
+  }
+  _DAT_600a28ac = _DAT_600a28ac & 0x807fffff | (uVar1 & 0xffff) << 0x17;
+  _DAT_600a28b8 = (uVar1 & 0xffff) << 0xc | _DAT_600a28b8 & 0xfff00fff;
   return;
 }
 

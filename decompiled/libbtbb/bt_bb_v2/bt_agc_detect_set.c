@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_detect_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,11 +16,11 @@ void bt_agc_detect_set(void)
 
 {
   _DAT_600a28a8 = _DAT_600a28a8 & 0xff83ffff | 0x100000;
+  _DAT_600a28a0 = _DAT_600a28a0 & 0xc0ffffff | 0x24000000;
   _DAT_600a28ac = _DAT_600a28ac & 0xff87ffff | 0x380000;
   _DAT_600a28b8 = _DAT_600a28b8 & 0xfffff0ff | 0x700;
   _DAT_600a28c0 = _DAT_600a28c0 & 0x1f | 0x9c752940;
   _DAT_600a28c4 = _DAT_600a28c4 & 0x3ff | 0x9ca7bc00;
-  _DAT_600a28a0 = _DAT_600a28a0 & 0xc000ffff | 0x249c0000;
   return;
 }
 

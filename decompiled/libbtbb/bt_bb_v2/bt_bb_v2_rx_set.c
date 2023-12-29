@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 05e53904ac98632e09d78693437b7fa0b35f36da
- * https://github.com/espressif/esp-phy-lib/commit/05e53904ac98632e09d78693437b7fa0b35f36da
- * Upstream date: 2023-05-22 12:26:13 +0800
- * Upstream subject: update h2 libphy phy_version: 200,0, 1cef4f4, May 22 2023, 11:57:13
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void bt_bb_v2_rx_set(void)
 
 {
   bt_bb_rx_set();
-  bt_set_rx_comp(0xfffffff2,0,0xfffffffc,0xfffffffc,0xfffffffc);
+  bt_set_rx_comp((int)((phy_param - 0xe) * 0x1000000) >> 0x18,0,0xfffffffc,0xfffffffc,0xfffffffc);
   bt_agc_gain_set();
   bt_agc_rssi_thresh();
   bt_agc_target_set();

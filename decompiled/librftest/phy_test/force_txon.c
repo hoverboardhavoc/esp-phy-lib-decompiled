@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: librftest -> phy_test.o -> force_txon
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,15 +15,18 @@
 void force_txon(int param_1)
 
 {
+  _DAT_600a70dc = _DAT_600a70dc & 0xfffeffff;
   if (param_1 == 0) {
+    if ((_DAT_600a0910 >> 10 & 3) == 3) {
+      _DAT_600a0910 = _DAT_600a0910 & 0xfffff3ff | 0x800;
+      ets_delay_us(1);
+    }
     _DAT_600a0910 = _DAT_600a0910 & 0xfffff3ff;
     ets_delay_us(1);
     _DAT_600a0910 = _DAT_600a0910 & 0xfffffcff;
   }
   else {
     _DAT_600a0910 = _DAT_600a0910 & 0xfffffcff | 0x200;
-    ets_delay_us(1);
-    _DAT_600a0910 = _DAT_600a0910 & 0xfffff3ff | 0x800;
     ets_delay_us(1);
     _DAT_600a0910 = _DAT_600a0910 | 0xc00;
   }

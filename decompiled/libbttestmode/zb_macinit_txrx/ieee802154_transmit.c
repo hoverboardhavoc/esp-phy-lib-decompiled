@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_transmit
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,9 +18,9 @@ void ieee802154_transmit(void)
   _DAT_60049058 = 0;
   _DAT_6004905c = 1;
   _tx_frame = 0x201000a;
-  DAT_00010d14 = 0x6050403;
-  DAT_00010d18 = 0x807;
-  DAT_00010d1a = 9;
+  DAT_00010d30 = 0x6050403;
+  DAT_00010d34 = 0x807;
+  DAT_00010d36 = 9;
   phy_printf("TX Start \n\r");
   phy_printf("transmitting frame %d bytes\n\r",_tx_frame & 0xff);
   _DAT_600a30d0 = &tx_frame;

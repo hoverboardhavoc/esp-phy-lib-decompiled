@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
     if ((_DAT_600a3064 & 2) != 0) {
       _DAT_600a3064 = _DAT_600a3064 | 2;
       *param_1 = *param_1 + 1;
-      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10c8b);
+      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10ca7) + (phy_param + 1 >> 1);
       *param_3 = (int)(char)(_DAT_600a2c3c >> 0x10) + *param_3;
       *param_4 = (_DAT_600a2c3c >> 8 & 0xff) + *param_4;
       return 0;
@@ -47,7 +47,7 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
   }
   if (uVar2 == 3) {
     *param_7 = *param_7 + 1;
-    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10c8b);
+    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10ca7) + (phy_param + 1 >> 1);
     return 0;
   }
   if ((uVar2 != 6) && (uVar2 != 9)) {

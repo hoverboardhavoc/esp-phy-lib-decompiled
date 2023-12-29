@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a8e8b9532e2874ac167d4ade7808fda70fe05820
- * https://github.com/espressif/esp-phy-lib/commit/a8e8b9532e2874ac167d4ade7808fda70fe05820
- * Upstream date: 2023-11-01 14:13:34 +0800
- * Upstream subject: h2 libphy fix ble track
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: librftest -> phy_test.o -> esp_phy_rxiq_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -61,23 +61,26 @@ void esp_phy_rxiq_cal(undefined4 param_1,int param_2,int param_3,int param_4)
   uVar3 = esp_phy_freq_cal(param_1,0);
   uVar4 = rxiq_cal_test(&uStack_44,param_4);
   uVar5 = get_rxiq_remain();
+  *(char *)(param_2 + 0xb) = (char)uVar4;
+  *(char *)(param_2 + 0xc) = (char)((ushort)uVar4 >> 8);
   *(undefined1 *)(param_2 + 10) = (undefined1)iStack_34;
-  *(undefined2 *)(param_2 + 0xc) = uVar4;
   *(char *)(param_2 + 9) = (char)uVar7;
   uVar2 = get_data_sat(uStack_3c,100,0xffffff9c);
-  *(undefined1 *)(param_2 + 0xe) = uVar2;
+  *(undefined1 *)(param_2 + 0xd) = uVar2;
   uVar2 = get_data_sat(uStack_38,100,0xffffff9c);
-  *(undefined1 *)(param_2 + 0xf) = uVar2;
+  *(char *)(param_2 + 0xf) = (char)uVar5;
+  *(char *)(param_2 + 0x10) = (char)((ushort)uVar5 >> 8);
+  *(char *)(param_2 + 0x11) = (char)uVar3;
+  *(undefined1 *)(param_2 + 0xe) = uVar2;
   *(undefined1 *)(param_2 + 5) = uStack_44;
   *(undefined1 *)(param_2 + 6) = uStack_43;
   *(undefined1 *)(param_2 + 7) = 0;
   *(undefined1 *)(param_2 + 8) = 0;
-  *(undefined2 *)(param_2 + 0x10) = uVar5;
-  *(undefined2 *)(param_2 + 0x12) = uVar3;
+  *(char *)(param_2 + 0x12) = (char)((ushort)uVar3 >> 8);
   if (param_4 != 0) {
     phy_printf("rxiq:%d,%d,vga=%d,sig=%d,iqpwr=%d,dc=%d,%d,rxiq_remain=%d,offset=%d\n",
                *(undefined1 *)(param_2 + 9),*(undefined1 *)(param_2 + 10),
-               *(undefined2 *)(param_2 + 0xc),(int)*(char *)(param_2 + 0xe));
+               *(undefined2 *)(param_2 + 0xb),(int)*(char *)(param_2 + 0xd));
   }
   if (param_3 != 0) {
     start_tx_tone_step(0,0x40,0x28,0,0,0);

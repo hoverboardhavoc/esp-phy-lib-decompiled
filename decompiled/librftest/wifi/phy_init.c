@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a8e8b9532e2874ac167d4ade7808fda70fe05820
- * https://github.com/espressif/esp-phy-lib/commit/a8e8b9532e2874ac167d4ade7808fda70fe05820
- * Upstream date: 2023-11-01 14:13:34 +0800
- * Upstream subject: h2 libphy fix ble track
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: librftest -> wifi.o -> phy_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ void phy_init(void)
   undefined1 auStack_778 [1908];
   
   _rtc_reset_cause = 0;
-  DAT_0001608a = 0;
+  DAT_0001508a = 0;
   register_chipv7_phy(init_param_default,auStack_778,2);
   return;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
+ * Upstream date: 2023-12-29 17:32:23 +0800
+ * Upstream subject: fix h2 crash at pos rssi bug
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,7 +17,7 @@ void ble_rx_start(void)
 {
   ble_select_phy_speed();
   memset(&_LANCHOR3,0x55,0x140);
-  _DAT_600a1834 = &DAT_00011033;
+  _DAT_600a1834 = &DAT_0001105b;
   _DAT_600a1110 = 0;
   _DAT_600a110c = 0;
   _DAT_600a1130 = 0;
