@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
- * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
- * Upstream date: 2023-12-29 17:32:23 +0800
- * Upstream subject: fix h2 crash at pos rssi bug
+ * Last changed at upstream commit b5d8d9b52c547d789d82108a463c647671744af5
+ * https://github.com/espressif/esp-phy-lib/commit/b5d8d9b52c547d789d82108a463c647671744af5
+ * Upstream date: 2024-01-05 14:41:53 +0800
+ * Upstream subject: fix h2 eco2 sleep-wakeup bug
  * Source: librftest -> wifi.o -> run_rftest_case
  *
  * (C) Espressif, Apache License 2.0.
@@ -292,7 +292,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                         iVar2 = strcmp(param_1,"print_ver");
                                                         if (iVar2 == 0) {
                                                           phy_printf("phy_version: %d.%d, %s, %s\n",
-                                                                     2,0x14,"Dec 29 2023","16:30:28"
+                                                                     2,0x14,"Jan  5 2024","14:16:22"
                                                                     );
                                                         }
                                                         else {
