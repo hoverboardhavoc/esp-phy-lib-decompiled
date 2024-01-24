@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit ab9b9d0880221ad8423d78ba36e73ff2cb450358
+ * https://github.com/espressif/esp-phy-lib/commit/ab9b9d0880221ad8423d78ba36e73ff2cb450358
+ * Upstream date: 2024-01-24 19:07:43 +0800
+ * Upstream subject: fix wifi boot bug at low temp
  * Source: librftest -> bb_common.o -> auto_ack_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,12 +38,12 @@ void auto_ack_test(undefined4 param_1,int param_2)
     do {
       if (-1 < (int)(_DAT_600a4080 << 1)) {
         bVar1 = false;
-        goto _L369;
+        goto _L368;
       }
       iVar4 = GetStopCmd();
     } while (iVar4 != 0);
     bVar1 = true;
-_L369:
+_L368:
     puVar7 = (uint *)((_DAT_600a407c & 0xff) + *(int *)(_DAT_600a4090 + 4));
     uVar6 = puVar7[0x1a];
     uVar3 = (uVar6 >> 8 & 0xff) << 0x10 | uVar6 << 0x18 | uVar6 >> 0x18 |
@@ -54,12 +54,12 @@ _L369:
     uVar5 = *puVar7;
     if ((uVar5 & 0xc000) == 0x4000) {
       uVar9 = (puVar7[1] & 0xf) + 0x10;
-_L373:
+_L372:
       uVar5 = puVar7[1] >> 8 & 0xffff;
     }
     else {
       uVar9 = uVar5 >> 8 & 0x1f;
-      if ((uVar5 & 0xc000) != 0) goto _L373;
+      if ((uVar5 & 0xc000) != 0) goto _L372;
       uVar5 = uVar5 >> 0x10 & 0xfff;
     }
     if (param_2 != 0) {
