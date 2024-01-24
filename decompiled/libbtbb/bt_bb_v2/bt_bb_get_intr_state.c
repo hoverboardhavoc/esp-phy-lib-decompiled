@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/cb8e32f9415a731981c50c3f9586f52b8ed8e26c
  * Upstream date: 2024-01-24 19:07:43 +0800
  * Upstream subject: fix C2 BLE CCA bug
- * Source: libbtbb -> bt_bb_v2.o -> bt_bb_isr
+ * Source: libbtbb -> bt_bb_v2.o -> bt_bb_get_intr_state
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,22 +12,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void bt_bb_isr(void)
+undefined4 bt_bb_get_intr_state(void)
 
 {
-  int iVar1;
-  int iVar2;
-  
-  iVar2 = _DAT_6004608c;
-  iVar1 = _DAT_60046084;
-  if ((_DAT_60046084 << 0x12 < 0) && (_DAT_6004608c << 0x12 < 0)) {
-    phy_set_ble_complex(0);
-    _DAT_60046090 = _DAT_60046090 | 0x2000;
-  }
-  if ((iVar1 << 0x11 < 0) && (iVar2 << 0x11 < 0)) {
-    phy_set_ble_complex(1);
-    _DAT_60046090 = _DAT_60046090 | 0x4000;
-  }
-  return;
+  return _DAT_6004608c;
 }
 
