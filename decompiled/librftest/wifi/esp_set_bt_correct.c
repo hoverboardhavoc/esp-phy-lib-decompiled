@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit 6e051981701aacebcbfe9147b2a1fec07d472829
+ * https://github.com/espressif/esp-phy-lib/commit/6e051981701aacebcbfe9147b2a1fec07d472829
+ * Upstream date: 2024-01-24 19:07:43 +0800
+ * Upstream subject: fix ble tx 2m problem causing by phy_wifi_enable_set
  * Source: librftest -> wifi.o -> esp_set_bt_correct
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ void esp_set_bt_correct(int param_1,undefined4 param_2)
   rom1_bt_set_tx_gain(0);
   bt_txpwr_freq(&phy_param);
   phy_printf("offset:%d,atten:%d,cal_power:%d\n",param_2,(int)(&DAT_000181c9)[param_1],
-             (int)(char)set_rx_gain_table);
+             (int)(char)bt_txiq_cal);
   DAT_000181c9 = local_18[0];
   DAT_000181ca = local_18[1];
   DAT_000181cb = local_18[2];

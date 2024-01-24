@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit 6e051981701aacebcbfe9147b2a1fec07d472829
+ * https://github.com/espressif/esp-phy-lib/commit/6e051981701aacebcbfe9147b2a1fec07d472829
+ * Upstream date: 2024-01-24 19:07:43 +0800
+ * Upstream subject: fix ble tx 2m problem causing by phy_wifi_enable_set
  * Source: librftest -> wifi.o -> esp_set_wifi_cali_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ undefined4 esp_set_wifi_cali_data(uint *param_1)
   
   uVar3 = *param_1;
   puVar1 = &phy_param;
-  bt_bb_tx_cca_set = (code)((byte)bt_bb_tx_cca_set & 0xf0 | (byte)(uVar3 & 0xf));
+  phy_current_level_set = (code)((byte)phy_current_level_set & 0xf0 | (byte)(uVar3 & 0xf));
   DAT_00018255 = (byte)param_1[1];
   puVar5 = param_1 + 2;
   puVar4 = &phy_param;
@@ -36,7 +36,7 @@ undefined4 esp_set_wifi_cali_data(uint *param_1)
   } while (puVar5 != param_1 + 8);
   if ((uVar3 & 0xf) == 1) {
     rom1_tsens_temp_read();
-    _bt_tx_tone = _DAT_000180e2;
+    _bt_bb_tx_cca_set = _DAT_000180e2;
   }
   if ((0xd < (DAT_00018255 & 0xf)) || (uVar2 = 0, 0xd < DAT_00018255 >> 4)) {
     phy_printf("err_code=%d,rate_index error \n!",1);

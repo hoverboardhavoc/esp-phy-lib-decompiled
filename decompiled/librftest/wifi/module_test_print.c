@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit 6e051981701aacebcbfe9147b2a1fec07d472829
+ * https://github.com/espressif/esp-phy-lib/commit/6e051981701aacebcbfe9147b2a1fec07d472829
+ * Upstream date: 2024-01-24 19:07:43 +0800
+ * Upstream subject: fix ble tx 2m problem causing by phy_wifi_enable_set
  * Source: librftest -> wifi.o -> module_test_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ void module_test_print(void)
   phy_version_print();
   phy_printf("vdd33=%d;\n",_DAT_00018252);
   phy_printf("TXIQ, ");
-  get_iq_value(&cStack_3c,_phy_get_vdd33,0);
+  get_iq_value(&cStack_3c,_phy_get_adc_rand,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   get_iq_value(&cStack_3c,_DAT_0001819e,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
@@ -48,7 +48,7 @@ void module_test_print(void)
   } while (pcVar6 != bt_txpwr_freq);
   phy_printf(&_LC12);
   phy_printf("BT_TXIQ, ");
-  get_iq_value(&cStack_3c,_meas_tone_pwr_db,0);
+  get_iq_value(&cStack_3c,_bt_tx_pwctrl_init,0);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   phy_printf(&_LC12);
   phy_printf("BT_TXDC, ");
@@ -64,7 +64,7 @@ void module_test_print(void)
   } while (pcVar6 != rf_cal_data_backup);
   phy_printf(&_LC12);
   phy_printf("RXIQ, ");
-  get_iq_value(&cStack_3c,_set_rf_freq_offset,1);
+  get_iq_value(&cStack_3c,_rssi_min_max_print,1);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);
   get_iq_value(&cStack_3c,_DAT_000181a2,1);
   phy_printf("%d, %d; ",(int)cStack_3c,(int)cStack_3b);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit 6e051981701aacebcbfe9147b2a1fec07d472829
+ * https://github.com/espressif/esp-phy-lib/commit/6e051981701aacebcbfe9147b2a1fec07d472829
+ * Upstream date: 2024-01-24 19:07:43 +0800
+ * Upstream subject: fix ble tx 2m problem causing by phy_wifi_enable_set
  * Source: librftest -> wifi.o -> crystal_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -113,7 +113,7 @@ _L214:
     phy_printf("WatchDog_rst_num=%d\n\n");
     phy_printf("UNTX BEACON NUM=%d\n\n",bStack_853);
     phy_printf("%d, %d, %d\n\n",uStack_852,bStack_853,uStack_851);
-    iVar3 = esp_phy_getstopcmd();
+    iVar3 = GetStopCmd();
     if (iVar3 == 0) {
       return;
     }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c38381964b48fe53dac584b74eefec62fc86511b
- * https://github.com/espressif/esp-phy-lib/commit/c38381964b48fe53dac584b74eefec62fc86511b
- * Upstream date: 2023-03-08 11:00:03 +0800
- * Upstream subject: Update esp32c3/s3 phy lib and add test lib
+ * Last changed at upstream commit 6e051981701aacebcbfe9147b2a1fec07d472829
+ * https://github.com/espressif/esp-phy-lib/commit/6e051981701aacebcbfe9147b2a1fec07d472829
+ * Upstream date: 2024-01-24 19:07:43 +0800
+ * Upstream subject: fix ble tx 2m problem causing by phy_wifi_enable_set
  * Source: librftest -> wifi.o -> rx_2440m_opt
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,11 +15,11 @@
 void rx_2440m_opt(void)
 
 {
-  uint uVar1;
-  char cVar2;
+  char cVar1;
+  int iVar2;
   int iVar3;
-  int iVar4;
-  undefined4 uVar5;
+  undefined4 uVar4;
+  uint uVar5;
   uint uVar6;
   uint uVar7;
   char *pcVar8;
@@ -41,80 +41,82 @@ void rx_2440m_opt(void)
     phy_set_freq(0x98c,0);
     pcVar8 = local_ac;
     _DAT_6001c02c = _DAT_6001c02c & 0xffffff | 0x4b800000;
-    iVar4 = 0;
+    iVar3 = 0;
     uVar11 = 0;
     uVar9 = 0;
     while( true ) {
       puVar10 = local_a8;
-      cVar2 = '\0';
+      cVar1 = '\0';
       puVar12 = puVar10;
       do {
-        uVar5 = 4;
-        if (iVar4 != 0) {
-          uVar5 = 6;
+        uVar4 = 4;
+        if (iVar3 != 0) {
+          uVar4 = 6;
         }
         (**(code **)(_g_phyFuns + 0x1bc))
-                  (0x6d,0,uVar5,4,0,cVar2 + '\x15',*(code **)(_g_phyFuns + 0x1bc));
+                  (0x6d,0,uVar4,4,0,cVar1 + '\x15',*(code **)(_g_phyFuns + 0x1bc));
         ets_delay_us(10);
         *puVar12 = 0;
         puVar12[1] = 0;
         iVar13 = 2;
         while( true ) {
-          freq_offset_get_pwr(6,0xffffff99,10,&uStack_78,local_ac + 2,0,0);
-          iVar3 = iStack_74;
-          uVar7 = uStack_78;
-          uVar1 = *puVar12;
+          start_tx_tone_step(1,0xffffff99,0,0,0,0);
+          freq_offset_get_pwr(6,10,&uStack_78,local_ac + 2,0,0);
+          iVar2 = iStack_74;
+          uVar6 = uStack_78;
+          uVar7 = *puVar12;
           uVar14 = puVar12[1];
-          freq_offset_get_pwr(6,0xffffff9a,10,&uStack_78,local_ac + 2,0,0);
-          uVar6 = uStack_78 + uVar7;
-          uVar1 = uVar6 + uVar1;
-          uVar7 = (uint)(uVar1 < uVar6) + uVar14 + (uint)(uVar6 < uVar7) + iVar3 + iStack_74;
-          *puVar12 = uVar1;
-          puVar12[1] = uVar7;
+          start_tx_tone_step(1,0xffffff9a,0,0,0,0);
+          freq_offset_get_pwr(6,10,&uStack_78,local_ac + 2,0,0);
+          uVar5 = uStack_78 + uVar6;
+          uVar7 = uVar5 + uVar7;
+          uVar6 = (uint)(uVar7 < uVar5) + (uint)(uVar5 < uVar6) + iVar2 + iStack_74 + uVar14;
+          *puVar12 = uVar7;
+          puVar12[1] = uVar6;
           if (iVar13 == 1) break;
           iVar13 = 1;
         }
-        uVar14 = uVar1 >> 0x13 | uVar7 * 0x2000;
-        uVar7 = uVar7 >> 0x13;
+        uVar14 = uVar7 >> 0x13 | uVar6 * 0x2000;
+        uVar6 = uVar6 >> 0x13;
         *puVar12 = uVar14;
-        uVar1 = local_a8[0];
-        puVar12[1] = uVar7;
-        uVar6 = local_a8[1];
-        if (cVar2 == '\0') {
+        uVar7 = local_a8[0];
+        puVar12[1] = uVar6;
+        uVar5 = local_a8[1];
+        if (cVar1 == '\0') {
           *pcVar8 = '\x15';
-          uVar9 = uVar6;
-          uVar11 = uVar1;
+          uVar9 = uVar5;
+          uVar11 = uVar7;
         }
-        else if ((uVar7 < uVar9) || ((uVar9 == uVar7 && (uVar14 < uVar11)))) {
-          *pcVar8 = cVar2 + '\x15';
-          uVar9 = uVar7;
+        else if ((uVar6 < uVar9) || ((uVar9 == uVar6 && (uVar14 < uVar11)))) {
+          *pcVar8 = cVar1 + '\x15';
+          uVar9 = uVar6;
           uVar11 = uVar14;
         }
-        cVar2 = cVar2 + '\x01';
+        cVar1 = cVar1 + '\x01';
         puVar12 = puVar12 + 2;
-      } while (cVar2 != '\x06');
-      if (iVar4 == 0) {
-        uVar5 = 4;
-        cVar2 = local_ac[0];
+      } while (cVar1 != '\x06');
+      if (iVar3 == 0) {
+        uVar4 = 4;
+        cVar1 = local_ac[0];
       }
       else {
-        uVar5 = 6;
-        cVar2 = local_ac[1];
+        uVar4 = 6;
+        cVar1 = local_ac[1];
       }
-      (**(code **)(_g_phyFuns + 0x1bc))(0x6d,0,uVar5,4,0,cVar2,*(code **)(_g_phyFuns + 0x1bc));
+      (**(code **)(_g_phyFuns + 0x1bc))(0x6d,0,uVar4,4,0,cVar1,*(code **)(_g_phyFuns + 0x1bc));
       if (rx_2440_print_en != '\0') {
         iVar13 = 0x15;
         do {
-          iVar3 = iVar13 + 1;
-          phy_printf("%d, dreg=%d, sig_pwr=%lld\n",iVar4,iVar13,*puVar10,puVar10[1]);
+          iVar2 = iVar13 + 1;
+          phy_printf("%d, dreg=%d, sig_pwr=%lld\n",iVar3,iVar13,*puVar10,puVar10[1]);
           puVar10 = puVar10 + 2;
-          iVar13 = iVar3;
-        } while (iVar3 != 0x1b);
-        phy_printf("%d, dreg=%d, sig_pwr=%lld\n",iVar4,*pcVar8,uVar11,uVar9);
+          iVar13 = iVar2;
+        } while (iVar2 != 0x1b);
+        phy_printf("%d, dreg=%d, sig_pwr=%lld\n",iVar3,*pcVar8,uVar11,uVar9);
       }
       pcVar8 = pcVar8 + 1;
-      if (iVar4 == 1) break;
-      iVar4 = 1;
+      if (iVar3 != 0) break;
+      iVar3 = 1;
     }
     _DAT_6001c02c = _DAT_6001c02c & 0x7fffff | 0x32000000;
   }

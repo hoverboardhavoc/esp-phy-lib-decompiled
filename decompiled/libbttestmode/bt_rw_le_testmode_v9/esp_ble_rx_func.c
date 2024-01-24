@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit 6e051981701aacebcbfe9147b2a1fec07d472829
+ * https://github.com/espressif/esp-phy-lib/commit/6e051981701aacebcbfe9147b2a1fec07d472829
+ * Upstream date: 2024-01-24 19:07:43 +0800
+ * Upstream subject: fix ble tx 2m problem causing by phy_wifi_enable_set
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> esp_ble_rx_func
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,11 @@ void esp_ble_rx_func(int param_1,undefined8 param_2)
 
 {
   *(undefined8 *)(param_1 + 0x78) = param_2;
-  tp = 0xffffffe1;
+  if (param_1 == 0) {
+    tp = 0xffffffe1;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
                     /* WARNING: Bad instruction - Truncating control flow here */
   halt_baddata();
 }
