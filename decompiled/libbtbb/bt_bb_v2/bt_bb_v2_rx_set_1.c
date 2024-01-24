@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cb8e32f9415a731981c50c3f9586f52b8ed8e26c
- * https://github.com/espressif/esp-phy-lib/commit/cb8e32f9415a731981c50c3f9586f52b8ed8e26c
- * Upstream date: 2024-01-24 19:07:43 +0800
- * Upstream subject: fix C2 BLE CCA bug
+ * Last changed at upstream commit 2d319a382336cf0522ea4bb5a3fbd6701a8633c6
+ * https://github.com/espressif/esp-phy-lib/commit/2d319a382336cf0522ea4bb5a3fbd6701a8633c6
+ * Upstream date: 2024-01-24 19:07:44 +0800
+ * Upstream subject: keep regs before sleep and after wakeup are same
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set_1
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,6 +31,7 @@ void bt_bb_v2_rx_set_1(void)
   _DAT_600468a4 = _DAT_600468a4 & 0xffe07fff | 0x38000;
   _DAT_60046020 = _DAT_60046020 & 0xffffc3ff | 0x1800;
   _DAT_600468bc = _DAT_600468bc & 0xfffffebf;
+  _DAT_60026010 = _DAT_60026010 | 0xf000b;
   return;
 }
 

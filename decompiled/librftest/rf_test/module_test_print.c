@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit 2d319a382336cf0522ea4bb5a3fbd6701a8633c6
+ * https://github.com/espressif/esp-phy-lib/commit/2d319a382336cf0522ea4bb5a3fbd6701a8633c6
+ * Upstream date: 2024-01-24 19:07:44 +0800
+ * Upstream subject: keep regs before sleep and after wakeup are same
  * Source: librftest -> rf_test.o -> module_test_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ void module_test_print(void)
   get_iq_value(&cStack_24,_DAT_000120de);
   pcVar7 = (code *)&phy_param;
   phy_printf("%d, %d; ",(int)cStack_24,(int)cStack_23);
-  phy_printf(&_LC30);
+  phy_printf(&_LC32);
   phy_printf("TXDC, ");
   do {
     pcVar1 = pcVar7 + 0xae;
@@ -46,20 +46,20 @@ void module_test_print(void)
     phy_printf("%d, %d, %d, %d; ",*(undefined2 *)pcVar4,*(undefined2 *)pcVar3,*(undefined2 *)pcVar2,
                *(undefined2 *)pcVar1);
   } while (pcVar7 != __mulsf3);
-  phy_printf(&_LC30);
+  phy_printf(&_LC32);
   phy_printf("BT_TXIQ, ");
   get_iq_value(&cStack_24,_DAT_0001210e);
   phy_printf("%d, %d; ",(int)cStack_24,(int)cStack_23);
-  phy_printf(&_LC30);
+  phy_printf(&_LC32);
   phy_printf("BT_TXDC, ");
   phy_printf("%d, %d, %d, %d; ",_DAT_00012110,_DAT_00012112,_DAT_00012114,_DAT_00012116);
-  phy_printf(&_LC30);
+  phy_printf(&_LC32);
   phy_printf("RXIQ, ");
   get_iq_value(&cStack_24,_DAT_000120e0);
   phy_printf("%d, %d; ",(int)cStack_24,(int)cStack_23);
   get_iq_value(&cStack_24,_DAT_000120e2);
   phy_printf("%d, %d; ",(int)cStack_24,(int)cStack_23);
-  phy_printf(&_LC30);
+  phy_printf(&_LC32);
   phy_printf("RXDC_RFRX_BT, ");
   pcVar7 = pcVar6;
   do {
@@ -68,7 +68,7 @@ void module_test_print(void)
     pcVar7 = pcVar7 + 4;
     phy_printf("%d, %d; ",(int)*(short *)pcVar2,(int)*(short *)pcVar1);
   } while (pcVar7 != __floatsisf);
-  phy_printf(&_LC30);
+  phy_printf(&_LC32);
   phy_printf("RXDC_RFRX_WIFI, ");
   do {
     pcVar7 = pcVar6 + 0x150;
@@ -76,7 +76,7 @@ void module_test_print(void)
     pcVar6 = pcVar6 + 4;
     phy_printf("%d, %d; ",(int)*(short *)pcVar1,(int)*(short *)pcVar7);
   } while (pcVar6 != __fixunssfsi);
-  phy_printf(&_LC30);
+  phy_printf(&_LC32);
   return;
 }
 
