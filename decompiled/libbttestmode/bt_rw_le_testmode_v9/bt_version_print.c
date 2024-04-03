@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d319a382336cf0522ea4bb5a3fbd6701a8633c6
- * https://github.com/espressif/esp-phy-lib/commit/2d319a382336cf0522ea4bb5a3fbd6701a8633c6
- * Upstream date: 2024-01-24 19:07:44 +0800
- * Upstream subject: keep regs before sleep and after wakeup are same
+ * Last changed at upstream commit c28825eb1be6bbe30e0ee8cfcd54614bf86273e7
+ * https://github.com/espressif/esp-phy-lib/commit/c28825eb1be6bbe30e0ee8cfcd54614bf86273e7
+ * Upstream date: 2024-04-03 16:53:14 +0800
+ * Upstream subject: fix coex test wifi affect ble s8 tx problm, and c3 s3 light sleep current opt, and c3 s3 ble rx problem
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> bt_version_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,7 +14,7 @@ void bt_version_print(void)
 
 {
   bt_bb_v2_version();
-  phy_printf("LE autotest version: %s, %s, %s\n","1faea94","Jan 24 2024","17:32:38");
+  phy_printf("LE autotest version: %s, %s, %s\n","c22527b","Mar 27 2024","18:55:42");
   return;
 }
 

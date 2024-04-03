@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d319a382336cf0522ea4bb5a3fbd6701a8633c6
- * https://github.com/espressif/esp-phy-lib/commit/2d319a382336cf0522ea4bb5a3fbd6701a8633c6
- * Upstream date: 2024-01-24 19:07:44 +0800
- * Upstream subject: keep regs before sleep and after wakeup are same
+ * Last changed at upstream commit c28825eb1be6bbe30e0ee8cfcd54614bf86273e7
+ * https://github.com/espressif/esp-phy-lib/commit/c28825eb1be6bbe30e0ee8cfcd54614bf86273e7
+ * Upstream date: 2024-04-03 16:53:14 +0800
+ * Upstream subject: fix coex test wifi affect ble s8 tx problm, and c3 s3 light sleep current opt, and c3 s3 ble rx problem
  * Source: librftest -> wifi.o -> rf_freq_debug
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x00011f3c) */
+/* WARNING: Removing unreachable block (ram,0x00011f58) */
 /* WARNING: Removing unreachable block (ram,0x00010000) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
