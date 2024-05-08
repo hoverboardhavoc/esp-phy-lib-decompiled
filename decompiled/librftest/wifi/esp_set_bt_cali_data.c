@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6e051981701aacebcbfe9147b2a1fec07d472829
- * https://github.com/espressif/esp-phy-lib/commit/6e051981701aacebcbfe9147b2a1fec07d472829
- * Upstream date: 2024-01-24 19:07:43 +0800
- * Upstream subject: fix ble tx 2m problem causing by phy_wifi_enable_set
+ * Last changed at upstream commit 792ba5917ee8191e7264143e69f9e6f8c1c0eacc
+ * https://github.com/espressif/esp-phy-lib/commit/792ba5917ee8191e7264143e69f9e6f8c1c0eacc
+ * Upstream date: 2024-05-08 10:58:27 +0800
+ * Upstream subject: update c3 s3 c6 libphy fix coex reset and bug
  * Source: librftest -> wifi.o -> esp_set_bt_cali_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,9 @@
 undefined4 esp_set_bt_cali_data(int *param_1)
 
 {
-  phy_current_level_set = (code)((byte)phy_current_level_set & 0xf | (byte)(*param_1 << 4));
-  bt_txiq_cal = SUB41(param_1[1],0);
+  adc_check_for_module_by_gpio_out0 =
+       (code)((byte)adc_check_for_module_by_gpio_out0 & 0xf | (byte)(*param_1 << 4));
+  txiq_cal_init = SUB41(param_1[1],0);
   DAT_000181c9 = (byte)param_1[2];
   DAT_000181ca = (byte)param_1[3];
   DAT_000181cb = (byte)param_1[4];
