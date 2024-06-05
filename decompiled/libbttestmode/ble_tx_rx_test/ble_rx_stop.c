@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
- * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
- * Upstream date: 2023-12-29 17:32:23 +0800
- * Upstream subject: fix h2 crash at pos rssi bug
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ undefined4 ble_rx_stop(void *param_1,uint *param_2)
     rx_en_flag = 0;
     return 0;
   }
-  __n = (uint)DAT_0001105c;
+  __n = (uint)DAT_00010ff0;
   if (param_2 != (uint *)0x0) {
     if ((*param_2 != 0) && ((int)*param_2 < (int)__n)) {
       phy_printf("Buffer size is so small!expect %d,actually is %d\n",__n);
@@ -35,7 +35,7 @@ undefined4 ble_rx_stop(void *param_1,uint *param_2)
   }
   _DAT_600a1110 = 0;
   _DAT_600a1010 = 1;
-  memcpy(param_1,&DAT_0001105d,__n);
+  memcpy(param_1,&DAT_00010ff1,__n);
   puVar1 = &_LANCHOR3;
   for (iVar2 = 3; iVar2 <= (int)(__n + 1); iVar2 = iVar2 + 8) {
     phy_printf("%x %x %x %x %x %x %x %x",puVar1[3],puVar1[4],puVar1[5],puVar1[6],puVar1[7],puVar1[8]

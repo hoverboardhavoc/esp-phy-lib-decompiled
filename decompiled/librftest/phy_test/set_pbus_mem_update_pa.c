@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
- * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
- * Upstream date: 2023-12-29 17:32:23 +0800
- * Upstream subject: fix h2 crash at pos rssi bug
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: librftest -> phy_test.o -> set_pbus_mem_update_pa
  *
  * (C) Espressif, Apache License 2.0.
@@ -73,7 +73,7 @@ void set_pbus_mem_update_pa(int param_1,uint param_2)
   puVar9 = &local_50;
   iVar4 = 0x10;
   iVar5 = 0;
-  uVar3 = 0xe;
+  uVar3 = 0xc;
   while( true ) {
     uVar8 = uVar3 + iVar4;
     _DAT_600a08f4 =

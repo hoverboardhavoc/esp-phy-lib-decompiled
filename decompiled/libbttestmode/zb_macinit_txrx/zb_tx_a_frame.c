@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,19 +28,19 @@ undefined4 zb_tx_a_frame(int *param_1,int *param_2,int param_3,undefined1 param_
     if (uVar3 != 0) {
       *param_1 = *param_1 + 1;
       _DAT_600a3064 = _DAT_600a3064 | 1;
-_L77:
+_L83:
       uVar1 = 0;
-      goto _L67;
+      goto _L73;
     }
     if ((_DAT_600a3064 & 0x20) != 0) {
       *param_2 = *param_2 + 1;
       _DAT_600a3084 = _DAT_600a3084 | 0x20;
-      goto _L77;
+      goto _L83;
     }
     iVar2 = GetStopCmd();
   } while (iVar2 != 0);
   uVar1 = 1;
-_L67:
+_L73:
   bt_track_pll_cap();
   bt_track_pbus_update(param_4);
   return uVar1;

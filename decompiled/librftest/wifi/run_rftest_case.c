@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 798678e4e011c666a931292fc300ec02160cdc6a
- * https://github.com/espressif/esp-phy-lib/commit/798678e4e011c666a931292fc300ec02160cdc6a
- * Upstream date: 2024-01-15 11:52:07 +0800
- * Upstream subject: fix h2 eco2 wakeup write i2c fail
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: librftest -> wifi.o -> run_rftest_case
  *
  * (C) Espressif, Apache License 2.0.
@@ -230,7 +230,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                         if (iVar2 == 0) {
                                                           _phy_param = CONCAT31(phy_param_1,1);
                                                           tx_pa_bb_gain = (short)*param_2;
-                                                          DAT_00013b52 = (short)param_2[1];
+                                                          DAT_00013b82 = (short)param_2[1];
                                                           force_tx_gain((int)(char)param_2[2],
                                                                         (char)param_2[3]);
                                                           phy_printf("%s, 0x%x,0x%x,%d\n",param_1,
@@ -243,7 +243,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                           if (iVar2 == 0) {
                                                             _phy_param = CONCAT31(phy_param_1,1);
                                                             tx_pa_bb_gain = (short)*param_2;
-                                                            DAT_00013b52 = (short)param_2[1];
+                                                            DAT_00013b82 = (short)param_2[1];
                                                             force_tx_gain((int)(char)param_2[2],
                                                                           (char)param_2[3]);
                                                             phy_printf("%s, 0x%x,0x%x,%d\n",param_1,
@@ -292,8 +292,7 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                         iVar2 = strcmp(param_1,"print_ver");
                                                         if (iVar2 == 0) {
                                                           phy_printf("phy_version: %d.%d, %s, %s\n",
-                                                                     2,0x1e,"Jan 15 2024","11:17:23"
-                                                                    );
+                                                                     3,10,"Jun  5 2024","14:19:21");
                                                         }
                                                         else {
                                                           iVar2 = strcmp(param_1,"init_print");
@@ -918,10 +917,16 @@ undefined4 run_rftest_case(char *param_1,uint *param_2,undefined4 param_3)
                                                   }
                                                   iVar2 = strcmp(param_1,"phy_tx_table");
                                                   if (iVar2 == 0) {
+                                                    if (phy_param < 3) {
+                                                      phy_printf("%s %d 0x%x\n",param_1,
+                                                                 *(undefined2 *)
+                                                                  (&phy_tx_table_eco2 + *param_2 * 2
+                                                                  ));
+                                                      return 1;
+                                                    }
                                                     phy_printf("%s %d 0x%x\n",param_1,
                                                                *(undefined2 *)
-                                                                (&phy_tx_table_eco2 + *param_2 * 2))
-                                                    ;
+                                                                (&phy_tx_table + *param_2 * 2));
                                                     return 1;
                                                   }
                                                   iVar2 = strcmp(param_1,"set_pbus_logain");

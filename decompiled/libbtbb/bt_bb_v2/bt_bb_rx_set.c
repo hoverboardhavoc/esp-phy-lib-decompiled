@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,7 +33,6 @@ void bt_bb_rx_set(int param_1)
   bt_agc_v2_set(DAT_60012f69,uVar1,uVar2);
   _DAT_600a2888 = _DAT_600a2888 & 0xdfffffff | 0x40000;
   _DAT_600a20bc = _DAT_600a20bc | 0x80000000;
-  _DAT_600a20c0 = _DAT_600a20c0 & 0xfffffffd;
   _DAT_600a2800 = _DAT_600a2800 | 0xe1c00;
   _DAT_600a284c = _DAT_600a284c & 0xfbffffff;
   _DAT_600a288c = _DAT_600a288c & 0xdfffffff;
@@ -43,6 +42,7 @@ void bt_bb_rx_set(int param_1)
   _DAT_600a2c0c = _DAT_600a2c0c & 0xfffffeff;
   _DAT_600a2c00 = _DAT_600a2c00 & 0xfff | 0x400000;
   _DAT_600a2c04 = _DAT_600a2c04 & 0xfffff7ff;
+  _DAT_600a20c0 = _DAT_600a20c0 & 0xfffffffd | 1;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
- * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
- * Upstream date: 2023-12-29 17:32:23 +0800
- * Upstream subject: fix h2 crash at pos rssi bug
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void zb_tx_init(uint param_1,int param_2,uint param_3,int param_4)
   _DAT_600a304c = param_3;
   if (param_4 == 0) {
     for (uVar4 = 0; uVar4 < param_1; uVar4 = uVar4 + 1 & 0xff) {
-      (&DAT_00010d2d)[uVar4] = (char)uVar4;
+      (&DAT_00010d85)[uVar4] = (char)uVar4;
     }
   }
   else {

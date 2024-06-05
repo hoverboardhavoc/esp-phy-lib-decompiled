@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
- * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
- * Upstream date: 2023-12-29 17:32:23 +0800
- * Upstream subject: fix h2 crash at pos rssi bug
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: librftest -> wifi.o -> dump_pbus_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,10 +14,10 @@ void dump_pbus_get(undefined4 *param_1)
 
 {
   dump_pbus1 = (undefined2)param_1[1];
-  DAT_00013b2e = (undefined2)param_1[2];
-  DAT_00013b30 = (undefined2)param_1[3];
-  DAT_00013b32 = (undefined2)param_1[4];
-  DAT_00013b34 = (undefined2)param_1[5];
+  DAT_00013b5e = (undefined2)param_1[2];
+  DAT_00013b60 = (undefined2)param_1[3];
+  DAT_00013b62 = (undefined2)param_1[4];
+  DAT_00013b64 = (undefined2)param_1[5];
   phy_printf("dump_pbus %d rfrx=0x%x bb1=0x%x bb2=0x%x rftx1=0x%x rftx2=0x%x\n",*param_1);
   return;
 }

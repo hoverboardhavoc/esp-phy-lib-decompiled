@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_ed_scan
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void ieee802154_ed_scan(uint param_1,uint param_2)
   _DAT_600a3000 = 0x44;
   do {
     if ((_DAT_600a3064 & 0x40) != 0) {
-      phy_printf(&_LC7,(int)(char)((uint)_DAT_600a3054 >> 0x10));
+      phy_printf(&_LC5,(int)(char)((uint)_DAT_600a3054 >> 0x10));
       _DAT_600a3064 = _DAT_600a3064 | 0x40;
       return;
     }

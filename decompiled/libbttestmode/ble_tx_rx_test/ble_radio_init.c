@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
- * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
- * Upstream date: 2023-12-29 17:32:23 +0800
- * Upstream subject: fix h2 crash at pos rssi bug
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_radio_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void ble_radio_init(void)
   _DAT_600a1554 = 0x65;
   _DAT_600a1510 = RADIO_MODE_DEFINE << 4 | RADIO_MODE_DEFINE << 8 | RADIO_MODE_DEFINE;
   _DAT_600a1830 = &_LANCHOR2;
-  _DAT_600a1834 = &DAT_0001105b;
+  _DAT_600a1834 = &DAT_00010fef;
   _DAT_600a1844 = 0;
   _DAT_600a1ff0 = 9;
   return;

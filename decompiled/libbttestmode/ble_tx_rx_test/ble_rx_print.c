@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,7 +60,7 @@ void ble_rx_print(undefined4 param_1,undefined4 param_2)
       iVar5 = iVar5 + cVar3;
       iVar6 = iVar6 + (_DAT_600a2c3c >> 8 & 0xff);
       iVar7 = iVar7 + (char)(_DAT_600a2c3c >> 0x10);
-      phy_printf(&_LC11,(int)cVar3);
+      phy_printf(&_LC9,(int)cVar3);
     }
     else {
       iVar4 = iVar4 + 1;

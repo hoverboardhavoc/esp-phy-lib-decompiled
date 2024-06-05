@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_slave_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,10 +43,10 @@ void zb_slave_test(undefined4 param_1,undefined4 param_2,undefined4 param_3,uint
                               (0,&uStack_3c,&uStack_38,&uStack_34,&uStack_30,&uStack_2c,param_4),
            uVar3 < uStack_3c && (param_4 == 0))) {
       iVar2 = zb_tx_a_frame(&uStack_28,auStack_24,0,param_2);
-      if ((iVar1 == 1) || (uVar3 = uStack_3c, iVar2 == 1)) goto _L171;
+      if ((iVar1 == 1) || (uVar3 = uStack_3c, iVar2 == 1)) goto _L177;
     }
   } while (iVar1 != 1);
-_L171:
+_L177:
   phy_printf("zb_slave_test ends!\n");
   phy_printf("slave_RX: n_correct=%d, n_error=%d\n",uStack_3c,uStack_38);
   phy_printf("slave_TX: n_correct=%d, n_error=%d\n",uStack_28,auStack_24[0]);

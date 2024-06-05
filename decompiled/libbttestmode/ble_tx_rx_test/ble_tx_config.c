@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 98617ae683c7456706c7de6e27b7f0355c77dc9b
- * https://github.com/espressif/esp-phy-lib/commit/98617ae683c7456706c7de6e27b7f0355c77dc9b
- * Upstream date: 2023-12-29 17:32:23 +0800
- * Upstream subject: fix h2 crash at pos rssi bug
+ * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
+ * Upstream date: 2024-06-05 14:35:04 +0800
+ * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_config
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void ble_tx_config(undefined1 param_1,ushort param_2,int param_3)
       puVar1 = puVar1 + 1;
     }
   }
-  DAT_000111a5 = (char)param_2;
+  DAT_00011139 = (char)param_2;
   _DAT_600a1830 = &_LANCHOR2;
   return;
 }
