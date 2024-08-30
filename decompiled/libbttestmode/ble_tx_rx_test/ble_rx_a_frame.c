@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit 772432d2e9e7422159ee3ef01a07fc985ce9466a
+ * https://github.com/espressif/esp-phy-lib/commit/772432d2e9e7422159ee3ef01a07fc985ce9466a
+ * Upstream date: 2024-08-30 17:42:59 +0800
+ * Upstream subject: feat(phy): add phy support for esp32c61
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ ble_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,
   int *in_stack_00000004;
   
   ble_rx_start();
-  bt_track_pll_cap();
+  phy_bt_track_pll_cap();
   do {
     if (_DAT_600a1110 != 0) {
       sVar1 = ble_rx_check_status();

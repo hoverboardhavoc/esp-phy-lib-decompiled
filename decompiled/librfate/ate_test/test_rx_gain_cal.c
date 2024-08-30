@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit 772432d2e9e7422159ee3ef01a07fc985ce9466a
+ * https://github.com/espressif/esp-phy-lib/commit/772432d2e9e7422159ee3ef01a07fc985ce9466a
+ * Upstream date: 2024-08-30 17:42:59 +0800
+ * Upstream subject: feat(phy): add phy support for esp32c61
  * Source: librfate -> ate_test.o -> test_rx_gain_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,57 +15,57 @@
 undefined1 test_rx_gain_cal(void)
 
 {
-  uint uVar1;
-  undefined1 uVar2;
-  char cVar3;
-  undefined1 uVar4;
-  int iVar5;
+  int iVar1;
+  uint uVar2;
+  undefined1 uVar3;
+  char cVar4;
+  undefined1 uVar5;
   undefined1 uVar6;
   undefined4 uStack_38;
   undefined4 uStack_34;
   
   uStack_38 = 0x1000100;
   uStack_34 = 0x1000100;
-  cVar3 = '\x04';
-  uVar1 = 3;
+  cVar4 = '\x04';
+  uVar2 = 3;
   do {
-    if (uVar1 < 7) {
-      uVar6 = (&_LANCHOR2)[uVar1];
-      uVar4 = (&_LANCHOR3)[uVar1];
-      uVar2 = (&_LANCHOR4)[uVar1];
+    if (uVar2 < 7) {
+      uVar6 = (&_LANCHOR2)[uVar2];
+      uVar5 = (&_LANCHOR3)[uVar2];
+      uVar3 = (&_LANCHOR4)[uVar2];
     }
     else {
-      uVar2 = 0xc;
-      uVar4 = 0xe0;
+      uVar3 = 0xc;
+      uVar5 = 0xe0;
       uVar6 = 0;
     }
-    (**(code **)(_g_phyFuns + 0x74))(1,1,0x1f1,*(code **)(_g_phyFuns + 0x74));
-    (**(code **)(_g_phyFuns + 0x90))(uVar2,0x18c,uVar4,*(code **)(_g_phyFuns + 0x90));
-    pbus_rx_dco_cal(4000,&uStack_38,10,0,0);
-    (**(code **)(_g_phyFuns + 0x98))(1,0x80,uVar6,0,0,0,*(code **)(_g_phyFuns + 0x98));
+    phy_pbus_force_test(1,1,0x1f1);
+    phy_set_loopback_gain(uVar3,0x18c,uVar5);
+    phy_pbus_rx_dco_cal(4000,&uStack_38,10,0,0);
+    phy_start_tx_tone_step(1,0x80,uVar6,0,0,0);
     ets_delay_us(1);
-    (**(code **)(_g_phyFuns + 0xa0))(1,0xfff,*(code **)(_g_phyFuns + 0xa0));
-    iVar5 = _DAT_600a0490 >> 9;
-    (**(code **)(_g_phyFuns + 0xa4))(*(code **)(_g_phyFuns + 0xa4));
-    (**(code **)(_g_phyFuns + 0x9c))(0,*(code **)(_g_phyFuns + 0x9c));
-    if (iVar5 - 0x1000U < 0xf001) {
+    phy_iq_est_enable(1,0xfff);
+    iVar1 = _DAT_600a0464;
+    phy_iq_est_disable();
+    phy_stop_tx_tone(0);
+    if ((iVar1 >> 9) - 0x1000U < 0xf001) {
       return uVar6;
     }
-    if (iVar5 < 0x1000) {
-      if (5 < uVar1) {
+    if (iVar1 >> 9 < 0x1000) {
+      if (5 < uVar2) {
         return uVar6;
       }
-      uVar1 = uVar1 + 1;
+      uVar2 = uVar2 + 1;
     }
     else {
-      if (uVar1 == 0) {
+      if (uVar2 == 0) {
         return uVar6;
       }
-      uVar1 = uVar1 - 1;
+      uVar2 = uVar2 - 1;
     }
-    cVar3 = cVar3 + -1;
-    uVar1 = uVar1 & 0xff;
-  } while (cVar3 != '\0');
+    cVar4 = cVar4 + -1;
+    uVar2 = uVar2 & 0xff;
+  } while (cVar4 != '\0');
   return uVar6;
 }
 

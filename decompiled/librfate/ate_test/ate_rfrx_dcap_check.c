@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit 772432d2e9e7422159ee3ef01a07fc985ce9466a
+ * https://github.com/espressif/esp-phy-lib/commit/772432d2e9e7422159ee3ef01a07fc985ce9466a
+ * Upstream date: 2024-08-30 17:42:59 +0800
+ * Upstream subject: feat(phy): add phy support for esp32c61
  * Source: librfate -> ate_test.o -> ate_rfrx_dcap_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void ate_rfrx_dcap_check(int param_1)
   puVar3 = local_30;
   uVar1 = 1;
   do {
-    chip_v7_set_chan(uVar1 & 0xffff,0);
+    phy_chip_set_chan(uVar1 & 0xffff,0);
     uVar4 = rfrx_dcap_cal();
     *puVar3 = uVar4;
     uVar1 = uVar1 + 1;
