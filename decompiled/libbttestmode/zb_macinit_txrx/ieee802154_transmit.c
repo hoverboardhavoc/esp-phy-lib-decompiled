@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * Upstream date: 2024-06-05 14:35:04 +0800
- * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
+ * Last changed at upstream commit 8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * https://github.com/espressif/esp-phy-lib/commit/8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * Upstream date: 2024-09-14 10:30:08 +0800
+ * Upstream subject: update ESP32, S2 and H2 librftest.a to support RF cert_test
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_transmit
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,9 +18,9 @@ void ieee802154_transmit(void)
   _DAT_60049058 = 0;
   _DAT_6004905c = 1;
   _tx_frame = 0x201000a;
-  DAT_00010d88 = 0x6050403;
-  DAT_00010d8c = 0x807;
-  DAT_00010d8e = 9;
+  DAT_00010dbc = 0x6050403;
+  DAT_00010dc0 = 0x807;
+  DAT_00010dc2 = 9;
   phy_printf("TX Start \n\r");
   phy_printf("transmitting frame %d bytes\n\r",_tx_frame & 0xff);
   _DAT_600a30d0 = &tx_frame;

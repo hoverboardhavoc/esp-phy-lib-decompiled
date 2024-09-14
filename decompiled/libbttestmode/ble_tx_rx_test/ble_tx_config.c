@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * Upstream date: 2024-06-05 14:35:04 +0800
- * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
+ * Last changed at upstream commit 8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * https://github.com/espressif/esp-phy-lib/commit/8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * Upstream date: 2024-09-14 10:30:08 +0800
+ * Upstream subject: update ESP32, S2 and H2 librftest.a to support RF cert_test
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_config
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,43 +21,44 @@ void ble_tx_config(undefined1 param_1,ushort param_2,int param_3)
   ble_select_phy_speed(param_1);
   if (param_3 == 2) {
     prbs9_gen_new(&_LANCHOR2);
-    _LANCHOR2 = 0x30;
+    _LANCHOR2 = 0;
   }
   else if (param_3 == 0) {
-    _LANCHOR2 = 0x70;
+    _LANCHOR2 = 2;
     puVar1 = &_LANCHOR2;
     for (uVar2 = 0; uVar2 < param_2; uVar2 = uVar2 + 1) {
       puVar1[2] = 0x55;
       puVar1 = puVar1 + 1;
     }
   }
-  else if (param_3 == 1) {
-    _LANCHOR2 = 0x60;
-    puVar1 = &_LANCHOR2;
-    for (uVar2 = 0; uVar2 < param_2; uVar2 = uVar2 + 1) {
-      puVar1[2] = 0xf;
-      puVar1 = puVar1 + 1;
-    }
-  }
-  else if (param_3 == 4) {
-    _LANCHOR2 = 0x40;
-    puVar1 = &_LANCHOR2;
-    for (uVar2 = 0; uVar2 < param_2; uVar2 = uVar2 + 1) {
-      puVar1[2] = 0xff;
-      puVar1 = puVar1 + 1;
-    }
-  }
   else {
-    _LANCHOR2 = 0x11;
-    uVar2 = 0;
-    puVar1 = &_LANCHOR2;
-    while (uVar2 < param_2) {
-      uVar2 = uVar2 + 1;
-      puVar1[2] = (char)uVar2;
-      puVar1 = puVar1 + 1;
+    _LANCHOR2 = (undefined1)param_3;
+    if (param_3 == 1) {
+      puVar1 = &_LANCHOR2;
+      for (uVar2 = 0; uVar2 < param_2; uVar2 = uVar2 + 1) {
+        puVar1[2] = 0xf;
+        puVar1 = puVar1 + 1;
+      }
+    }
+    else if (param_3 == 4) {
+      puVar1 = &_LANCHOR2;
+      for (uVar2 = 0; uVar2 < param_2; uVar2 = uVar2 + 1) {
+        puVar1[2] = 0xff;
+        puVar1 = puVar1 + 1;
+      }
+    }
+    else {
+      _LANCHOR2 = 0x11;
+      uVar2 = 0;
+      puVar1 = &_LANCHOR2;
+      while (uVar2 < param_2) {
+        uVar2 = uVar2 + 1;
+        puVar1[2] = (char)uVar2;
+        puVar1 = puVar1 + 1;
+      }
     }
   }
-  DAT_00011139 = (char)param_2;
+  DAT_00011195 = (char)param_2;
   _DAT_600a1830 = &_LANCHOR2;
   return;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * https://github.com/espressif/esp-phy-lib/commit/8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * Upstream date: 2024-09-14 10:30:08 +0800
+ * Upstream subject: update ESP32, S2 and H2 librftest.a to support RF cert_test
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,11 +34,11 @@ void zb_tx(uint param_1,uint param_2,uint param_3,uint param_4,int param_5)
   if (param_1 < 3) {
     param_1 = 3;
   }
-  if (param_5 != 0) {
+  if (param_5 != 0 || fcc_mode_sel != '\0') {
     _DAT_600a3098 = _DAT_600a3098 & 0xffffff00 | 0x3f;
   }
   zb_tx_init(param_1,param_2,param_3,0);
-  if (param_5 != 0) {
+  if (param_5 != 0 || fcc_mode_sel != '\0') {
     bt_track_pll_cap();
   }
   set_pbus_mem_update(param_3 & 0xff);

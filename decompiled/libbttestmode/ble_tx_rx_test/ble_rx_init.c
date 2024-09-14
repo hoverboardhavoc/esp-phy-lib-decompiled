@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * Upstream date: 2024-06-05 14:35:04 +0800
- * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
+ * Last changed at upstream commit 8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * https://github.com/espressif/esp-phy-lib/commit/8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * Upstream date: 2024-09-14 10:30:08 +0800
+ * Upstream subject: update ESP32, S2 and H2 librftest.a to support RF cert_test
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,9 +17,9 @@ void ble_rx_init(void)
 {
   ble_select_phy_speed();
   memset(&_LANCHOR3,0x55,0x140);
-  _DAT_600a1834 = &DAT_00010fef;
+  _DAT_600a1834 = &DAT_0001104b;
   if (_DAT_600a1550 != 0) {
-    __assert_func("ble_tx_rx_test.c",0x16a,"ble_rx_init",
+    __assert_func("ble_tx_rx_test.c",0x16d,"ble_rx_init",
                   "RADIO->STATE == RADIO_STATE_STATE_Disabled");
   }
   return;

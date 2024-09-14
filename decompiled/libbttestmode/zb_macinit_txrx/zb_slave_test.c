@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * Upstream date: 2024-06-05 14:35:04 +0800
- * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
+ * Last changed at upstream commit 8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * https://github.com/espressif/esp-phy-lib/commit/8608fcf54d51e81f2e74ebf335fa33f61953f7c8
+ * Upstream date: 2024-09-14 10:30:08 +0800
+ * Upstream subject: update ESP32, S2 and H2 librftest.a to support RF cert_test
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_slave_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,10 +43,10 @@ void zb_slave_test(undefined4 param_1,undefined4 param_2,undefined4 param_3,uint
                               (0,&uStack_3c,&uStack_38,&uStack_34,&uStack_30,&uStack_2c,param_4),
            uVar3 < uStack_3c && (param_4 == 0))) {
       iVar2 = zb_tx_a_frame(&uStack_28,auStack_24,0,param_2);
-      if ((iVar1 == 1) || (uVar3 = uStack_3c, iVar2 == 1)) goto _L177;
+      if ((iVar1 == 1) || (uVar3 = uStack_3c, iVar2 == 1)) goto _L180;
     }
   } while (iVar1 != 1);
-_L177:
+_L180:
   phy_printf("zb_slave_test ends!\n");
   phy_printf("slave_RX: n_correct=%d, n_error=%d\n",uStack_3c,uStack_38);
   phy_printf("slave_TX: n_correct=%d, n_error=%d\n",uStack_28,auStack_24[0]);
