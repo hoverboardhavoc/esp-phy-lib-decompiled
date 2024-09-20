@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 772432d2e9e7422159ee3ef01a07fc985ce9466a
- * https://github.com/espressif/esp-phy-lib/commit/772432d2e9e7422159ee3ef01a07fc985ce9466a
- * Upstream date: 2024-08-30 17:42:59 +0800
- * Upstream subject: feat(phy): add phy support for esp32c61
+ * Last changed at upstream commit 6bd4ea98abf865ee8ee3598f58d7260bf06ff03e
+ * https://github.com/espressif/esp-phy-lib/commit/6bd4ea98abf865ee8ee3598f58d7260bf06ff03e
+ * Upstream date: 2024-09-20 20:33:24 +0800
+ * Upstream subject: update c61 libphy support sleep
  * Source: librfate -> ate_test.o -> ate_rfrx_dcap_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void ate_rfrx_dcap_check(int param_1)
   puVar3 = local_30;
   uVar1 = 1;
   do {
-    phy_chip_set_chan(uVar1 & 0xffff,0);
+    chip_v7_set_chan(uVar1 & 0xffff,0);
     uVar4 = rfrx_dcap_cal();
     *puVar3 = uVar4;
     uVar1 = uVar1 + 1;

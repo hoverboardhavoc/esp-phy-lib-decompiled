@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 772432d2e9e7422159ee3ef01a07fc985ce9466a
- * https://github.com/espressif/esp-phy-lib/commit/772432d2e9e7422159ee3ef01a07fc985ce9466a
- * Upstream date: 2024-08-30 17:42:59 +0800
- * Upstream subject: feat(phy): add phy support for esp32c61
+ * Last changed at upstream commit 6bd4ea98abf865ee8ee3598f58d7260bf06ff03e
+ * https://github.com/espressif/esp-phy-lib/commit/6bd4ea98abf865ee8ee3598f58d7260bf06ff03e
+ * Upstream date: 2024-09-20 20:33:24 +0800
+ * Upstream subject: update c61 libphy support sleep
  * Source: librfate -> ate_test.o -> test_rx_gain_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ undefined1 test_rx_gain_cal(void)
     }
     phy_pbus_force_test(1,1,0x1f1);
     phy_set_loopback_gain(uVar3,0x18c,uVar5);
-    phy_pbus_rx_dco_cal(4000,&uStack_38,10,0,0);
+    phy_pbus_rx_dco_cal_new(4000,&uStack_38,10,0,0);
     phy_start_tx_tone_step(1,0x80,uVar6,0,0,0);
     ets_delay_us(1);
     phy_iq_est_enable(1,0xfff);
