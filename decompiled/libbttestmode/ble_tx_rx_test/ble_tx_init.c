@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * Upstream date: 2024-06-05 14:35:04 +0800
- * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
+ * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
+ * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
+ * Upstream date: 2025-01-03 11:45:24 +0800
+ * Upstream subject: support h2 eco5 test
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void ble_tx_init(int param_1,int param_2,uint param_3,int param_4,undefined1 par
   }
   _DAT_600a150c = _DAT_600a150c & 0xffffff00 | uVar3;
   iVar1 = 0x962;
-  uVar3 = (byte)ch_map2[param_1] + 0x962;
+  uVar3 = (byte)(&ch_map2)[param_1] + 0x962;
   if ((0x97d < uVar3) && (iVar1 = 0x97e, 0x997 < uVar3)) {
     iVar1 = 0x998;
   }

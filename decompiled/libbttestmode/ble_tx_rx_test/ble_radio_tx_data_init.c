@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8608fcf54d51e81f2e74ebf335fa33f61953f7c8
- * https://github.com/espressif/esp-phy-lib/commit/8608fcf54d51e81f2e74ebf335fa33f61953f7c8
- * Upstream date: 2024-09-14 10:30:08 +0800
- * Upstream subject: update ESP32, S2 and H2 librftest.a to support RF cert_test
+ * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
+ * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
+ * Upstream date: 2025-01-03 11:45:24 +0800
+ * Upstream subject: support h2 eco5 test
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_radio_tx_data_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void ble_radio_tx_data_init(ushort param_1,int param_2)
       }
     }
   }
-  DAT_00011195 = (char)param_1;
+  DAT_000111f1 = (char)param_1;
   _DAT_600a1830 = &_LANCHOR2;
   return;
 }

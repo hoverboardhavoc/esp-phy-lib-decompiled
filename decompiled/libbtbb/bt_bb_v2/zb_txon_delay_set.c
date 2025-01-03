@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 97a141a563a4b752f5943d0049aa691038d08613
- * https://github.com/espressif/esp-phy-lib/commit/97a141a563a4b752f5943d0049aa691038d08613
- * Upstream date: 2023-06-28 11:18:04 +0800
- * Upstream subject: h2: optimize track pll when temperature changes. fix ramp up and ramp down timing.
+ * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
+ * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
+ * Upstream date: 2025-01-03 11:45:24 +0800
+ * Upstream subject: support h2 eco5 test
  * Source: libbtbb -> bt_bb_v2.o -> zb_txon_delay_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,10 @@
 void zb_txon_delay_set(void)
 
 {
-  _DAT_600a3104 = _DAT_600a3104 & 0xfffffc00 | 0x28;
+  _DAT_600a3104 = _DAT_600a3104 & 0xfffffc00 | 0x23;
   _DAT_600a3110 = _DAT_600a3110 & 0xfffff800 | 0x32;
-  _DAT_600a3114 = _DAT_600a3114 & 0xfffffc00 | 0x7a;
-  _DAT_600a310c = _DAT_600a310c & 0xffffffc0 | 1;
+  _DAT_600a3114 = _DAT_600a3114 & 0xfffffc00 | 0x7f;
+  _DAT_600a310c = _DAT_600a310c & 0xffffffc0;
   return;
 }
 

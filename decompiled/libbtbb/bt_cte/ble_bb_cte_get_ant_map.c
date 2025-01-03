@@ -1,0 +1,18 @@
+/*
+ * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
+ * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
+ * Upstream date: 2025-01-03 11:45:24 +0800
+ * Upstream subject: support h2 eco5 test
+ * Source: libbtbb -> bt_cte.o -> ble_bb_cte_get_ant_map
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+undefined4 ble_bb_cte_get_ant_map(void)
+
+{
+  return 0x600a2130;
+}
+

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8608fcf54d51e81f2e74ebf335fa33f61953f7c8
- * https://github.com/espressif/esp-phy-lib/commit/8608fcf54d51e81f2e74ebf335fa33f61953f7c8
- * Upstream date: 2024-09-14 10:30:08 +0800
- * Upstream subject: update ESP32, S2 and H2 librftest.a to support RF cert_test
+ * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
+ * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
+ * Upstream date: 2025-01-03 11:45:24 +0800
+ * Upstream subject: support h2 eco5 test
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  phy_printf("libbtbb version: %s, %s, %s\n","a024da6","Aug 15 2024","18:52:23");
+  phy_printf("libbtbb version: %s, %s, %s\n","8a403d9","Dec 26 2024","16:27:25");
   return;
 }
 

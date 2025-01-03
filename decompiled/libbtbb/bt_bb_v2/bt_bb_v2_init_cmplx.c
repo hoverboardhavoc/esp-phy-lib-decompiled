@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * Upstream date: 2024-06-05 14:35:04 +0800
- * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
+ * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
+ * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
+ * Upstream date: 2025-01-03 11:45:24 +0800
+ * Upstream subject: support h2 eco5 test
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_init_cmplx
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,9 +19,12 @@ void bt_bb_v2_init_cmplx(int param_1)
   bt_bb_v2_rx_set(3);
   set_gauss_coeff_1m();
   set_gauss_coeff_2m();
-  zb_txon_delay_set();
   _DAT_600a08fc = _DAT_600a08fc & 0xffff0000 | 0x5004;
   _DAT_600a200c = _DAT_600a200c & 0xffffff7f;
+  bt_bb_set_le_tx_on_delay(0x31);
+  bt_bb_tx_cca_period(0x3f,0x14);
+  bt_bb_set_zb_tx_on_delay(0x32);
+  ieee802154_txon_delay_set();
   if (param_1 != 0) {
     bt_bb_v2_version();
     return;

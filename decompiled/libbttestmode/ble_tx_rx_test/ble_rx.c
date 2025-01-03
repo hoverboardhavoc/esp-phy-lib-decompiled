@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 8608fcf54d51e81f2e74ebf335fa33f61953f7c8
- * https://github.com/espressif/esp-phy-lib/commit/8608fcf54d51e81f2e74ebf335fa33f61953f7c8
- * Upstream date: 2024-09-14 10:30:08 +0800
- * Upstream subject: update ESP32, S2 and H2 librftest.a to support RF cert_test
+ * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
+ * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
+ * Upstream date: 2025-01-03 11:45:24 +0800
+ * Upstream subject: support h2 eco5 test
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void ble_rx(int param_1,undefined4 param_2)
   
   chip_v7_set_chan(1,0);
   bt_track_pll_cap();
-  xtal_freq_rx_cal(1,(byte)ch_map2[param_1] + 2,0);
+  xtal_freq_rx_cal(1,(byte)(&ch_map2)[param_1] + 2,0);
   ble_radio_init();
   ble_whitening_enable(0);
   iVar3 = 0;
@@ -35,9 +35,9 @@ void ble_rx(int param_1,undefined4 param_2)
       if (iVar2 == 0) {
         _DAT_600a1010 = 1;
         _DAT_6004905c = 1;
-        ___floatunsidf = 0;
+        _phy_set_clk_conf = 0;
         if (iVar1 != 0) {
-          ___floatunsidf = iVar3 / iVar1;
+          _phy_set_clk_conf = iVar3 / iVar1;
         }
         esp_rx_valid = 2;
         if (iVar1 == 0) {
@@ -49,10 +49,10 @@ void ble_rx(int param_1,undefined4 param_2)
           }
         }
         _esp_rx_result = iVar3;
-        ___muldf3 = iVar1;
+        _DAT_0001205c = iVar1;
         phy_printf("%x %x %x %x %x %x %x %d %d %d p %d %d %d %d\n",iVar1 + iVar4,iVar1,0,0,iVar4,0,0
                   );
-        xtal_freq_rx_cal(0,(byte)ch_map2[param_1] + 2,0);
+        xtal_freq_rx_cal(0,(byte)(&ch_map2)[param_1] + 2,0);
         return;
       }
     }
