@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * https://github.com/espressif/esp-phy-lib/commit/c5d2548ae63b895c5f7c8727f25c3e129c59d71d
- * Upstream date: 2024-06-05 14:35:04 +0800
- * Upstream subject: update C6 H2 libphy for coex test ble 154 chan bug
+ * Last changed at upstream commit 38908075833e4ae3a48e6ffe431a672698e07e21
+ * https://github.com/espressif/esp-phy-lib/commit/38908075833e4ae3a48e6ffe431a672698e07e21
+ * Upstream date: 2025-02-13 17:19:18 +0800
+ * Upstream subject: update H2 libphy fit ECO5 btbb rssi fix
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_rssi_thresh
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,9 +15,16 @@
 void bt_agc_rssi_thresh(void)
 
 {
-  _DAT_600a28a0 = _DAT_600a28a0 & 0xff00ffff | 0x8e0000;
-  _DAT_600a28ac = _DAT_600a28ac & 0x807fffff | 0x40000000;
-  _DAT_600a28b8 = _DAT_600a28b8 & 0xfff00fff | 0x80000;
+  uint uVar1;
+  
+  _DAT_600a28a0 =
+       (0x97 - (uint)(BLE_RSSI_COMP >> 1)) * 0x10000 & 0xff0000 | _DAT_600a28a0 & 0xff00ffff;
+  uVar1 = 0x88 - (BLE_RSSI_COMP >> 1);
+  if ((uVar1 & 0xffff) < 0x80) {
+    uVar1 = 0x80;
+  }
+  _DAT_600a28ac = (uVar1 & 0xff) << 0x17 | _DAT_600a28ac & 0x807fffff;
+  _DAT_600a28b8 = (uVar1 & 0xff) << 0xc | _DAT_600a28b8 & 0xfff00fff;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
- * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
- * Upstream date: 2025-01-03 11:45:24 +0800
- * Upstream subject: support h2 eco5 test
+ * Last changed at upstream commit 38908075833e4ae3a48e6ffe431a672698e07e21
+ * https://github.com/espressif/esp-phy-lib/commit/38908075833e4ae3a48e6ffe431a672698e07e21
+ * Upstream date: 2025-02-13 17:19:18 +0800
+ * Upstream subject: update H2 libphy fit ECO5 btbb rssi fix
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_config
  *
  * (C) Espressif, Apache License 2.0.
@@ -58,7 +58,7 @@ void ble_tx_config(undefined1 param_1,ushort param_2,int param_3)
       }
     }
   }
-  DAT_000111f1 = (char)param_2;
+  DAT_00011211 = (char)param_2;
   _DAT_600a1830 = &_LANCHOR2;
   return;
 }
