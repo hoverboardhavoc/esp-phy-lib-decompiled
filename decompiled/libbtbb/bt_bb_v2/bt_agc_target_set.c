@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit fc76520d481fc3d08cbc001ef47804a4457fffd7
+ * https://github.com/espressif/esp-phy-lib/commit/fc76520d481fc3d08cbc001ef47804a4457fffd7
+ * Upstream date: 2025-03-10 14:21:08 +0800
+ * Upstream subject: update chips libphy add btbb_set_rx_sense api
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_target_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void bt_agc_target_set(void)
   _DAT_600a2898 = _DAT_600a2898 & 0xffff8000 | 0x19d4;
   _DAT_600a2840 = _DAT_600a2840 & 0xffc003ff | 0x3a8800;
   _DAT_600a2894 = _DAT_600a2894 & 0xff803fff | 0x710000;
-  _DAT_600a28b4 = _DAT_600a28b4 & 0x7fffff | 0xe2000000;
+  _DAT_600a28b4 = _DAT_600a28b4 & 0x7fffff | 0xea000000;
   return;
 }
 

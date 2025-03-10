@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * https://github.com/espressif/esp-phy-lib/commit/9af79fa4c0c1211cd1570ca7cc785a6ca069c929
- * Upstream date: 2023-03-31 17:07:27 +0800
- * Upstream subject: update_for_rftest_20230331
+ * Last changed at upstream commit fc76520d481fc3d08cbc001ef47804a4457fffd7
+ * https://github.com/espressif/esp-phy-lib/commit/fc76520d481fc3d08cbc001ef47804a4457fffd7
+ * Upstream date: 2025-03-10 14:21:08 +0800
+ * Upstream subject: update chips libphy add btbb_set_rx_sense api
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_gain_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,18 +16,18 @@ void bt_bb_gain_set(void)
 
 {
   uint uVar1;
+  uint uVar2;
   
+  uVar1 = _DAT_6001c0a4;
   _DAT_6001c094 = _DAT_6001c094 | 1;
   _DAT_6001104c = _DAT_6001104c | 4;
-  uVar1 = _DAT_6001c0d0 >> 9;
+  uVar2 = _DAT_6001c0d0 >> 9;
   _DAT_60011844 =
-       ((char)uVar1 + 0x12) * 0x80000 & 0xf80000U |
-       (uVar1 & 0x7f) << 7 | _DAT_60011844 & 0xff07c000 | uVar1 & 0x7f;
+       ((char)uVar2 + 0x12) * 0x80000 & 0xf80000U |
+       (uVar2 & 0x7f) << 7 | _DAT_60011844 & 0xff07c000 | uVar2 & 0x7f;
   _DAT_60011854 = _DAT_60011854 & 0xfffffe03 | 0xc9;
-  uVar1 = _DAT_6001c0a4 >> 0xf & 0x7f;
-  _DAT_60011850 =
-       _DAT_6001c0a4 >> 1 & 0xfe00000 |
-       uVar1 | _DAT_60011850 & 0xf0000000 | uVar1 << 0xe | uVar1 << 7;
+  bt_agc_gain_max(_DAT_6001c0a4 >> 0xf & 0x7f);
+  _DAT_60011850 = (uVar1 >> 0x16 & 0x7f) << 0x15 | _DAT_60011850 & 0xf01fffff;
   _DAT_60011848 = _DAT_60011848 & 0xff00ffff | 0x500000;
   _DAT_60011858 = 0x2c2c2c2c;
   _DAT_6001185c = 0x2c2c2c2c;

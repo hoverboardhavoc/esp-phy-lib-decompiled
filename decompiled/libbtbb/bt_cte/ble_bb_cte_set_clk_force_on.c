@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
- * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
- * Upstream date: 2025-01-03 11:45:24 +0800
- * Upstream subject: support h2 eco5 test
+ * Last changed at upstream commit fc76520d481fc3d08cbc001ef47804a4457fffd7
+ * https://github.com/espressif/esp-phy-lib/commit/fc76520d481fc3d08cbc001ef47804a4457fffd7
+ * Upstream date: 2025-03-10 14:21:08 +0800
+ * Upstream subject: update chips libphy add btbb_set_rx_sense api
  * Source: libbtbb -> bt_cte.o -> ble_bb_cte_set_clk_force_on
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,6 +15,7 @@
 void ble_bb_cte_set_clk_force_on(void)
 
 {
+  _DAT_600a2184 = _DAT_600a2184 | 0x20000000;
   return;
 }
 
