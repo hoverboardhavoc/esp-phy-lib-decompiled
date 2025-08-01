@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit 1d4cd3aafa244a0adf5891f058b3519bc970d644
+ * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
+ * Upstream date: 2025-08-01 19:50:02 +0800
+ * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_correlator_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,14 @@
 void bt_bb_rx_correlator_set(void)
 
 {
+  uint uVar1;
+  
   _DAT_600a20fc = _DAT_600a20fc & 0x81ffffff | 0x12000000;
-  _DAT_600a2068 = _DAT_600a2068 & 0x81f | 0x10d9b860;
+  uVar1 = _DAT_600a2068 & 0x81f;
+  _DAT_600a2068 = uVar1 | 0x10d9b060;
+  if (phy_param < 5) {
+    _DAT_600a2068 = uVar1 | 0x10d9b860;
+  }
   _DAT_600a2060 = _DAT_600a2060 & 0x3ffffff | 0x8000000;
   _DAT_600a2100 = _DAT_600a2100 & 0xf33fffff | 0x400000;
   _DAT_600a2064 = _DAT_600a2064 & 0xfc000003 | 0x310908;

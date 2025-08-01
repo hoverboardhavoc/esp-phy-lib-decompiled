@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
  * Upstream date: 2025-08-01 19:50:02 +0800
  * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
- * Source: libbtbb -> bt_bb_v2.o -> bt_bb_set_zb_tx_on_delay
+ * Source: libbtbb -> bt_bb_v2.o -> bt_bb_coex_config
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,10 +12,10 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void bt_bb_set_zb_tx_on_delay(int param_1)
+void bt_bb_coex_config(void)
 
 {
-  _DAT_600a2010 = (param_1 + 0x1ffffff6) * 0x1000000 | _DAT_600a2010 & 0x1fffff;
+  _DAT_600a2184 = _DAT_600a2184 | 0x140000;
   return;
 }
 

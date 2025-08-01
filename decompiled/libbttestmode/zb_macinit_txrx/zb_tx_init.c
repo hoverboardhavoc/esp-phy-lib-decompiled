@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 38908075833e4ae3a48e6ffe431a672698e07e21
- * https://github.com/espressif/esp-phy-lib/commit/38908075833e4ae3a48e6ffe431a672698e07e21
- * Upstream date: 2025-02-13 17:19:18 +0800
- * Upstream subject: update H2 libphy fit ECO5 btbb rssi fix
+ * Last changed at upstream commit 1d4cd3aafa244a0adf5891f058b3519bc970d644
+ * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
+ * Upstream date: 2025-08-01 19:50:02 +0800
+ * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void zb_tx_init(uint param_1,int param_2,uint param_3,int param_4)
   _DAT_600a304c = param_3;
   if (param_4 == 0) {
     for (uVar4 = 0; uVar4 < param_1; uVar4 = uVar4 + 1 & 0xff) {
-      (&DAT_00010e11)[uVar4] = (char)uVar4;
+      (&DAT_00010e0d)[uVar4] = (char)uVar4;
     }
   }
   else {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fc76520d481fc3d08cbc001ef47804a4457fffd7
- * https://github.com/espressif/esp-phy-lib/commit/fc76520d481fc3d08cbc001ef47804a4457fffd7
- * Upstream date: 2025-03-10 14:21:08 +0800
- * Upstream subject: update chips libphy add btbb_set_rx_sense api
+ * Last changed at upstream commit 1d4cd3aafa244a0adf5891f058b3519bc970d644
+ * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
+ * Upstream date: 2025-08-01 19:50:02 +0800
+ * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  phy_printf("libbtbb version: %s, %s, %s\n","e9c8b26","Mar  3 2025","16:09:24");
+  phy_printf("libbtbb version: %s, %s, %s\n","4515421","Aug  1 2025","17:46:22");
   return;
 }
 

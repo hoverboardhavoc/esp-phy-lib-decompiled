@@ -3,19 +3,30 @@
  * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
  * Upstream date: 2025-08-01 19:50:02 +0800
  * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
- * Source: libbtbb -> bt_bb_v2.o -> bt_bb_set_zb_tx_on_delay
+ * Source: libbttestmode -> ble_tx_rx_test.o -> get_source_flash_freq_err
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void bt_bb_set_zb_tx_on_delay(int param_1)
+void get_source_flash_freq_err(uint *param_1)
 
 {
-  _DAT_600a2010 = (param_1 + 0x1ffffff6) * 0x1000000 | _DAT_600a2010 & 0x1fffff;
+  char cStack_14;
+  char cStack_13;
+  byte bStack_12;
+  byte bStack_11;
+  
+  if (ble_freq_est != '\0') {
+    spi_flash_attach(0,0);
+    esp_rom_spiflash_read(0x80000,&cStack_14,4);
+    if ((cStack_14 == '\x11') && (cStack_13 == '\"')) {
+      *param_1 = (uint)bStack_12;
+      param_1[1] = (uint)bStack_11;
+    }
+    return;
+  }
   return;
 }
 

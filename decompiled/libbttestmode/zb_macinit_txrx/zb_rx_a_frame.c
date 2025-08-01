@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 38908075833e4ae3a48e6ffe431a672698e07e21
- * https://github.com/espressif/esp-phy-lib/commit/38908075833e4ae3a48e6ffe431a672698e07e21
- * Upstream date: 2025-02-13 17:19:18 +0800
- * Upstream subject: update H2 libphy fit ECO5 btbb rssi fix
+ * Last changed at upstream commit 1d4cd3aafa244a0adf5891f058b3519bc970d644
+ * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
+ * Upstream date: 2025-08-01 19:50:02 +0800
+ * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
     if ((_DAT_600a3064 & 2) != 0) {
       _DAT_600a3064 = _DAT_600a3064 | 2;
       *param_1 = *param_1 + 1;
-      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10d8b) + ((int)(_BLE_RSSI_COMP + 1) >> 1);
+      *param_2 = *param_2 + (int)*(char *)(rx_frame + 68999) + ((int)(_BLE_RSSI_COMP + 1) >> 1);
       *param_3 = (int)(char)(_DAT_600a2c3c >> 0x10) + *param_3;
       *param_4 = (_DAT_600a2c3c >> 8 & 0xff) + *param_4;
       return 0;
@@ -47,7 +47,7 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
   }
   if (uVar2 == 3) {
     *param_7 = *param_7 + 1;
-    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10d8b) + ((int)(_BLE_RSSI_COMP + 1) >> 1);
+    *param_8 = *param_8 + (int)*(char *)(rx_frame + 68999) + ((int)(_BLE_RSSI_COMP + 1) >> 1);
     return 0;
   }
   if ((uVar2 != 6) && (uVar2 != 9)) {
