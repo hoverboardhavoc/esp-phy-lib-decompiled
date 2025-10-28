@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e5944fc80c813150131566dd0761709ae9fdea89
- * https://github.com/espressif/esp-phy-lib/commit/e5944fc80c813150131566dd0761709ae9fdea89
- * Upstream date: 2025-02-18 15:55:42 +0800
- * Upstream subject: update libphy for RXDC cal opt, no antenna current opt, add cca api
+ * Last changed at upstream commit 218d3e79a323a437b5f994c32fe7b2144f54ca8c
+ * https://github.com/espressif/esp-phy-lib/commit/218d3e79a323a437b5f994c32fe7b2144f54ca8c
+ * Upstream date: 2025-10-28 15:27:17 +0800
+ * Upstream subject: update C3 S3 C2 S2 libphy for rxdc opt
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> ble_chan_trans_to_normal
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,23 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-int ble_chan_trans_to_normal(uint param_1)
+/* WARNING: Control flow encountered bad instruction data */
+
+void ble_chan_trans_to_normal(void)
 
 {
-  if (param_1 != 0x25) {
-    if (param_1 == 0x26) {
-      return 0xc;
-    }
-    if (param_1 == 0x27) {
-      return 0x27;
-    }
-    if (param_1 < 0xb) {
-      return param_1 + 1;
-    }
-    if (param_1 < 0x25) {
-      return param_1 + 2;
-    }
-  }
-  return 0;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
 }
 

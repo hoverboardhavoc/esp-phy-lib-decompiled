@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e5944fc80c813150131566dd0761709ae9fdea89
- * https://github.com/espressif/esp-phy-lib/commit/e5944fc80c813150131566dd0761709ae9fdea89
- * Upstream date: 2025-02-18 15:55:42 +0800
- * Upstream subject: update libphy for RXDC cal opt, no antenna current opt, add cca api
+ * Last changed at upstream commit 218d3e79a323a437b5f994c32fe7b2144f54ca8c
+ * https://github.com/espressif/esp-phy-lib/commit/218d3e79a323a437b5f994c32fe7b2144f54ca8c
+ * Upstream date: 2025-10-28 15:27:17 +0800
+ * Upstream subject: update C3 S3 C2 S2 libphy for rxdc opt
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> rw_le_v9_rx_per_syncw_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void rw_le_v9_rx_per_syncw_init(undefined8 param_1)
   undefined8 uStack00000080;
   
   uStack00000080 = param_1;
-  thunk_FUN_00013ee8();
+  thunk_FUN_00013f2c();
   return;
 }
 
