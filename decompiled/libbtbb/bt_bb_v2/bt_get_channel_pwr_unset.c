@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_get_channel_pwr_unset
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,8 @@
 void bt_get_channel_pwr_unset(void)
 
 {
-  _DAT_600a2004 = _DAT_600a2004 & 0xfffffcff;
-  _DAT_600a00c0 = _DAT_600a00c0 & 0xfdffffff;
+  _DAT_600c2004 = _DAT_600c2004 & 0xfffffcff;
+  _DAT_600c001c = _DAT_600c001c & 0xbfffffff;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: librfate -> ate_test.o -> ate_bt_dut_func
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,28 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void ate_bt_dut_func(int param_1)
+void ate_bt_dut_func(int param_1,undefined4 param_2)
 
 {
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  undefined4 uStack_24;
-  undefined4 uStack_20;
-  undefined4 uStack_1c;
+  char cStack_1b;
+  char cStack_1a;
+  char cStack_19;
   undefined4 uStack_18;
-  undefined4 uStack_14;
+  undefined4 auStack_14 [3];
   
-  uStack_2c = 0;
-  uStack_28 = 0;
-  uStack_24 = 0;
-  uStack_20 = 0;
-  uStack_1c = 0;
-  uStack_18 = 0;
-  uStack_14 = 0;
-  le_master_test(9,2,0xc,0x32,0x25,&uStack_2c,&uStack_28,&uStack_24);
+  rw_le_pq_master_test(0,0xc,param_2,auStack_14,&uStack_18,&cStack_1b,&cStack_1a);
   if (param_1 != 0) {
-    phy_printf("le_txrx_num: %d, %d\n",uStack_2c,uStack_24);
-    phy_printf("le_rssi: avg=%d, max=%d, min=%d\n",uStack_1c,uStack_18,uStack_14);
+    phy_printf("le_txrx_num: %d, %d\n",auStack_14[0],uStack_18);
+    phy_printf("le_rssi: avg=%d, max=%d, min=%d\n",(int)cStack_1b,(int)cStack_1a,(int)cStack_19);
   }
   return;
 }

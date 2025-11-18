@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c28825eb1be6bbe30e0ee8cfcd54614bf86273e7
- * https://github.com/espressif/esp-phy-lib/commit/c28825eb1be6bbe30e0ee8cfcd54614bf86273e7
- * Upstream date: 2024-04-03 16:53:14 +0800
- * Upstream subject: fix coex test wifi affect ble s8 tx problm, and c3 s3 light sleep current opt, and c3 s3 ble rx problem
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_get_cur_rx_info
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,6 +15,6 @@
 undefined4 bt_bb_get_cur_rx_info(void)
 
 {
-  return _DAT_600a20b0;
+  return _DAT_600c20b0;
 }
 

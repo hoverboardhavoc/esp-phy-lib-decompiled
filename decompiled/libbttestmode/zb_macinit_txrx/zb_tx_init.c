@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1d4cd3aafa244a0adf5891f058b3519bc970d644
- * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
- * Upstream date: 2025-08-01 19:50:02 +0800
- * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,15 +20,15 @@ void zb_tx_init(uint param_1,int param_2,uint param_3,int param_4)
   undefined1 *puVar3;
   uint uVar4;
   
-  _DAT_600a3048 = param_2 + -0x962;
+  _DAT_600c3048 = param_2 + -0x962;
   tx_frame = (undefined1)param_1;
   if (0xf < param_3) {
     param_3 = 0xf;
   }
-  _DAT_600a304c = param_3;
+  _DAT_600c304c = param_3;
   if (param_4 == 0) {
     for (uVar4 = 0; uVar4 < param_1; uVar4 = uVar4 + 1 & 0xff) {
-      (&DAT_00010e0d)[uVar4] = (char)uVar4;
+      (&DAT_00010ddd)[uVar4] = (char)uVar4;
     }
   }
   else {
@@ -42,7 +42,7 @@ void zb_tx_init(uint param_1,int param_2,uint param_3,int param_4)
       *puVar3 = *puVar1;
     } while (iVar2 != 10);
   }
-  _DAT_600a30d0 = &tx_frame;
+  _DAT_600c30d0 = &tx_frame;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> le_slave_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,11 +50,11 @@ void le_slave_test(undefined4 param_1,undefined4 param_2,undefined4 param_3,unde
   phy_printf("slave_RX: n_correct=%d, n_error=%d\n",uStack_3c,uStack_38);
   phy_printf("slave_TX: n_correct=%d, n_error=%d\n",uStack_28,auStack_24[0]);
   if (uStack_3c == 0) {
-    if ((_DAT_60091004 & 0x100) == 0) {
-      _DAT_60091004 = _DAT_60091004 | 0x100;
+    if ((_DAT_60093004 & 0x100) == 0) {
+      _DAT_60093004 = _DAT_60093004 | 0x100;
     }
     else {
-      _DAT_60091004 = _DAT_60091004 & 0xfffffeff;
+      _DAT_60093004 = _DAT_60093004 & 0xfffffeff;
     }
   }
   phy_set_clk_conf(0);

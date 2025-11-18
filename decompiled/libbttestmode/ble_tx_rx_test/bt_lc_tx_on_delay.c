@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> bt_lc_tx_on_delay
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void bt_lc_tx_on_delay(uint param_1)
 
 {
-  _DAT_600a1650 = (param_1 & 0xff) << 0x10 | _DAT_600a1650 & 0xff00ff00 | param_1 & 0xff;
+  _DAT_600c1650 = (param_1 & 0xff) << 0x10 | _DAT_600c1650 & 0xff00ff00 | param_1 & 0xff;
   return;
 }
 

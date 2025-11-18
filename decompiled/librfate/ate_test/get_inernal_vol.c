@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: librfate -> ate_test.o -> get_inernal_vol
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void get_inernal_vol(undefined4 param_1,undefined4 param_2,undefined4 param_3,un
     cVar4 = '\b';
     uVar1 = 0;
     do {
-      iVar2 = get_sar2_vol(3);
+      iVar2 = get_sar2_vol(0);
       cVar4 = cVar4 + -1;
       uVar1 = uVar1 + iVar2 & 0xffff;
     } while (cVar4 != '\0');

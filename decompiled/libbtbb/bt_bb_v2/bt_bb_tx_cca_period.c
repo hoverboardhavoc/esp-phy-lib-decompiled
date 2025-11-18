@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_tx_cca_period
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,9 +15,9 @@
 void bt_bb_tx_cca_period(int param_1,int param_2)
 
 {
-  _DAT_600a20b8 =
+  _DAT_600c20b8 =
        (param_1 + 0x1ffffffb) * 0x1000 - 0x200U & 0xffe00 |
-       ((param_1 - param_2) + 0x1ffffffb) * 0x800000 & 0x7f800000U | _DAT_600a20b8 & 0x800001ff;
+       ((param_1 - param_2) + 0x1ffffffb) * 0x800000 & 0x7f800000U | _DAT_600c20b8 & 0x800001ff;
   return;
 }
 

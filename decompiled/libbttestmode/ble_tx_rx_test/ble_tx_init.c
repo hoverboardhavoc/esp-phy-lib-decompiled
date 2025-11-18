@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
- * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
- * Upstream date: 2025-01-03 11:45:24 +0800
- * Upstream subject: support h2 eco5 test
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,58 +12,18 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ble_tx_init(int param_1,int param_2,uint param_3,int param_4,undefined1 param_5)
+void ble_tx_init(uint param_1,undefined4 param_2,undefined1 param_3)
 
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
+  uint uVar1;
   
   ble_select_phy_speed();
-  ble_radio_tx_data_init(param_5,param_4);
-  uVar3 = 0xf;
-  if (param_3 < 0x10) {
-    uVar3 = param_3 & 0xff;
+  ble_radio_tx_data_init(param_3,param_2);
+  uVar1 = 0xf;
+  if (param_1 < 0x10) {
+    uVar1 = param_1 & 0xff;
   }
-  _DAT_600a150c = _DAT_600a150c & 0xffffff00 | uVar3;
-  iVar1 = 0x962;
-  uVar3 = (byte)(&ch_map2)[param_1] + 0x962;
-  if ((0x97d < uVar3) && (iVar1 = 0x97e, 0x997 < uVar3)) {
-    iVar1 = 0x998;
-  }
-  if (dis_tx_scale != '\0') {
-    return;
-  }
-  if (param_2 == 2) {
-    if (param_4 == 1) {
-      iVar2 = 0x800;
-    }
-    else {
-      if (param_4 != 0) {
-        _DAT_600a0c08 = _DAT_600a0c08 & 0xff000fff | 0x800000;
-        return;
-      }
-      iVar2 = 0x85f;
-    }
-    uVar4 = (iVar2 + (uVar3 - iVar1) * -3) * 0x1000 & 0xfff000;
-    uVar3 = 0xff000fff;
-  }
-  else {
-    if ((param_4 == 1) || (param_4 == 4)) {
-      uVar3 = ((uVar3 - iVar1) * 0xc) / 10;
-    }
-    else {
-      if (param_4 != 0) {
-        _DAT_600a0c08 = _DAT_600a0c08 & 0xfffff000 | 0x408;
-        return;
-      }
-      uVar3 = -(((uVar3 - iVar1) * 0xc) / 10);
-    }
-    uVar4 = uVar3 + 0x408 & 0xfff;
-    uVar3 = 0xfffff000;
-  }
-  _DAT_600a0c08 = uVar4 | uVar3 & _DAT_600a0c08;
+  _DAT_600c150c = _DAT_600c150c & 0xffffff00 | uVar1;
   return;
 }
 

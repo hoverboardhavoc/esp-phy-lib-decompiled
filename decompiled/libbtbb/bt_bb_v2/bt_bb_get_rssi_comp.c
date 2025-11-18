@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 38908075833e4ae3a48e6ffe431a672698e07e21
- * https://github.com/espressif/esp-phy-lib/commit/38908075833e4ae3a48e6ffe431a672698e07e21
- * Upstream date: 2025-02-13 17:19:18 +0800
- * Upstream subject: update H2 libphy fit ECO5 btbb rssi fix
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_get_rssi_comp
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,9 +10,9 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-uint bt_bb_get_rssi_comp(void)
+undefined4 bt_bb_get_rssi_comp(void)
 
 {
-  return BLE_RSSI_COMP + 1 >> 1;
+  return 0;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1e3487dc778d48c15229af05ce0f03f78e15528c
- * https://github.com/espressif/esp-phy-lib/commit/1e3487dc778d48c15229af05ce0f03f78e15528c
- * Upstream date: 2025-01-03 11:45:24 +0800
- * Upstream subject: support h2 eco5 test
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_cte.o -> ble_bb_cte_set_cte_ant_switch_delay_rx_aoa_1us_2m
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void ble_bb_cte_set_cte_ant_switch_delay_rx_aoa_1us_2m(uint param_1)
 
 {
-  _DAT_600a2158 = (param_1 & 0xff) << 8 | _DAT_600a2158 & 0xffff00ff;
+  _DAT_600c2158 = (param_1 & 0xff) << 8 | _DAT_600c2158 & 0xffff00ff;
   return;
 }
 

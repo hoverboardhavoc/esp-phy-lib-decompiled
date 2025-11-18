@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1d4cd3aafa244a0adf5891f058b3519bc970d644
- * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
- * Upstream date: 2025-08-01 19:50:02 +0800
- * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  phy_printf("libbtbb version: %s, %s, %s\n","4515421","Aug  1 2025","17:46:22");
+  phy_printf("libbtbb version: %s, %s, %s\n","77409b1","Aug  5 2025","09:55:22");
   return;
 }
 

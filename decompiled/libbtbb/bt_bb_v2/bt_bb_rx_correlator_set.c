@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1d4cd3aafa244a0adf5891f058b3519bc970d644
- * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
- * Upstream date: 2025-08-01 19:50:02 +0800
- * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_correlator_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,18 +15,12 @@
 void bt_bb_rx_correlator_set(void)
 
 {
-  uint uVar1;
-  
-  _DAT_600a20fc = _DAT_600a20fc & 0x81ffffff | 0x12000000;
-  uVar1 = _DAT_600a2068 & 0x81f;
-  _DAT_600a2068 = uVar1 | 0x10d9b060;
-  if (phy_param < 5) {
-    _DAT_600a2068 = uVar1 | 0x10d9b860;
-  }
-  _DAT_600a2060 = _DAT_600a2060 & 0x3ffffff | 0x8000000;
-  _DAT_600a2100 = _DAT_600a2100 & 0xf33fffff | 0x400000;
-  _DAT_600a2064 = _DAT_600a2064 & 0xfc000003 | 0x310908;
-  _DAT_600a20f8 = _DAT_600a20f8 & 0x8000001f | 0x214e060;
+  _DAT_600c2114 = _DAT_600c2114 & 0xf00000ff | 0x8aa600;
+  _DAT_600c2068 = _DAT_600c2068 & 0x81f | 0x4d9b060;
+  _DAT_600c2100 = _DAT_600c2100 & 0xf33fffff | 0x400000;
+  _DAT_600c2064 = _DAT_600c2064 & 0xfc003f03 | 0x518008;
+  _DAT_600c20f8 = _DAT_600c20f8 & 0x8000001f | 0x234f0c0;
+  _DAT_600c2060 = _DAT_600c2060 & 0xff | 0x10208200;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_tx_cca_free_timer_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,12 +16,12 @@ void bt_bb_tx_cca_free_timer_set(int param_1,int param_2)
 
 {
   if (param_1 == 0) {
-    _DAT_600a2174 = _DAT_600a2174 & 0xfffff7ff;
+    _DAT_600c2174 = _DAT_600c2174 & 0xfffff7ff;
   }
   else {
-    _DAT_600a2174 = _DAT_600a2174 | 0x800;
+    _DAT_600c2174 = _DAT_600c2174 | 0x800;
   }
-  _DAT_600a2174 = _DAT_600a2174 & 0xfff | param_2 << 0xc;
+  _DAT_600c2174 = _DAT_600c2174 & 0xfff | param_2 << 0xc;
   return;
 }
 

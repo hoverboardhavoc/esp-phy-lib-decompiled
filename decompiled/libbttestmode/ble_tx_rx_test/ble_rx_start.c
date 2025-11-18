@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 38908075833e4ae3a48e6ffe431a672698e07e21
- * https://github.com/espressif/esp-phy-lib/commit/38908075833e4ae3a48e6ffe431a672698e07e21
- * Upstream date: 2025-02-13 17:19:18 +0800
- * Upstream subject: update H2 libphy fit ECO5 btbb rssi fix
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,13 +17,13 @@ void ble_rx_start(void)
 {
   ble_select_phy_speed();
   memset(&_LANCHOR3,0x55,0x140);
-  _DAT_600a1834 = &DAT_000110c7;
-  _DAT_600a1110 = 0;
-  _DAT_600a110c = 0;
-  _DAT_600a1130 = 0;
-  _DAT_600a1134 = 0;
-  _DAT_600a1200 = 0x13;
-  _DAT_600a1004 = 1;
+  _DAT_600c1834 = &DAT_0001119f;
+  _DAT_600c1450 = 0;
+  _DAT_600c143c = 0;
+  _DAT_600c1470 = 0;
+  _DAT_600c1474 = 0;
+  _DAT_600c14b0 = 0x13;
+  _DAT_600c1404 = 1;
   rx_en_flag = 1;
   return;
 }

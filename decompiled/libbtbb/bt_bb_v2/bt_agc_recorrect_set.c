@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1d4cd3aafa244a0adf5891f058b3519bc970d644
- * https://github.com/espressif/esp-phy-lib/commit/1d4cd3aafa244a0adf5891f058b3519bc970d644
- * Upstream date: 2025-08-01 19:50:02 +0800
- * Upstream subject: 1. fix C5ECO2 signaling test power 2. fix C5ECO2/C6ECO3/H2ECO5 coex problem
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_recorrect_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,11 +15,10 @@
 void bt_agc_recorrect_set(void)
 
 {
-  _DAT_600a28b4 = _DAT_600a28b4 & 0xffffc1ff | 0x1500;
-  _DAT_600a28bc = _DAT_600a28bc & 0xfffffebf | 0xa0;
-  _DAT_600a28b0 = _DAT_600a28b0 & 0xffffc00f | 0x1f20;
-  _DAT_600a2868 = _DAT_600a2868 & 0xfffff820 | 0x3bef;
-  _DAT_600a286c = _DAT_600a286c & 0xffffff | 0xf000000;
+  _DAT_600c28b4 = _DAT_600c28b4 | 0x100;
+  _DAT_600c28bc = _DAT_600c28bc & 0xfffffebf | 0xa0;
+  _DAT_600c28b0 = _DAT_600c28b0 & 0xff83ffff | 0x700000;
+  _DAT_600c2868 = _DAT_600c2868 & 0xffffffe0 | 0x383c;
   return;
 }
 

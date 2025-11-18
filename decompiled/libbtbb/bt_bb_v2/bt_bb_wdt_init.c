@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_wdt_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,8 @@
 void bt_bb_wdt_init(uint param_1,uint param_2)
 
 {
-  _DAT_600a20dc =
-       (param_2 & 3) << 0xd | (param_1 & 0xffff) << 0xf | _DAT_600a20dc & 0x80001fff | 0x80000000;
+  _DAT_600c20dc =
+       (param_2 & 3) << 0xd | (param_1 & 0xffff) << 0xf | _DAT_600c20dc & 0x80001fff | 0x80000000;
   return;
 }
 

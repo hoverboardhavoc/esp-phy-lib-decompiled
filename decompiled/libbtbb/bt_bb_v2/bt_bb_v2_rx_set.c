@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fc76520d481fc3d08cbc001ef47804a4457fffd7
- * https://github.com/espressif/esp-phy-lib/commit/fc76520d481fc3d08cbc001ef47804a4457fffd7
- * Upstream date: 2025-03-10 14:21:08 +0800
- * Upstream subject: update chips libphy add btbb_set_rx_sense api
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,8 +16,7 @@ void bt_bb_v2_rx_set(void)
 
 {
   bt_bb_rx_set();
-  bt_set_rx_comp((int)(((byte)BLE_RSSI_COMP - 0xe) * 0x1000000) >> 0x18,0,0xfffffffc,0xfffffffc,
-                 0xfffffffc);
+  bt_set_rx_comp(0xfffffff4,0xfffffffa,0xfffffffa,0xfffffff8,0);
   bt_agc_gain_set();
   bt_agc_rssi_thresh();
   bt_agc_target_set();
@@ -25,18 +24,10 @@ void bt_bb_v2_rx_set(void)
   bt_agc_recorrect_set();
   bt_agc_detect_set();
   bt_bb_rx_correlator_set();
-  bt_bb_rx_dpo_set();
   bt_bb_rx_filter_sel();
   zb_rx_core_set();
   zb_rx_v0_0_set();
-  zb_rx_auto_sel();
-  if (phy_param < 5) {
-    return;
-  }
-  _DAT_600a2c0c = _DAT_600a2c0c & 0xffe003ff | 0x1e6c00;
-  _DAT_600a2020 = _DAT_600a2020 & 0xfffffff3 | 0x10;
-  bt_set_rx_comp((int)(((byte)BLE_RSSI_COMP - 0xe) * 0x1000000) >> 0x18,2,2,0,0);
-  _DAT_600a2c10 = _DAT_600a2c10 & 0x1fff | 0xf254c000;
+  _DAT_600c2c48 = _DAT_600c2c48 & 0x403fffff | 0x28400000;
   return;
 }
 

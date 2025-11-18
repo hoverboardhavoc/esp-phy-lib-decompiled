@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: librfate -> ate_test.o -> freq_offset_table
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,27 +10,29 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-bool freq_offset_table(int param_1,uint param_2)
+undefined4 freq_offset_table(int param_1,uint param_2)
 
 {
-  undefined1 uVar1;
+  undefined4 uVar1;
   
   if (param_2 < 10) {
-    uVar1 = 0xf;
+    uVar1 = 0x27;
   }
   else {
-    uVar1 = 0xe;
-    if ((((((2 < (param_2 - 10 & 0xffff)) && (uVar1 = 0xd, param_1 != 2)) &&
-          (uVar1 = 0xb, param_1 != 3)) &&
-         ((uVar1 = 10, param_1 != 4 && (uVar1 = 9, 1 < (param_1 - 5U & 0xffff))))) &&
-        ((uVar1 = 8, 2 < (param_1 - 7U & 0xffff) &&
-         ((uVar1 = 7, 3 < (param_1 - 10U & 0xffff) && (uVar1 = 6, 8 < (param_1 - 0xeU & 0xffff))))))
-        ) && ((uVar1 = 5, 0x12 < (param_1 - 0x17U & 0xffff) &&
-              ((uVar1 = 3, 0x2e < (param_1 - 0x2aU & 0xffff) &&
-               (uVar1 = 2, 0xb1 < (param_1 - 0x59U & 0xffff))))))) {
-      return param_1 - 0x10bU < 0x216;
+    uVar1 = 0x24;
+    if (((((2 < (param_2 - 10 & 0xffff)) && (uVar1 = 0x21, param_1 != 2)) &&
+         (uVar1 = 0x1e, param_1 != 3)) &&
+        ((((uVar1 = 0x1b, param_1 != 4 && (uVar1 = 0x18, 1 < (param_1 - 5U & 0xffff))) &&
+          ((uVar1 = 0x15, 2 < (param_1 - 7U & 0xffff) &&
+           ((uVar1 = 0x12, 3 < (param_1 - 10U & 0xffff) &&
+            (uVar1 = 0xf, 8 < (param_1 - 0xeU & 0xffff))))))) &&
+         (uVar1 = 0xc, 0x12 < (param_1 - 0x17U & 0xffff))))) &&
+       (((uVar1 = 9, 0x2e < (param_1 - 0x2aU & 0xffff) &&
+         (uVar1 = 6, 0xb1 < (param_1 - 0x59U & 0xffff))) &&
+        (uVar1 = 3, 0x215 < (param_1 - 0x10bU & 0xffff))))) {
+      return 0;
     }
   }
-  return (bool)uVar1;
+  return uVar1;
 }
 

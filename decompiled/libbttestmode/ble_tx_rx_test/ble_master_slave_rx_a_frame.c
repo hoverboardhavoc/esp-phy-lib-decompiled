@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
+ * Upstream date: 2025-11-18 19:35:51 +0800
+ * Upstream subject: support H4 BETA5 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_master_slave_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,20 +23,19 @@ ble_master_slave_rx_a_frame
   int iVar3;
   
   ble_rx_start(param_2,param_3);
-  bt_track_pll_cap();
   iVar2 = phy_time_now();
-  while (_DAT_600a1110 == 0) {
+  while (_DAT_600c1450 == 0) {
     iVar3 = GetStopCmd();
     if ((iVar3 == 0) ||
        ((param_1 != 0 && (iVar3 = phy_time_now(), param_1 < (uint)(iVar3 - iVar2))))) {
-      _DAT_600a1010 = 1;
+      _DAT_600c1410 = 1;
       return 0;
     }
   }
   sVar1 = ble_rx_check_status();
   if (sVar1 == 0) {
     *param_4 = *param_4 + 1;
-    iVar2 = (int)(char)_DAT_600a1548;
+    iVar2 = (int)(char)_DAT_600c1548;
     *param_6 = *param_6 + iVar2;
     if (*param_4 != 1) {
       if (*param_7 < iVar2) {
