@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_correlator_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,9 +16,7 @@ void bt_bb_rx_correlator_set(void)
 
 {
   _DAT_600c2114 = _DAT_600c2114 & 0xf00000ff | 0x8aa600;
-  _DAT_600c2068 = _DAT_600c2068 & 0x81f | 0x4d9b060;
-  _DAT_600c2100 = _DAT_600c2100 & 0xf33fffff | 0x400000;
-  _DAT_600c2064 = _DAT_600c2064 & 0xfc003f03 | 0x518008;
+  _DAT_600c2064 = _DAT_600c2064 & 0xfc003fff | 0x518000;
   _DAT_600c20f8 = _DAT_600c20f8 & 0x8000001f | 0x234f0c0;
   _DAT_600c2060 = _DAT_600c2060 & 0xff | 0x10208200;
   return;

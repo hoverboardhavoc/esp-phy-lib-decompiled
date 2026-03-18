@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,7 +49,7 @@ void zb_tx(uint param_1,uint param_2,uint param_3,uint param_4,int param_5)
     uVar1 = uVar1 + 1;
     if (((param_4 != 0) && (param_4 <= uVar1)) || (iVar3 = GetStopCmd(), iVar3 == 0)) break;
   } while (iVar2 == 0);
-  phy_printf("Txed %d %d\n",uStack_28,auStack_24[0]);
+  ets_printf("Txed %d %d\n",uStack_28,auStack_24[0]);
   if (param_5 != 0) {
     _DAT_600c3098 = _DAT_600c3098 & 0xffffff00;
   }

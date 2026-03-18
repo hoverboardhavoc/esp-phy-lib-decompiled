@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_slave_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,13 +43,13 @@ void zb_slave_test(undefined4 param_1,undefined4 param_2,undefined4 param_3,uint
                               (0,&uStack_3c,&uStack_38,&uStack_34,&uStack_30,&uStack_2c,param_4),
            uVar3 < uStack_3c && (param_4 == 0))) {
       iVar2 = zb_tx_a_frame(&uStack_28,auStack_24,0,param_2);
-      if ((iVar1 == 1) || (uVar3 = uStack_3c, iVar2 == 1)) goto _L187;
+      if ((iVar1 == 1) || (uVar3 = uStack_3c, iVar2 == 1)) goto _L189;
     }
   } while (iVar1 != 1);
-_L187:
-  phy_printf("zb_slave_test ends!\n");
-  phy_printf("slave_RX: n_correct=%d, n_error=%d\n",uStack_3c,uStack_38);
-  phy_printf("slave_TX: n_correct=%d, n_error=%d\n",uStack_28,auStack_24[0]);
+_L189:
+  ets_printf("zb_slave_test ends!\n");
+  ets_printf("slave_RX: n_correct=%d, n_error=%d\n",uStack_3c,uStack_38);
+  ets_printf("slave_TX: n_correct=%d, n_error=%d\n",uStack_28,auStack_24[0]);
   phy_set_clk_conf(0);
   _DAT_600c3064 = _DAT_600c3064 | 0xf;
   return;

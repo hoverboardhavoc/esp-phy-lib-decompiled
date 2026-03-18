@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,6 +26,7 @@ bool ble_tx_a_frame(int param_1,undefined4 param_2,undefined4 param_3,int *param
     *param_5 = *param_5 + 1;
   }
   rw_cca_fifo_print(param_3);
+  bt_track_pll_cap();
   iVar2 = GetStopCmd();
   bVar3 = false;
   if ((iVar2 != 0) && ((*param_4 + *param_5 != param_1 || (bVar3 = false, param_1 == 0)))) {

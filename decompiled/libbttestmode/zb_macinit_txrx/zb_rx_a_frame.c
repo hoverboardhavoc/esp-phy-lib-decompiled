@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,9 +27,9 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
     if ((_DAT_600c3064 & 2) != 0) {
       _DAT_600c3064 = _DAT_600c3064 | 2;
       *param_1 = *param_1 + 1;
-      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10d57);
-      *param_3 = (int)(char)(_DAT_600c2c3c >> 0x10) + *param_3;
-      *param_4 = (_DAT_600c2c3c >> 8 & 0xff) + *param_4;
+      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10d53);
+      *param_3 = *param_3 + ((int)_DAT_600c20b0 >> 0x18);
+      *param_4 = (_DAT_600c20b0 >> 8 & 0xff) + *param_4;
       return 0;
     }
     if ((_DAT_600c3064 & 0x10) != 0) break;
@@ -47,7 +47,7 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
   }
   if (uVar2 == 3) {
     *param_7 = *param_7 + 1;
-    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10d57);
+    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10d53);
     return 0;
   }
   if ((uVar2 != 6) && (uVar2 != 9)) {

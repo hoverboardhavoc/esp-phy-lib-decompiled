@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbtbb -> bt_bb_v2.o -> ble_tx_config_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,47 +17,56 @@ void ble_tx_config_check(int param_1)
 {
   uint uVar1;
   uint uVar2;
-  char *pcVar3;
+  char cVar3;
   uint uVar4;
-  uint uVar5;
+  char *pcVar5;
   uint uVar6;
   uint uVar7;
   uint uVar8;
+  uint uVar9;
   
-  uVar2 = _DAT_600c0870;
-  uVar7 = _DAT_600c2010 >> 5 & 0xff;
-  uVar5 = _DAT_600c2018 >> 3 & 0x1f;
-  uVar6 = _DAT_600c1650 & 0xff;
-  uVar1 = _DAT_600c2018 >> 0x13 & 0x1f;
-  uVar4 = _DAT_600c20b8 >> 0xc;
-  uVar8 = (uVar6 - (uVar7 + uVar5)) - uVar1;
-  phy_printf("tx_cca_start_ts = %d\n",_DAT_600c20b8 >> 0x17 & 0xff);
-  uVar4 = uVar4 & 0xff;
-  phy_printf("tx_cca_end_ts   = %d\n",uVar4);
-  phy_printf("bb_tx_on_delay  = %d\n",uVar7);
-  phy_printf("rf_on_bt_delay  = %d\n",uVar2 >> 5 & 7);
-  uVar2 = uVar2 >> 0xd & 7;
-  phy_printf("pa_on_bt_delay  = %d\n",uVar2);
-  phy_printf("tx_ramp_delay   = %d\n",uVar5);
-  phy_printf("tx_rampup_delay = %d\n",uVar1);
-  phy_printf("lc_tx_on_delay  = %d\n",uVar6);
-  phy_printf("constant_DC_time= %d\n",uVar8);
-  if (param_1 != 0) {
-    if (uVar8 < 10) {
-      pcVar3 = "FAIL:DC is too short\n";
-    }
-    else if (uVar7 < uVar4) {
-      pcVar3 = "FAIL:CCA_END is too late\n";
-    }
-    else if (uVar1 < uVar2) {
-      pcVar3 = "FAIL:PA_ON is too late\n";
-    }
-    else {
-      pcVar3 = "PASS\n";
-    }
-    phy_printf(pcVar3);
+  uVar8 = _DAT_600c201c;
+  uVar1 = _DAT_600c2014;
+  uVar9 = _DAT_600c1650;
+  uVar4 = _DAT_600c0870;
+  uVar7 = _DAT_600c20b8 >> 0xc;
+  ets_printf("tx_cca_start_ts = %d\n",_DAT_600c20b8 >> 0x17 & 0xff);
+  uVar7 = uVar7 & 0xff;
+  ets_printf("tx_cca_end_ts   = %d\n",uVar7);
+  uVar2 = uVar1 >> 0x13 & 0xff;
+  ets_printf("bb_tx_on_delay  = %d\n",uVar2);
+  ets_printf("rf_on_bt_delay  = %d\n",uVar4 >> 5 & 7);
+  uVar6 = uVar4 >> 0xd & 7;
+  ets_printf("pa_on_bt_delay  = %d\n",uVar6);
+  uVar4 = uVar1 >> 0xb & 0x1f;
+  ets_printf("tx_ramp_delay   = %d\n",uVar4);
+  uVar8 = uVar8 >> 0x1b;
+  ets_printf("tx_rampup_delay = %d\n",uVar8);
+  uVar9 = uVar9 & 0xff;
+  ets_printf("lc_tx_on_delay  = %d\n",uVar9);
+  uVar4 = ((uVar9 - uVar2) - uVar4) - uVar8;
+  ets_printf("constant_DC_time= %d\n",uVar4);
+  if (param_1 == 0) {
     return;
   }
+  cVar3 = uVar4 < 10;
+  if ((bool)cVar3) {
+    ets_printf("FAIL:DC is too short\n");
+  }
+  if (uVar2 < uVar7) {
+    cVar3 = cVar3 + '\x01';
+    ets_printf("FAIL:CCA_END is too late\n");
+  }
+  if ((uVar2 - uVar9) + uVar8 + (uVar9 - uVar2) < uVar6) {
+    pcVar5 = "FAIL:PA_ON is too late\n";
+  }
+  else {
+    if (cVar3 != '\0') {
+      return;
+    }
+    pcVar5 = "PASS\n";
+  }
+  ets_printf(pcVar5);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_radio_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void ble_radio_init(void)
   _DAT_600c1554 = 0x65;
   _DAT_600c1510 = RADIO_MODE_DEFINE << 4 | RADIO_MODE_DEFINE << 8 | RADIO_MODE_DEFINE;
   _DAT_600c1830 = &_LANCHOR2;
-  _DAT_600c1834 = &DAT_0001119f;
+  _DAT_600c1834 = &DAT_00011223;
   _DAT_600c1ff0 = 9;
   _DAT_600c1074 = 0x40810000;
   return;

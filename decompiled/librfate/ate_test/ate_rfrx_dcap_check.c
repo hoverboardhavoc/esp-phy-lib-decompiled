@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: librfate -> ate_test.o -> ate_rfrx_dcap_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,14 +27,14 @@ void ate_rfrx_dcap_check(int param_1)
     puVar3 = puVar3 + 1;
   } while (uVar1 != 0xf);
   if (param_1 != 0) {
-    phy_printf("rfrx_lna_dcap:");
+    ets_printf("rfrx_lna_dcap:");
     iVar2 = 0;
     do {
       puVar3 = local_30 + iVar2;
       iVar2 = iVar2 + 1;
-      phy_printf(&_LC9,*puVar3);
+      ets_printf(&_LC9,*puVar3);
     } while (iVar2 != 0xe);
-    phy_printf(&_LC7);
+    ets_printf(&_LC7);
     return;
   }
   return;

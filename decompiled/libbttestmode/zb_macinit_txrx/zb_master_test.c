@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_master_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,11 +42,11 @@ void zb_master_test(undefined4 param_1,undefined4 param_2,int param_3,uint param
       iVar2 = zb_master_slave_rx_a_frame
                         (iVar4,param_8,in_stack_00000000,aiStack_44,in_stack_00000008,
                          in_stack_0000000c,0);
-      if (iVar2 == 1) goto _L165;
+      if (iVar2 == 1) goto _L167;
     }
     else {
       ets_delay_us(1000);
-      iVar2 = (int)*(char *)(rx_frame + 0x10d57);
+      iVar2 = (int)*(char *)(rx_frame + 0x10d53);
       aiStack_44[0] = aiStack_44[0] + iVar2;
       if (*param_6 == 1) {
         *in_stack_00000008 = iVar2;
@@ -55,15 +55,15 @@ void zb_master_test(undefined4 param_1,undefined4 param_2,int param_3,uint param
         if (*in_stack_00000008 < iVar2) {
           *in_stack_00000008 = iVar2;
         }
-        if (*in_stack_0000000c <= iVar2) goto _L166;
+        if (*in_stack_0000000c <= iVar2) goto _L168;
       }
       *in_stack_0000000c = iVar2;
     }
-_L166:
+_L168:
     if (iVar1 == 1) break;
   }
   if (param_5 == 0) {
-_L165:
+_L167:
     uVar3 = *param_8;
   }
   else {

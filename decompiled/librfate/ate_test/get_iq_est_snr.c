@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: librfate -> ate_test.o -> get_iq_est_snr
  *
  * (C) Espressif, Apache License 2.0.
@@ -105,7 +105,7 @@ int get_iq_est_snr(uint *param_1,int param_2,int param_3,int param_4)
     __lshrdi3(uVar20,uVar11,iVar9);
     __lshrdi3(uVar10,uVar19,iVar9);
     __ashrdi3(uVar15,iVar1,iVar9);
-    phy_printf("tot_pwr=%lld, sig_pwr=%lld, dc_pwr=%lld, n_pwr=%lld, iq_pwr=%lld,iq_g=%lld,iq_p=%d\n"
+    ets_printf("tot_pwr=%lld, sig_pwr=%lld, dc_pwr=%lld, n_pwr=%lld, iq_pwr=%lld,iq_g=%lld,iq_p=%d\n"
                ,uVar8,extraout_a1_06,uVar7,extraout_a1_05,uVar6,extraout_a1_04);
   }
   *param_1 = uVar3;

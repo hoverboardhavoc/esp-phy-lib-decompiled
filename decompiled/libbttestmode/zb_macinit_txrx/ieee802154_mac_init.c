@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
+ * Upstream date: 2026-03-18 11:37:56 +0800
+ * Upstream subject: support h4eco1, phy=89ae914
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_mac_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void ieee802154_mac_init(void)
   _DAT_600c3004 = 0x1a080080;
   _DAT_600c3048 = 0xb;
   _DAT_600c3054 = _DAT_600c3054 | 0x2000;
-  _DAT_600c3070 = _DAT_600c3070 | 0xff;
+  _DAT_600c3070 = _DAT_600c3070 & 0xfffffc00 | 0x1ef;
   _DAT_600c3060 = _DAT_600c3060 | 0x1fff;
   _DAT_600c3068 = _DAT_600c3068 & 0x80000000 | 0x7fffffff;
   _DAT_600c3078 = _DAT_600c3078 | 0x7fffffff;
