@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  ets_printf("libbtbb version: %s, %s, %s\n","991e859","Mar 18 2026","10:59:22");
+  phy_printf("libbtbb version: %s, %s, %s\n","cef22a9","Mar 30 2026","10:05:22");
   return;
 }
 

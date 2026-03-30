@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -73,7 +73,7 @@ void ble_tx(undefined4 param_1,uint param_2,undefined4 param_3,undefined4 param_
     }
     ets_delay_us(param_8 - 100 & 0xffff);
   }
-  ets_printf("TX done %d %d %d %d %d %d %d %d\n",uStack_38,uStack_34,_n_cca_ind0,_n_cca_ind1,
+  phy_printf("TX done %d %d %d %d %d %d %d %d\n",uStack_38,uStack_34,_n_cca_ind0,_n_cca_ind1,
              _n_cca_ind2,_cca_rssi_sum,(int)cca_rssi_max);
   _n_cca_ind0 = 0;
   _n_cca_ind1 = 0;

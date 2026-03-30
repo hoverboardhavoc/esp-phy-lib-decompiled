@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: librfate -> ate_test.o -> get_corr_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,7 +34,7 @@ void get_corr_power(int *param_1,int param_2,int param_3)
   param_1[1] = iVar4;
   param_1[2] = iVar2 * iVar2 + iVar3 * iVar3;
   if (param_3 != 0) {
-    ets_printf("tot_p=%d, sig_pwr=%d, dc_i=%d, dc_q=%d\n",iVar1,iVar4);
+    phy_printf("tot_p=%d, sig_pwr=%d, dc_i=%d, dc_q=%d\n",iVar1,iVar4);
     return;
   }
   return;

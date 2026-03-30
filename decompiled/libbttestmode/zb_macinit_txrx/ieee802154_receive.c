@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_receive
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,11 +23,11 @@ void ieee802154_receive(void)
   while( true ) {
     if ((_DAT_600c3064 & 2) != 0) break;
     if ((_DAT_600c3064 & 0x10) != 0) {
-      ets_printf("RX Abort, reason:%x\n\r",_DAT_600c3080 >> 4 & 0x1f);
+      phy_printf("RX Abort, reason:%x\n\r",_DAT_600c3080 >> 4 & 0x1f);
       _DAT_600c3080 = _DAT_600c3080 | 0x10;
     }
   }
-  ets_printf("RX Done (%d bytes)\n\r",rx_frame);
+  phy_printf("RX Done (%d bytes)\n\r",rx_frame);
   _DAT_600c3064 = _DAT_600c3064 | 2;
   return;
 }

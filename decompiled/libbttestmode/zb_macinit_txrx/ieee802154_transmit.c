@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_transmit
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,13 +21,13 @@ void ieee802154_transmit(void)
   DAT_00010ddc = 0x6050403;
   DAT_00010de0 = 0x807;
   DAT_00010de2 = 9;
-  ets_printf("TX Start \n\r");
-  ets_printf("transmitting frame %d bytes\n\r",_tx_frame & 0xff);
+  phy_printf("TX Start \n\r");
+  phy_printf("transmitting frame %d bytes\n\r",_tx_frame & 0xff);
   _DAT_600c30d0 = &tx_frame;
   _DAT_600c3000 = 0x41;
   do {
     if ((_DAT_600c3064 & 1) != 0) {
-      ets_printf("TX Done\n\r");
+      phy_printf("TX Done\n\r");
       _DAT_600c3064 = _DAT_600c3064 | 1;
       return;
     }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,14 +21,14 @@ undefined4 ble_rx_stop(void *param_1,uint *param_2)
   
   if ((_DAT_600c1450 != 1) || (rx_en_flag == '\0')) {
     _DAT_600c1410 = 1;
-    ets_printf("ble rx failed\n");
+    phy_printf("ble rx failed\n");
     rx_en_flag = 0;
     return 0;
   }
   __n = (uint)DAT_00011224;
   if (param_2 != (uint *)0x0) {
     if ((*param_2 != 0) && ((int)*param_2 < (int)__n)) {
-      ets_printf("Buffer size is so small!expect %d,actually is %d\n",__n);
+      phy_printf("Buffer size is so small!expect %d,actually is %d\n",__n);
       return 1;
     }
     *param_2 = __n;
@@ -38,11 +38,11 @@ undefined4 ble_rx_stop(void *param_1,uint *param_2)
   memcpy(param_1,&DAT_00011225,__n);
   puVar1 = &_LANCHOR3;
   for (iVar2 = 3; iVar2 <= (int)(__n + 1); iVar2 = iVar2 + 8) {
-    ets_printf("%x %x %x %x %x %x %x %x",puVar1[3],puVar1[4],puVar1[5],puVar1[6],puVar1[7],puVar1[8]
+    phy_printf("%x %x %x %x %x %x %x %x",puVar1[3],puVar1[4],puVar1[5],puVar1[6],puVar1[7],puVar1[8]
                ,puVar1[9]);
     puVar1 = puVar1 + 8;
   }
-  ets_printf("ble rx success");
+  phy_printf("ble rx success");
   memset(&_LANCHOR3,0x55,0x140);
   rx_en_flag = 0;
   return 1;

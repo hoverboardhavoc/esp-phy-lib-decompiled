@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,7 +49,7 @@ void ble_rx_print(undefined4 param_1,undefined4 param_2)
             _DAT_60093004 = _DAT_60093004 & 0xfffffeff;
           }
         }
-        ets_printf("RX %d %d %d %d %d %d %d %d\n",iVar1,iVar4,iVar5,iVar6,iVar7,iVar8,iVar9);
+        phy_printf("RX %d %d %d %d %d %d %d %d\n",iVar1,iVar4,iVar5,iVar6,iVar7,iVar8,iVar9);
         return;
       }
     }
@@ -60,7 +60,7 @@ void ble_rx_print(undefined4 param_1,undefined4 param_2)
       iVar5 = iVar5 + cVar3;
       iVar6 = iVar6 + (_DAT_600c20b0 >> 8 & 0xff);
       iVar7 = iVar7 + (char)_DAT_600c20b0;
-      ets_printf(&_LC9,(int)cVar3);
+      phy_printf(&_LC9,(int)cVar3);
     }
     else {
       iVar4 = iVar4 + 1;

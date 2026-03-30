@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: librfate -> ate_test.o -> ate_rxdc_remain_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -86,25 +86,25 @@ void ate_rxdc_remain_check(int param_1)
   set_txclk_en(0);
   _DAT_600c702c = _DAT_600c702c & 0x7fffff | uVar1 & 0xff000000;
   if (param_1 != 0) {
-    ets_printf("wifi_rxdc_remain:\n");
+    phy_printf("wifi_rxdc_remain:\n");
   }
   iVar6 = 1;
   do {
     if (param_1 != 0) {
-      ets_printf("chan=%02d, ",iVar6);
+      phy_printf("chan=%02d, ",iVar6);
     }
     cVar2 = '\x04';
     piVar8 = piVar4;
     do {
       if (param_1 != 0) {
-        ets_printf("%d,%d,%d; ",(int)(char)*piVar8,(int)*(char *)((int)piVar8 + 1),
+        phy_printf("%d,%d,%d; ",(int)(char)*piVar8,(int)*(char *)((int)piVar8 + 1),
                    (int)*(char *)((int)piVar8 + 2));
       }
       cVar2 = cVar2 + -1;
       piVar8 = (int *)((int)piVar8 + 3);
     } while (cVar2 != '\0');
     if (param_1 != 0) {
-      ets_printf(&_LC7);
+      phy_printf(&_LC7);
     }
     iVar6 = iVar6 + 2;
     piVar4 = piVar4 + 3;

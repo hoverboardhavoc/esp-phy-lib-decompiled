@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -56,7 +56,7 @@ void ble_rx(uint param_1,undefined4 param_2)
             _DAT_60093004 = _DAT_60093004 & 0xfffffeff;
           }
         }
-        ets_printf("%x %x %x %x %x %x %x %d %d %d p %d %d %d %d\n",iVar1 + iVar3,iVar1,0,0,iVar3,0,0
+        phy_printf("%x %x %x %x %x %x %x %d %d %d p %d %d %d %d\n",iVar1 + iVar3,iVar1,0,0,iVar3,0,0
                   );
         phy_xtal_freq_dreg_set(0);
         return;

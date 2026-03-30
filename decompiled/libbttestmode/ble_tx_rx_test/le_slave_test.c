@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
+ * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
+ * Upstream date: 2026-03-30 10:56:56 +0800
+ * Upstream subject: support h4eco1 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> le_slave_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ void le_slave_test(undefined4 param_1,undefined4 param_2,undefined4 param_3,unde
   uStack_2c = 0;
   uStack_28 = 0;
   auStack_24[0] = 0;
-  ets_printf("le_slave_test begins!\n");
+  phy_printf("le_slave_test begins!\n");
   phy_set_clk_conf(2);
   ble_tx_init(param_1,param_2,param_3,2,param_4);
   ble_rx_init(param_1,param_2);
@@ -46,9 +46,9 @@ void le_slave_test(undefined4 param_1,undefined4 param_2,undefined4 param_3,unde
       uVar2 = uStack_3c;
     }
   }
-  ets_printf("le_slave_test ends!\n");
-  ets_printf("slave_RX: n_correct=%d, n_error=%d\n",uStack_3c,uStack_38);
-  ets_printf("slave_TX: n_correct=%d, n_error=%d\n",uStack_28,auStack_24[0]);
+  phy_printf("le_slave_test ends!\n");
+  phy_printf("slave_RX: n_correct=%d, n_error=%d\n",uStack_3c,uStack_38);
+  phy_printf("slave_TX: n_correct=%d, n_error=%d\n",uStack_28,auStack_24[0]);
   if (uStack_3c == 0) {
     if ((_DAT_60093004 & 0x100) == 0) {
       _DAT_60093004 = _DAT_60093004 | 0x100;
