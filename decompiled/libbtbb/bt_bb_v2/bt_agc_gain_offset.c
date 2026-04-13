@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 979b0530b1210dd53d4a776053cb953d27d951b9
- * https://github.com/espressif/esp-phy-lib/commit/979b0530b1210dd53d4a776053cb953d27d951b9
- * Upstream date: 2022-12-14 13:04:45 +0800
- * Upstream subject: phy_init: phy_version 101,0868884,Dec  7 2022,14:01:12
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_gain_offset
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,8 @@
 void bt_agc_gain_offset(int param_1)
 
 {
-  _DAT_600a2848 = (_DAT_600a2848 & 0xff00ffff | param_1 << 0x10) & 0xffffff | param_1 << 0x18;
-  _DAT_600a2868 = _DAT_600a2868 & 0xffff | param_1 << 0x18 | param_1 << 0x10;
+  _DAT_20102848 = (_DAT_20102848 & 0xff00ffff | param_1 << 0x10) & 0xffffff | param_1 << 0x18;
+  _DAT_20102868 = _DAT_20102868 & 0xffff | param_1 << 0x18 | param_1 << 0x10;
   return;
 }
 

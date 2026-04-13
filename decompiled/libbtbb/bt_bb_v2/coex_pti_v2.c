@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1f5593aae9be976878fa89ef4ad263c481567c4
- * https://github.com/espressif/esp-phy-lib/commit/d1f5593aae9be976878fa89ef4ad263c481567c4
- * Upstream date: 2023-02-03 08:24:50 +0000
- * Upstream subject: [ESP32H2] Update libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_bb_v2.o -> coex_pti_v2
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,9 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 void coex_pti_v2(void)
 
 {
+  _DAT_20100010 = 0x6400010;
   return;
 }
 

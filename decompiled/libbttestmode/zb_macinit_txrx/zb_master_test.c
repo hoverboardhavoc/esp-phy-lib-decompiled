@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_master_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,75 +13,50 @@
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void zb_master_test(undefined4 param_1,undefined4 param_2,int param_3,uint param_4,uint param_5,
-                   uint *param_6,undefined4 param_7,uint *param_8)
+                   undefined4 param_6,undefined4 param_7,uint *param_8)
 
 {
-  int iVar1;
+  uint uVar1;
   int iVar2;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  int iVar3;
   undefined4 in_stack_00000000;
   int *in_stack_00000004;
   int *in_stack_00000008;
   int *in_stack_0000000c;
-  int aiStack_44 [4];
+  int iStack_34;
   
-  aiStack_44[0] = 0;
-  iVar4 = 1000;
+  iStack_34 = 0;
+  iVar2 = 1000;
   if (0x14 < param_4) {
-    iVar4 = param_4 * 0x32;
+    iVar2 = param_4 * 0x32;
   }
   phy_set_clk_conf(3);
   zb_tx_init(param_4,param_1,param_2,param_5);
   zb_rx_init(param_1);
-  _DAT_600c3004 = (param_5 & 1) << 3 | _DAT_600c3004 & 0xfffffff6 | param_5 & 1;
-  for (iVar5 = 0; iVar5 != param_3; iVar5 = iVar5 + 1) {
-    iVar1 = zb_tx_a_frame(param_6,param_7,param_5,param_2);
+  _DAT_20103004 = (param_5 & 1) << 3 | _DAT_20103004 & 0xfffffff6 | param_5 & 1;
+  for (iVar3 = 0; param_3 != iVar3; iVar3 = iVar3 + 1) {
+    zb_tx_a_frame(param_6,param_7,param_5);
     if (param_5 == 0) {
-      iVar2 = zb_master_slave_rx_a_frame
-                        (iVar4,param_8,in_stack_00000000,aiStack_44,in_stack_00000008,
-                         in_stack_0000000c,0);
-      if (iVar2 == 1) goto _L167;
+      zb_master_slave_rx_a_frame
+                (iVar2,param_8,in_stack_00000000,&iStack_34,in_stack_00000008,in_stack_0000000c,0);
     }
     else {
       ets_delay_us(1000);
-      iVar2 = (int)*(char *)(rx_frame + 0x10d53);
-      aiStack_44[0] = aiStack_44[0] + iVar2;
-      if (*param_6 == 1) {
-        *in_stack_00000008 = iVar2;
-      }
-      else {
-        if (*in_stack_00000008 < iVar2) {
-          *in_stack_00000008 = iVar2;
-        }
-        if (*in_stack_0000000c <= iVar2) goto _L168;
-      }
-      *in_stack_0000000c = iVar2;
     }
-_L168:
-    if (iVar1 == 1) break;
   }
-  if (param_5 == 0) {
-_L167:
-    uVar3 = *param_8;
-  }
-  else {
-    uVar3 = *param_6;
-  }
-  if (uVar3 == 0) {
+  uVar1 = *param_8;
+  if (uVar1 == 0) {
     *in_stack_00000004 = 0;
   }
   else {
-    iVar4 = aiStack_44[0];
-    if (2 < uVar3) {
-      uVar3 = uVar3 - 2 & 0xffff;
-      iVar4 = (aiStack_44[0] - *in_stack_00000008) - *in_stack_0000000c;
+    iVar2 = iStack_34;
+    if (2 < uVar1) {
+      uVar1 = (int)((uVar1 - 2) * 0x1000000) >> 0x18;
+      iVar2 = (iStack_34 - *in_stack_00000008) - *in_stack_0000000c;
     }
-    *in_stack_00000004 = iVar4 / (int)uVar3;
+    *in_stack_00000004 = iVar2 / (int)uVar1;
   }
   phy_set_clk_conf(0);
-  _DAT_600c3064 = _DAT_600c3064 | 0xf;
   return;
 }
 

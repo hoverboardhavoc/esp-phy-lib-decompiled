@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_bb_v2.o -> ieee802154_txon_delay_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,10 @@
 void ieee802154_txon_delay_set(void)
 
 {
-  _DAT_600c3104 = _DAT_600c3104 & 0xfffffc00 | 0x28;
-  _DAT_600c3110 = _DAT_600c3110 & 0xfffff800 | 0x32;
-  _DAT_600c3114 = _DAT_600c3114 & 0xfffffc00 | 0x7a;
-  _DAT_600c310c = _DAT_600c310c & 0xffffffc0 | 1;
+  _DAT_20103104 = _DAT_20103104 & 0xfffffc00 | 0x2d;
+  _DAT_20103110 = _DAT_20103110 & 0xfffff800 | 0x32;
+  _DAT_20103114 = _DAT_20103114 & 0xfffffc00 | 0x75;
+  _DAT_2010310c = _DAT_2010310c & 0xffffffc0 | 5;
   return;
 }
 

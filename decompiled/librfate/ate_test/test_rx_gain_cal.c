@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: librfate -> ate_test.o -> test_rx_gain_cal
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,42 +30,42 @@ undefined1 test_rx_gain_cal(void)
   uVar2 = 3;
   do {
     if (uVar2 < 7) {
-      uVar5 = (&_LANCHOR1)[uVar2];
       uVar6 = (&_LANCHOR2)[uVar2];
-      uVar3 = (&_LANCHOR3)[uVar2];
+      uVar5 = (&_LANCHOR3)[uVar2];
+      uVar3 = (&_LANCHOR4)[uVar2];
     }
     else {
       uVar3 = 0xc;
-      uVar6 = 0xe0;
-      uVar5 = 0;
+      uVar5 = 0xe0;
+      uVar6 = 0;
     }
-    pbus_force_test(1,1,0x1f1);
-    set_loopback_gain(uVar3,0x18c,uVar6);
-    pbus_rx_dco_cal(0x1000,&uStack_38,0);
-    start_tx_tone_step(1,0x80,uVar5,0,0,0);
+    phy_pbus_force_test(1,1,0x1f1);
+    phy_set_loopback_gain(uVar3,0x18c,uVar5);
+    phy_pbus_rx_dco_cal(4000,&uStack_38,10,0,0);
+    phy_start_tx_tone_step_new(1,0x80,uVar6,0,0,0);
     ets_delay_us(1);
-    iq_est_enable(1,0xfff);
-    iVar1 = _DAT_600c0464;
-    iq_est_disable();
-    stop_tx_tone(0);
+    phy_iq_est_enable(1,0xfff);
+    iVar1 = _DAT_2010046c;
+    phy_iq_est_disable();
+    phy_stop_tx_tone_new(0);
     if ((iVar1 >> 9) - 0x1000U < 0xf001) {
-      return uVar5;
+      return uVar6;
     }
     if (iVar1 >> 9 < 0x1000) {
       if (5 < uVar2) {
-        return uVar5;
+        return uVar6;
       }
       uVar2 = uVar2 + 1;
     }
     else {
       if (uVar2 == 0) {
-        return uVar5;
+        return uVar6;
       }
       uVar2 = uVar2 - 1;
     }
     cVar4 = cVar4 + -1;
     uVar2 = uVar2 & 0xff;
   } while (cVar4 != '\0');
-  return uVar5;
+  return uVar6;
 }
 

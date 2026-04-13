@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,6 +19,7 @@ bool ble_tx_a_frame(int param_1,undefined4 param_2,undefined4 param_3,int *param
   
   ble_tx_start(param_2);
   iVar1 = ble_tx_check_status();
+  phy_bt_track_pll_cap();
   if (iVar1 == 0) {
     *param_4 = *param_4 + 1;
   }
@@ -26,7 +27,6 @@ bool ble_tx_a_frame(int param_1,undefined4 param_2,undefined4 param_3,int *param
     *param_5 = *param_5 + 1;
   }
   rw_cca_fifo_print(param_3);
-  bt_track_pll_cap();
   iVar2 = GetStopCmd();
   bVar3 = false;
   if ((iVar2 != 0) && ((*param_4 + *param_5 != param_1 || (bVar3 = false, param_1 == 0)))) {

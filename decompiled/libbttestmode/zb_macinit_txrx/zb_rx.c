@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
- * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
- * Upstream date: 2026-03-30 10:56:56 +0800
- * Upstream subject: support h4eco1 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,8 +28,9 @@ void zb_rx(undefined4 param_1)
   undefined4 uStack_18;
   undefined4 auStack_14 [3];
   
-  dis_clk_for_current(0,1);
+  phy_set_clk_conf(3);
   zb_rx_init(param_1);
+  rfpll_cal_track_set();
   uStack_38 = 0;
   uStack_34 = 0;
   uStack_30 = 0;
@@ -46,10 +47,10 @@ void zb_rx(undefined4 param_1)
     iVar2 = GetStopCmd();
     if (iVar2 == 0) break;
   } while (iVar1 == 0);
-  _DAT_600c3000 = 0x45;
+  _DAT_20103000 = 0x45;
   phy_printf("RX %d %d %d %d %d %d %d %d %d %d\n",uStack_38,uStack_34,uStack_30,uStack_2c,uStack_28,
              uStack_24,uStack_1c);
-  dis_clk_for_current(1,1);
+  phy_set_clk_conf(0);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
- * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
- * Upstream date: 2026-03-30 10:56:56 +0800
- * Upstream subject: support h4eco1 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: librfate -> ate_test.o -> get_corr_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,11 +21,11 @@ void get_corr_power(int *param_1,int param_2,int param_3)
   int iVar4;
   int iVar5;
   
-  iVar4 = (_DAT_600c044c >> 9) + (_DAT_600c0458 >> 9);
-  iVar5 = (_DAT_600c0450 >> 9) - (_DAT_600c0454 >> 9);
-  iVar2 = _DAT_600c045c >> (param_2 + 6U & 0x1f);
-  iVar3 = _DAT_600c0460 >> (param_2 + 6U & 0x1f);
-  iVar1 = _DAT_600c0464 >> (param_2 - 3U & 0x1f);
+  iVar4 = (_DAT_20100454 >> 9) + (_DAT_20100460 >> 9);
+  iVar5 = (_DAT_20100458 >> 9) - (_DAT_2010045c >> 9);
+  iVar2 = _DAT_20100464 >> (param_2 + 6U & 0x1f);
+  iVar3 = _DAT_20100468 >> (param_2 + 6U & 0x1f);
+  iVar1 = _DAT_2010046c >> (param_2 - 3U & 0x1f);
   *param_1 = iVar1;
   iVar4 = __ashrdi3((uint)((uint)(iVar5 * iVar5 + iVar4 * iVar4) < (uint)(iVar4 * iVar4)) +
                     (int)((ulonglong)((longlong)iVar4 * (longlong)iVar4) >> 0x20) +

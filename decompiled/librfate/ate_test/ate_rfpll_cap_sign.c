@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ecd88d5ce3578e45402b80b78c26969ef8732839
- * https://github.com/espressif/esp-phy-lib/commit/ecd88d5ce3578e45402b80b78c26969ef8732839
- * Upstream date: 2023-10-19 05:57:11 +0000
- * Upstream subject: update h2 btbb for ble slave connect
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: librfate -> ate_test.o -> ate_rfpll_cap_sign
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,9 +20,9 @@ void ate_rfpll_cap_sign(int param_1)
   uint uVar5;
   int iVar6;
   
-  chip_v7_set_chan(1,0);
-  iVar3 = read_pll_cap();
-  i2c_writeReg_Mask(0x62,1,0xb,6,6,1);
+  phy_chip_set_chan(1,0);
+  iVar3 = phy_read_pll_cap();
+  phy_i2c_writeReg_Mask(0x62,1,0xb,6,6,1);
   iVar6 = 0;
   cVar2 = '\0';
   while( true ) {
@@ -32,9 +32,9 @@ void ate_rfpll_cap_sign(int param_1)
       if (iVar6 != 0) {
         uVar5 = iVar3 + 1 + iVar1;
       }
-      write_pll_cap(uVar5 & 0xffff);
+      phy_write_pll_cap((int)(short)uVar5);
       ets_delay_us(5);
-      uVar4 = i2c_readReg(0x62,1,0xc);
+      uVar4 = phy_i2c_readReg(0x62,1,0xc);
       if ((uVar4 >> 2 & 3) == 0) {
         cVar2 = cVar2 + '\x01';
       }

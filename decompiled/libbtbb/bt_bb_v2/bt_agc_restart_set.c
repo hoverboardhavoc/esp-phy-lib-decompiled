@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_agc_restart_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,13 +15,19 @@
 void bt_agc_restart_set(void)
 
 {
-  _DAT_600c28e0 = 0x14141414;
-  _DAT_600c28e4 = _DAT_600c28e4 & 0xffffff | 0x19000000;
-  _DAT_600c28ec = 0x2d2dd3d3;
-  _DAT_600c28f0 = _DAT_600c28f0 & 0xffff | 0xa6a60000;
-  _DAT_600c2900 = _DAT_600c2900 & 0xfff | 0x66666000;
-  _DAT_600c28e8 = _DAT_600c28e8 & 0xff0003ff | 0xe70c00;
-  _DAT_600c28dc = _DAT_600c28dc | 0x10000000;
+  _DAT_20102888 = _DAT_20102888 & 0xbfffffff;
+  _DAT_201028bc = _DAT_201028bc | 0x80000000;
+  _DAT_20102884 = _DAT_20102884 & 0xffffff | 0xf4000000;
+  _DAT_201028e0 = 0x140e0e0f;
+  _DAT_201028e4 = 0x1eecf2f2;
+  _DAT_201028ec = 0x2d28d3d8;
+  _DAT_201028f0 = _DAT_201028f0 & 0xffff | 0xa6a60000;
+  _DAT_20102900 = _DAT_20102900 & 0xfff | 0x6668a000;
+  _DAT_201028e8 = _DAT_201028e8 & 0x3ff | 0xf1e20c00;
+  _DAT_20102068 = _DAT_20102068 | 1;
+  _DAT_20102100 = _DAT_20102100 | 0x3807c0;
+  _DAT_201028dc = _DAT_201028dc | 0xf8000000;
+  _DAT_201028f8 = _DAT_201028f8 & 3 | 0x30580c30;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
- * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
- * Upstream date: 2026-03-30 10:56:56 +0800
- * Upstream subject: support h4eco1 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_transmit
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,23 +18,22 @@ void ieee802154_transmit(void)
   _DAT_60049058 = 0;
   _DAT_6004905c = 1;
   _tx_frame = 0x201000a;
-  DAT_00010ddc = 0x6050403;
-  DAT_00010de0 = 0x807;
-  DAT_00010de2 = 9;
+  DAT_00010b70 = 0x6050403;
+  DAT_00010b74 = 0x807;
+  DAT_00010b76 = 9;
   phy_printf("TX Start \n\r");
   phy_printf("transmitting frame %d bytes\n\r",_tx_frame & 0xff);
-  _DAT_600c30d0 = &tx_frame;
-  _DAT_600c3000 = 0x41;
+  _DAT_201030d0 = &tx_frame;
+  _DAT_20103000 = 0x41;
   do {
-    if ((_DAT_600c3064 & 1) != 0) {
+    if ((_DAT_20103064 & 1) != 0) {
       phy_printf("TX Done\n\r");
-      _DAT_600c3064 = _DAT_600c3064 | 1;
+      _DAT_20103064 = _DAT_20103064 | 1;
       return;
     }
-  } while ((_DAT_600c3064 & 0x20) == 0);
-  _DAT_600c30d0 = &tx_frame;
-  _DAT_600c3084 = _DAT_600c3084 | 1;
-  _DAT_600c3000 = 0x41;
+  } while ((_DAT_20103064 & 0x20) == 0);
+  phy_printf("TX Abort, reason:%x\n\r",_DAT_20103084 >> 4 & 0x1f);
+  _DAT_20103084 = _DAT_20103084 | 1;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
- * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
- * Upstream date: 2026-03-30 10:56:56 +0800
- * Upstream subject: support h4eco1 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,54 +12,45 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void zb_tx(uint param_1,uint param_2,uint param_3,uint param_4,int param_5)
+void zb_tx(uint param_1,undefined4 param_2,undefined4 param_3,uint param_4,int param_5)
 
 {
   uint uVar1;
   int iVar2;
   int iVar3;
   undefined4 uStack_28;
-  undefined4 auStack_24 [3];
+  undefined4 auStack_24 [4];
   
   uStack_28 = 0;
   auStack_24[0] = 0;
-  bt_track_pll_cap();
-  dis_clk_for_current(0,1);
-  if (param_2 < 0x1b) {
-    param_2 = param_2 * 5 + 0x92e;
+  phy_test_filter_band_set(1);
+  _DAT_2010f4b8 = _DAT_2010f4b8 | 1;
+  phy_set_clk_conf(3);
+  rfpll_cal_track_set();
+  uVar1 = 0x7f;
+  if (param_1 < 0x80) {
+    uVar1 = param_1;
   }
-  if (0x7f < param_1) {
-    param_1 = 0x7f;
-  }
-  if (param_1 < 3) {
-    param_1 = 3;
+  if (uVar1 < 3) {
+    uVar1 = 3;
   }
   if (param_5 != 0) {
-    _DAT_600c3098 = _DAT_600c3098 & 0xffffff00 | 0x3f;
+    _DAT_20103098 = _DAT_20103098 & 0xffffff00 | 0x3f;
   }
-  zb_tx_init(param_1,param_2,param_3,0);
-  if (param_5 != 0) {
-    bt_track_pll_cap();
-    i2c_writeReg_Mask(0x62,1,6,3,3,1);
-  }
-  set_pbus_mem_update(param_3 & 0xff);
+  zb_tx_init(uVar1,param_2,param_3,0);
   uVar1 = 0;
   do {
-    iVar2 = zb_tx_a_frame(&uStack_28,auStack_24,0,param_3);
+    iVar2 = zb_tx_a_frame(&uStack_28,auStack_24,0);
     uVar1 = uVar1 + 1;
     if (((param_4 != 0) && (param_4 <= uVar1)) || (iVar3 = GetStopCmd(), iVar3 == 0)) break;
   } while (iVar2 == 0);
   phy_printf("Txed %d %d\n",uStack_28,auStack_24[0]);
+  phy_set_clk_conf(0);
   if (param_5 != 0) {
-    _DAT_600c3098 = _DAT_600c3098 & 0xffffff00;
+    _DAT_20103098 = _DAT_20103098 & 0xffffff00;
   }
-  pbus_debugmode();
-  pbus_xpd_rx_off();
-  pbus_workmode();
-  dis_clk_for_current(1,1);
-  if (param_5 != 0) {
-    i2c_writeReg_Mask(0x62,1,6,3,3,0);
-  }
+  _DAT_2010f4b8 = _DAT_2010f4b8 & 0xfffffffe;
+  phy_test_filter_band_set(0);
   return;
 }
 

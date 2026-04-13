@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> bt_rw_testmode_v9.o -> rw_bt_v9_init_tx_descriptor_dm1_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,25 +10,10 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void rw_bt_v9_init_tx_descriptor_dm1_test(undefined4 *param_1)
+void rw_bt_v9_init_tx_descriptor_dm1_test(void)
 
 {
-  int unaff_s1;
-  int iVar1;
-  
-  if (((uint)(param_1 + 0x86) & 0x10) == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-  iVar1 = *(int *)(unaff_s1 + 0x44);
-  *param_1 = *(undefined4 *)(((uint)(param_1 + 0x86) & 0x10) + 0x10);
-  if (iVar1 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  rw_init_tx_descriptor(0,0,1,3,2,10);
+  return;
 }
 

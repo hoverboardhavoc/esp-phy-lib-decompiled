@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> bt_rw_testmode_v9.o -> rw_bt_v9_rx_status_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,22 +10,15 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void rw_bt_v9_rx_status_print(void)
+void rw_bt_v9_rx_status_print(uint *param_1)
 
 {
-  undefined4 unaff_s0;
-  int unaff_s1;
-  undefined8 uVar1;
-  int *in_stack_0000004c;
-  
-  *(undefined4 *)unaff_s0 = unaff_s0;
-  uVar1 = *(undefined8 *)(unaff_s1 + 0x80);
-  in_stack_0000004c[6] = (int)(in_stack_0000004c + 2);
-  *in_stack_0000004c = (int)(in_stack_0000004c + 2);
-  *(undefined8 *)(in_stack_0000004c + 0x5c) = uVar1;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  if ((int)(*param_1 << 0x10) < 0) {
+    if (-1 < (int)(*param_1 << 0xf)) {
+      phy_printf("\nrx%3x rssi%d\n",*param_1 >> 0x10 & 0x1ff,(int)(char)param_1[2]);
+      return;
+    }
+  }
+  return;
 }
 

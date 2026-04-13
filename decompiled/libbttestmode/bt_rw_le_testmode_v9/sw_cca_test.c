@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> sw_cca_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void sw_cca_test(undefined8 *param_1)
+void sw_cca_test(uint param_1,uint param_2)
 
 {
-  undefined8 unaff_fs0;
+  uint uVar1;
   
-  *param_1 = unaff_fs0;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  do {
+  } while (-1 < _DAT_60031014 << 0xc);
+  _DAT_60031018 = _DAT_60031018 | 0x80000;
+  uVar1 = _DAT_60031360 >> 0xc;
+  _DAT_60031360 = (param_1 & 0x7f) << 4 | _DAT_60031360 & 0xfffff000 | param_2 & 0xf;
+  phy_printf(&_LC20,(int)(char)uVar1);
+  return;
 }
 

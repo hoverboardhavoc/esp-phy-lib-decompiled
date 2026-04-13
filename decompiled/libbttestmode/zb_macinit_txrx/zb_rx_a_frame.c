@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,24 +22,24 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
   int *in_stack_00000000;
   int *in_stack_00000004;
   
-  _DAT_600c3000 = 0x42;
+  _DAT_20103000 = 0x42;
   while( true ) {
-    if ((_DAT_600c3064 & 2) != 0) {
-      _DAT_600c3064 = _DAT_600c3064 | 2;
+    if ((_DAT_20103064 & 2) != 0) {
+      _DAT_20103064 = _DAT_20103064 | 2;
       *param_1 = *param_1 + 1;
-      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10d53);
-      *param_3 = *param_3 + ((int)_DAT_600c20b0 >> 0x18);
-      *param_4 = (_DAT_600c20b0 >> 8 & 0xff) + *param_4;
+      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10ae7);
+      *param_3 = *param_3 + ((int)_DAT_201020b0 >> 0x18);
+      *param_4 = (_DAT_201020b0 >> 8 & 0xff) + *param_4;
       return 0;
     }
-    if ((_DAT_600c3064 & 0x10) != 0) break;
+    if ((_DAT_20103064 & 0x10) != 0) break;
     iVar1 = GetStopCmd();
     if (iVar1 == 0) {
       return 1;
     }
   }
-  _DAT_600c3064 = _DAT_600c3064 | 0x10;
-  uVar2 = _DAT_600c3080 >> 4 & 0x1f;
+  _DAT_20103064 = _DAT_20103064 | 0x10;
+  uVar2 = _DAT_20103080 >> 4 & 0x1f;
   *param_5 = *param_5 + 1;
   if (uVar2 == 2) {
     *param_6 = *param_6 + 1;
@@ -47,7 +47,7 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
   }
   if (uVar2 == 3) {
     *param_7 = *param_7 + 1;
-    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10d53);
+    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10ae7);
     return 0;
   }
   if ((uVar2 != 6) && (uVar2 != 9)) {

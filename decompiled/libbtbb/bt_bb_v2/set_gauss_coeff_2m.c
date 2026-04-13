@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_bb_v2.o -> set_gauss_coeff_2m
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,8 +15,8 @@
 void set_gauss_coeff_2m(void)
 
 {
-  _DAT_600c20f0 = _DAT_600c20f0 & 0xff | 0x149100;
-  _DAT_600c20f4 = 0x9fac0760;
+  _DAT_201020f0 = _DAT_201020f0 & 0xff | 0xe6900;
+  _DAT_201020f4 = 0x962d3f8f;
   return;
 }
 

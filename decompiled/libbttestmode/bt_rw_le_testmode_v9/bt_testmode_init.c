@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c28825eb1be6bbe30e0ee8cfcd54614bf86273e7
- * https://github.com/espressif/esp-phy-lib/commit/c28825eb1be6bbe30e0ee8cfcd54614bf86273e7
- * Upstream date: 2024-04-03 16:53:14 +0800
- * Upstream subject: fix coex test wifi affect ble s8 tx problm, and c3 s3 light sleep current opt, and c3 s3 ble rx problem
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> bt_testmode_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,42 +10,25 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void bt_testmode_init(int param_1,int param_2,uint param_3,int param_4,undefined8 param_5)
+void bt_testmode_init(void)
 
 {
-  int unaff_s1;
-  uint unaff_s11;
-  
-  *(undefined8 *)(param_4 + 0x7c) = param_5;
-  if (param_1 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-  if (unaff_s1 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-  if (param_3 <= unaff_s11) {
-    do {
-    } while (param_2 == 0);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-  if (param_3 != 0) {
-    if (unaff_s1 == -0x17) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
-    }
-    if (param_1 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
-    }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  _DAT_2010f01c = _DAT_2010f01c | 0xf;
+  _DAT_20109c04 = 0xffffffff;
+  _DAT_20109c14 = 0xffffffff;
+  _DAT_20109c0c = 0xffffffff;
+  _DAT_2010f018 = 0xffffffff;
+  _DAT_20109c10 = 0;
+  bt_bb_v2_init_cmplx(1);
+  bt_bb_tx_cca_set(0,0xd8,1,3,0,0,0,0);
+  bt_bb_corr_thresh_aa_lc_en(0);
+  bt_lc_tx_on_delay(0x3c);
+  ieee802154_mac_init();
+  btlc_reg_init(0x2f000000);
+  _DAT_2010185c = _DAT_2010185c | 0x180000;
+  phy_printf("\nRW V9 LE autotest! %s, %s\n","Apr 13 2026","09:45:23");
+  return;
 }
 

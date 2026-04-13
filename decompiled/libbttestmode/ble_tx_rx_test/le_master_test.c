@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> le_master_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,10 +20,9 @@ void le_master_test(undefined4 param_1,int param_2,undefined4 param_3,int param_
   int *in_stack_00000004;
   int *in_stack_00000008;
   int *in_stack_0000000c;
-  int aiStack_44 [4];
+  int iStack_34;
   
-  aiStack_44[0] = 0;
-  chip_v7_set_chan(1,0);
+  iStack_34 = 0;
   phy_set_clk_conf(2);
   ble_tx_init(param_1,param_2,param_3,2,param_5);
   ble_rx_init(param_1,param_2);
@@ -46,9 +45,9 @@ void le_master_test(undefined4 param_1,int param_2,undefined4 param_3,int param_
   }
   for (iVar2 = 0; iVar2 < param_4; iVar2 = iVar2 + 1) {
     ets_delay_us(200);
-    ble_tx_a_frame(1,0,0,param_6,param_7,param_3);
+    ble_tx_a_frame(1,0,0,param_6,param_7);
     ble_master_slave_rx_a_frame
-              (param_5,param_1,param_2,param_8,in_stack_00000000,aiStack_44,in_stack_00000008,
+              (param_5,param_1,param_2,param_8,in_stack_00000000,&iStack_34,in_stack_00000008,
                in_stack_0000000c);
   }
   uVar1 = *param_8;
@@ -56,10 +55,10 @@ void le_master_test(undefined4 param_1,int param_2,undefined4 param_3,int param_
     *in_stack_00000004 = 0;
   }
   else {
-    iVar2 = aiStack_44[0];
+    iVar2 = iStack_34;
     if (2 < uVar1) {
       uVar1 = uVar1 - 2 & 0xffff;
-      iVar2 = (aiStack_44[0] - *in_stack_00000008) - *in_stack_0000000c;
+      iVar2 = (iStack_34 - *in_stack_00000008) - *in_stack_0000000c;
     }
     *in_stack_00000004 = iVar2 / (int)uVar1;
   }

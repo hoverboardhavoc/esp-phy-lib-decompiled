@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_stop_current_operation
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,10 @@
 void ble_stop_current_operation(void)
 
 {
-  if (_DAT_600c1550 != 0) {
-    _DAT_600c1410 = 1;
+  if (_DAT_20101550 != 0) {
+    _DAT_20101410 = 1;
     do {
-    } while (_DAT_600c1550 != 0);
+    } while (_DAT_20101550 != 0);
   }
   return;
 }

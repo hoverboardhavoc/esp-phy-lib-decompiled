@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
- * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
- * Upstream date: 2026-03-30 10:56:56 +0800
- * Upstream subject: support h4eco1 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_receive
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,23 +12,23 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ieee802154_receive(void)
+undefined4 ieee802154_receive(void)
 
 {
   _DAT_60049058 = 0;
   _DAT_6004905c = 1;
   memset(&rx_frame,0,0x82);
-  _DAT_600c30e0 = &rx_frame;
-  _DAT_600c3000 = 0x42;
+  _DAT_201030e0 = &rx_frame;
+  _DAT_20103000 = 0x42;
   while( true ) {
-    if ((_DAT_600c3064 & 2) != 0) break;
-    if ((_DAT_600c3064 & 0x10) != 0) {
-      phy_printf("RX Abort, reason:%x\n\r",_DAT_600c3080 >> 4 & 0x1f);
-      _DAT_600c3080 = _DAT_600c3080 | 0x10;
+    if ((_DAT_20103064 & 2) != 0) break;
+    if ((_DAT_20103064 & 0x10) != 0) {
+      phy_printf("RX Abort, reason:%x\n\r",_DAT_20103080 >> 4 & 0x1f);
+      _DAT_20103080 = _DAT_20103080 | 0x10;
     }
   }
   phy_printf("RX Done (%d bytes)\n\r",rx_frame);
-  _DAT_600c3064 = _DAT_600c3064 | 2;
-  return;
+  _DAT_20103064 = _DAT_20103064 | 2;
+  return 0;
 }
 

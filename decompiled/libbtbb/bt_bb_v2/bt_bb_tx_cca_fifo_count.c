@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_tx_cca_fifo_count
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,6 +15,6 @@
 uint bt_bb_tx_cca_fifo_count(void)
 
 {
-  return _DAT_600c20d4 >> 0x19 & 0xf;
+  return _DAT_201020d4 >> 0x19 & 0xf;
 }
 

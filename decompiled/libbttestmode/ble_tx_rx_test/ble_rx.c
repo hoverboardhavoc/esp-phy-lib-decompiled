@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3dad662616b80b89abed23f218fb8ef2222ceb63
- * https://github.com/espressif/esp-phy-lib/commit/3dad662616b80b89abed23f218fb8ef2222ceb63
- * Upstream date: 2026-03-30 10:56:56 +0800
- * Upstream subject: support h4eco1 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,65 +10,52 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Type propagation algorithm not settling */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ble_rx(uint param_1,undefined4 param_2)
+void ble_rx(undefined4 param_1,undefined4 param_2)
 
 {
   int iVar1;
-  int iVar2;
-  int iVar3;
+  int iStack_40;
+  int aiStack_3c [10];
   
-  if ((param_1 - 0x938 & 0xffff) < 0x29) {
-    if (0x94c < _phy_param) {
-      phy_set_chan_freq_base(0x938);
-    }
-    _DAT_600c13f4 = _DAT_600c13f4 & 0xffffffbf;
-    _DAT_600c1508 = _DAT_600c1508 & 0xfffffcff | 0x100;
-    phy_xtal_freq_dreg_set(param_1);
-    param_1 = ble_freq_trans_chan_2360(param_1);
-  }
-  else {
-    if (_phy_param < 0x94c) {
-      phy_set_chan_freq_base(0x962);
-    }
-    _DAT_600c13f4 = _DAT_600c13f4 & 0xffffffbf;
-    _DAT_600c1508 = _DAT_600c1508 & 0xfffffcff | 0x100;
-    phy_xtal_freq_dreg_set((byte)ch_map2[param_1] + 2);
-  }
-  bt_track_pll_cap();
-  ble_radio_init();
-  ble_whitening_enable(0);
-  iVar3 = 0;
-  iVar1 = 0;
+  iStack_40 = 0;
+  aiStack_3c[0] = 0;
+  aiStack_3c[1] = 0;
+  aiStack_3c[2] = 0;
+  aiStack_3c[3] = 0;
+  aiStack_3c[4] = 0;
+  aiStack_3c[5] = 0;
+  aiStack_3c[6] = 0;
+  ble_rx_init();
   do {
-    ble_rx_start(param_1 & 0xff,param_2);
-    while (_DAT_600c1450 == 0) {
-      iVar2 = GetStopCmd();
-      if (iVar2 == 0) {
-        _DAT_600c1410 = 1;
-        _DAT_6004905c = 1;
-        if (iVar1 == 0) {
-          if ((_DAT_60093004 & 0x100) == 0) {
-            _DAT_60093004 = _DAT_60093004 | 0x100;
-          }
-          else {
-            _DAT_60093004 = _DAT_60093004 & 0xfffffeff;
-          }
-        }
-        phy_printf("%x %x %x %x %x %x %x %d %d %d p %d %d %d %d\n",iVar1 + iVar3,iVar1,0,0,iVar3,0,0
-                  );
-        phy_xtal_freq_dreg_set(0);
-        return;
-      }
-    }
-    iVar2 = ble_rx_check_status();
-    if (iVar2 == 0) {
-      iVar1 = iVar1 + 1;
+    iVar1 = ble_rx_a_frame(param_1,param_2,&iStack_40,aiStack_3c,aiStack_3c + 1,aiStack_3c + 2,
+                           aiStack_3c + 3,aiStack_3c + 4);
+  } while (iVar1 != 0);
+  if (iStack_40 == 0) {
+    if ((_DAT_20583004 & 0x100) == 0) {
+      _DAT_20583004 = _DAT_20583004 | 0x100;
     }
     else {
-      iVar3 = iVar3 + 1;
+      _DAT_20583004 = _DAT_20583004 & 0xfffffeff;
     }
-  } while( true );
+  }
+  _short_log_en = 0;
+  if (iStack_40 != 0) {
+    _short_log_en = aiStack_3c[3] / iStack_40;
+  }
+  esp_rx_valid = 2;
+  _esp_rx_result = aiStack_3c[3];
+  _phy_set_clk_conf = iStack_40;
+  if ((_short_log_en & 0xff) == 0) {
+    phy_printf("%x %x %x %x %x %x %x %d %d %d p %d %d %d %d\n",iStack_40 + aiStack_3c[0],iStack_40,0
+               ,0,0,0);
+  }
+  else {
+    phy_printf("rx_num: %d rx_rssi: %d\n");
+  }
+  phy_set_clk_conf(0);
+  return;
 }
 

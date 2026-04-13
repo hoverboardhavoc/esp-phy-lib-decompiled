@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a7a0481e34fd4368aa15a143dfbd855015380fd4
- * https://github.com/espressif/esp-phy-lib/commit/a7a0481e34fd4368aa15a143dfbd855015380fd4
- * Upstream date: 2023-09-25 15:20:47 +0800
- * Upstream subject: phy_param_track_tot and phy_wifi_enable_set for all chips
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bbmac_idle_for_swrst
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,9 +18,9 @@ bool bbmac_idle_for_swrst(void)
   bool bVar1;
   
   bVar1 = false;
-  if ((((_DAT_600a207c >> 0x1c == 0) && ((_DAT_600a207c >> 0x16 & 3) == 0)) &&
-      ((_DAT_600a1550 & 0xf) == 0)) && ((_DAT_600a3088 & 0xf) == 0)) {
-    bVar1 = (_DAT_600a2c38 & 7) == 1;
+  if (((((_DAT_2010207c >> 0x14 & 0xf) == 0) && ((_DAT_2010207c >> 0xf & 3) == 0)) &&
+      ((_DAT_20101550 & 0xf) == 0)) && ((_DAT_20103088 & 0xf) == 0)) {
+    bVar1 = (_DAT_20102c38 & 7) == 1;
   }
   return bVar1;
 }

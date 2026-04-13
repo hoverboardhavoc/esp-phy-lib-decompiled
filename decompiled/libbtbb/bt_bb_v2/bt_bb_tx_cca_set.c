@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_tx_cca_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,33 +21,33 @@ void bt_bb_tx_cca_set(int param_1,uint param_2,int param_3,uint param_4,uint par
   uint in_stack_00000004;
   
   if (param_1 == 0) {
-    _DAT_600c20b8 = _DAT_600c20b8 & 0x7fffffff;
+    _DAT_201020b8 = _DAT_201020b8 & 0x7fffffff;
   }
   else {
-    _DAT_600c20b8 = _DAT_600c20b8 | 0x80000000;
+    _DAT_201020b8 = _DAT_201020b8 | 0x80000000;
   }
-  _DAT_600c20b8 = (param_2 & 0xff) << 1 | _DAT_600c20b8 & 0xfffffe01 | 1;
+  _DAT_201020b8 = (param_2 & 0xff) << 1 | _DAT_201020b8 & 0xfffffe01 | 1;
   if (param_3 == 0) {
-    _DAT_600c20bc = _DAT_600c20bc & 0xbfffffff;
+    _DAT_201020bc = _DAT_201020bc & 0xbfffffff;
   }
   else {
-    _DAT_600c20bc = _DAT_600c20bc | 0x40000000;
+    _DAT_201020bc = _DAT_201020bc | 0x40000000;
   }
-  _DAT_600c20bc = (param_5 & 0x1f) << 0x14 | (param_4 & 0x1f) << 0x19 | _DAT_600c20bc & 0xc00fffff;
+  _DAT_201020bc = (param_5 & 0x1f) << 0x14 | (param_4 & 0x1f) << 0x19 | _DAT_201020bc & 0xc00fffff;
   if (param_6 == 0) {
-    _DAT_600c20c0 = _DAT_600c20c0 & 0xffdfffff;
+    _DAT_201020c0 = _DAT_201020c0 & 0xffdfffff;
   }
   else {
-    _DAT_600c20c0 = _DAT_600c20c0 | 0x200000;
+    _DAT_201020c0 = _DAT_201020c0 | 0x200000;
   }
   uVar1 = (param_7 & 0xff) << 0xd;
   if (param_8 == 0) {
-    uVar1 = uVar1 | _DAT_600c20c0 & 0xffe00fff;
+    uVar1 = uVar1 | _DAT_201020c0 & 0xffe00fff;
   }
   else {
-    uVar1 = uVar1 | _DAT_600c20c0 & 0xffe01fff | 0x1000;
+    uVar1 = uVar1 | _DAT_201020c0 & 0xffe01fff | 0x1000;
   }
-  _DAT_600c20c0 =
+  _DAT_201020c0 =
        (in_stack_00000004 & 0x1f) << 2 | (in_stack_00000000 & 0x1f) << 7 | uVar1 & 0xfffff003;
   return;
 }

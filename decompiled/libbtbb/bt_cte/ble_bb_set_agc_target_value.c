@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_cte.o -> ble_bb_set_agc_target_value
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void ble_bb_set_agc_target_value(uint param_1)
 
 {
-  _DAT_600c2840 = (param_1 & 0x1ff) << 0xd | _DAT_600c2840 & 0xffc01fff;
+  _DAT_20102840 = (param_1 & 0x1ff) << 0xd | _DAT_20102840 & 0xffc01fff;
   return;
 }
 

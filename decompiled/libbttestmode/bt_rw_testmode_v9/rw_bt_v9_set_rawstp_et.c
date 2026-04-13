@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> bt_rw_testmode_v9.o -> rw_bt_v9_set_rawstp_et
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,11 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void rw_bt_v9_set_rawstp_et(void)
+void rw_bt_v9_set_rawstp_et(uint *param_1,int param_2)
 
 {
-  undefined4 unaff_s0;
-  
-  *(undefined4 *)unaff_s0 = unaff_s0;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  *param_1 = *param_1 & 0xffff | param_2 << 0x10;
+  param_1[1] = (uint)(param_2 << 4) >> 0x14 | param_1[1] & 0xfffff000;
+  return;
 }
 

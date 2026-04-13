@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void zb_tx_init(uint param_1,int param_2,uint param_3,int param_4)
+void zb_tx_init(uint param_1,uint param_2,uint param_3,int param_4)
 
 {
   undefined1 *puVar1;
@@ -20,15 +20,20 @@ void zb_tx_init(uint param_1,int param_2,uint param_3,int param_4)
   undefined1 *puVar3;
   uint uVar4;
   
-  _DAT_600c3048 = param_2 + -0x962;
   tx_frame = (undefined1)param_1;
+  if (param_2 < 0x1b) {
+    _DAT_20103048 = param_2 * 5 + -0x34;
+  }
+  else {
+    _DAT_20103048 = param_2 - 0x962;
+  }
   if (0xf < param_3) {
     param_3 = 0xf;
   }
-  _DAT_600c304c = param_3;
+  _DAT_2010304c = param_3;
   if (param_4 == 0) {
     for (uVar4 = 0; uVar4 < param_1; uVar4 = uVar4 + 1 & 0xff) {
-      (&DAT_00010dd9)[uVar4] = (char)uVar4;
+      (&DAT_00010b6d)[uVar4] = (char)uVar4;
     }
   }
   else {
@@ -42,7 +47,7 @@ void zb_tx_init(uint param_1,int param_2,uint param_3,int param_4)
       *puVar3 = *puVar1;
     } while (iVar2 != 10);
   }
-  _DAT_600c30d0 = &tx_frame;
+  _DAT_201030d0 = &tx_frame;
   return;
 }
 

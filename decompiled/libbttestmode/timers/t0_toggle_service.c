@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> timers.o -> t0_toggle_service
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,19 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Removing unreachable block (ram,0x0001012c) */
+/* WARNING: Removing unreachable block (ram,0x00010132) */
+/* WARNING: Removing unreachable block (ram,0x00010118) */
+/* WARNING: Removing unreachable block (ram,0x0001011e) */
+/* WARNING: Removing unreachable block (ram,0x00010156) */
+/* WARNING: Removing unreachable block (ram,0x00010150) */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void t0_toggle_service(int param_1,undefined8 *param_2)
+void t0_toggle_service(void)
 
 {
-  undefined8 unaff_fs0;
-  
-  *param_2 = unaff_fs0;
-  if (param_1 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  _DAT_60008000 = _DAT_60008000 | 0x400;
+  uRam6000807c = uRam6000807c | 1;
+  return;
 }
 

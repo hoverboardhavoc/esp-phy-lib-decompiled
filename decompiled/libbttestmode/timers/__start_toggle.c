@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> timers.o -> __start_toggle
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,24 +10,106 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void __start_toggle(void)
+void __start_toggle(undefined4 param_1,int param_2)
 
 {
-  int unaff_s1;
-  int in_stack_0000004c;
+  uint *puVar1;
+  uint *puVar2;
+  undefined4 *puVar3;
+  undefined1 *puVar4;
   
-  if (unaff_s1 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+  if (param_2 == 0) {
+_L12:
+    puVar1 = (uint *)&DAT_60008000;
   }
-  if (unaff_s1 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+  else {
+    puVar1 = (uint *)&DAT_60009000;
+    if (param_2 != 1) {
+      ebreak();
+      goto _L12;
+    }
   }
-  *(undefined8 *)(in_stack_0000004c + 0x18) = *(undefined8 *)(unaff_s1 + 0x80);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  *puVar1 = *puVar1 | 0x60000400;
+  if (param_2 == 0) {
+    puVar4 = &DAT_60008000;
+_L26:
+    puVar2 = (uint *)(puVar4 + 0x70);
+  }
+  else {
+    if (param_2 == 1) {
+      puVar4 = &DAT_60009000;
+      goto _L26;
+    }
+    puVar2 = (uint *)&DAT_00000070;
+  }
+  *puVar2 = *puVar2 | 1;
+  *puVar1 = *puVar1 & 0xe0001fff | 0xa0000;
+  if (param_2 == 0) {
+    puVar4 = &DAT_60008000;
+_L27:
+    puVar3 = (undefined4 *)(puVar4 + 0x10);
+  }
+  else {
+    if (param_2 == 1) {
+      puVar4 = &DAT_60009000;
+      goto _L27;
+    }
+    puVar3 = (undefined4 *)&DAT_00000010;
+  }
+  *puVar3 = param_1;
+  if (param_2 == 0) {
+    puVar4 = &DAT_60008000;
+_L28:
+    puVar3 = (undefined4 *)(puVar4 + 0x14);
+  }
+  else {
+    if (param_2 == 1) {
+      puVar4 = &DAT_60009000;
+      goto _L28;
+    }
+    puVar3 = (undefined4 *)&DAT_00000014;
+  }
+  *puVar3 = 0;
+  if (param_2 == 0) {
+    puVar4 = &DAT_60008000;
+_L29:
+    puVar3 = (undefined4 *)(puVar4 + 0x18);
+  }
+  else {
+    if (param_2 == 1) {
+      puVar4 = &DAT_60009000;
+      goto _L29;
+    }
+    puVar3 = (undefined4 *)&DAT_00000018;
+  }
+  *puVar3 = 0;
+  if (param_2 == 0) {
+    puVar4 = &DAT_60008000;
+_L30:
+    puVar3 = (undefined4 *)(puVar4 + 0x1c);
+  }
+  else {
+    if (param_2 == 1) {
+      puVar4 = &DAT_60009000;
+      goto _L30;
+    }
+    puVar3 = (undefined4 *)&DAT_0000001c;
+  }
+  *puVar3 = 0;
+  if (param_2 == 0) {
+    puVar4 = &DAT_60008000;
+  }
+  else {
+    if (param_2 != 1) {
+      puVar3 = (undefined4 *)&DAT_00000020;
+      goto _L11;
+    }
+    puVar4 = &DAT_60009000;
+  }
+  puVar3 = (undefined4 *)(puVar4 + 0x20);
+_L11:
+  *puVar3 = 0;
+  *puVar1 = *puVar1 | 0x80000000;
+  return;
 }
 

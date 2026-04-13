@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbtbb -> bt_cte.o -> ble_cte_freq_adjust
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,23 +12,17 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ble_cte_freq_adjust(int param_1,int param_2,int param_3,uint param_4,int param_5,uint param_6)
+void ble_cte_freq_adjust(int param_1,int param_2,uint param_3,int param_4,uint param_5)
 
 {
   if (param_1 == 0) {
-    _DAT_600c215c = _DAT_600c215c & 0xfffffffb;
+    _DAT_2010215c = _DAT_2010215c & 0xfffffff7;
   }
   else {
-    _DAT_600c215c = _DAT_600c215c | 4;
+    _DAT_2010215c = _DAT_2010215c | 8;
   }
-  if (param_2 == 0) {
-    _DAT_600c215c = _DAT_600c215c & 0xfffffff7;
-  }
-  else {
-    _DAT_600c215c = _DAT_600c215c | 8;
-  }
-  _DAT_600c215c = (param_4 & 0x3f) << 4 | _DAT_600c215c & 0xc0f | param_3 << 0xc;
-  _DAT_600c21b0 = (param_6 & 0x3f) << 6 | _DAT_600c21b0 & 0x3f | param_5 << 0xc;
+  _DAT_2010215c = (param_3 & 0x3f) << 4 | _DAT_2010215c & 0xc0f | param_2 << 0xc;
+  _DAT_201021b0 = (param_5 & 0x3f) << 6 | _DAT_201021b0 & 0x3f | param_4 << 0xc;
   return;
 }
 

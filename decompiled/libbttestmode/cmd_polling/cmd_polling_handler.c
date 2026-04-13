@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * https://github.com/espressif/esp-phy-lib/commit/f1d9b9b5cb63dac81b9027f50f7a46b1d840ce5c
- * Upstream date: 2023-09-26 12:19:54 +0800
- * Upstream subject: add librftest.a
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> cmd_polling.o -> cmd_polling_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,25 +10,22 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cmd_polling_handler(int param_1,int param_2,undefined8 param_3)
+void cmd_polling_handler(void)
 
 {
-  undefined4 unaff_s0;
-  undefined8 uVar1;
-  int in_stack_0000004c;
+  char *pcVar1;
   
-  uVar1 = *(undefined8 *)(param_1 + 0x20);
-  *(undefined8 *)(param_2 + 0x7c) = param_3;
-  *(undefined8 *)(in_stack_0000004c + 8) = uVar1;
-  *(undefined4 *)unaff_s0 = unaff_s0;
-  *(int *)(in_stack_0000004c + 0x48) = in_stack_0000004c + 8;
-  if (in_stack_0000004c == -8) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  _DAT_60008000 = _DAT_60008000 | 0x400;
+  pcVar1 = &cmd_queue;
+  _DAT_6000807c = _DAT_6000807c | 1;
+  do {
+    if (*pcVar1 != '\0') {
+      (**(code **)(pcVar1 + 8))(*(undefined4 *)(pcVar1 + 0xc),*(code **)(pcVar1 + 8));
+    }
+    pcVar1 = pcVar1 + 0x10;
+  } while (pcVar1 != (char *)0x1034c);
+  return;
 }
 

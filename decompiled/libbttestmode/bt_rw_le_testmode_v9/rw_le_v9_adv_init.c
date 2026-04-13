@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2d319a382336cf0522ea4bb5a3fbd6701a8633c6
- * https://github.com/espressif/esp-phy-lib/commit/2d319a382336cf0522ea4bb5a3fbd6701a8633c6
- * Upstream date: 2024-01-24 19:07:44 +0800
- * Upstream subject: keep regs before sleep and after wakeup are same
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> rw_le_v9_adv_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,39 +10,20 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void rw_le_v9_adv_init(undefined8 *param_1,int param_2,int param_3,undefined8 param_4)
+void rw_le_v9_adv_init(uint param_1)
 
 {
-  int unaff_s0;
-  int iVar1;
-  int iVar2;
-  undefined8 uVar3;
-  undefined8 uVar4;
-  undefined8 uVar5;
-  undefined4 unaff_fs10;
-  undefined8 in_ft10;
-  
-  iVar2 = param_2;
-  iVar1 = FUN_00011b56();
-  *(undefined4 *)(param_2 + 0xfc) = unaff_fs10;
-  if (iVar2 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-  *(int *)(unaff_s0 + 0x40) = unaff_s0;
-  if (param_1 == (undefined8 *)0x0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-  uVar5 = *param_1;
-  uVar4 = *param_1;
-  uVar3 = *param_1;
-  *(undefined8 *)(iVar1 + 8) = param_4;
-  FUN_000122ba(param_3 + -8,uVar3,uVar4,uVar5);
-  *(undefined8 *)(param_2 + 0x88) = in_ft10;
-  FUN_000124aa();
+  _DAT_60031120 = _DAT_60031120 & 0xffffc000 | param_1 & 0x3fff;
+  _DAT_60031000 = _DAT_60031000 & 0xffffbfff;
+  rw_le_v9_prep_cs(&DAT_3ffd0200,5,1,1,0,1,0);
+  _DAT_3ffd0300 = 0x14400320;
+  _DAT_3ffd0304 = 0x340;
+  _DAT_3ffd0320 = 0x18440300;
+  _DAT_3ffd0324 = 0x440;
+  rw_fill_adv_buf(&DAT_3ffd0340);
+  rw_fill_scanrsp_buf(0x3ffd0440);
   return;
 }
 

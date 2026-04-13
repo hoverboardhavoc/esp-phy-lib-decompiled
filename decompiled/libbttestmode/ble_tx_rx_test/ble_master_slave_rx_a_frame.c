@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * https://github.com/espressif/esp-phy-lib/commit/b3bc6fbd9714a6638da8b1958e3f7af08532ecc7
- * Upstream date: 2026-03-18 11:37:56 +0800
- * Upstream subject: support h4eco1, phy=89ae914
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_master_slave_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,19 +23,19 @@ ble_master_slave_rx_a_frame
   int iVar3;
   
   ble_rx_start(param_2,param_3);
-  bt_track_pll_cap();
-  iVar3 = _DAT_600cd800;
-  while (_DAT_600c1450 == 0) {
+  phy_bt_track_pll_cap();
+  iVar3 = _DAT_2010d800;
+  while (_DAT_20101450 == 0) {
     iVar2 = GetStopCmd();
-    if ((iVar2 == 0) || ((param_1 != 0 && (param_1 < (uint)(_DAT_600cd800 - iVar3))))) {
-      _DAT_600c1410 = 1;
+    if ((iVar2 == 0) || ((param_1 != 0 && (param_1 < (uint)(_DAT_2010d800 - iVar3))))) {
+      _DAT_20101410 = 1;
       return 0;
     }
   }
   sVar1 = ble_rx_check_status();
   if (sVar1 == 0) {
     *param_4 = *param_4 + 1;
-    iVar3 = (int)(char)_DAT_600c1548;
+    iVar3 = (int)(char)_DAT_20101548;
     *param_6 = *param_6 + iVar3;
     if (*param_4 != 1) {
       if (*param_7 < iVar3) {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
+ * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
+ * Upstream date: 2026-04-13 10:23:07 +0800
+ * Upstream subject: support s31 libphy
  * Source: libbttestmode -> ble_tx_rx_test.o -> bt_lc_tx_on_delay
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void bt_lc_tx_on_delay(uint param_1)
 
 {
-  _DAT_600c1650 = (param_1 & 0xff) << 0x10 | _DAT_600c1650 & 0xff00ff00 | param_1 & 0xff;
+  _DAT_20101650 = (param_1 & 0xff) << 0x10 | _DAT_20101650 & 0xff00ff00 | param_1 & 0xff;
   return;
 }
 
