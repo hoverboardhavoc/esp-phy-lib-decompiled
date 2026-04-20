@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit 6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
+ * https://github.com/espressif/esp-phy-lib/commit/6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
+ * Upstream date: 2026-04-20 19:43:28 +0800
+ * Upstream subject: S31 support 154 api and light sleep
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void zb_tx(uint param_1,undefined4 param_2,undefined4 param_3,uint param_4,int param_5)
+void zb_tx(undefined4 param_1,undefined4 param_2,undefined4 param_3,uint param_4,int param_5)
 
 {
   uint uVar1;
@@ -27,17 +27,10 @@ void zb_tx(uint param_1,undefined4 param_2,undefined4 param_3,uint param_4,int p
   _DAT_2010f4b8 = _DAT_2010f4b8 | 1;
   phy_set_clk_conf(3);
   rfpll_cal_track_set();
-  uVar1 = 0x7f;
-  if (param_1 < 0x80) {
-    uVar1 = param_1;
-  }
-  if (uVar1 < 3) {
-    uVar1 = 3;
-  }
   if (param_5 != 0) {
     _DAT_20103098 = _DAT_20103098 & 0xffffff00 | 0x3f;
   }
-  zb_tx_init(uVar1,param_2,param_3,0);
+  zb_tx_init(param_1,param_2,param_3,0);
   uVar1 = 0;
   do {
     iVar2 = zb_tx_a_frame(&uStack_28,auStack_24,0);

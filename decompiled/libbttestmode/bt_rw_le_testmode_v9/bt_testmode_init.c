@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit 6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
+ * https://github.com/espressif/esp-phy-lib/commit/6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
+ * Upstream date: 2026-04-20 19:43:28 +0800
+ * Upstream subject: S31 support 154 api and light sleep
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> bt_testmode_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void bt_testmode_init(void)
   ieee802154_mac_init();
   btlc_reg_init(0x2f000000);
   _DAT_2010185c = _DAT_2010185c | 0x180000;
-  phy_printf("\nRW V9 LE autotest! %s, %s\n","Apr 13 2026","09:45:23");
+  phy_printf("\nRW V9 LE autotest! %s, %s\n","Apr 20 2026","19:04:23");
   return;
 }
 
