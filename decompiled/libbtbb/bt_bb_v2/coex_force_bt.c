@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 603b69583635ffcedf2a5e1d0f70da77edf82d10
- * https://github.com/espressif/esp-phy-lib/commit/603b69583635ffcedf2a5e1d0f70da77edf82d10
- * Upstream date: 2024-03-04 14:31:40 +0800
- * Upstream subject: feat: add esp32c5 beta3 support wifi
+ * Last changed at upstream commit 59c1234e929212aec0fdda75769b759951235536
+ * https://github.com/espressif/esp-phy-lib/commit/59c1234e929212aec0fdda75769b759951235536
+ * Upstream date: 2026-04-22 17:40:08 +0800
+ * Upstream subject: support freq hop done api
  * Source: libbtbb -> bt_bb_v2.o -> coex_force_bt
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void coex_force_bt(void)
   _DAT_600af400 = _DAT_600af400 & 0xc0000000 | 0x25000000;
   _DAT_600af404 = _DAT_600af404 & 0xff000000 | 5;
   _DAT_600af408 = _DAT_600af408 | 1;
-  phy_printf(&_LC0,_DAT_600af480);
+  phy_printf(&_LC1,_DAT_600af480);
   return;
 }
 

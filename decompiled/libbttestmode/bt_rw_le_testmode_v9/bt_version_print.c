@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 218d3e79a323a437b5f994c32fe7b2144f54ca8c
- * https://github.com/espressif/esp-phy-lib/commit/218d3e79a323a437b5f994c32fe7b2144f54ca8c
- * Upstream date: 2025-10-28 15:27:17 +0800
- * Upstream subject: update C3 S3 C2 S2 libphy for rxdc opt
+ * Last changed at upstream commit 59c1234e929212aec0fdda75769b759951235536
+ * https://github.com/espressif/esp-phy-lib/commit/59c1234e929212aec0fdda75769b759951235536
+ * Upstream date: 2026-04-22 17:40:08 +0800
+ * Upstream subject: support freq hop done api
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> bt_version_print
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,7 +14,7 @@ void bt_version_print(void)
 
 {
   bt_bb_v2_version();
-  phy_printf("LE autotest version: %s, %s, %s\n","3153b12","Aug 25 2025","19:01:29");
+  phy_printf("LE autotest version: %s, %s, %s\n","8f9aa17","Apr 13 2026","18:46:29");
   return;
 }
 

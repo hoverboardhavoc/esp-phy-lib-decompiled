@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit fbc304747bc55b40ef7225130fcf87f43b981482
- * https://github.com/espressif/esp-phy-lib/commit/fbc304747bc55b40ef7225130fcf87f43b981482
- * Upstream date: 2025-11-17 14:20:47 +0800
- * Upstream subject: libphy support C5ECO3 and ECO2 coex, fix C6 track reset
+ * Last changed at upstream commit 59c1234e929212aec0fdda75769b759951235536
+ * https://github.com/espressif/esp-phy-lib/commit/59c1234e929212aec0fdda75769b759951235536
+ * Upstream date: 2026-04-22 17:40:08 +0800
+ * Upstream subject: support freq hop done api
  * Source: libbttestmode -> ble_tx_rx_test.o -> write_source_freq_info
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,12 +16,12 @@ void write_source_freq_info(int param_1,undefined4 *param_2,undefined1 param_3)
 
 {
   if ((ble_freq_est != '\0') && (param_1 != 0)) {
-    _DAT_0001103a = ble_freq_err;
-    DAT_00011038 = (undefined1)*param_2;
-    DAT_0001103d = (undefined1)param_1;
-    DAT_00011039 = (undefined1)param_2[1];
+    DAT_0001105e = ble_freq_err;
+    DAT_0001105c = (undefined1)*param_2;
+    DAT_00011061 = (undefined1)param_1;
+    DAT_0001105d = (undefined1)param_2[1];
     _DAT_600a1830 = &ble_radio_tx_buffer;
-    DAT_0001103c = param_3;
+    DAT_00011060 = param_3;
   }
   return;
 }
