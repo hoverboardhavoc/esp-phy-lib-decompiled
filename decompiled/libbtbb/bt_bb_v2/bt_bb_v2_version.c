@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * https://github.com/espressif/esp-phy-lib/commit/6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * Upstream date: 2026-04-20 19:43:28 +0800
- * Upstream subject: S31 support 154 api and light sleep
+ * Last changed at upstream commit ae6f29bfebbfdacc1bba905afff3399fe733245f
+ * https://github.com/espressif/esp-phy-lib/commit/ae6f29bfebbfdacc1bba905afff3399fe733245f
+ * Upstream date: 2026-05-21 14:11:41 +0800
+ * Upstream subject: support wifi api and regdma
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  phy_printf("libbtbb version: %s, %s, %s\n","4ef64f3","Apr 20 2026","19:04:27");
+  phy_printf("libbtbb version: %s, %s, %s\n","8e5a42e","May 12 2026","16:38:26");
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * https://github.com/espressif/esp-phy-lib/commit/6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * Upstream date: 2026-04-20 19:43:28 +0800
- * Upstream subject: S31 support 154 api and light sleep
+ * Last changed at upstream commit ae6f29bfebbfdacc1bba905afff3399fe733245f
+ * https://github.com/espressif/esp-phy-lib/commit/ae6f29bfebbfdacc1bba905afff3399fe733245f
+ * Upstream date: 2026-05-21 14:11:41 +0800
+ * Upstream subject: support wifi api and regdma
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> bt_testmode_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void bt_testmode_init(void)
   ieee802154_mac_init();
   btlc_reg_init(0x2f000000);
   _DAT_2010185c = _DAT_2010185c | 0x180000;
-  phy_printf("\nRW V9 LE autotest! %s, %s\n","Apr 20 2026","19:04:23");
+  phy_printf("\nRW V9 LE autotest! %s, %s\n","May 12 2026","16:38:22");
   return;
 }
 

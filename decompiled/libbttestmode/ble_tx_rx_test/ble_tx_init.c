@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit ae6f29bfebbfdacc1bba905afff3399fe733245f
+ * https://github.com/espressif/esp-phy-lib/commit/ae6f29bfebbfdacc1bba905afff3399fe733245f
+ * Upstream date: 2026-05-21 14:11:41 +0800
+ * Upstream subject: support wifi api and regdma
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,20 +12,18 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ble_tx_init(undefined4 param_1,undefined4 param_2,uint param_3,undefined4 param_4,
-                undefined1 param_5)
+void ble_tx_init(uint param_1,undefined4 param_2,undefined1 param_3)
 
 {
   char *pcVar1;
   uint uVar2;
   
-  ble_radio_init();
-  ble_select_phy_speed(param_1,param_2);
-  ble_radio_tx_data_init(param_5,param_4);
+  ble_select_phy_speed();
+  ble_radio_tx_data_init(param_3,param_2);
   ble_whitening_enable(0);
   uVar2 = 0xf;
-  if (param_3 < 0x10) {
-    uVar2 = param_3;
+  if (param_1 < 0x10) {
+    uVar2 = param_1;
   }
   uVar2 = uVar2 & 0xff;
   pcVar1 = (char *)0x20101000;
