@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * https://github.com/espressif/esp-phy-lib/commit/6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * Upstream date: 2026-04-20 19:43:28 +0800
- * Upstream subject: S31 support 154 api and light sleep
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,6 @@ void zb_tx(undefined4 param_1,undefined4 param_2,undefined4 param_3,uint param_4
   
   uStack_28 = 0;
   auStack_24[0] = 0;
-  phy_test_filter_band_set(1);
   _DAT_2010f4b8 = _DAT_2010f4b8 | 1;
   phy_set_clk_conf(3);
   rfpll_cal_track_set();

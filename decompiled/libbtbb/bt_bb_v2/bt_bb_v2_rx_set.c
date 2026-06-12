@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ae6f29bfebbfdacc1bba905afff3399fe733245f
- * https://github.com/espressif/esp-phy-lib/commit/ae6f29bfebbfdacc1bba905afff3399fe733245f
- * Upstream date: 2026-05-21 14:11:41 +0800
- * Upstream subject: support wifi api and regdma
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void bt_bb_v2_rx_set(void)
 
 {
   bt_bb_rx_set();
-  bt_set_rx_comp(6,0,3,2,0,0);
+  bt_set_rx_comp(6);
   bt_agc_gain_offset(0x50);
   bt_agc_gain_set();
   bt_agc_rssi_thresh();

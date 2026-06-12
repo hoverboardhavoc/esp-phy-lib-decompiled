@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: librfate -> ate_test.o -> ate_rfpll_cap_sign
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,9 +20,9 @@ void ate_rfpll_cap_sign(int param_1)
   uint uVar5;
   int iVar6;
   
-  phy_chip_set_chan(1,0);
-  iVar3 = phy_read_pll_cap();
-  phy_i2c_writeReg_Mask(0x62,1,0xb,6,6,1);
+  chip_v7_set_chan(1,0);
+  iVar3 = read_pll_cap();
+  i2c_writeReg_Mask(0x62,1,0xb,6,6,1);
   iVar6 = 0;
   cVar2 = '\0';
   while( true ) {
@@ -32,9 +32,9 @@ void ate_rfpll_cap_sign(int param_1)
       if (iVar6 != 0) {
         uVar5 = iVar3 + 1 + iVar1;
       }
-      phy_write_pll_cap((int)(short)uVar5);
+      write_pll_cap(uVar5 & 0xffff);
       ets_delay_us(5);
-      uVar4 = phy_i2c_readReg(0x62,1,0xc);
+      uVar4 = i2c_readReg(0x62,1,0xc);
       if ((uVar4 >> 2 & 3) == 0) {
         cVar2 = cVar2 + '\x01';
       }

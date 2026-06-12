@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ae6f29bfebbfdacc1bba905afff3399fe733245f
- * https://github.com/espressif/esp-phy-lib/commit/ae6f29bfebbfdacc1bba905afff3399fe733245f
- * Upstream date: 2026-05-21 14:11:41 +0800
- * Upstream subject: support wifi api and regdma
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,7 +17,7 @@ void ble_rx_start(void)
 {
   ble_select_phy_speed();
   memset(&_LANCHOR3,0x55,0x140);
-  _DAT_20101834 = &DAT_00011007;
+  _DAT_20101834 = &DAT_00010fdf;
   _DAT_20101450 = 0;
   _DAT_2010143c = 0;
   _DAT_20101470 = 0;

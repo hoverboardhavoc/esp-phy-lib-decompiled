@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ae6f29bfebbfdacc1bba905afff3399fe733245f
- * https://github.com/espressif/esp-phy-lib/commit/ae6f29bfebbfdacc1bba905afff3399fe733245f
- * Upstream date: 2026-05-21 14:11:41 +0800
- * Upstream subject: support wifi api and regdma
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_radio_tx_data_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,8 +57,8 @@ void ble_radio_tx_data_init(ushort param_1,int param_2)
       }
     }
   }
-  DAT_00011145 = (char)param_1;
-  _DAT_20101830 = 0x4451;
+  DAT_0001111d = (char)param_1;
+  _DAT_20101830 = 0x4447;
   return;
 }
 

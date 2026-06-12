@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * https://github.com/espressif/esp-phy-lib/commit/6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * Upstream date: 2026-04-20 19:43:28 +0800
- * Upstream subject: S31 support 154 api and light sleep
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> zb_macinit_txrx.o -> ieee802154_transmit
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,9 +18,9 @@ void ieee802154_transmit(void)
   _DAT_60049058 = 0;
   _DAT_6004905c = 1;
   _tx_frame = 0x201000a;
-  DAT_00010b64 = 0x6050403;
-  DAT_00010b68 = 0x807;
-  DAT_00010b6a = 9;
+  DAT_00010b5c = 0x6050403;
+  DAT_00010b60 = 0x807;
+  DAT_00010b62 = 9;
   phy_printf("TX Start \n\r");
   phy_printf("transmitting frame %d bytes\n\r",_tx_frame & 0xff);
   _DAT_201030d0 = &tx_frame;

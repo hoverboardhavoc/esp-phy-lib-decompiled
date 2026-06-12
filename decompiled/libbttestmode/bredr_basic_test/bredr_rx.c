@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> bredr_basic_test.o -> bredr_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,19 +32,19 @@ void bredr_rx(uint param_1,uint param_2,uint param_3,undefined1 param_4,undefine
   tlTable = &timeline_table;
   iStack_48 = 0;
   auStack_44[0] = 0;
-  DAT_00012dd4._2_2_ = DAT_00012dd4._2_2_ & 0xfc0f | 0x220;
-  DAT_00012dfa = 0xf;
-  DAT_00012de0 = DAT_00012de0 & 0xff01ffff | (param_1 & 0x7f) << 0x11;
-  DAT_00012df0 = 0x2aa;
-  DAT_00012e04 = DAT_00012e04 | 0xf00000;
-  _DAT_20101078 = _DAT_20101078 & 0xfff00000 | 0x4b73;
+  DAT_00012dc8._2_2_ = DAT_00012dc8._2_2_ & 0xfc0f | 0x220;
+  DAT_00012dee = 0xf;
+  DAT_00012dd4 = DAT_00012dd4 & 0xff01ffff | (param_1 & 0x7f) << 0x11;
+  DAT_00012de4 = 0x2aa;
+  DAT_00012df8 = DAT_00012df8 | 0xf00000;
+  _DAT_20101078 = _DAT_20101078 & 0xfff00000 | 0x4b70;
   _DAT_2010a048 = _DAT_2010a048 | 0x2000;
   _DAT_2010a04c = _DAT_2010a04c | 0x2000;
-  DAT_00012df8 = param_5;
+  DAT_00012dec = param_5;
   iVar1 = bb_init_device(&timeline_table);
   devTable = iVar1;
   if (tlTable != (undefined4 *)0x0) {
-    tlTable[2] = tlTable[2] & 0xfff00000 | 0x4755;
+    tlTable[2] = tlTable[2] & 0xfff00000 | 0x4752;
   }
   linkTable = linkstat_table;
   *(uint *)(iVar1 + 0x10) = *(uint *)(iVar1 + 0x10) & 0x1fffffff | 0x40000000;
@@ -54,16 +54,16 @@ void bredr_rx(uint param_1,uint param_2,uint param_3,undefined1 param_4,undefine
   *(undefined2 *)(iVar1 + 0x48) = param_5;
   *(uint *)(iVar1 + 0x54) = *(uint *)(iVar1 + 0x54) & 0xdf0000ff;
   *(undefined4 *)(iVar1 + 0x68) = 0;
-  uVar4 = DAT_00012568;
+  uVar4 = DAT_0001255c;
   rx_head_buf._4_4_ = rx_head_buf._4_4_ & 0xffffc000 | 2000;
   rx_head_buf._12_4_ = rx_head_buf._12_4_ | 0xffffff;
   rxHeadBuf = rx_head_buf;
-  DAT_00012560 = DAT_00012560 & 0xfff00000 | 0x4967;
-  DAT_00012568._0_3_ = (uint3)DAT_00012568 & 0xffc000 | (uint3)param_7 & 0x3fff;
+  DAT_00012554 = DAT_00012554 & 0xfff00000 | 0x4964;
+  DAT_0001255c._0_3_ = (uint3)DAT_0001255c & 0xffc000 | (uint3)param_7 & 0x3fff;
   rxLink0 = &rx_buflink;
   rx_buflink = rx_buflink & 0xfff00000;
-  DAT_00012568 = CONCAT13((char)(uVar4 >> 0x18),(uint3)DAT_00012568) & 0x3fffffff;
-  DAT_00012564 = DAT_00012564 & 0xfff00000;
+  DAT_0001255c = CONCAT13((char)(uVar4 >> 0x18),(uint3)DAT_0001255c) & 0x3fffffff;
+  DAT_00012558 = DAT_00012558 & 0xfff00000;
   enable_rxlink(0,1,iVar1,&rx_buflink);
   iVar7 = 0;
   iVar1 = 0;

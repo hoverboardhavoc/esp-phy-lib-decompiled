@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ae6f29bfebbfdacc1bba905afff3399fe733245f
- * https://github.com/espressif/esp-phy-lib/commit/ae6f29bfebbfdacc1bba905afff3399fe733245f
- * Upstream date: 2026-05-21 14:11:41 +0800
- * Upstream subject: support wifi api and regdma
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ undefined4 ble_rx_stop(void *param_1,uint *param_2)
     rx_en_flag = 0;
     return 0;
   }
-  __n = (uint)DAT_00011008;
+  __n = (uint)DAT_00010fe0;
   if (param_2 != (uint *)0x0) {
     if ((*param_2 != 0) && ((int)*param_2 < (int)__n)) {
       phy_printf("Buffer size is so small!expect %d,actually is %d\n",__n);
@@ -35,7 +35,7 @@ undefined4 ble_rx_stop(void *param_1,uint *param_2)
   }
   _DAT_20101450 = 0;
   _DAT_20101410 = 1;
-  memcpy(param_1,&DAT_00011009,__n);
+  memcpy(param_1,&DAT_00010fe1,__n);
   puVar1 = &_LANCHOR3;
   for (iVar2 = 3; iVar2 <= (int)(__n + 1); iVar2 = iVar2 + 8) {
     phy_printf("%x %x %x %x %x %x %x %x",puVar1[3],puVar1[4],puVar1[5],puVar1[6],puVar1[7],puVar1[8]

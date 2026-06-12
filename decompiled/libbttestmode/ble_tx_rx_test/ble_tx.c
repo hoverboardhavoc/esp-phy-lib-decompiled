@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,7 +34,7 @@ void ble_tx(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 
   }
   while( true ) {
     if (in_stack_00000000 != '\0') {
-      _DAT_20101508 = (uint)(byte)ch_map2[_DAT_2010d800 % 0x28];
+      _DAT_20101508 = (uint)(byte)(&ch_map2)[_DAT_2010d800 % 0x28];
       _DAT_20101554 = _DAT_2010d800 % 0x28 | 0x40;
     }
     iVar1 = ble_tx_a_frame(param_1,param_7,in_stack_00000004,&uStack_38,auStack_34);

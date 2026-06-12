@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: librfate -> ate_test.o -> ate_rxdc_remain_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,73 +17,98 @@ void ate_rxdc_remain_check(int param_1)
 {
   uint uVar1;
   char cVar2;
-  uint uVar3;
-  char *pcVar4;
-  uint uVar5;
-  short sVar6;
-  int iVar7;
-  char *pcVar8;
-  char *pcVar9;
-  undefined4 uStack_b8;
-  undefined4 uStack_b4;
-  undefined4 uStack_b0;
-  char local_94 [96];
+  short sVar3;
+  int *piVar4;
+  char cVar5;
+  int iVar6;
+  int *piVar7;
+  int *piVar8;
+  int *piVar9;
+  uint uVar10;
+  int local_a8 [3];
+  undefined1 auStack_9c [12];
+  undefined1 auStack_90 [12];
+  int local_84 [21];
   
-  phy_set_txclk_en(1);
-  uVar1 = _DAT_2010702c;
-  uVar3 = _DAT_20100434 >> 0x16;
-  pcVar8 = local_94;
-  sVar6 = 1;
-  pcVar9 = pcVar8;
-  _DAT_20100434 = _DAT_20100434 & 0xff3fffff;
+  set_txclk_en(1);
+  uVar1 = _DAT_600c702c;
+  piVar4 = local_84;
+  sVar3 = 1;
+  piVar8 = piVar4;
   do {
-    phy_chip_set_chan(sVar6,0);
-    uVar5 = 0x40000000;
-    _DAT_2010702c = _DAT_2010702c & 0xff7fffff | 0x800000;
-    pcVar4 = pcVar9;
+    chip_v7_set_chan(sVar3,0);
+    _DAT_600c702c = _DAT_600c702c | 0x800000;
+    uVar10 = 0x48000000;
+    piVar9 = piVar8;
     do {
-      _DAT_2010702c = _DAT_2010702c & 0xffffff | uVar5;
-      phy_rxdc_est_min(4000,0,&uStack_b8,0);
-      uStack_b8 = phy_get_data_sat(uStack_b8,0x7f,0xffffff81);
-      uStack_b4 = phy_get_data_sat(uStack_b4,0x7f,0xffffff81);
-      uStack_b0 = phy_get_data_sat(uStack_b0,0x7f,0xffffff81);
-      pcVar4[2] = (char)uStack_b0;
-      *pcVar4 = (char)uStack_b8;
-      pcVar4[1] = (char)uStack_b4;
-      uVar5 = uVar5 + 0xfa000000;
-      pcVar4 = pcVar4 + 3;
-    } while (uVar5 != 0x28000000);
-    sVar6 = sVar6 + 2;
-    pcVar9 = pcVar9 + 0xc;
-  } while (sVar6 != 0xf);
-  uVar3 = (uVar3 & 3) << 0x16;
-  _DAT_20100434 = _DAT_20100434 & 0xff3fffff | uVar3;
-  phy_set_txclk_en(0);
-  _DAT_20100434 = _DAT_20100434 & 0xff3fffff | uVar3;
-  _DAT_2010702c = _DAT_2010702c & 0x7fffff | uVar1 & 0xff000000;
+      _DAT_600c702c = _DAT_600c702c & 0xffffff | uVar10;
+      dc_iq_est(1,4000,local_a8);
+      dc_iq_est(1,4000,auStack_9c);
+      dc_iq_est(1,4000,auStack_90);
+      piVar7 = local_a8;
+      cVar2 = '\x7f';
+      iVar6 = 100;
+      cVar5 = '\x7f';
+      do {
+        if (*piVar7 < 0x80) {
+          if (*piVar7 < -0x7f) {
+            *piVar7 = -0x7f;
+          }
+        }
+        else {
+          *piVar7 = 0x7f;
+        }
+        if (piVar7[1] < 0x80) {
+          if (piVar7[1] < -0x7f) {
+            piVar7[1] = -0x7f;
+          }
+        }
+        else {
+          piVar7[1] = 0x7f;
+        }
+        if (piVar7[2] < iVar6) {
+          cVar2 = (char)*piVar7;
+          cVar5 = (char)piVar7[1];
+          iVar6 = (int)(char)piVar7[2];
+        }
+        piVar7 = piVar7 + 3;
+      } while (piVar4 != piVar7);
+      *(char *)piVar9 = cVar2;
+      *(char *)((int)piVar9 + 1) = cVar5;
+      *(char *)((int)piVar9 + 2) = (char)iVar6;
+      uVar10 = uVar10 + 0xfa000000;
+      piVar9 = (int *)((int)piVar9 + 3);
+    } while (uVar10 != 0x30000000);
+    sVar3 = sVar3 + 2;
+    piVar8 = piVar8 + 3;
+  } while (sVar3 != 0xf);
+  _DAT_600c702c = _DAT_600c702c & 0xff7fffff;
+  set_txclk_en(0);
+  _DAT_600c702c = _DAT_600c702c & 0x7fffff | uVar1 & 0xff000000;
   if (param_1 != 0) {
     phy_printf("wifi_rxdc_remain:\n");
   }
-  iVar7 = 1;
+  iVar6 = 1;
   do {
     if (param_1 != 0) {
-      phy_printf("chan=%02d, ",iVar7);
+      phy_printf("chan=%02d, ",iVar6);
     }
     cVar2 = '\x04';
-    pcVar9 = pcVar8;
+    piVar8 = piVar4;
     do {
       if (param_1 != 0) {
-        phy_printf("%d,%d,%d; ",(int)*pcVar9,(int)pcVar9[1],(int)pcVar9[2]);
+        phy_printf("%d,%d,%d; ",(int)(char)*piVar8,(int)*(char *)((int)piVar8 + 1),
+                   (int)*(char *)((int)piVar8 + 2));
       }
       cVar2 = cVar2 + -1;
-      pcVar9 = pcVar9 + 3;
+      piVar8 = (int *)((int)piVar8 + 3);
     } while (cVar2 != '\0');
     if (param_1 != 0) {
-      phy_printf(&_LC9);
+      phy_printf(&_LC7);
     }
-    iVar7 = iVar7 + 2;
-    pcVar8 = pcVar8 + 0xc;
-  } while (iVar7 != 0xf);
+    iVar6 = iVar6 + 2;
+    piVar4 = piVar4 + 3;
+  } while (iVar6 != 0xf);
   return;
 }
 

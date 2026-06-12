@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> cmd_polling_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,12 +13,12 @@
 void cmd_polling_test(void)
 
 {
-  DAT_000137dc = 9;
+  DAT_000137e4 = 9;
   arga = 8;
   argb = 6;
-  DAT_000137e4 = 7;
+  DAT_000137ec = 7;
   my_samp = 0x25;
-  DAT_0001384c = 0x62;
+  DAT_00013854 = 0x62;
   cmd_polling_start(1000000);
   cmd_polling_attach(1,0,cmd_polling_test0,3);
   cmd_polling_attach(0,0,cmd_polling_test1,0);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> ble_tx_rx_test.o -> le_master_test
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,6 +16,7 @@ void le_master_test(undefined4 param_1,int param_2,undefined4 param_3,int param_
 {
   uint uVar1;
   int iVar2;
+  int iVar3;
   undefined4 in_stack_00000000;
   int *in_stack_00000004;
   int *in_stack_00000008;
@@ -27,28 +28,23 @@ void le_master_test(undefined4 param_1,int param_2,undefined4 param_3,int param_
   ble_tx_init(param_1,param_2,param_3,2,param_5);
   ble_rx_init(param_1,param_2);
   if (param_2 == 2) {
-    __floatunsidf(param_5);
-    __muldf3(0,0);
-    param_5 = __fixunsdfsi();
+    iVar2 = 0xe;
+  }
+  else if (param_2 == 1) {
+    iVar2 = 0x1b;
+  }
+  else if (param_2 == 3) {
+    iVar2 = 0x6c;
   }
   else {
-    if (param_2 == 1) {
-      iVar2 = 0x1b;
-    }
-    else if (param_2 == 3) {
-      iVar2 = 0x6c;
-    }
-    else {
-      iVar2 = 0x36;
-    }
-    param_5 = param_5 * iVar2;
+    iVar2 = 0x36;
   }
-  for (iVar2 = 0; iVar2 < param_4; iVar2 = iVar2 + 1) {
+  for (iVar3 = 0; iVar3 < param_4; iVar3 = iVar3 + 1) {
     ets_delay_us(200);
     ble_tx_a_frame(1,0,0,param_6,param_7);
     ble_master_slave_rx_a_frame
-              (param_5,param_1,param_2,param_8,in_stack_00000000,&iStack_34,in_stack_00000008,
-               in_stack_0000000c);
+              (param_5 * iVar2,param_1,param_2,param_8,in_stack_00000000,&iStack_34,
+               in_stack_00000008,in_stack_0000000c);
   }
   uVar1 = *param_8;
   if (uVar1 == 0) {

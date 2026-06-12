@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,8 +22,8 @@ void bt_bb_rx_set(uint param_1)
   bt_agc_v2_set();
   _DAT_20102888 = _DAT_20102888 & 0xdfffffff | 0x40000;
   _DAT_201020bc = _DAT_201020bc | 0x80000000;
-  _DAT_201020c0 = _DAT_201020c0 & 0xfffffffd;
   _DAT_20102800 = _DAT_20102800 | 0xe1c00;
+  _DAT_201020c0 = _DAT_201020c0 & 0xfffffffd | 1;
   _DAT_2010284c = _DAT_2010284c & 0xfbffffff;
   _DAT_2010288c = _DAT_2010288c & 0xdfffffff;
   _DAT_20102000 = _DAT_20102000 | 1;

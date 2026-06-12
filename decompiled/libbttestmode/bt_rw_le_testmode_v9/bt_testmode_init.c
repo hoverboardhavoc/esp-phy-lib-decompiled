@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ae6f29bfebbfdacc1bba905afff3399fe733245f
- * https://github.com/espressif/esp-phy-lib/commit/ae6f29bfebbfdacc1bba905afff3399fe733245f
- * Upstream date: 2026-05-21 14:11:41 +0800
- * Upstream subject: support wifi api and regdma
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> bt_testmode_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,9 +26,10 @@ void bt_testmode_init(void)
   bt_bb_corr_thresh_aa_lc_en(0);
   bt_lc_tx_on_delay(0x3c);
   ieee802154_mac_init();
+  ieee802154_txon_delay_set();
   btlc_reg_init(0x2f000000);
   _DAT_2010185c = _DAT_2010185c | 0x180000;
-  phy_printf("\nRW V9 LE autotest! %s, %s\n","May 12 2026","16:38:22");
+  phy_printf("\nRW V9 LE autotest! %s, %s\n","Jun 12 2026","18:28:22");
   return;
 }
 

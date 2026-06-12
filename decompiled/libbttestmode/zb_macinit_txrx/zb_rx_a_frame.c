@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * https://github.com/espressif/esp-phy-lib/commit/6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * Upstream date: 2026-04-20 19:43:28 +0800
- * Upstream subject: S31 support 154 api and light sleep
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
     if ((_DAT_20103064 & 2) != 0) {
       _DAT_20103064 = _DAT_20103064 | 2;
       *param_1 = *param_1 + 1;
-      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10adb);
+      *param_2 = *param_2 + (int)*(char *)(rx_frame + 0x10ad3);
       *param_3 = *param_3 + ((int)_DAT_201020b0 >> 0x18);
       *param_4 = (_DAT_201020b0 >> 8 & 0xff) + *param_4;
       return 0;
@@ -47,7 +47,7 @@ zb_rx_a_frame(int *param_1,int *param_2,int *param_3,int *param_4,int *param_5,i
   }
   if (uVar2 == 3) {
     *param_7 = *param_7 + 1;
-    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10adb);
+    *param_8 = *param_8 + (int)*(char *)(rx_frame + 0x10ad3);
     return 0;
   }
   if ((uVar2 != 6) && (uVar2 != 9)) {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * https://github.com/espressif/esp-phy-lib/commit/6b304ed9f5ba7f70b2bde6549f24f18f6b634f23
- * Upstream date: 2026-04-20 19:43:28 +0800
- * Upstream subject: S31 support 154 api and light sleep
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> zb_macinit_txrx.o -> zb_master_slave_rx_a_frame
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,7 +45,7 @@ zb_master_slave_rx_a_frame
   }
   _DAT_20103064 = _DAT_20103064 | 2;
   *param_2 = *param_2 + 1;
-  iVar3 = (int)*(char *)(rx_frame + 0x10adb);
+  iVar3 = (int)*(char *)(rx_frame + 0x10ad3);
   *param_4 = *param_4 + iVar3;
   if (*param_2 == 1) {
     *param_5 = iVar3;

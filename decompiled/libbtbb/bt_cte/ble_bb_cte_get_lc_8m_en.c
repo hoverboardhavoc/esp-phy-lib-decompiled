@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * https://github.com/espressif/esp-phy-lib/commit/d8e2d8760cf6396978a59b6e807c493fe4d2d160
- * Upstream date: 2025-11-18 19:35:51 +0800
- * Upstream subject: support H4 BETA5 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbtbb -> bt_cte.o -> ble_bb_cte_get_lc_8m_en
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,6 +15,6 @@
 uint ble_bb_cte_get_lc_8m_en(void)
 
 {
-  return _DAT_600c2094 & 1;
+  return _DAT_20102094 & 1;
 }
 

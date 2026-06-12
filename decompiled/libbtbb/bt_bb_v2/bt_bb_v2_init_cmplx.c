@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_init_cmplx
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,13 +23,13 @@ void bt_bb_v2_init_cmplx(int param_1)
   bt_bb_set_le_tx_on_delay(0x3c);
   bt_bb_tx_cca_period(0x45,0x14);
   bt_bb_set_zb_tx_on_delay(0x3c);
-  ieee802154_txon_delay_set();
   bt_bb_coex_config();
   bt_bb_cca_config();
   if (param_1 != 0) {
     bt_bb_v2_version();
   }
   zb_rx_v0_0_set();
+  _DAT_20102c00 = _DAT_20102c00 & 0xffff | 0x19f000;
   return;
 }
 

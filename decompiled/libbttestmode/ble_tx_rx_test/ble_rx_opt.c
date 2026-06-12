@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbttestmode -> ble_tx_rx_test.o -> ble_rx_opt
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void ble_rx_opt(uint param_1,int param_2)
   int iVar1;
   
   if (param_2 == 0) {
-    param_1 = (uint)(byte)ch_map2[param_1];
+    param_1 = (uint)(byte)(&ch_map2)[param_1];
     iVar1 = 0x962;
   }
   else {

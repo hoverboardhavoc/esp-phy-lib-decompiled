@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
+ * Upstream date: 2026-06-12 19:07:58 +0800
+ * Upstream subject: update s31 for phy
  * Source: libbtbb -> bt_bb_v2.o -> ieee802154_set_rx_sense
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,11 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000102cc) */
-/* WARNING: Removing unreachable block (ram,0x0001024c) */
-/* WARNING: Removing unreachable block (ram,0x00010292) */
-/* WARNING: Removing unreachable block (ram,0x0001026c) */
-/* WARNING: Removing unreachable block (ram,0x0001027e) */
+/* WARNING: Removing unreachable block (ram,0x000102f4) */
+/* WARNING: Removing unreachable block (ram,0x00010274) */
+/* WARNING: Removing unreachable block (ram,0x000102ba) */
+/* WARNING: Removing unreachable block (ram,0x00010294) */
+/* WARNING: Removing unreachable block (ram,0x000102a6) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void ieee802154_set_rx_sense(int param_1,int param_2)
