@@ -1,9 +1,9 @@
 # Decompile catch-up status
 
 - **Status:** CAUGHT UP
-- **Processed:** 131 / 131 upstream glob-commits
+- **Processed:** 132 / 132 upstream glob-commits
 - **Remaining:** 0
-- **Upstream-glob-HEAD:** `c6deb4887ae1bf02064d6d26e4ea52674885a4ff`
-- **Latest processed:** `c6deb4887ae1bf02064d6d26e4ea52674885a4ff`
+- **Upstream-glob-HEAD:** `403246a6f6ce8ec7de9028350e65ca2bb51b8829`
+- **Latest processed:** `403246a6f6ce8ec7de9028350e65ca2bb51b8829`
 
 The `decompiled` branch is caught up to the upstream glob-HEAD; no re-dispatch needed.
