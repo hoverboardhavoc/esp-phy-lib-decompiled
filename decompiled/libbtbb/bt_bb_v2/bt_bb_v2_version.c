@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
- * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
- * Upstream date: 2026-06-12 19:07:58 +0800
- * Upstream subject: update s31 for phy
+ * Last changed at upstream commit 5695f4f38108658bc4a33e4712c1ebcb34911434
+ * https://github.com/espressif/esp-phy-lib/commit/5695f4f38108658bc4a33e4712c1ebcb34911434
+ * Upstream date: 2026-07-22 11:10:34 +0800
+ * Upstream subject: update s31,C6 for track
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  phy_printf("libbtbb version: %s, %s, %s\n","36ec483","Jun 12 2026","18:28:25");
+  phy_printf("libbtbb version: %s, %s, %s\n","d5590f7","Jul 14 2026","10:33:07");
   return;
 }
 

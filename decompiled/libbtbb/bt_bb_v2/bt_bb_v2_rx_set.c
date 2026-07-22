@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e294ff039e26b3486d6c9e5853d24d98ee3300b2
- * https://github.com/espressif/esp-phy-lib/commit/e294ff039e26b3486d6c9e5853d24d98ee3300b2
- * Upstream date: 2026-06-12 19:07:58 +0800
- * Upstream subject: update s31 for phy
+ * Last changed at upstream commit 5695f4f38108658bc4a33e4712c1ebcb34911434
+ * https://github.com/espressif/esp-phy-lib/commit/5695f4f38108658bc4a33e4712c1ebcb34911434
+ * Upstream date: 2026-07-22 11:10:34 +0800
+ * Upstream subject: update s31,C6 for track
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_rx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,6 +29,12 @@ void bt_bb_v2_rx_set(void)
   bt_bb_rx_filter_sel();
   zb_rx_v0_0_set();
   _DAT_20102068 = _DAT_20102068 & 0xffffdfff;
+  _DAT_20102864 = 0x404;
+  _DAT_20102858 = 0xa1b272e;
+  _DAT_2010285c = 0xa1b272e;
+  _DAT_2010284c = _DAT_2010284c & 0xfff80000 | 0xd5081770;
+  _DAT_20102820 = _DAT_20102820 & 0xfffffff7;
+  _DAT_20102888 = _DAT_20102888 | 0x40000000;
   return;
 }
 
