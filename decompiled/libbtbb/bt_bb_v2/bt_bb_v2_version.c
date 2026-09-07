@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5695f4f38108658bc4a33e4712c1ebcb34911434
- * https://github.com/espressif/esp-phy-lib/commit/5695f4f38108658bc4a33e4712c1ebcb34911434
- * Upstream date: 2026-07-22 11:10:34 +0800
- * Upstream subject: update s31,C6 for track
+ * Last changed at upstream commit b88e4b76e090ae59c51cb00b916d38def895b396
+ * https://github.com/espressif/esp-phy-lib/commit/b88e4b76e090ae59c51cb00b916d38def895b396
+ * Upstream date: 2026-09-07 15:06:44 +0800
+ * Upstream subject: update libphy for track and 154 api
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_v2_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void bt_bb_v2_version(void)
 
 {
-  phy_printf("libbtbb version: %s, %s, %s\n","d5590f7","Jul 14 2026","10:33:07");
+  phy_printf("libbtbb version: %s, %s, %s\n","299ba0d","Sep  2 2026","19:36:27");
   return;
 }
 

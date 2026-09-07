@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5695f4f38108658bc4a33e4712c1ebcb34911434
- * https://github.com/espressif/esp-phy-lib/commit/5695f4f38108658bc4a33e4712c1ebcb34911434
- * Upstream date: 2026-07-22 11:10:34 +0800
- * Upstream subject: update s31,C6 for track
+ * Last changed at upstream commit b88e4b76e090ae59c51cb00b916d38def895b396
+ * https://github.com/espressif/esp-phy-lib/commit/b88e4b76e090ae59c51cb00b916d38def895b396
+ * Upstream date: 2026-09-07 15:06:44 +0800
+ * Upstream subject: update libphy for track and 154 api
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> bt_testmode_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ void bt_testmode_init(void)
   ieee802154_txon_delay_set();
   btlc_reg_init(0x2f000000);
   _DAT_2010185c = _DAT_2010185c | 0x180000;
-  phy_printf("\nRW V9 LE autotest! %s, %s\n","Jul 14 2026","10:33:09");
+  phy_printf("\nRW V9 LE autotest! %s, %s\n","Sep  2 2026","19:36:29");
   return;
 }
 
