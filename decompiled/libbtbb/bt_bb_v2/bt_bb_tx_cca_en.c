@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit 20f1db053a0e6cb9f1c09d255c43bf42483041d0
+ * https://github.com/espressif/esp-phy-lib/commit/20f1db053a0e6cb9f1c09d255c43bf42483041d0
+ * Upstream date: 2026-09-24 11:57:44 +0800
+ * Upstream subject: fix S31 bod rst
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_tx_cca_en
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void bt_bb_tx_cca_en(int param_1)
 
 {
-  _DAT_20102014 = (param_1 * 0x14 + 0x20000032) * 0x80000 & 0x7f80000U | _DAT_20102014 & 0xf800ffff;
+  _DAT_20102014 = (param_1 * 0x14 + 0x2000001d) * 0x80000 & 0x7f80000U | _DAT_20102014 & 0xf800ffff;
   return;
 }
 

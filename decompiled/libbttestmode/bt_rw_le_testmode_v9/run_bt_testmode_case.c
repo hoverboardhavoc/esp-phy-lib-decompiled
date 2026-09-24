@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit 20f1db053a0e6cb9f1c09d255c43bf42483041d0
+ * https://github.com/espressif/esp-phy-lib/commit/20f1db053a0e6cb9f1c09d255c43bf42483041d0
+ * Upstream date: 2026-09-24 11:57:44 +0800
+ * Upstream subject: fix S31 bod rst
  * Source: libbttestmode -> bt_rw_le_testmode_v9.o -> run_bt_testmode_case
  *
  * (C) Espressif, Apache License 2.0.
@@ -103,7 +103,7 @@ _L382:
           }
           iVar3 = strcmp(param_1,"ble_tx_continue_stop");
           if (iVar3 == 0) {
-            phy_printf(&_LC43,param_1);
+            phy_printf(&_LC40,param_1);
             ble_tx_continue_stop();
             return 1;
           }
@@ -156,7 +156,7 @@ _L383:
             iVar3 = strcmp(param_1,"bt_tx_cca_set");
             if (iVar3 == 0) {
               bt_bb_tx_cca_en((char)*param_2);
-              bt_lc_tx_on_delay(*param_2 * 0x14 + 0x3c);
+              bt_lc_tx_on_delay(*param_2 * 0x14 + 0x27);
               bt_bb_tx_cca_set(*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],
                                param_2[6],param_2[7]);
             }
@@ -178,7 +178,7 @@ _L383:
                 abStack_21[0] = 0;
                 iVar5 = bt_bb_get_tx_pwr_table(abStack_21);
                 for (iVar3 = 0; iVar3 < (int)*param_2; iVar3 = iVar3 + 1) {
-                  phy_printf(&_LC62,(int)*(char *)(iVar5 + iVar3));
+                  phy_printf(&_LC59,(int)*(char *)(iVar5 + iVar3));
                 }
                 uVar6 = (uint)abStack_21[0];
                 pcVar4 = "\n%s %d\n";
@@ -190,7 +190,7 @@ _L383:
               }
               bt_bb_v2_init_cmplx(1);
             }
-            phy_printf(&_LC43,param_1);
+            phy_printf(&_LC40,param_1);
             return 1;
           }
           phy_printf("RW LE V9 RX PER\n");

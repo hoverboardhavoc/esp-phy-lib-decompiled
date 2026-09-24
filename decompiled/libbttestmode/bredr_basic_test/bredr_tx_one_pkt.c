@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit cef4eca1d256d7325017049c6152cb78182fcd67
- * https://github.com/espressif/esp-phy-lib/commit/cef4eca1d256d7325017049c6152cb78182fcd67
- * Upstream date: 2026-04-13 10:23:07 +0800
- * Upstream subject: support s31 libphy
+ * Last changed at upstream commit 20f1db053a0e6cb9f1c09d255c43bf42483041d0
+ * https://github.com/espressif/esp-phy-lib/commit/20f1db053a0e6cb9f1c09d255c43bf42483041d0
+ * Upstream date: 2026-09-24 11:57:44 +0800
+ * Upstream subject: fix S31 bod rst
  * Source: libbttestmode -> bredr_basic_test.o -> bredr_tx_one_pkt
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ undefined4 bredr_tx_one_pkt(int param_1)
   int iVar1;
   
   iVar1 = capture_btlc_timer();
-  *(int *)(tlTable + 0xc) = iVar1 + 40000;
+  *(int *)(tlTable + 0xc) = iVar1 + 0x28;
   *devTable = *devTable | 0x800000;
   *(byte *)(txLink0 + 0xf) = *(byte *)(txLink0 + 0xf) & 0x3f;
   _DAT_20101000 = _DAT_20101000 | 1;
